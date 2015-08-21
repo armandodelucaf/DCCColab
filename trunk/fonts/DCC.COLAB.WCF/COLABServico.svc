@@ -1,0 +1,1 @@
+﻿<%@ ServiceHost Language="C#" Debug="true" Service="DCC.COLAB.Business.COLABServico" CodeBehind="COLABServico.svc.cs" %>

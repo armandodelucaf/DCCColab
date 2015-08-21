@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{49AD2D65-C293-498D-9772-CCBBBF1F68AC}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DCC.COLAB.Common</RootNamespace>
+    <AssemblyName>DCC.COLAB.Common</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="log4net">
+      <HintPath>..\libs\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AuxiliarEntities\Ordenacao.cs" />
+    <Compile Include="AuxiliarEntities\Paginacao.cs" />
+    <Compile Include="AuxiliarEntities\UsuarioLogado.cs" />
+    <Compile Include="IBaseDataAccess.cs" />
+    <Compile Include="Basic\BusinessConfig.cs" />
+    <Compile Include="Basic\Util.cs" />
+    <Compile Include="Basic\Log\Logger.cs" />
+    <Compile Include="Basic\Log\LogManager.cs" />
+    <Compile Include="Basic\ConstantsEnum.cs" />
+    <Compile Include="Basic\Log\Messages.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Messages.resx</DependentUpon>
+    </Compile>
+    <Compile Include="DataAccess\IDocumentoDataAccess.cs" />
+    <Compile Include="DataAccess\IArquivoDataAccess.cs" />
+    <Compile Include="DataAccess\IPerfilAcessoDataAccess.cs" />
+    <Compile Include="DataAccess\IUsuarioDataAccess.cs" />
+    <Compile Include="DataAccess\IUsuarioLogadoDataAccess.cs" />
+    <Compile Include="Entities\Acao.cs" />
+    <Compile Include="Entities\Documento.cs" />
+    <Compile Include="Entities\Usuario.cs" />
+    <Compile Include="Entities\Funcionalidade.cs" />
+    <Compile Include="Entities\FuncionalidadeAcao.cs" />
+    <Compile Include="Entities\Arquivo.cs" />
+    <Compile Include="Entities\PerfilAcesso.cs" />
+    <Compile Include="Filtros\FiltroDocumento.cs" />
+    <Compile Include="Filtros\FiltroFuncionalidadeAcao.cs" />
+    <Compile Include="Filtros\FiltroBase.cs" />
+    <Compile Include="Basic\Log\Message.cs" />
+    <Compile Include="Filtros\FiltroUsuario.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DCCFramework\DCCFramework.csproj">
+      <Project>{884769eb-8c63-47a1-9ad2-0fac8d629354}</Project>
+      <Name>DCCFramework</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Basic\Log\Messages.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Messages.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

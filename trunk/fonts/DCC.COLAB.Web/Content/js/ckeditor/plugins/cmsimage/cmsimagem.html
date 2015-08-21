@@ -1,0 +1,136 @@
+﻿<input id="hdCKEditorInstanceName" name="hdCKEditorInstanceName" type="hidden" value="" />
+
+<div class="modal fade" id="imageSearchModal" tabindex="-1" role="dialog" aria-labelledby="imageSearchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="imageSearchModalLabel">Galeria de Imagens do DCC</h4>
+            </div>
+            <div class="modal-body text-center" id="selecaoDeImagens">
+                <form>
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <label for="txtFiltroImagem" class="control-label pull-left">Filtrar:</label>
+                                <input id="txtFiltroImagem" name="txtFiltroImagem" maxlength="300" type="text" placeholder="Digite o nome ou a tag associada a imagem" class="form-control input-md" />
+                            </div>
+                        </div>
+                    </div>
+                    <div id="divImagensDoRepositorio" class="center">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <div class="col-md-12 text-center">
+                    <ul class="pagination" id="myPager"></ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade clearfix" id="imageParametersModal" tabindex="-1" role="dialog" aria-labelledby="imageSearchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="imageParametersLabel">Visualização e Ajuste de Imagem</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <input id="hdCodigoImagem" name="hdCodigoImagem" type="hidden" value="" />
+                    <div class="row">
+                        <div class="col-md-7">
+                            <div class="form-group center-block" id="divImagemSelecionadaGaleria">
+                                <div>
+                                    <img style="max-width: 100%" class="thumbnail" id="imgSelecionadaGaleria" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-5">
+                            <div class="form-group">
+                                <label for="nomeImagem" class="control-label">Nome da imagem:</label>
+                                <div id="nomeImagemSelecionada">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="formatoImagemSelecionada" class="control-label">Formato da imagem:</label>
+                                <div id="formatoImagemSelecionada">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="dimensoesImagemSelecionada" class="control-label">Dimensões da imagem original:</label>
+                                <div id="dimensoesImagemSelecionada">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="control-label" for="larguraImagemSelecionada">Largura da imagem:</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" id="larguraImagemSelecionada" placeholder="Tamanho da imagem">
+                                    <div class="input-group-addon">px</div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label" for="alturaImagemSelecionada">Altura da imagem:</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" id="alturaImagemSelecionada" placeholder="Tamanho da imagem">
+                                    <div class="input-group-addon">px</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="control-label" for="margemHorizontalImagemSelecionada">Margem horizontal da imagem:</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" id="margemHorizontalImagemSelecionada" placeholder="Tamanho da margem">
+                                    <div class="input-group-addon">px</div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label" for="margemVerticalImagemSelecionada">Margem vertical da imagem:</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" id="margemVerticalImagemSelecionada" placeholder="Tamanho da margem">
+                                    <div class="input-group-addon">px</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="control-label" for="bordaImagemSelecionada">Borda da imagem:</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" id="bordaImagemSelecionada" placeholder="Tamanho da borda">
+                                    <div class="input-group-addon">px</div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="selectAlinhamentoImagem" class="control-label">Alinhamento da imagem:</label>
+                                <select id="selectAlinhamentoImagem" class="form-control input-md">
+                                    <option value="0" selected="selected">Sem alinhamento</option>
+                                    <option value="1">Alinhamento a esquerda</option>
+                                    <option value="2">Alinhamento a direita</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="txtTituloAlternativoImagem" class="control-label">Título alternativo da imagem:</label>
+                                <input id="txtTituloAlternativoImagem" name="txtTituloAlternativoImagem" maxlength="100" type="text" placeholder="Digite aqui um texto alternativo para a imagem" class="form-control input-md" value="" />
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" data-dismiss="modal" class="btn btn-default" onclick="javascript:backToImageSearch();">Voltar</button>
+                <button type="button" data-dismiss="modal" class="btn btn-default" onclick="javascript:insertImageOnEditor();">Inserir Imagem</button>
+            </div>
+        </div>
+    </div>
+</div>

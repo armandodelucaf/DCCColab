@@ -1,0 +1,121 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>DCC COLAB</title>
+
+    <script type="text/javascript">
+        var siteRoot = '@ViewData["siteRoot"]';
+    </script>
+
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width" />
+
+    @Styles.Render("~/Content/css/font-awesome.min.css")
+
+    @Styles.Render("~/Content/css/bootstrap/bootstrap.min.css")
+    @Styles.Render("~/Content/css/bootstrap/bootstrap-theme.min.css")
+    @Styles.Render("~/Content/css/bootstrap/sticky-footer.css")
+    @Styles.Render("~/Content/css/bootstrap/bootstrap-msg.css")
+    @Styles.Render("~/Content/css/bootstrap/dataTables.bootstrap.css")
+    @Styles.Render("~/Content/css/bootstrap/fileinput.min.css")
+    @Styles.Render("~/Content/css/bootstrap/bootstrap-datepicker.css")
+    @Styles.Render("~/Content/css/bootstrap/bootstrap-select.min.css")
+    @Styles.Render("~/Content/css/bootstrap/bootstrap-tagsinput.css")
+    @Styles.Render("~/Content/css/jquery.datetimepicker.css")
+    @Styles.Render("~/Content/css/bootstrap/bootstrap-image-gallery.min.css")
+    @Styles.Render("~/Content/css/bootstrap/bootstrap-colorpicker.min.css")
+    @Styles.Render("~/Content/css/jquery.Jcrop.min.css")
+
+    @Styles.Render("~/Content/css/cms.css")
+    @Styles.Render("~/Content/themes/base/all.css")
+
+    @Scripts.Render("~/Content/js/jquery/jquery-1.11.2.min.js")
+    @Scripts.Render("~/Content/js/jquery/jquery-ui-1.11.3.min.js")
+    @Scripts.Render("~/Content/js/jquery/jquery.sortable.min.js")
+    @Scripts.Render("~/Content/js/jquery/jquery.confirm.min.js")
+    @Scripts.Render("~/Content/js/jquery/jquery.dataTables.min.js")
+    @Scripts.Render("~/Content/js/jquery/ajaxfileupload.js")
+    @Scripts.Render("~/Content/js/jquery/jquery.mask.min.js")
+    @Scripts.Render("~/Content/js/jquery/jquery.blockUI.js")
+
+    @Scripts.Render("~/Content/js/jquery/jquery.datetimepicker.js")
+    @Scripts.Render("~/Content/js/jquery/jquery.inputmask.bundle.min.js")
+    @Scripts.Render("~/Content/js/bootstrap/dataTables.bootstrap.js")
+    @Scripts.Render("~/Content/js/bootstrap/bootstrap-msg.js")
+    @Scripts.Render("~/Content/js/bootstrap/bootstrap.min.js")
+    @Scripts.Render("~/Content/js/bootstrap/fileinput.min.js")
+    @Scripts.Render("~/Content/js/bootstrap/bootstrap-select.min.js")
+    @Scripts.Render("~/Content/js/bootstrap/i18n/defaults-pt_BR.min.js")
+    @Scripts.Render("~/Content/js/bootstrap/typeahead.bundle.min.js")
+    @Scripts.Render("~/Content/js/bootstrap/datepicker/bootstrap-datepicker.js")
+    @Scripts.Render("~/Content/js/bootstrap/datepicker/bootstrap-datepicker.pt-BR.js")
+    @Scripts.Render("~/Content/js/ckeditor/ckeditor.js")
+    @Scripts.Render("~/Content/js/bootstrap/bootstrap-image-gallery.min.js")
+    @Scripts.Render("~/Content/js/bootstrap/pagination/jquery.twbsPagination.js")
+    @Scripts.Render("~/Content/js/swfobject.js")
+    @Scripts.Render("~/Content/js/bootstrap/bootstrap-colorpicker.min.js")
+    @Scripts.Render("~/Content/js/jquery/jquery.Jcrop.min.js")
+
+    @Scripts.Render("~/Content/js/cms/cms.js")
+    @Scripts.Render("~/Content/js/cms/paginacao.js")
+    @Scripts.Render("~/Content/js/cms/galeria.js")
+    @Scripts.Render("~/Content/js/cms/mascara.js")
+    @Scripts.Render("~/Content/js/base64-binary.js")
+    @Scripts.Render("~/Content/js/facebookImageUpload.js")
+    @Scripts.Render("~/Content/js/cms/servidor.js")
+</head>
+
+@RenderSection("styles", required: false)
+
+<body>
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <img src="~/Content/img/img_dcc.png" style="width:40px;"/>
+                <a class="navbar-brand" href="#" style="float: right">DCC COLAB</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Gerenciador de Sites<span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="@Url.Action("Consulta", "Documento")">Documentos</a></li>
+                            <li><a href="@Url.Action("Consulta", "PerfisAcesso")">Perfis de Acesso</a></li>
+                            <li><a href="@Url.Action("Consulta", "Usuario")">Usuários</a></li>
+                            <li class="divider"></li>
+                        </ul>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><p class="navbar-text">Olá, @DCC.COLAB.Web.Util.SessaoUtil.Usuario.nome</p></li>
+                    <li><a href="@Url.Action("Logout","Login")">[Encerrar sessão]</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div id="messages"></div>
+    <div class="jumbotron">
+        <section class="content-wrapper main-content clear-fix">
+            @RenderBody()
+        </section>
+    </div>
+
+</body>
+
+<footer class="footer">
+    <div class="container">
+        <p class="text-muted legal">© Copyright 2015 - Armando De Luca Filho e Hugo Santos do Nascimento - Todos os direitos reservados.</p>
+    </div>
+</footer>
+
+</html>
+
+@RenderSection("scripts", required: false)

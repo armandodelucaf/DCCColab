@@ -1,0 +1,30 @@
+D:\Projetos\cms - Copia\trunk\fonts\DCC.COLAB.DataAccess\bin\Debug\DCC.COLAB.DataAccess.SQLServer.dll
+D:\Projetos\cms - Copia\trunk\fonts\DCC.COLAB.DataAccess\bin\Debug\DCC.COLAB.DataAccess.SQLServer.pdb
+D:\Projetos\cms - Copia\trunk\fonts\DCC.COLAB.DataAccess\bin\Debug\DCC.COLAB.Common.dll
+D:\Projetos\cms - Copia\trunk\fonts\DCC.COLAB.DataAccess\bin\Debug\DCCFramework.dll
+D:\Projetos\cms - Copia\trunk\fonts\DCC.COLAB.DataAccess\bin\Debug\log4net.dll
+D:\Projetos\cms - Copia\trunk\fonts\DCC.COLAB.DataAccess\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Data.dll
+D:\Projetos\cms - Copia\trunk\fonts\DCC.COLAB.DataAccess\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Common.dll
+D:\Projetos\cms - Copia\trunk\fonts\DCC.COLAB.DataAccess\bin\Debug\Microsoft.Practices.ServiceLocation.dll
+D:\Projetos\cms - Copia\trunk\fonts\DCC.COLAB.DataAccess\bin\Debug\Microsoft.Practices.Unity.dll
+D:\Projetos\cms - Copia\trunk\fonts\DCC.COLAB.DataAccess\bin\Debug\Microsoft.Practices.Unity.Interception.dll
+D:\Projetos\cms - Copia\trunk\fonts\DCC.COLAB.DataAccess\bin\Debug\DCC.COLAB.Common.pdb
+D:\Projetos\cms - Copia\trunk\fonts\DCC.COLAB.DataAccess\bin\Debug\DCCFramework.pdb
+D:\Projetos\cms - Copia\trunk\fonts\DCC.COLAB.DataAccess\obj\Debug\DCC.COLAB.DataAccess.csprojResolveAssemblyReference.cache
+D:\Projetos\cms - Copia\trunk\fonts\DCC.COLAB.DataAccess\obj\Debug\DCC.COLAB.DataAccess.SQLServer.dll
+D:\Projetos\cms - Copia\trunk\fonts\DCC.COLAB.DataAccess\obj\Debug\DCC.COLAB.DataAccess.SQLServer.pdb
+C:\Projetos\dcccolab\trunk\fonts\DCC.COLAB.DataAccess\bin\Debug\DCC.COLAB.DataAccess.SQLServer.dll
+C:\Projetos\dcccolab\trunk\fonts\DCC.COLAB.DataAccess\bin\Debug\DCC.COLAB.DataAccess.SQLServer.pdb
+C:\Projetos\dcccolab\trunk\fonts\DCC.COLAB.DataAccess\bin\Debug\DCC.COLAB.Common.dll
+C:\Projetos\dcccolab\trunk\fonts\DCC.COLAB.DataAccess\bin\Debug\DCCFramework.dll
+C:\Projetos\dcccolab\trunk\fonts\DCC.COLAB.DataAccess\bin\Debug\log4net.dll
+C:\Projetos\dcccolab\trunk\fonts\DCC.COLAB.DataAccess\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Data.dll
+C:\Projetos\dcccolab\trunk\fonts\DCC.COLAB.DataAccess\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Common.dll
+C:\Projetos\dcccolab\trunk\fonts\DCC.COLAB.DataAccess\bin\Debug\Microsoft.Practices.ServiceLocation.dll
+C:\Projetos\dcccolab\trunk\fonts\DCC.COLAB.DataAccess\bin\Debug\Microsoft.Practices.Unity.dll
+C:\Projetos\dcccolab\trunk\fonts\DCC.COLAB.DataAccess\bin\Debug\Microsoft.Practices.Unity.Interception.dll
+C:\Projetos\dcccolab\trunk\fonts\DCC.COLAB.DataAccess\bin\Debug\DCC.COLAB.Common.pdb
+C:\Projetos\dcccolab\trunk\fonts\DCC.COLAB.DataAccess\bin\Debug\DCCFramework.pdb
+C:\Projetos\dcccolab\trunk\fonts\DCC.COLAB.DataAccess\obj\Debug\DCC.COLAB.DataAccess.csprojResolveAssemblyReference.cache
+C:\Projetos\dcccolab\trunk\fonts\DCC.COLAB.DataAccess\obj\Debug\DCC.COLAB.DataAccess.SQLServer.dll
+C:\Projetos\dcccolab\trunk\fonts\DCC.COLAB.DataAccess\obj\Debug\DCC.COLAB.DataAccess.SQLServer.pdb

@@ -1,0 +1,581 @@
+body {
+    background-color: #eee;
+}
+
+.large-modal .modal-dialog {
+    width: 75%;
+}
+
+div.scrollBox{
+  height: 400px;
+  overflow-y: auto;
+}
+
+hr {
+    background-color: #AAA;
+    height: 1px;
+    width: 100%;
+}
+
+.max-textarea {
+    height: 100%;
+}
+
+.center {
+     float: none !important;
+     margin-left: auto !important;
+     margin-right: auto !important;
+}
+
+.content-wrapper {
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 20px;
+}
+
+.form-signin
+{
+    max-width: 330px;
+    padding: 15px;
+    margin: 0 auto;
+}
+.form-signin .form-signin-heading, .form-signin .checkbox
+{
+    margin-bottom: 10px;
+}
+.form-signin .checkbox
+{
+    font-weight: normal;
+}
+.form-signin .form-control
+{
+    position: relative;
+    font-size: 16px;
+    height: auto;
+    padding: 10px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.form-signin .form-control:focus
+{
+    z-index: 2;
+}
+.form-signin input[type="text"]
+{
+    font-size: 13px;
+    margin-bottom: -1px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+.form-signin input[type="password"]
+{
+    font-size: 13px;
+    margin-bottom: 10px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+.account-wall
+{
+    margin-top: 80px;
+    padding: 40px 0px 20px 0px;
+    background-color: #f7f7f7;
+    -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    border-radius: 10%;
+    min-width: 100px;
+}
+.login-title
+{
+    color: #555;
+    font-size: 18px;
+    font-weight: 400;
+    display: block;
+}
+.profile-img
+{
+    margin: 0 auto 10px;
+    padding-left:10px;
+    padding-right:10px;
+    display: block;
+}
+
+.fonteAzul {
+    color: #4293dc !important;
+    font-size: 26px !important;
+    font-weight: bold;
+    font-family: Verdana, Geneva, sans-serif;
+}
+
+.legal {
+    display:block;
+	text-align:center;
+	font-family:Verdana, Geneva, sans-serif;
+	color:#8e8e8e;
+	font-size:9px;
+}
+
+.img-responsive {
+    display: block;
+    height: auto;
+    max-width: 100%;
+}
+
+.footer {
+    max-height:20px !important;
+    height: 20px !important;
+}
+
+.jumbotron {
+    padding:20px;
+    padding-top: 40px;
+}
+
+.alignCenter {
+    text-align: center;
+}
+
+.datepicker {
+    z-index: 9999 !important;
+}
+
+.lessMarginModal label {
+    margin-bottom: 0px !important;
+}
+
+.lessMarginModal .form-group {
+    margin-bottom: 8px !important;
+}
+
+.panel-title {
+    font-size: 14px;
+}
+
+.panel-heading {
+    padding: 3px 15px;
+    height: 25px;
+}
+
+.ajax-loading-img {
+    content: url("/../Content/img/Loading/Fig8.gif");
+    width: 17%;
+    min-width: 120px; 
+    max-width: 230px; 
+    border-radius: 1em; 
+    padding: 5px; 
+    border: 3px solid rgb(170, 170, 170); 
+    background-color: #FFF;
+}
+
+/* Filtros */
+
+.navbar-filtro .navbar-header {
+    float: none;
+}
+
+.navbar-filtro .navbar-collapse {
+    border-color: transparent;
+}
+
+.navbar-filtro .navbar-collapse form label{
+    text-align: left;
+}
+
+.navbar-filtro .navbar-collapse > .form-horizontal {
+    padding-top: 7px;
+    margin-bottom: 10px;
+}
+
+.requiredLabel.glyphicon 
+{
+    color: red;
+    vertical-align: text-top;
+    font-size: 7px;
+    margin-left: 2px;
+}
+
+.accordion.glyphicon 
+{
+    font-size: 9px;
+    color: #265a88;
+}
+
+/* Auditoria */
+
+#modalAuditoria #tabelaMudancas .colunaDescricao {
+    width:20%;    
+}
+#modalAuditoria #tabelaMudancas .colunaAuditoria {
+    text-align:left;
+    width:40%;    
+}
+
+/* Imagens */
+
+.imagemModalGaleria {
+    width: 200px;
+    height: 160px;
+}
+
+#modal-recorte-imagem .jcrop-imagem
+{
+    display: inline-block;
+}
+#modal-recorte-imagem #divImagemRecorte
+{
+    text-align: center;
+}
+
+/* Galeria */
+
+#paginaEdicaoGaleria #quadro-selecao-galeria {
+    padding: 10px 12px !important;
+    overflow-y: auto !important;
+    max-height: 500px !important;
+    overflow-x: hidden !important;
+}
+
+#paginaEdicaoGaleria #div-adicionar-itens {
+    margin-bottom: 10px;
+    margin-left: 5px;
+}
+
+#paginaEdicaoGaleria #divDestaqueAtual {
+    width: 270px;
+    height: 220px;
+    margin: auto;
+    padding-bottom: 10px;
+}
+
+#paginaEdicaoGaleria #imgDestaqueAtual {
+    max-height: 100%;
+    margin: auto;
+    min-height: 200px;
+}
+
+#paginaEdicaoGaleria .div-destaque-icon {
+    position: absolute;
+    background-color: white;
+    width: 28px;
+}
+
+#paginaEdicaoGaleria .img-destaque-icon {
+    cursor: pointer;
+    content: url("/../Content/img/ic_estrela_vazada.png");
+}
+
+#paginaEdicaoGaleria .img-destaque-icon.destaque-selecionado {
+    content: url("/../Content/img/ic_estrela_preenchida.png");
+}
+
+#paginaConsultaGaleria #divDesativar {
+    width: 270px;
+    height: 220px;
+    margin: auto;
+    padding-bottom: 10px;
+}
+
+#paginaConsultaGaleria #imgDesativar {
+    max-height: 100%;
+    margin: auto;
+    min-height: 200px;
+}
+
+#paginaConsultaGaleria .div-desativar-icon {
+    position: absolute;
+    background-color: white;
+    width: 28px;
+}
+
+#paginaConsultaGaleria .img-desativado-icon {
+    cursor: pointer;
+    content: url("/../Content/img/ic_desativar.png");
+}
+
+#paginaConsultaGaleria .img-ativo-icon {
+    content: url("/../Content/img/ic_ativar.png");
+}
+
+/* Confederações */
+
+@media (min-width: 992px) {
+  #paginaEdicaoConfederacao #tagsPortuguesConfederacao {
+    min-height: 156px;
+  }
+
+  #paginaEdicaoConfederacao #tagsInglesConfederacao {
+    min-height: 378px;
+  }
+}
+
+@media (min-width: 1200px) {
+  #paginaEdicaoConfederacao #tagsPortuguesConfederacao {
+    min-height: 94px;
+  }
+
+  #paginaEdicaoConfederacao #tagsInglesConfederacao {
+    min-height: 316px;
+  }
+}
+
+#paginaEdicaoConfederacao #divLogotipoConfederacao {
+    width: 270px;
+    height: 170px;
+    margin: auto;
+    padding-bottom: 10px;
+}
+
+#paginaEdicaoConfederacao #imgLogotipoConfederacao {
+    max-height: 100%;
+    margin: auto;
+    min-height: 150px;
+}
+
+
+/* Atletas */
+
+#tabelaAtletas td,
+#tabelaAtletasSIGEF td,
+#tabelaAtletas th,
+#tabelaAtletasSIGEF_wrapper th {
+    vertical-align: middle;
+}
+
+#tabelaAtletas td:first-of-type,
+#tabelaAtletasSIGEF td:first-of-type {
+    text-align: center;
+}
+
+#tabelaAtletas th:first-of-type,
+#tabelaAtletasSIGEF_wrapper th:first-of-type,
+#tabelaAtletasSIGEF_wrapper th:nth-child(2) {
+    text-align: center;
+}
+
+#tabelaAtletas .imagem-atleta,
+#tabelaAtletasSIGEF .imagem-atleta {
+    max-width: 100px;
+    max-height: 80px;
+}
+
+#paginaEdicaoAtleta #divFotoAtleta {
+    width: 210px;
+    height: 210px;
+    margin: auto;
+    padding-bottom: 10px;
+}
+
+#paginaEdicaoAtleta #imgFotoAtleta {
+    max-height: 100%;
+    margin: auto;
+    min-height: 150px;
+}
+
+/* Editoria */
+
+#modal-edicao-editoria #divImgEditoria {
+    width: 240px;
+    height: 170px;
+    margin: auto;
+    padding-bottom: 10px;
+}
+
+#modal-edicao-editoria #imgEditoria {
+    max-height: 100%;
+    margin: auto;
+    min-height: 150px;
+}
+
+/* Modalidade */
+
+#tabelaModalidadesSIGEF_wrapper th:first-of-type {
+    vertical-align: middle;
+    text-align: center;
+}
+
+#paginaEdicaoModalidade #divPictograma {
+    width: 200px;
+    height: 200px;
+    margin: auto;
+    padding-bottom: 10px;
+}
+
+#paginaEdicaoModalidade #imgPictograma {
+    width: 100%;
+    height: 100%;
+    margin: auto;
+}
+
+@media (min-width: 992px) {
+  #paginaEdicaoModalidade .textarea-tag {
+    min-height: 378px;
+  }
+}
+
+@media (min-width: 1200px) {
+  #paginaEdicaoModalidade .textarea-tag {
+    min-height: 316px;
+  }
+}
+
+/* Evento */
+
+#tabelaEventosSIGEF th {
+    vertical-align: middle;
+}
+
+@media (min-width: 992px) {
+  #paginaEdicaoEvento #tagsPortuguesEvento {
+    min-height: 304px;
+  }
+
+  #paginaEdicaoEvento #tagsInglesEvento {
+    min-height: 378px;
+  }
+}
+
+@media (min-width: 1200px) {
+  #paginaEdicaoEvento #tagsPortuguesEvento {
+    min-height: 242px;
+  }
+
+  #paginaEdicaoEvento #tagsInglesEvento {
+    min-height: 316px;
+  }
+}
+
+/* Widget */
+
+#modalPerfilAtletas .checkbox {
+    margin-top: 10px;
+}
+
+#modalNoticia .checkbox {
+    margin-top: 0;
+}
+
+/* Geração de galerias */
+
+.quadro-galeria {
+    display: block;
+    width: 100%;
+    min-height: 50px;
+    padding: 20px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+.galeria-exibicao ul {         
+    padding: 0;
+    margin: 0;
+}
+
+.galeria-exibicao ul li {     
+    list-style: none;
+    margin-bottom: 7px;        
+}
+
+.galeria-exibicao ul li .div-item-galeria {
+    display: table;
+    margin: 0 auto;
+}
+
+.galeria-exibicao ul li .div-zoom-icon {
+    position: absolute;
+    background-color: white;
+    width: 25px;
+}
+
+.galeria-exibicao ul li .img-zoom-icon {
+    cursor: pointer;
+    content: url("/../Content/img/ic_detalhar.png");
+}
+
+.galeria-exibicao ul li .div-delete-icon {
+    position: absolute;
+    background-color: white;
+    width: 25px;
+    right: 0;
+}
+
+.galeria-exibicao ul li .img-delete-icon {
+    cursor: pointer;
+    content: url("/../Content/img/bt_excluir.gif");
+}
+
+.galeria-exibicao ul li .img-selecionada {
+    border: 2px solid #337ab7;
+}
+
+.galeria-exibicao ul li .div-img-galeria {
+    position: relative;
+    display: table;
+    margin: 0 auto;
+}
+
+.galeria-exibicao ul li .img-galeria {
+    margin: auto;
+    cursor: pointer;
+    width: auto;
+    max-height: 150px;
+    float: left;
+}
+
+.galeria-exibicao ul li .img-dados {
+    height: 30px;
+}
+
+.galeria-exibicao ul li .img-titulo {
+    height: 100%;
+    width: 100%;
+    text-align: center;
+    font-size: 13px;
+}
+
+.modal-galeria-zoom .img-galeria-zoom {
+   margin: auto;
+}
+
+.modal-galeria-zoom .div-galeria-zoom-img {
+    max-width: 1000px;
+    max-height: 1000px;
+    margin-bottom: 5px;
+}
+
+.modal-galeria-zoom .div-galeria-zoom-extra {
+    margin-bottom: 2px;
+}
+
+.modal-galeria-zoom .label-galeria-zoom-extra {
+    margin-right: 2px;
+    margin-bottom: 0px;
+}
+
+/* make sidebar nav vertical */ 
+@media (min-width: 768px) {
+  .sidebar-nav .navbar .navbar-collapse {
+    padding: 0;
+    max-height: none;
+  }
+  .sidebar-nav .navbar ul {
+    float: none;
+  }
+  .sidebar-nav .navbar ul:not {
+    display: block;
+  }
+  .sidebar-nav .navbar li {
+    float: none;
+    display: block;
+  }
+  .sidebar-nav .navbar li a {
+    padding-top: 12px;
+    padding-bottom: 12px;
+  }
+}

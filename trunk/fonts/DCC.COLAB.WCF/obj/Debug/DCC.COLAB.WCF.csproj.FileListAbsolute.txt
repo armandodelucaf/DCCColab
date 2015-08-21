@@ -1,0 +1,69 @@
+D:\Projetos\cms - Copia\trunk\fonts\DCC.COLAB.WCF\bin\DCC.COLAB.WCF.dll
+D:\Projetos\cms - Copia\trunk\fonts\DCC.COLAB.WCF\bin\DCC.COLAB.WCF.pdb
+D:\Projetos\cms - Copia\trunk\fonts\DCC.COLAB.WCF\bin\DCC.COLAB.Business.dll
+D:\Projetos\cms - Copia\trunk\fonts\DCC.COLAB.WCF\bin\DCC.COLAB.Common.dll
+D:\Projetos\cms - Copia\trunk\fonts\DCC.COLAB.WCF\bin\DCC.COLAB.DataAccess.SQLServer.dll
+D:\Projetos\cms - Copia\trunk\fonts\DCC.COLAB.WCF\bin\log4net.dll
+D:\Projetos\cms - Copia\trunk\fonts\DCC.COLAB.WCF\bin\Microsoft.Practices.Unity.Configuration.dll
+D:\Projetos\cms - Copia\trunk\fonts\DCC.COLAB.WCF\bin\Microsoft.Practices.Unity.Interception.Configuration.dll
+D:\Projetos\cms - Copia\trunk\fonts\DCC.COLAB.WCF\bin\DCC.COLAB.WCF.Interface.dll
+D:\Projetos\cms - Copia\trunk\fonts\DCC.COLAB.WCF\bin\Microsoft.Practices.Unity.Interception.dll
+D:\Projetos\cms - Copia\trunk\fonts\DCC.COLAB.WCF\bin\Microsoft.Practices.Unity.dll
+D:\Projetos\cms - Copia\trunk\fonts\DCC.COLAB.WCF\bin\DCCFramework.dll
+D:\Projetos\cms - Copia\trunk\fonts\DCC.COLAB.WCF\bin\Microsoft.Practices.ServiceLocation.dll
+D:\Projetos\cms - Copia\trunk\fonts\DCC.COLAB.WCF\bin\Microsoft.Practices.EnterpriseLibrary.Data.dll
+D:\Projetos\cms - Copia\trunk\fonts\DCC.COLAB.WCF\bin\Microsoft.Practices.EnterpriseLibrary.Common.dll
+D:\Projetos\cms - Copia\trunk\fonts\DCC.COLAB.WCF\bin\DCC.COLAB.Business.pdb
+D:\Projetos\cms - Copia\trunk\fonts\DCC.COLAB.WCF\bin\DCC.COLAB.Common.pdb
+D:\Projetos\cms - Copia\trunk\fonts\DCC.COLAB.WCF\bin\DCC.COLAB.DataAccess.SQLServer.pdb
+D:\Projetos\cms - Copia\trunk\fonts\DCC.COLAB.WCF\bin\DCC.COLAB.WCF.Interface.pdb
+D:\Projetos\cms - Copia\trunk\fonts\DCC.COLAB.WCF\bin\DCCFramework.pdb
+D:\Projetos\cms - Copia\trunk\fonts\DCC.COLAB.WCF\obj\Debug\DCC.COLAB.WCF.csprojResolveAssemblyReference.cache
+D:\Projetos\cms - Copia\trunk\fonts\DCC.COLAB.WCF\obj\Debug\DCC.COLAB.WCF.dll
+D:\Projetos\cms - Copia\trunk\fonts\DCC.COLAB.WCF\obj\Debug\DCC.COLAB.WCF.pdb
+D:\Projetos\dcccolab\trunk\fonts\DCC.COLAB.WCF\bin\DCC.COLAB.WCF.dll
+D:\Projetos\dcccolab\trunk\fonts\DCC.COLAB.WCF\bin\DCC.COLAB.WCF.pdb
+D:\Projetos\dcccolab\trunk\fonts\DCC.COLAB.WCF\bin\DCC.COLAB.Business.dll
+D:\Projetos\dcccolab\trunk\fonts\DCC.COLAB.WCF\bin\DCC.COLAB.Common.dll
+D:\Projetos\dcccolab\trunk\fonts\DCC.COLAB.WCF\bin\DCC.COLAB.DataAccess.SQLServer.dll
+D:\Projetos\dcccolab\trunk\fonts\DCC.COLAB.WCF\bin\log4net.dll
+D:\Projetos\dcccolab\trunk\fonts\DCC.COLAB.WCF\bin\Microsoft.Practices.Unity.Configuration.dll
+D:\Projetos\dcccolab\trunk\fonts\DCC.COLAB.WCF\bin\Microsoft.Practices.Unity.Interception.Configuration.dll
+D:\Projetos\dcccolab\trunk\fonts\DCC.COLAB.WCF\bin\DCC.COLAB.WCF.Interface.dll
+D:\Projetos\dcccolab\trunk\fonts\DCC.COLAB.WCF\bin\Microsoft.Practices.Unity.Interception.dll
+D:\Projetos\dcccolab\trunk\fonts\DCC.COLAB.WCF\bin\Microsoft.Practices.Unity.dll
+D:\Projetos\dcccolab\trunk\fonts\DCC.COLAB.WCF\bin\DCCFramework.dll
+D:\Projetos\dcccolab\trunk\fonts\DCC.COLAB.WCF\bin\Microsoft.Practices.ServiceLocation.dll
+D:\Projetos\dcccolab\trunk\fonts\DCC.COLAB.WCF\bin\Microsoft.Practices.EnterpriseLibrary.Data.dll
+D:\Projetos\dcccolab\trunk\fonts\DCC.COLAB.WCF\bin\Microsoft.Practices.EnterpriseLibrary.Common.dll
+D:\Projetos\dcccolab\trunk\fonts\DCC.COLAB.WCF\bin\DCC.COLAB.Business.pdb
+D:\Projetos\dcccolab\trunk\fonts\DCC.COLAB.WCF\bin\DCC.COLAB.Common.pdb
+D:\Projetos\dcccolab\trunk\fonts\DCC.COLAB.WCF\bin\DCC.COLAB.DataAccess.SQLServer.pdb
+D:\Projetos\dcccolab\trunk\fonts\DCC.COLAB.WCF\bin\DCC.COLAB.WCF.Interface.pdb
+D:\Projetos\dcccolab\trunk\fonts\DCC.COLAB.WCF\bin\DCCFramework.pdb
+D:\Projetos\dcccolab\trunk\fonts\DCC.COLAB.WCF\obj\Debug\DCC.COLAB.WCF.dll
+D:\Projetos\dcccolab\trunk\fonts\DCC.COLAB.WCF\obj\Debug\DCC.COLAB.WCF.pdb
+D:\Projetos\dcccolab\trunk\fonts\DCC.COLAB.WCF\obj\Debug\DCC.COLAB.WCF.csprojResolveAssemblyReference.cache
+C:\Projetos\dcccolab\trunk\fonts\DCC.COLAB.WCF\bin\DCC.COLAB.WCF.dll
+C:\Projetos\dcccolab\trunk\fonts\DCC.COLAB.WCF\bin\DCC.COLAB.WCF.pdb
+C:\Projetos\dcccolab\trunk\fonts\DCC.COLAB.WCF\bin\DCC.COLAB.Business.dll
+C:\Projetos\dcccolab\trunk\fonts\DCC.COLAB.WCF\bin\DCC.COLAB.Common.dll
+C:\Projetos\dcccolab\trunk\fonts\DCC.COLAB.WCF\bin\DCC.COLAB.DataAccess.SQLServer.dll
+C:\Projetos\dcccolab\trunk\fonts\DCC.COLAB.WCF\bin\log4net.dll
+C:\Projetos\dcccolab\trunk\fonts\DCC.COLAB.WCF\bin\Microsoft.Practices.Unity.Configuration.dll
+C:\Projetos\dcccolab\trunk\fonts\DCC.COLAB.WCF\bin\Microsoft.Practices.Unity.Interception.Configuration.dll
+C:\Projetos\dcccolab\trunk\fonts\DCC.COLAB.WCF\bin\DCC.COLAB.WCF.Interface.dll
+C:\Projetos\dcccolab\trunk\fonts\DCC.COLAB.WCF\bin\Microsoft.Practices.Unity.Interception.dll
+C:\Projetos\dcccolab\trunk\fonts\DCC.COLAB.WCF\bin\Microsoft.Practices.Unity.dll
+C:\Projetos\dcccolab\trunk\fonts\DCC.COLAB.WCF\bin\DCCFramework.dll
+C:\Projetos\dcccolab\trunk\fonts\DCC.COLAB.WCF\bin\Microsoft.Practices.ServiceLocation.dll
+C:\Projetos\dcccolab\trunk\fonts\DCC.COLAB.WCF\bin\Microsoft.Practices.EnterpriseLibrary.Data.dll
+C:\Projetos\dcccolab\trunk\fonts\DCC.COLAB.WCF\bin\Microsoft.Practices.EnterpriseLibrary.Common.dll
+C:\Projetos\dcccolab\trunk\fonts\DCC.COLAB.WCF\bin\DCC.COLAB.Business.pdb
+C:\Projetos\dcccolab\trunk\fonts\DCC.COLAB.WCF\bin\DCC.COLAB.Common.pdb
+C:\Projetos\dcccolab\trunk\fonts\DCC.COLAB.WCF\bin\DCC.COLAB.DataAccess.SQLServer.pdb
+C:\Projetos\dcccolab\trunk\fonts\DCC.COLAB.WCF\bin\DCC.COLAB.WCF.Interface.pdb
+C:\Projetos\dcccolab\trunk\fonts\DCC.COLAB.WCF\bin\DCCFramework.pdb
+C:\Projetos\dcccolab\trunk\fonts\DCC.COLAB.WCF\obj\Debug\DCC.COLAB.WCF.csprojResolveAssemblyReference.cache
+C:\Projetos\dcccolab\trunk\fonts\DCC.COLAB.WCF\obj\Debug\DCC.COLAB.WCF.dll
+C:\Projetos\dcccolab\trunk\fonts\DCC.COLAB.WCF\obj\Debug\DCC.COLAB.WCF.pdb
