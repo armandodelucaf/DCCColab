@@ -46,7 +46,6 @@
     <Compile Include="Entities\DocumentoDataAccess.cs" />
     <Compile Include="Entities\PerfilAcessoDataAccess.cs" />
     <Compile Include="Entities\UsuarioDataAccess.cs" />
-    <Compile Include="Entities\UsuarioLogadoDataAccess.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

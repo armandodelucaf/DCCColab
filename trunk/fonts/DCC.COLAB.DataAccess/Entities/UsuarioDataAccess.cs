@@ -66,6 +66,22 @@ namespace DCC.COLAB.DataAccess.SQLServer.Entities
             }
         }
 
+        public Usuario ValidarUsuarioSenha(string login, string senha)
+        {
+            try
+            {
+                Hashtable parametros = new Hashtable();
+                parametros.Add("LOGIN", login);
+                parametros.Add("SENHA", senha);
+                Usuario usuario = this.SelecionarPorNomeQuery("validaUsuarioSenha", parametros, this.RecuperaObjeto).Cast<Usuario>().FirstOrDefault();
+                return usuario;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public string RecuperarSenha(Usuario usuario)
         {
             try
@@ -118,10 +134,15 @@ namespace DCC.COLAB.DataAccess.SQLServer.Entities
         private Usuario RecuperaObjeto(MySqlDataReader dr)
         {
             Usuario usuario = new Usuario();
-            usuario.codigo = CastDB<int>(dr, "id_usuario");
-            usuario.perfilAcesso.codigo = CastDB<int>(dr, "id_perfil");
-            usuario.email = CastDB<string>(dr, "ds_login");
-            usuario.nome = CastDB<string>(dr, "nm_participante");
+            usuario.id = CastDB<int>(dr, "id_Usuario");
+            usuario.nome = CastDB<string>(dr, "nm_Usuario");
+            usuario.email = CastDB<string>(dr, "email");
+            usuario.idFacebook = CastDB<int>(dr, "id_Facebook");
+            usuario.moderador = CastDB<bool>(dr, "moderador");
+            usuario.perfilAcesso = new PerfilAcesso() {
+                codigo = CastDB<int>(dr, "id_Perfil_Acesso"),
+                nome = CastDB<string>(dr, "nm_Perfil_Acesso")
+            };
             return usuario;
         }
 
@@ -132,7 +153,7 @@ namespace DCC.COLAB.DataAccess.SQLServer.Entities
         private Hashtable BuildParametrosInserirUsuario(Usuario usuario)
         {
             Hashtable parametros = new Hashtable();
-            parametros.Add("ID", usuario.codigo);
+            parametros.Add("ID", usuario.id);
             parametros.Add("NOME", usuario.nome);
             parametros.Add("EMAIL", usuario.email);
             parametros.Add("ID_PERFIL", usuario.perfilAcesso.codigo);

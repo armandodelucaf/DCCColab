@@ -13,10 +13,7 @@ namespace DCC.COLAB.WCF.Interface
         #region Usuario
 
         [OperationContract]
-        UsuarioLogado ValidarUsuarioSenha(string login, string senha);
-
-        [OperationContract]
-        UsuarioLogado ObterDadosUsuarioLogado(int idParticipante);
+        Usuario ValidarUsuarioSenha(string login, string senha);
 
         [OperationContract]
         Usuario SelecionarUsuarioPorCodigo(int codigo);

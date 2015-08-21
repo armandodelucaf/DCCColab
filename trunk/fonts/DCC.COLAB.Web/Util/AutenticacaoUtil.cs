@@ -1,4 +1,4 @@
-﻿using DCC.COLAB.Common.AuxiliarEntities;
+﻿using DCC.COLAB.Common.Entities;
 using DCC.COLAB.WCF.Interface;
 using System;
 using System.Collections.Generic;
@@ -10,11 +10,11 @@ namespace DCC.COLAB.Web.Util
     public class AutenticacaoUtil
     {
 
-        public static UsuarioLogado ValidarUsuarioSenha(String login, String senha)
+        public static Usuario ValidarUsuarioSenha(String login, String senha)
         {
             try
             {
-                UsuarioLogado usuarioLogado = WCFDispatcher<ICOLABServico>.UseService(u => u.ValidarUsuarioSenha(login, senha));
+                Usuario usuarioLogado = WCFDispatcher<ICOLABServico>.UseService(u => u.ValidarUsuarioSenha(login, senha));
                 return usuarioLogado;
             }
             catch (Exception ex)

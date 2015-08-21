@@ -26,6 +26,7 @@
         U.id_Usuario,
         U.id_Facebook,
         U.nm_Usuario,
+        U.email,
         PA.id_Perfil_Acesso,
         PA.nm_Perfil_Acesso,
         PA.moderador

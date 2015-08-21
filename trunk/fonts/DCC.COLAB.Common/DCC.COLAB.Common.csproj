@@ -48,7 +48,6 @@
   <ItemGroup>
     <Compile Include="AuxiliarEntities\Ordenacao.cs" />
     <Compile Include="AuxiliarEntities\Paginacao.cs" />
-    <Compile Include="AuxiliarEntities\UsuarioLogado.cs" />
     <Compile Include="IBaseDataAccess.cs" />
     <Compile Include="Basic\BusinessConfig.cs" />
     <Compile Include="Basic\Util.cs" />
@@ -64,7 +63,6 @@
     <Compile Include="DataAccess\IArquivoDataAccess.cs" />
     <Compile Include="DataAccess\IPerfilAcessoDataAccess.cs" />
     <Compile Include="DataAccess\IUsuarioDataAccess.cs" />
-    <Compile Include="DataAccess\IUsuarioLogadoDataAccess.cs" />
     <Compile Include="Entities\Acao.cs" />
     <Compile Include="Entities\Documento.cs" />
     <Compile Include="Entities\Usuario.cs" />

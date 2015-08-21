@@ -112,9 +112,21 @@ namespace DCC.COLAB.Business.Entities
         {
             try
             {
-                Usuario registro = SelecionarUsuarioPorCodigo(usuario.codigo);
+                Usuario registro = SelecionarUsuarioPorCodigo(usuario.id);
                 registro.senha = usuario.senha;
                 dataAccess.AtualizarSenha(registro);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public virtual Usuario ValidarUsuarioSenha(string login, string senha)
+        {
+            try
+            {
+                return dataAccess.ValidarUsuarioSenha(login, senha);
             }
             catch (Exception ex)
             {

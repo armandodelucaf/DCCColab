@@ -1,4 +1,4 @@
-﻿using DCC.COLAB.Common.AuxiliarEntities;
+﻿using DCC.COLAB.Common.Entities;
 using DCC.COLAB.Common.Basic;
 using DCC.COLAB.WCF.Interface;
 using System;
@@ -25,7 +25,7 @@ namespace DCC.COLAB.Web.Util
             set { System.Web.HttpContext.Current.Session[ConstantsEnum.CHAVE_SESSAO_AUTENTICADO] = value; }
         }
 
-        public static UsuarioLogado Usuario
+        public static Usuario Usuario
         {
             get {
                 if (System.Web.HttpContext.Current.Session == null || System.Web.HttpContext.Current.Session.IsNewSession)
@@ -34,7 +34,7 @@ namespace DCC.COLAB.Web.Util
                 }
                 else
                 {
-                    return (UsuarioLogado)System.Web.HttpContext.Current.Session[ConstantsEnum.CHAVE_SESSAO_USUARIO];
+                    return (Usuario)System.Web.HttpContext.Current.Session[ConstantsEnum.CHAVE_SESSAO_USUARIO];
                 }
             }
             set { System.Web.HttpContext.Current.Session[ConstantsEnum.CHAVE_SESSAO_USUARIO] = value; }
@@ -46,7 +46,7 @@ namespace DCC.COLAB.Web.Util
             set { System.Web.HttpContext.Current.Session[ConstantsEnum.CHAVE_SESSAO_USUARIO_LOGIN] = value; }
         }
 
-        static internal void AlterarVariavelSessaoUsuario(UsuarioLogado usuario)
+        static internal void AlterarVariavelSessaoUsuario(Usuario usuario)
         {
             Usuario = usuario;
 
@@ -78,22 +78,6 @@ namespace DCC.COLAB.Web.Util
         {
             HttpContext.Current.Session.RemoveAll();
         }
-
-        //public static List<String> ListaDeNomesDasEditorias
-        //{
-        //    get
-        //    {
-        //        if (System.Web.HttpContext.Current.Session == null)
-        //        {
-        //            return new List<string>();
-        //        }
-        //        else
-        //        {
-        //            return (List<String>)System.Web.HttpContext.Current.Session[ConstantsEnum.CHAVE_LISTA_NOME_EDITORIAS];
-        //        }
-        //    }
-        //    set { System.Web.HttpContext.Current.Session[ConstantsEnum.CHAVE_LISTA_NOME_EDITORIAS] = value; }
-        //}
 
         static internal void RemoverSessao()
         {

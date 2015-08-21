@@ -57,7 +57,7 @@ namespace DCC.COLAB.Web.Controllers
         {        
             try
             {              
-                if (usuario.codigo == 0)
+                if (usuario.id == 0)
                 {
                     WCFDispatcher<ICOLABServico>.UseService(u => u.InserirUsuario(usuario, SessaoUtil.UsuarioLogin));
                 }

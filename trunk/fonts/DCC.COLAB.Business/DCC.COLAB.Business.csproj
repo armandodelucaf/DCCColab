@@ -68,7 +68,6 @@
     <Compile Include="Entities\DocumentoBusinessFacade.cs" />
     <Compile Include="Entities\PerfilAcessoBusinessFacade.cs" />
     <Compile Include="Entities\UsuarioBusinessFacade.cs" />
-    <Compile Include="Entities\UsuarioLogadoBusinessFacade.cs" />
     <Compile Include="COLABServico.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Util\Attributes.cs">

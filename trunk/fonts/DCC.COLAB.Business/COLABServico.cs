@@ -15,17 +15,10 @@ namespace DCC.COLAB.Business
         #region Usuario
 
         [OperationBehavior(Impersonation = ImpersonationOption.Allowed)]
-        public UsuarioLogado ValidarUsuarioSenha(string login, string senha)
+        public Usuario ValidarUsuarioSenha(string login, string senha)
         {
-            UsuarioLogadoBusinessFacade usuarioLogadoBusinessFacade = BusinessFactory.GetInstance().Get<UsuarioLogadoBusinessFacade>();
+            UsuarioBusinessFacade usuarioLogadoBusinessFacade = BusinessFactory.GetInstance().Get<UsuarioBusinessFacade>();
             return usuarioLogadoBusinessFacade.ValidarUsuarioSenha(login, senha);
-        }
-
-        [OperationBehavior(Impersonation = ImpersonationOption.Allowed)]
-        public UsuarioLogado ObterDadosUsuarioLogado(int idParticipante)
-        {
-            UsuarioLogadoBusinessFacade usuarioLogadoBusinessFacade = BusinessFactory.GetInstance().Get<UsuarioLogadoBusinessFacade>();
-            return usuarioLogadoBusinessFacade.ObterDadosUsuarioLogado(idParticipante);
         }
 
         [OperationBehavior(Impersonation = ImpersonationOption.Allowed)]

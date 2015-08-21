@@ -29,19 +29,11 @@ namespace DCC.COLAB.Web.Controllers
 
         public JsonResult ValidarLogin(string email, string senha)
         {
-            UsuarioLogado usuarioAutenticado = AutenticacaoUtil.ValidarUsuarioSenha(email, senha);
+            Usuario usuarioAutenticado = AutenticacaoUtil.ValidarUsuarioSenha(email, senha);
             if (usuarioAutenticado != null)
             {
-
                 SessaoUtil.AlterarVariavelSessaoUsuario(usuarioAutenticado);
-                if (!usuarioAutenticado.necessitaTrocaSenha)
-                {
-                    return Json(new { redirectURL = Url.Action("Index", "Home"), isRedirect = true, changePassword = false }, JsonRequestBehavior.AllowGet);
-                }
-                else
-                {
-                    return Json(new { }, JsonRequestBehavior.AllowGet);
-                }
+                return Json(new { redirectURL = Url.Action("Index", "Home"), isRedirect = true, changePassword = false }, JsonRequestBehavior.AllowGet);
             }
             else
             {

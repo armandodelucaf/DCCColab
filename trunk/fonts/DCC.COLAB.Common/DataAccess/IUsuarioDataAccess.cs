@@ -27,5 +27,7 @@ namespace DCC.COLAB.Common.DataAccess
         string RecuperarSenha(Usuario usuario);
 
         void AtualizarSenha(Usuario usuario);
+
+        Usuario ValidarUsuarioSenha(string login, string senha);
     }
 }
