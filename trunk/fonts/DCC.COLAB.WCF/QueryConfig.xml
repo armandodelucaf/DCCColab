@@ -6,17 +6,17 @@
       SELECT COUNT(1) FROM ( @MINHAQUERY@ ) C
     </querySelecionarCount>
     <querySelecionarPaginado>
+      SET @row_number = 0;
       SELECT * FROM
       (
       SELECT
-      row_number() OVER(ORDER BY @ORDER_BY_EXTERNO) AS number, * FROM
+      (@row_number:=@row_number + 1) AS number, N.* FROM
       (
       @MINHAQUERY@
       ) N
       ) S
       WHERE
       (number BETWEEN @REGISTRO_INICIAL + 1 AND @REGISTRO_INICIAL + @QTD_A_RETORNAR)
-      ORDER BY @ORDER_BY_EXTERNO
     </querySelecionarPaginado>
   </Paginacao>
 

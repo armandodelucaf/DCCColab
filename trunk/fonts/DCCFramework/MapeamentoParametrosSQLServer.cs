@@ -22,7 +22,7 @@ namespace DCCFramework
                     String chaveDoParametro = parametro.Key.ToString();
                     Object valorDoParametro = parametro.Value;
 
-                    if (chaveDoParametro == "ORDER_BY" || chaveDoParametro == "ORDER_BY_EXTERNO")
+                    if (chaveDoParametro == "ORDER_BY") // || chaveDoParametro == "ORDER_BY_EXTERNO")
                     {
                         command.CommandText = command.CommandText.Replace("@" + chaveDoParametro, valorDoParametro.ToString());
                     }

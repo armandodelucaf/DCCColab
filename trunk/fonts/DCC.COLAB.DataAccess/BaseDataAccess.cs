@@ -29,7 +29,7 @@ namespace DCC.COLAB.DataAccess.SQLServer
             parametros.Add("REGISTRO_INICIAL", filtro.registroInicial);
             parametros.Add("QTD_A_RETORNAR", filtro.quantidadeARetornar);
             parametros.Add("ORDER_BY", ordenacao);
-            parametros.Add("ORDER_BY_EXTERNO", RetirarReferenciaTabela(ordenacao));
+            //parametros.Add("ORDER_BY_EXTERNO", RetirarReferenciaTabela(ordenacao));
 
             return parametros;
         }
@@ -55,19 +55,19 @@ namespace DCC.COLAB.DataAccess.SQLServer
             }
         }
 
-        private string RetirarReferenciaTabela(string ordenacao) {
-            List<string> lista = ordenacao.Split(new Char [] {','}).ToList();
+        //private string RetirarReferenciaTabela(string ordenacao) {
+        //    List<string> lista = ordenacao.Split(new Char [] {','}).ToList();
 
-            for (int i = 0; i < lista.Count; i++)
-            {
-                int indicePonto = lista[i].IndexOf('.');
-                if (indicePonto >= 0)
-                {
-                    lista[i] = lista[i].Substring(indicePonto+1);
-                }
-            }
+        //    for (int i = 0; i < lista.Count; i++)
+        //    {
+        //        int indicePonto = lista[i].IndexOf('.');
+        //        if (indicePonto >= 0)
+        //        {
+        //            lista[i] = lista[i].Substring(indicePonto+1);
+        //        }
+        //    }
 
-            return string.Join(", ", lista.ToArray());
-        }
+        //    return string.Join(", ", lista.ToArray());
+        //}
     }
 }

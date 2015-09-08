@@ -17,3 +17,13 @@ C:\Projetos\dcccolab\trunk\fonts\DCCFramework\bin\Debug\Microsoft.Practices.Serv
 C:\Projetos\dcccolab\trunk\fonts\DCCFramework\bin\Debug\Microsoft.Practices.Unity.Interception.dll
 C:\Projetos\dcccolab\trunk\fonts\DCCFramework\obj\Debug\DCCFramework.dll
 C:\Projetos\dcccolab\trunk\fonts\DCCFramework\obj\Debug\DCCFramework.pdb
+C:\Users\armando.filho\Documents\GitHub\DCCColab\trunk\fonts\DCCFramework\bin\Debug\DCCFramework.dll
+C:\Users\armando.filho\Documents\GitHub\DCCColab\trunk\fonts\DCCFramework\bin\Debug\DCCFramework.pdb
+C:\Users\armando.filho\Documents\GitHub\DCCColab\trunk\fonts\DCCFramework\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Common.dll
+C:\Users\armando.filho\Documents\GitHub\DCCColab\trunk\fonts\DCCFramework\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Data.dll
+C:\Users\armando.filho\Documents\GitHub\DCCColab\trunk\fonts\DCCFramework\bin\Debug\Microsoft.Practices.Unity.dll
+C:\Users\armando.filho\Documents\GitHub\DCCColab\trunk\fonts\DCCFramework\bin\Debug\Microsoft.Practices.ServiceLocation.dll
+C:\Users\armando.filho\Documents\GitHub\DCCColab\trunk\fonts\DCCFramework\bin\Debug\Microsoft.Practices.Unity.Interception.dll
+C:\Users\armando.filho\Documents\GitHub\DCCColab\trunk\fonts\DCCFramework\obj\Debug\DCCFramework.csprojResolveAssemblyReference.cache
+C:\Users\armando.filho\Documents\GitHub\DCCColab\trunk\fonts\DCCFramework\obj\Debug\DCCFramework.dll
+C:\Users\armando.filho\Documents\GitHub\DCCColab\trunk\fonts\DCCFramework\obj\Debug\DCCFramework.pdb

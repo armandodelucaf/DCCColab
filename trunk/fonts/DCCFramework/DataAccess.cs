@@ -161,7 +161,7 @@ namespace DCCFramework
                 }
 
                 String query = GerenciadorDoArquivoDeQueries.Instancia.ObterQuery(nomeQuery).ToUpper();
-                query = query.Replace("ORDER BY", "").Replace("@ORDER_BY", "");
+                //query = query.Replace("ORDER BY", "").Replace("@ORDER_BY", "");
 
                 string queryPaginacao = GerenciadorDoArquivoDeQueries.Instancia.ObterQuery("querySelecionarPaginado").ToUpper();
                 queryPaginacao = queryPaginacao.Replace("@MINHAQUERY@", query);
