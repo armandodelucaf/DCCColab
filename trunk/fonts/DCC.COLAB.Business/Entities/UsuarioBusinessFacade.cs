@@ -24,7 +24,7 @@ namespace DCC.COLAB.Business.Entities
             {
                 Usuario usuario = dataAccess.SelecionarUsuarioPorCodigo(codigo);
                 PerfilAcessoBusinessFacade perfilAcessoBusinessFacade = ObterOutraBusiness<PerfilAcessoBusinessFacade>();
-                usuario.perfilAcesso = perfilAcessoBusinessFacade.SelecionarPerfilPorCodigo(usuario.perfilAcesso.codigo);
+                usuario.perfilAcesso = perfilAcessoBusinessFacade.SelecionarPerfilPorCodigo(usuario.perfilAcesso.id);
                 return usuario;
             }
             catch (Exception ex)

@@ -1,0 +1,514 @@
+﻿<div>
+    <legend>Documentos - Consulta</legend>
+
+    <table id="tabelaDocumentos" class="table hover table-bordered" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th>Código</th>
+                <th>Título</th>
+                <th>Descrição</th>
+                <th>Tamanho</th>
+                <th>Versão</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+    </table>
+
+    <div class="form-group">
+        <div>
+            <button id="btnNovo" name="btnNovo" class="btn btn-success">Novos documentos</button>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="myModalUpload" tabindex="-1" role="dialog" aria-labelledby="myModalUploadLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalUploadLabel">Novo documento</h4>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-warning" role="alert">
+                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span><strong>&nbsp;ATENÇÃO</strong>
+                    <br />
+                    - Para seleção múltipla de arquivos, segure CTRL ou SHIFT.
+                    <br />
+                    - Máximo de 10 arquivos por vez.
+                </div>
+                <form enctype="multipart/form-data">
+                    <div class="form-group" id="divNovoDocumento">
+                        <label for="inputDocumentos" class="control-label">Documentos:</label>
+                        <input id="inputDocumentos" type="file" class="file" accept="application/pdf" multiple />
+                    </div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="atualizaDocumento" tabindex="-1" role="dialog" aria-labelledby="myModalUploadLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="atualizaDocumentoLabel"></h4>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-warning" role="alert">
+                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span><strong>&nbsp;ATENÇÃO</strong>
+                    <br />
+                    - Selecione a nova versão do arquivo. As versões anteriores não serão apagadas
+                </div>
+                <form enctype="multipart/form-data">
+                    <input type="hidden" id="hdCodigoAtualizaDocumento" value="" />
+                    <div class="form-group" id="divAtualizaDocumento">
+                        <label for="inputAtualizaDocumento" class="control-label">Documento:</label>
+                        <input id="inputAtualizaDocumento" type="file" class="file" accept="application/pdf" />
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="edicaoDeDocumentos" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="edicaoDeDocumentosLabel">Adicionar documentos</h4>
+            </div>
+
+            <div class="modal-body">
+                <form>
+                    <div class='documentosMultiplosModalDiv' id="documentoModalDiv">
+                        <input id="hdCodigoDocumento" name="hdCodigoDocumento" type="hidden" value="" />
+                        <input id="hdCodigoArquivo" name="hdCodigoArquivo" type="hidden" value="" />
+                        <input id="hdNomeDocumento" name="hdNomeDocumento" type="hidden" value="" />
+                        <input id="hdTamanho" name="hdTamanho" type="hidden" value="" />
+                        <input id="hdExtensao" name="hdExtensao" type="hidden" value="" />
+                        <input id="hdVersao" name="hdVersao" type="hidden" value="" />
+                        <input id="hdTags" name="hdTags" type="hidden" value="" />
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="tituloDocumento" class="control-label">Título:</label>
+                                    <input type="text" id="tituloDocumento" name="tituloDocumento" required="required" placeholder="Digite aqui um título para o documento" class="form-control input-md" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="descricaoDocumento" class="control-label">Descrição do Documento:</label>
+                                    <textarea id="descricaoDocumento" name="descricaoDocumento" placeholder="Digite aqui uma descrição para o documento" class="form-control input-md"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group ui-front">
+                                    <label for="tagsDocumento" class="control-label">Tags:</label>
+                                    <textarea id="tagsDocumento" name="tagsDocumento" placeholder="Digite aqui as tags em português para o documento" class="form-control input-md"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row atualizaDocumento">
+                            <div class="col-md-12">
+                                <button type="button" class="btn btn-primary" id="btnAtualizar" data-dismiss="modal">Atualizar Versão do Documento</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                <button type="button" class="btn btn-primary" id="btnSalvar" data-dismiss="modal">Salvar informações dos documentos</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modalExclusao" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="modalExclusaoLabel">Excluir documento</h4>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-warning" role="alert">
+                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span><strong>&nbsp;ATENÇÃO</strong><br />
+                    Excluir a versão atual automaticamente fará com que a versão imediatamente anterior do documento seja recuperada (exceto se ela for a primeira versão do documento). 
+                    <br />
+                    Para excluir permanentemente todas as versões do documento, selecione "Excluir todas as versões".
+                </div>
+                <form>
+                    <input type="hidden" id="hdCodigoExcluiDocumento" value="" />
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-warning" id="excluiVersaoAtual" data-dismiss="modal">Excluir versão atual</button>
+                <button type="button" class="btn btn-danger" id="excluiDocumento" data-dismiss="modal">Excluir todas as versões</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+
+    <script type="text/javascript">
+        var CarregarDocumentoParaEdicao = function (codigoDocumento) {
+            SRV.ChamarAjax('@Url.Action("ObterDocumento", "Documento")', { codigo: codigoDocumento }, CarregarDocumentoParaEdicao_cb);
+        };
+
+        var CarregarDocumentoParaEdicao_cb = function (json) {
+            $('div[id^="documentoModalDiv_"]').remove();
+            $('#edicaoDeDocumentos form hr').remove();
+            $('#edicaoDeDocumentos input').val('');
+            $('#edicaoDeDocumentos textarea').val('');
+            $('#edicaoDeDocumentos .atualizaDocumento').show();
+            PreencherCamposModal(json, "#documentoModalDiv");
+            $('#edicaoDeDocumentos').modal();
+        };
+
+        $('#btnAtualizar').click(function () {
+            var title = $('.documentosMultiplosModalDiv #tituloDocumento').val();
+            var id = $('.documentosMultiplosModalDiv #hdCodigoDocumento').val();
+            AtualizarDocumento(id, title);
+        });
+
+        var AtualizarDocumento = function (id, title) {
+            $('#hdCodigoAtualizaDocumento').val(id);
+            $('#atualizaDocumentoLabel').text("Atualizar " + title);
+            $("#inputAtualizaDocumento").fileinput('refresh', {
+                uploadUrl: "@Url.Action("AtualizarDocumento", "Documento")",
+                uploadAsync: false,
+                uploadExtraData: { codigo: $('#hdCodigoAtualizaDocumento').val() },
+                maxFileCount: 1,
+                dropZoneEnabled: false,
+                previewTemplates: "other",
+                removeLabel: 'Remover',
+                uploadLabel: 'Salvar',
+                uploadClass: "btn btn-success",
+                browseLabel: ' Selecionar...',
+                browseIcon: '<span class="glyphicon glyphicon-file"></span>',
+                allowedFileExtensions: ["pdf"],
+                msgInvalidFileExtension: 'Arquivo com extensão inválida. Extensões permitidas: "{extensions}"'
+            });
+
+            $('#inputAtualizaDocumento').on('fileuploaded', function (event, data, previewId, index) {
+                $('#atualizaDocumento').modal("hide");
+                $('#inputAtualizaDocumento').fileinput('clear');
+                AtualizarListagem();
+            });
+            $('#atualizaDocumento').modal();
+        }
+
+        var PreencherCamposModal = function (result, id) {
+            $(id + " #tituloDocumento").val(result.titulo);
+            $(id + " #descricaoDocumento").val(result.descricao);
+            $(id + " #hdCodigoDocumento").val(result.codigo);
+            $(id + " #hdCodigoArquivo").val(result.arquivo.codigo);
+            $(id + " #hdNomeDocumento").val(result.nome);
+            $(id + " #hdTamanho").val(result.tamanho);
+            $(id + " #hdExtensao").val(result.extensao);
+            $(id + " #hdVersao").val(result.versao);
+            $(id + " #hdTags").val(JSON.stringify(result.tagsAssociadas));
+            if ($(id + ' #hdTags').val() != '') {
+                var tags = JSON.parse($('#hdTags').val());
+                var txtTags = []
+                for (i = 0; i < tags.length; i++) {
+                    txtTags.push(tags[i].nome);
+                }
+                $(id + ' #tagsDocumento').val(txtTags.join(", "));
+            }
+            ObterTagsIdioma(1, $(id + ' #tagsDocumento'), $(id + ' #hdTags'));
+        };
+
+        var AtualizarListagem = function () {
+            $('#tabelaDocumentos').dataTable().fnDraw(false);
+        };
+
+        var InicializarListagem = function () {
+            $('#tabelaDocumentos').dataTable({
+                columns: [
+                    { "data": "codigo", "name": "D.id_documento" },
+                    { "data": "titulo", "name": "D.titulo" },
+                    { "data": "descricao", "name": "D.descricao" },
+                    { "data": "tamanhoString", "name": "DV.tamanho" },
+                    { "data": "versao", "name": "DV.versao" },
+                    { "data": "" }
+                ],
+                columnDefs: [
+                    { targets: 0, visible: false, orderable: false, searchable: false },
+                    { targets: 2, visible: true, orderable: false, searchable: false },
+                    {
+                        targets: 5, orderable: false, searchable: false, width: "60px", sClass: "alignCenter", render: function (data, type, row) {
+                            var acoes = "";
+                            acoes += "<a href='#' onClick='ExibeDocumentoEmNovaJanela(" + row["codigo"] + ",\"" + row["nome"] + "\")'><img width='15px' title='pdf' alt='Abrir Documento' src='/../Content/img/pdf.jpg'/></a>";
+                            acoes += "&nbsp;&nbsp;";
+                            acoes += "<a href='#' onClick='CarregarDocumentoParaEdicao(" + row["codigo"] + ")'><img width='15px' title='editar' alt='Editar' src='/../Content/img/ic_editar.png' class='rowEditIcon'/></a>";
+                            acoes += "&nbsp;&nbsp;";
+                            acoes += "<a href='#' onClick='Excluir(" + row["codigo"] + ")'><img width='15px' title='excluir' alt='Excluir' src='/../Content/img/bt_excluir.gif' class='rowDeleteIcon' codigo='" + row["codigo"] + "'/></a>";
+                            return acoes;
+                        }
+                    },
+                ],
+                language: { url: "/../Content/dataTable_pt_BR.js", searchPlaceholder: "título / tag" },
+                processing: true,
+                serverSide: true,
+                order: [[1, "asc"]],
+                ajax: {
+                    url: "@Url.Action("ListarDocumentosPagina", "Documento")",
+                    async: false,
+                    type: 'POST',
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    data: function (d) {
+                        return COLAB.ObterFiltroBaseDataTable(d);
+                    }
+                }
+            });
+        };
+        var ConfigurarCarregadorDeArquivos = function () {
+            $("#inputDocumentos").fileinput('refresh', {
+                uploadUrl: "@Url.Action("SalvarArquivoObterMetadados", "Documento")",
+                uploadAsync: false,
+                maxFileCount: 10,
+                dropZoneEnabled: false,
+                previewTemplates: "other",
+                removeLabel: 'Remover',
+                uploadLabel: 'Salvar',
+                uploadClass: "btn btn-success",
+                browseLabel: ' Selecionar...',
+                browseIcon: '<span class="glyphicon glyphicon-file"></span>',
+                allowedFileExtensions: ["pdf"],
+                msgFilesTooMany: 'O número de arquivos selecionados para upload ({n}) excedeu o limite máximo permitido ({m}). Por favor selecione menos documentos e tente novamente!',
+                msgInvalidFileExtension: 'Arquivo com extensão inválida. Extensões permitidas: "{extensions}"'
+            });
+
+            $('#inputDocumentos').on('fileuploaded', function (event, data, previewId, index) {
+                $('#myModalUpload').modal("hide");
+                $('#inputDocumentos').fileinput('clear');
+                AtualizarListagem();
+                EditarListaDocumentos(data.response);
+            });
+
+            $('#inputDocumentos').on('filebatchuploadsuccess', function (event, data, previewId, index) {
+                $('#myModalUpload').modal("hide");
+                $('#inputDocumentos').fileinput('clear');
+                AtualizarListagem();
+                EditarListaDocumentos(data.response);
+            });
+
+            $('#inputDocumentos').on('fileimageloaded', function (event) {
+                $('button.kv-file-upload').remove();
+            });
+        };
+        $("#btnNovo").on('click', function () {
+            $('#myModalUpload').modal();
+        });
+
+        var ExibeDocumentoEmNovaJanela = function (codigo, titulo) {
+            var url = 'http:\/\/' + window.location.host + '/Handlers/RecuperaDocumento.ashx?codigo=' + codigo;
+            var documentWindow = window.open(url, "_blank");
+            documentWindow.document.title = "'" + titulo + "'";
+        }
+
+        var EditarListaDocumentos = function (response) {
+            $('div[id^="documentoModalDiv_"]').remove();
+            $('#edicaoDeDocumentos form hr').remove();
+            $('#edicaoDeDocumentos input').val('');
+            $('#edicaoDeDocumentos textarea').val('');
+            $('#edicaoDeDocumentos .atualizaDocumento').show();
+            for (index = 0; index < response.length; index++) {
+                var multipleDiv = $('#documentoModalDiv');
+                var div = {};
+                if (index == 0) {
+                    div = multipleDiv;
+                }
+                else {
+                    div = multipleDiv.clone();
+                }
+                $(div).addClass('documentosMultiplosModalDiv');
+                ObterTagsIdioma(1, $(div).find('#tagsDocumento'), $(div).find('#hdTags'));
+                $(div).find('#tituloDocumento').val(response[index].nome);
+                $(div).find('#descricaoDocumento').val(response[index].descricao);
+                $(div).find('#hdCodigoDocumento').val(response[index].codigo);
+                $(div).find('#hdNomeDocumento').val(response[index].nome);
+                $(div).find('#hdTamanho').val(response[index].tamanho);
+                $(div).find('#hdTamanho').val(response[index].tamanho);
+                $(div).find('#hdExtensao').val(response[index].extensao);
+                $(div).find('#hdVersao').val(response[index].versao);
+                $(div).find('.atualizaDocumento').hide();
+                if (index != 0) {
+                    $('#edicaoDeDocumentos form').append('<hr/>');
+                    $('#edicaoDeDocumentos form').append(div);
+                    $(div).prop('id', "documentoModalDiv_" + index);
+                    div = $('.documentosMultiplosModalDiv:last');
+                }
+            }
+            $("#edicaoDeDocumentos").modal();
+        }
+
+        var ObterTagsIdioma = function (idioma, autoCompleteObj, hdJsonObj) {
+            var paramCallback = { idioma: idioma, autoCompleteObj: autoCompleteObj, hdJsonObj: hdJsonObj }
+            SRV.ChamarAjax('@Url.Action("ObterTagsPorIdioma", "Tag")', { idioma: idioma }, CarregarTagsPorIdioma_cb, paramCallback);
+        }
+
+        var split = function (val) {
+            return val.split(/,\s*/);
+        }
+
+        var extractLast = function (term) {
+            return split(term).pop();
+        }
+
+        var CarregarTagsPorIdioma_cb = function (json, paramCallback) {
+            var idioma = paramCallback.idioma;
+            var autoCompleteObj = paramCallback.autoCompleteObj;
+            var hdJsonObj = paramCallback.hdJsonObj;
+
+            var dataSet = $.map(json, function (value, index) {
+                return { value: value.codigo, label: value.nome };
+            });
+
+            autoCompleteObj.autocomplete({
+                minLength: 0,
+                source: function (request, response) {
+                    // delegate back to autocomplete, but extract the last term
+                    response($.ui.autocomplete.filter(dataSet, extractLast(request.term)));
+                },
+                focus: function () {
+                    // prevent value inserted on focus
+                    return false;
+                },
+                select: function (event, ui) {
+                    var tags = split(this.value);
+                    // remove the current input
+                    tags.pop();
+                    // add the selected item
+                    tags.push(ui.item.label);
+                    // add placeholder to get the comma-and-space at the end
+                    tags.push("");
+                    this.value = tags.join(", ");
+
+                    metrics = jQuery.grep(dataSet, function (element) {
+                        return element.label != ui.item.label;
+                    });
+
+                    return false;
+                },
+                change: function (event, ui) {
+                    var tags = split(this.value);
+                    if (tags[tags.length - 1] === '') {
+                        tags.pop();
+                    }
+
+                    var uniqueTags = tags.filter(function (item, pos, self) {
+                        return self.indexOf(item) == pos;
+                    })
+                    tags = uniqueTags;
+
+                    var tagsObj = [];
+
+                    $.each(tags, function (index, value) {
+                        tagFound = dataSet.filter(function (tag) { return tag.label.toUpperCase() == value.toUpperCase() })
+                        if (tagFound.length > 0) {
+                            tagsObj.push({ idioma: idioma, nome: tagFound[0].label.toUpperCase(), codigo: tagFound[0].value });
+                        }
+                        else {
+                            tagsObj.push({ idioma: idioma, nome: value.toUpperCase(), codigo: 0 });
+                        }
+                    });
+                    hdJsonObj.val(JSON.stringify(tagsObj));
+                }
+            });
+        };
+
+        $('#excluiVersaoAtual').click(function () { ExcluirDocumentoAjax($('#hdCodigoExcluiDocumento').val(), false); });
+
+        $('#excluiDocumento').click(function () { ExcluirDocumentoAjax($('#hdCodigoExcluiDocumento').val(), true); });
+
+        var Excluir = function (codigoDocumento) {
+            $('#hdCodigoExcluiDocumento').val(codigoDocumento);
+            $('#modalExclusao').modal();
+        };
+
+        var ExcluirDocumentoAjax = function (codigo, deleteAll) {
+            SRV.ChamarAjax('@Url.Action("Excluir", "Documento")', { codigo: codigo, excluirTudo: deleteAll }, SucessoExcluir_cb);
+        };
+
+        var SucessoExcluir_cb = function (json) {
+            Msg.success("Exclusão realizada com sucesso.", 3000);
+            AtualizarListagem();
+        };
+
+        $("#btnSalvar").on('click', function () {
+            var documentos = $('.documentosMultiplosModalDiv');
+            var listaDocumentos = [];
+            var semTitulo = false;
+
+            documentos.each(function (index) {
+                var obj = {
+                    codigo: $.trim($(this).find('#hdCodigoDocumento').val()),
+                    tamanho: $.trim($(this).find('#hdTamanho').val()),
+                    extensao: $.trim($(this).find('#hdExtensao').val()),
+                    versao: $.trim($(this).find('#hdVersao').val()),
+                    nome: $.trim($(this).find('#hdNomeDocumento').val()),
+                    titulo: $.trim($(this).find('#tituloDocumento').val()),
+                    descricao: $.trim($(this).find('#descricaoDocumento').val()),
+                    tagsAssociadas: JSON.parse($.trim($("#hdTags").val())),
+                    arquivo: {
+                        codigo: $.trim($(this).find('#hdCodigoArquivo').val())
+                    }
+                }
+                if (obj.titulo == "") {
+                    semTitulo = true;
+                }
+                else {
+                    listaDocumentos.push(obj);
+                }
+            });
+
+            if (semTitulo) {
+                Msg.error("O nome do arquivo é uma informação obrigatória. Favor conferir o preenchimento do campo.", 7000);
+            }
+            else { 
+                if (listaDocumentos.length == 0) {
+                    Msg.error("É necessário ter ao menos um documento associado para ser salvo.", 7000);
+                }
+                else {
+                    var formData = new FormData();
+                    formData.append("listaDocumentos", JSON.stringify(listaDocumentos));
+                    SRV.ChamarHttpRequest('@Url.Action("Salvar", "Documento")', formData, SucessoSalvar_cb);
+                }
+            };
+        });
+
+        var SucessoSalvar_cb = function (json) {
+            Msg.success("Cadastro realizado com sucesso.", 3000);
+            AtualizarListagem();
+        };
+
+        $(document).ready(function () {
+            var files;
+            Msg.iconMode = "fa";
+            InicializarListagem();
+            ConfigurarCarregadorDeArquivos();
+            COLAB.InicializarPropriedades();
+        });
+
+    </script>
+
+}

@@ -1,25 +1,19 @@
-﻿using DCC.COLAB.Common.Basic;
-using DCC.COLAB.Common.DataAccess;
+﻿using DCC.COLAB.Common.DataAccess;
 using DCC.COLAB.Common.Entities;
 using DCC.COLAB.Common.Filtros;
 using DCCFramework;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections;
-using System.Configuration;
 using System.Collections.Generic;
-//using System.Data.SqlClient;
 using System.Linq;
-using System.Net;
-using System.Net.Mail;
 using System.Text;
-using System.Threading.Tasks;
-using DCC.COLAB.Common.AuxiliarEntities;
-using MySql.Data.MySqlClient;
 
 namespace DCC.COLAB.DataAccess.SQLServer.Entities
 {
     public class UsuarioDataAccess : BaseDataAccess, IUsuarioDataAccess
     {
+        protected override string ObterOrdenacaoDefault() { return "U.nm_Usuario ASC"; }
 
         public Usuario SelecionarUsuarioPorCodigo(int codigo)
         {
@@ -140,7 +134,7 @@ namespace DCC.COLAB.DataAccess.SQLServer.Entities
             usuario.idFacebook = CastDB<int>(dr, "id_Facebook");
             usuario.moderador = CastDB<bool>(dr, "moderador");
             usuario.perfilAcesso = new PerfilAcesso() {
-                codigo = CastDB<int>(dr, "id_Perfil_Acesso"),
+                id = CastDB<int>(dr, "id_Perfil_Acesso"),
                 nome = CastDB<string>(dr, "nm_Perfil_Acesso")
             };
             return usuario;
@@ -156,14 +150,14 @@ namespace DCC.COLAB.DataAccess.SQLServer.Entities
             parametros.Add("ID", usuario.id);
             parametros.Add("NOME", usuario.nome);
             parametros.Add("EMAIL", usuario.email);
-            parametros.Add("ID_PERFIL", usuario.perfilAcesso.codigo);
+            parametros.Add("ID_PERFIL", usuario.perfilAcesso.id);
+            parametros.Add("SENHA", usuario.senha);
             return parametros;
         }
 
         private Hashtable BuildParametrosSelecionarUsuariosFiltrados(FiltroUsuario filtro)
         {
             Hashtable parametros = CriarHashFiltroDefault(filtro);
-            parametros.Add("IDS", filtro.codigos);
             return parametros;
         }
         #endregion

@@ -845,7 +845,9 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="wcfBindings.config" />
-    <Content Include="wcfClient.config" />
+    <Content Include="wcfClient.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -856,6 +858,8 @@
     <Content Include="Views\Documento\Consulta.cshtml" />
     <Content Include="Handlers\RecuperaDocumento.ashx" />
     <Content Include="Views\Usuario\Consulta.cshtml" />
+    <None Include="Properties\PublishProfiles\dcccolab - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\dcccolab - Web Deploy.pubxml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -18,6 +18,7 @@ namespace DCC.COLAB.Web.Controllers
         public ActionResult Consulta()
         {
             ViewBag.usuario = new Usuario();
+            ViewBag.listaPerfisAcesso = WCFDispatcher<ICOLABServico>.UseService(u => u.SelecionarPerfisAcessoFiltrados(new FiltroBase())).ToList();
             return View();
         }
 
@@ -41,7 +42,7 @@ namespace DCC.COLAB.Web.Controllers
 
             foreach (var usuario in usuarios)
             {
-                usuario.perfilAcesso = WCFDispatcher<ICOLABServico>.UseService(u => u.SelecionarPerfilPorCodigo(usuario.perfilAcesso.codigo));
+                usuario.perfilAcesso = WCFDispatcher<ICOLABServico>.UseService(u => u.SelecionarPerfilPorCodigo(usuario.perfilAcesso.id));
             }
 
             Paginacao paginacao = new Paginacao();

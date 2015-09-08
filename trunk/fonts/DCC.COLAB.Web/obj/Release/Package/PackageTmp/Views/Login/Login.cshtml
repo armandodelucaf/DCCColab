@@ -1,0 +1,133 @@
+﻿@{
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+}
+
+<html>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-8 col-sm-8 col-md-6 col-lg-6 col-xs-offset-2 col-sm-offset-2 col-md-offset-3 col-lg-offset-3">
+                <div class="account-wall">
+                    <img class="profile-img img-responsive" src="~/Content/img/img_minerva_ufrj.jpg" alt="DCCColab" style="width: 200px;">
+                    <div class="form-signin">
+                        <input type="text" id="txtEmail" class="form-control" placeholder="Digite o e-mail cadastrado" required="required" autofocus="autofocus" />
+                        <br />
+                        <input type="password" id="txtSenha" class="form-control" placeholder="Digite a senha" required="required" />
+                        <br />
+                        <a id="btnLogin" class="btn btn-lg btn-primary btn-block" href="#" role="button">Entrar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="alteracaoDeSenha" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="alteracaoDeSenhaLabel">Você precisa alterar a sua senha para continuar!</h4>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <input type="hidden" id="hdCodUsuario" value="" />
+                        <input type="hidden" id="hdIdParticipante" value="" />
+                        <div id="alteraSenha">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="txtAlteraSenha" class="control-label">Nova senha:</label>
+                                        <input id="txtAlteraSenha" name="txtAlteraSenha" maxlength="20" type="password" placeholder="Digite a sua nova senha" class="form-control input-md" required value="" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="txtConfirmaAlteraSenha" class="control-label">Confirme a nova senha:</label>
+                                        <input id="txtConfirmaAlteraSenha" name="txtConfirmaAlteraSenha" maxlength="20" type="password" placeholder="Confirme a sua nova senha" class="form-control input-md" required value="" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" id="btnAlteraSenha">Continuar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+@Scripts.Render("~/Content/js/jquery/jquery.blockUI.js")
+@Scripts.Render("~/Content/js/cms/servidor.js")
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        Msg.iconMode = "fa";
+
+        $('#txtEmail').keypress(function (event) {
+            if (event.which == 13) {
+                $("#btnLogin").click();
+            }
+        });
+
+        $('#txtSenha').keypress(function (event) {
+            if (event.which == 13) {
+                $("#btnLogin").click();
+            }
+        });
+
+        $("#btnLogin").on('click', function () {
+            var email = $.trim($("#txtEmail").val());
+            var senha = $.trim($("#txtSenha").val());
+
+            if (email == "" || senha == "") {
+                Msg.error("Favor entrar com os dados de autenticação.", 5000);
+            }
+            else {
+                SRV.ChamarAjax('@Url.Action("ValidarLogin", "Login")', { email: email, senha: senha }, Login_cb);
+            }
+        });
+    });
+
+    var Login_cb = function (json) {
+        if (json.isRedirect) {
+            window.location.href = json.redirectURL;
+        }
+        else if (json.changePassword) {
+            $('#hdCodUsuario').val(json.idUsuario);
+            $('#hdIdParticipante').val(json.idParticipante);
+            $('#alteracaoDeSenha').modal();
+        }
+    };
+
+    $('#btnAlteraSenha').click(function () {
+        var codigo = parseInt($("#hdCodUsuario").val());
+        var idParticipante = parseInt($("#hdIdParticipante").val());
+        if ($('#txtAlteraSenha').val() != '' && $('#txtAlteraSenha').val() == $('#txtConfirmaAlteraSenha').val()) {
+            var senha = $('#txtAlteraSenha').val();
+            var params = {
+                'codigo': codigo,
+                'idParticipante': idParticipante,
+                'senha': senha
+            }
+            SRV.ChamarAjax('@Url.Action("AtualizarSenha", "Usuario")', params, AlteraSenha_cb);
+        }
+        else {
+            Msg.error('Cheque o preenchimento dos campos e certifique-se de que a confirmação de senha esteja correta', 4000);
+        }
+    });
+
+    var AlteraSenha_cb = function (json) {
+        if (json.isRedirect) {
+            $('#alteracaoDeSenha').modal('hide');
+            Msg.success('Senha alterada com sucesso.', 5000);
+            setTimeout(function () { window.location.href = '@Url.Action("Index","Home")'; }, 2000);
+        }
+    };
+
+</script>

@@ -61,12 +61,6 @@ namespace DCC.COLAB.WCF.Interface
         [OperationContract]
         void ExcluirPerfilAcesso(int codigoPerfil, string usuario);
 
-        [OperationContract]
-        List<FuncionalidadeAcao> SelecionarFuncionalidadesAcoesFiltradas(FiltroFuncionalidadeAcao filtro);
-
-        [OperationContract]
-        void MudarStatusPerfilAcesso(int codigoPerfil, bool status, string usuario);
-
         #endregion
 
         #region Arquivo

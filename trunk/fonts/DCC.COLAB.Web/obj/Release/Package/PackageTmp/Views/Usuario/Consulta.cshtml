@@ -1,0 +1,353 @@
+﻿<div>
+    <legend>Usuários - Consulta</legend>
+
+    <table id="tabelaUsuarios" class="table hover table-bordered" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th>Código</th>
+                <th>Nome</th>
+                <th>E-mail</th>
+                <th>Perfil de Acesso</th>
+            </tr>
+        </thead>
+    </table>
+
+    <div class="form-group">
+        <div>
+            <button id="btnNovo" name="btnNovo" class="btn btn-success">Novo usuário</button>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="cadastroDeUsuario" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="cadastroDeUsuarioLabel">Cadastrar Novo Usuário</h4>
+            </div>
+            <div class="modal-body" style="overflow-y: inherit !important;">
+                <form>
+                    <input type="hidden" id="hdCodUsuario" value="" />
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="txtNome" class="control-label">Nome:</label>
+                                <input id="txtNome" name="txtNome" type="text" placeholder="Nome completo do usuário" class="form-control input-md" required value="" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="txtEmail" class="control-label">E-mail:</label>
+                                <input id="txtEmail" name="txtEmail" type="text" placeholder="Endereço eletrônico do usuário" class="form-control input-md" required value="" />
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="txtSenha" class="control-label">Senha:</label>
+                                <input id="txtSenha" name="txtSenha" maxlength="20" type="password" placeholder="Digite a senha para o usuário" class="form-control input-md" required value="" />
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group" id="confirmaSenha">
+                                <label for="txtConfirmaSenha" class="control-label">Confirme a Senha:</label>
+                                <input id="txtConfirmaSenha" name="txtConfirmaSenha" maxlength="20" type="password" placeholder="Confirme a senha" class="form-control input-md" required value="" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="selectPerfilAcesso" class="control-label">Perfil de acesso:</label>
+                                <select id="selectPerfilAcesso" class="form-control input-md" required>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                <button type="button" class="btn btn-primary" id="btnSalvar">Cadastrar usuário</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="edicaoDeUsuario" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="edicaoDeUsuarioLabel">Editar Usuário</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <input type="hidden" id="hdEditarCodUsuario" value="" />
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="selectEditarPerfilAcesso" class="control-label">Selecione o perfil de acesso:</label>
+                                <select id="selectEditarPerfilAcesso" class="form-control input-md" required>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="alteraSenha">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="txtAlteraSenha" class="control-label">Nova senha:</label>
+                                    <input id="txtAlteraSenha" name="txtAlteraSenha" maxlength="20" type="password" placeholder="Digite a nova senha para o usuário" class="form-control input-md" required value="" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="txtConfirmaAlteraSenha" class="control-label">Confirme a nova senha:</label>
+                                    <input id="txtConfirmaAlteraSenha" name="txtConfirmaAlteraSenha" maxlength="20" type="password" placeholder="Confirme a nova senha" class="form-control input-md" required value="" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <button type="button" class="btn btn-primary pull-right" id="btnAlteraSenha">Alterar a senha do usuário</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                <button type="button" class="btn btn-warning" id="btnRecuperaSenha"><span class="glyphicon glyphicon-envelope"></span>&nbsp;Recuperar Senha</button>
+                <button type="button" class="btn btn-warning" id="btnAbreEdicaoSenha"><span class="glyphicon glyphicon-pencil"></span>&nbsp;Editar Senha</button>
+                <button type="button" class="btn btn-success" id="btnSalvarEdicao">Salvar Perfil de Acesso</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section scripts
+{
+    <script type="text/javascript">
+        var CarregarUsuarioParaEdicao = function (codigoUsuario) {
+            SRV.ChamarAjax('@Url.Action("ObterUsuario", "Usuario")', { codigo: codigoUsuario }, CarregarUsuarioParaEdicao_cb);
+        };
+
+        var CarregarUsuarioParaEdicao_cb = function (json) {
+            $('#edicaoDeUsuarioLabel').text(json.cpf + ' - ' + json.nome);
+            $("#hdEditarCodUsuario").val(json.codigo);
+            $("#hdEditarIdParticipante").val(json.idParticipante);
+            $("#selectEditarPerfilAcesso").val(json.perfilAcesso.codigo);
+            $('#alteraSenha').hide();
+            $('#edicaoDeUsuario').modal();
+        };
+
+        $('#btnAlteraSenha').click(function () {
+            var codigo = parseInt($("#hdEditarCodUsuario").val());
+            var idParticipante = parseInt($("#hdEditarIdParticipante").val());
+            if ($('#txtAlteraSenha').val() != '' && $('#txtAlteraSenha').val() == $('#txtConfirmaAlteraSenha').val()) {
+                var senha = $('#txtAlteraSenha').val();
+                var params = {
+                    'codigo': codigo,
+                    'idParticipante': idParticipante,
+                    'senha': senha
+                }
+                SRV.ChamarAjax('@Url.Action("AtualizarSenha", "Usuario")', params, AlteraSenha_cb);
+            } else {
+                Msg.error('Cheque o preenchimento dos campos e certifique-se de que a confirmação de senha esteja correta', 4000);
+            }
+        });
+
+        var AlteraSenha_cb = function (response) {
+            $('#alteraSenha').hide();
+            $('#alteraSenha input').val('');
+            Msg.success('Senha alterada com sucesso.', 5000);
+        };
+
+        $('#btnSalvarEdicao').click(function () {
+            var codigo = parseInt($("#hdEditarCodUsuario").val());
+            var perfilAcesso = parseInt($('#selectEditarPerfilAcesso').val());
+
+            var params = {
+                'codigo': codigo,
+                'perfilAcesso': { 'codigo': parseInt(perfilAcesso) }
+            }
+
+            SRV.ChamarAjax('@Url.Action("Salvar", "Usuario")', params, SalvarEdicao_cb);
+        });
+
+        var SalvarEdicao_cb = function (response) {
+            Msg.success('Cadastro atualizado com sucesso', 4000);
+            $('#edicaoDeUsuario').modal('hide');
+            AtualizarListagem();
+        };
+
+        $('#btnRecuperaSenha').click(function () {
+            var codigo = parseInt($("#hdEditarCodUsuario").val());
+            SRV.ChamarAjax('@Url.Action("RecuperarSenha", "Usuario")', { codigo: codigo }, RecuperaSenha_cb);
+        });
+
+        var RecuperaSenha_cb = function (response) {
+            $('#edicaoDeUsuario').modal('hide');
+            Msg.success('Senha enviada para o e-mail cadastrado.', 5000);
+        };
+
+        $('#btnAbreEdicaoSenha').click(function () {
+            $('#alteraSenha').show();
+        });
+
+        var ExcluirUsuario = function (codigoUsuario) {
+            $.confirm({
+                title: "Confirmação",
+                text: "Deseja realmente excluir este usuário?",
+                confirm: function () {
+                    ExcluirUsuarioAjax(codigoUsuario);
+                },
+                cancel: function () {
+                    // nothing to do
+                },
+                confirmButton: "Sim",
+                cancelButton: "Não",
+                post: true
+            });
+        };
+
+        var ExcluirUsuarioAjax = function (codigo) {
+            SRV.ChamarAjax('@Url.Action("Excluir", "Usuario")', { codigo: codigo }, SucessoExcluir_cb);
+        };
+
+        var SucessoExcluir_cb = function (json) {
+            Msg.success("Exclusão realizada com sucesso.", 3000);
+            AtualizarListagem();
+        };
+
+        var AtualizarListagem = function () {
+            $('#tabelaUsuarios').dataTable().fnDraw(false);
+        };
+
+        var InicializarListagem = function () {
+            $('#tabelaUsuarios').dataTable({
+                columns: [
+                    { "data": "codigo", "name": "U.id_usuario" },
+                    { "data": "cpf", "name": "PD.nu_documento" },
+                    { "data": "nome", "name": "P.nm_participante" },
+                    { "data": "email", "name": "PPFC.ds_login" },
+                    { "data": "perfilAcesso.nome", "name": "PF.nome" },
+                    { "data": "" }
+                ],
+                columnDefs: [
+                    { targets: 0, visible: false, orderable: false, searchable: false },
+                    {
+                        targets: 5, orderable: false, searchable: false, width: "60px", sClass: "alignCenter", render: function (data, type, row) {
+                            var acoes = "";
+                            acoes += "<a href='#' onClick='CarregarUsuarioParaEdicao(" + row["codigo"] + ")'><img width='15px' title='editar' alt='Editar' src='/../Content/img/ic_editar.png' class='rowEditIcon'/></a>";
+                            acoes += "&nbsp;&nbsp;";
+                            acoes += "<a href='#' onClick='ExcluirUsuario(" + row["codigo"] + ")'><img width='15px' title='excluir' alt='Excluir' src='/../Content/img/bt_excluir.gif' class='rowDeleteIcon' codigo='" + row["codigo"] + "'/></a>";
+                            return acoes;
+                        }
+                    },
+                ],
+                language: { url: "/../Content/dataTable_pt_BR.js", searchPlaceholder: "nome" },
+                processing: true,
+                serverSide: true,
+                order: [[2, "asc"]],
+                ajax: {
+                    url: "@Url.Action("ListarUsuarios", "Usuario")",
+                    async: false,
+                    type: 'POST',
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    data: function (d) {
+                        return COLAB.ObterFiltroBaseDataTable(d);
+                    }
+                }
+            });
+        };
+
+        $('#btnNovo').click(function () {
+            cadastraNovoUsuario(cpf);
+        });
+
+        var cadastraNovoUsuario = function () {
+            $('input').val('');
+            $('#txtNome').change(function () {
+                $(this).val($(this).val().toUpperCase());
+            });
+            $('#cadastroDeUsuario').modal();
+        }
+
+        $('#btnSalvar').click(function () {
+            var nome = $('#txtNome').val();
+            var senha = $('#txtSenha').val();
+            var email = $('#txtEmail').val();
+            var perfilAcesso = parseInt($('#selectPerfilAcesso').val());
+
+            if ($('#txtEmail').is(':enabled') && !validaEmail(email)) {
+                Msg.error('O e-mail não foi digitado ou não parece ser válido.', 4000);
+            }
+            else if ($('#txtSenha').is(':enabled') && !senha) {
+                Msg.error('É obrigatório definir uma senha.', 4000);
+            }
+            else if ($('#txtSenha').val() != $('#txtConfirmaSenha').val()) {
+                Msg.error('As senhas não conferem. Favor verificar', 4000);
+            } else if (idFuncao == 0) {
+                Msg.error('Você precisa digitar uma função válida', 4000);
+            }
+            else {
+                var params = {
+                    'nome': nome,
+                    'senha': senha,
+                    'email': email,
+                    'perfilAcesso': { 'codigo': parseInt(perfilAcesso) }
+                }
+
+                SRV.ChamarAjax('@Url.Action("Salvar", "Usuario")', params, Salvar_cb);
+            }
+        });
+
+        var Salvar_cb = function (json) {
+            Msg.success('Cadastro efetuado com sucesso', 4000);
+            $('#cadastroDeUsuario').modal('hide');
+            AtualizarListagem();
+        };
+
+        var buscaParticipanteSigef = function (idParticipante, possuiCadastroContaSigef) {
+            var paramCallback = { possuiCadastroContaSigef: possuiCadastroContaSigef };
+            SRV.ChamarAjax('@Url.Action("ObtemDadosParticipanteSigef", "Usuario")', { idParticipante: idParticipante }, buscaParticipanteSigef_cb, paramCallback);
+        };
+
+        var buscaParticipanteSigef_cb = function (response, paramCallback) {
+            var possuiCadastroContaSigef = paramCallback.possuiCadastroContaSigef;
+
+            $('#hdCpf').val(response.cpf);
+            $('#hdIdParticipante').val(response.idParticipante);
+            $('#txtNome').val(response.nome).prop('disabled', true);
+            if (possuiCadastroContaSigef) {
+                $('#txtSenha').prop('disabled', true).prop("placeholder", "Senha do SIGEF");
+                $('#txtEmail').prop('disabled', true).prop("placeholder", response.email);
+                $('#selectFuncao').val(response.nomeFuncao);
+                $('#selectFuncao').prop('disabled', true);
+            }
+            else {
+                $('#txtEmail').val(response.email).prop("placeholder", "Endereço eletrônico do usuário");
+                $('#txtSenha').prop("placeholder", "Digite a senha para o usuário");
+                $('#necessitaCadastroSigef').val('parcial');
+            }
+            $('#selectTipoParticipante').val(response.tipoParticipante).prop('disabled', true);
+            $('#cadastroDeUsuario').modal();
+        };
+
+        $(document).ready(function () {
+            Msg.iconMode = "fa";
+            InicializarListagem();
+            COLAB.InicializarPropriedades();
+        });
+    </script>
+}

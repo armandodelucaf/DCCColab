@@ -22,12 +22,6 @@ namespace DCC.COLAB.Common.DataAccess
         List<PerfilAcesso> SelecionarPerfisAcessoFiltrados(FiltroBase filtro);
 
         void ExcluirPerfilAcesso(int codigoPerfil);
-
-        List<FuncionalidadeAcao> SelecionarFuncionalidadesAcoesFiltradas(FiltroFuncionalidadeAcao filtro);
-
-        List<FuncionalidadeAcao> SelecionarFuncionalidadesAcaoAssociadasPerfil(FiltroFuncionalidadeAcao filtro);
-
-        void MudarStatusPerfilAcesso(int codigoPerfil, bool status);
-        
+                
     }
 }

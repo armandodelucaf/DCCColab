@@ -123,20 +123,6 @@ namespace DCC.COLAB.Business
             perfilAcessoBusinessFacade.ExcluirPerfilAcesso(codigoPerfil, usuario);
         }
 
-        [OperationBehavior(Impersonation = ImpersonationOption.Allowed)]
-        public List<FuncionalidadeAcao> SelecionarFuncionalidadesAcoesFiltradas(FiltroFuncionalidadeAcao filtro)
-        {
-            PerfilAcessoBusinessFacade perfilAcessoBusinessFacade = BusinessFactory.GetInstance().Get<PerfilAcessoBusinessFacade>();
-            return perfilAcessoBusinessFacade.SelecionarFuncionalidadesAcoesFiltradas(filtro);
-        }
-
-        [OperationBehavior(Impersonation = ImpersonationOption.Allowed)]
-        public void MudarStatusPerfilAcesso(int codigoPerfil, bool status, string usuario)
-        {
-            PerfilAcessoBusinessFacade perfilAcessoBusinessFacade = BusinessFactory.GetInstance().Get<PerfilAcessoBusinessFacade>();
-            perfilAcessoBusinessFacade.MudarStatusPerfilAcesso(codigoPerfil, status, usuario);
-        }
-
         #endregion
 
         #region Arquivo

@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>DCC COLAB</title>
+
+        <script type="text/javascript">
+            var siteRoot = '@ViewData["siteRoot"]';
+	    </script>
+
+        <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+        <meta name="viewport" content="width=device-width" />
+        
+        <link rel="stylesheet" type="text/css" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" />
+        @Styles.Render("~/Content/css/bootstrap/bootstrap-theme.min.css")
+        @Styles.Render("~/Content/css/bootstrap/bootstrap.min.css")
+        @Styles.Render("~/Content/css/bootstrap/sticky-footer.css")
+        @Styles.Render("~/Content/css/bootstrap/bootstrap-msg.css")
+        
+        @Styles.Render("~/Content/css/cms.css")
+        
+        @Scripts.Render("~/Content/js/jquery/jquery-1.11.2.min.js")
+        @Scripts.Render("~/Content/js/jquery/jquery-ui-1.8.20.min.js")
+        @Scripts.Render("~/Content/js/bootstrap/bootstrap-msg.js")
+        @Scripts.Render("~/Content/js/bootstrap/bootstrap.min.js")
+        
+    </head>
+    <body>
+        <div class="container" id="body">
+            <div id="messages"></div>
+            @RenderSection("featured", required: false)
+            <section class="content-wrapper main-content clear-fix">
+                @RenderBody()
+            </section>
+        </div>
+
+        <footer class="footer">
+            <div class="container">
+                <p class="text-muted legal">© Copyright 2015 - Armando De Luca Filho e Hugo Santos do Nascimento - Todos os direitos reservados.</p>
+            </div>
+        </footer>
+
+    </body>
+</html>

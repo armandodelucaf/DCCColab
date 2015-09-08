@@ -20,8 +20,6 @@ namespace DCC.COLAB.Business.Entities
             try
             {
                 PerfilAcesso perfil = dataAccess.SelecionarPerfilPorCodigo(codigoPerfil);
-                perfil.funcionalidadesPermitidas = SelecionarFuncionalidadesAcaoAssociadasPerfil(new FiltroFuncionalidadeAcao() { codigoPerfil = perfil.codigo });
-
                 return perfil;
             }
             catch (Exception ex)
@@ -87,43 +85,6 @@ namespace DCC.COLAB.Business.Entities
             try
             {
                 dataAccess.ExcluirPerfilAcesso(codigoPerfil);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
-
-        public virtual List<FuncionalidadeAcao> SelecionarFuncionalidadesAcoesFiltradas(FiltroFuncionalidadeAcao filtro)
-        {
-            try
-            {
-                return dataAccess.SelecionarFuncionalidadesAcoesFiltradas(filtro);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
-
-        public virtual List<FuncionalidadeAcao> SelecionarFuncionalidadesAcaoAssociadasPerfil(FiltroFuncionalidadeAcao filtro)
-        {
-            try
-            {
-                return dataAccess.SelecionarFuncionalidadesAcaoAssociadasPerfil(filtro);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
-
-        [RequiresTransaction]
-        public virtual void MudarStatusPerfilAcesso(int codigoPerfil, bool status, string usuario)
-        {
-            try
-            {
-                dataAccess.MudarStatusPerfilAcesso(codigoPerfil, status);
             }
             catch (Exception ex)
             {
