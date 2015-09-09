@@ -322,8 +322,9 @@ namespace DCCFramework
                     throw new ArgumentNullException("nomeQuery", "Argumento n\x00e3o pode ser nulo ou vazio.");
                 }
 
-                var queryString = GerenciadorDoArquivoDeQueries.Instancia.ObterQuery(nomeQuery);
-                var queryComRetornoId = string.Format("BEGIN {0} SELECT SCOPE_IDENTITY() END", queryString);
+                var queryString = GerenciadorDoArquivoDeQueries.Instancia.ObterQuery(nomeQuery).Trim();
+                queryString += (queryString[queryString.Length - 1] == ';' ? "" : ";");
+                var queryComRetornoId = string.Format("{0} SELECT LAST_INSERT_ID();", queryString);
                // var database = DatabaseFactory.CreateDatabase();
                 command = CommandFactory.GetCommand(database, queryComRetornoId);
 

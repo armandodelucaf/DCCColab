@@ -132,10 +132,10 @@ namespace DCC.COLAB.DataAccess.SQLServer.Entities
             usuario.nome = CastDB<string>(dr, "nm_Usuario");
             usuario.email = CastDB<string>(dr, "email");
             usuario.idFacebook = CastDB<int>(dr, "id_Facebook");
-            usuario.moderador = CastDB<bool>(dr, "moderador");
             usuario.perfilAcesso = new PerfilAcesso() {
                 id = CastDB<int>(dr, "id_Perfil_Acesso"),
-                nome = CastDB<string>(dr, "nm_Perfil_Acesso")
+                nome = CastDB<string>(dr, "nm_Perfil_Acesso"),
+                perfilModerador = CastDB<bool>(dr, "moderador")
             };
             return usuario;
         }

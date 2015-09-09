@@ -1,4 +1,4 @@
-USE `master_colab`;
+USE `dcccolab`;
 
 INSERT INTO `Perfil_Acesso` (nm_Perfil_Acesso, moderador) VALUES ('Administrador', 1);
 INSERT INTO `Perfil_Acesso` (nm_Perfil_Acesso, moderador) VALUES ('Professor', 0);

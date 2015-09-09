@@ -36,9 +36,6 @@ namespace DCC.COLAB.Common.Entities
         public int idFacebook { get; set; }
 
         [DataMember]
-        public bool moderador { get; set; }
-
-        [DataMember]
         public PerfilAcesso perfilAcesso { get; set; }
     }
 }

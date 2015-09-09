@@ -1,4 +1,4 @@
-USE `master_colab`;
+USE `dcccolab`;
 
 DROP TABLE IF EXISTS `Perfil_Acesso`;
 DROP TABLE IF EXISTS `Usuario`;

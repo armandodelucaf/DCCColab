@@ -70,7 +70,7 @@
                             <div class="form-group">
                                 <label for="selectPerfilAcesso" class="control-label">Perfil de acesso:</label>
                                 <select id="selectPerfilAcesso" class="form-control input-md" required>
-                                    <option value="">Selecione um Perfil de Acesso</option>
+                                    <option value="0">Selecione um Perfil de Acesso</option>
                                     @foreach (PerfilAcesso perfilacesso in listaPerfisAcesso) {
                                         <option value="@perfilacesso.id">@perfilacesso.nome</option>
                                     }                                    
@@ -287,34 +287,42 @@
             $('#txtEmail').val('');
             $('#txtSenha').val('');
             $('#txtConfirmaSenha').val('');
-            $('#selectPerfilAcesso').val('');
+            $('#selectPerfilAcesso').val(0);
 
             $('#cadastroDeUsuario').modal();
         });
 
         $('#btnSalvar').click(function () {
-            var nome = $('#txtNome').val();
-            var senha = $('#txtSenha').val();
-            var email = $('#txtEmail').val();
+            var nome = $.trim($('#txtNome').val());
+            var email = $.trim($('#txtEmail').val());
+            var senha = $.trim($('#txtSenha').val());
+            var confirmaSenha = $.trim($('#txtConfirmaSenha').val());
             var perfilAcesso = parseInt($('#selectPerfilAcesso').val());
 
-            if ($('#txtEmail').is(':enabled') && !validaEmail(email)) {
-                Msg.error('O e-mail não foi digitado ou não parece ser válido.', 4000);
+            if (!nome) {
+                Msg.error('O campo "Nome" é obrigatório. Favor verificar o preenchimento do mesmo.', 4000);
             }
-            else if ($('#txtSenha').is(':enabled') && !senha) {
-                Msg.error('É obrigatório definir uma senha.', 4000);
+            else if (!email) {
+                Msg.error('O campo "E-mail" é obrigatório. Favor verificar o preenchimento do mesmo.', 4000);
             }
-            else if ($('#txtSenha').val() != $('#txtConfirmaSenha').val()) {
-                Msg.error('As senhas não conferem. Favor verificar', 4000);
-            } else if (idFuncao == 0) {
-                Msg.error('Você precisa digitar uma função válida', 4000);
+            else if (!email) {
+                Msg.error('O campo "E-mail" é obrigatório. Favor verificar o preenchimento do mesmo.', 4000);
+            }
+            else if (!senha) {
+                Msg.error('O campo "Senha" é obrigatório. Favor verificar o preenchimento do mesmo.', 4000);
+            }
+            else if (senha != confirmaSenha) {
+                Msg.error('As senhas não conferem. Favor verificar.', 4000);
+            }
+            else if (perfilAcesso == 0) {
+                Msg.error('O campo "Perfil de Acesso" é obrigatório. Favor verificar a seleção do mesmo.', 4000);
             }
             else {
                 var params = {
                     'nome': nome,
                     'senha': senha,
                     'email': email,
-                    'perfilAcesso': { 'codigo': parseInt(perfilAcesso) }
+                    'perfilAcesso': { 'id': perfilAcesso, 'nome': $('#selectPerfilAcesso option:selected').text() }
                 }
 
                 SRV.ChamarAjax('@Url.Action("Salvar", "Usuario")', params, Salvar_cb);
