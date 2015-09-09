@@ -122,8 +122,8 @@
     <Content Include="unity.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Properties\PublishProfiles\dcccolab - FTP.pubxml" />
-    <None Include="Properties\PublishProfiles\dcccolab - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\dcccolabwcf - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\dcccolabwcf - Web Deploy.pubxml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
