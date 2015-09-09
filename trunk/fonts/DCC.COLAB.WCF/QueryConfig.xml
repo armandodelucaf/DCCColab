@@ -27,7 +27,7 @@
         PA.nm_Perfil_Acesso,
         PA.moderador
       FROM
-        master_colab.Perfil_Acesso PA
+        dcccolab.Perfil_Acesso PA
       WHERE
         (PA.id_Perfil_Acesso = @ID)
     </selecionarPerfilAcessoPorCodigo>
@@ -37,17 +37,17 @@
         PA.nm_Perfil_Acesso, 
         PA.moderador
       FROM
-        master_colab.Perfil_Acesso PA
+        dcccolab.Perfil_Acesso PA
       WHERE
         (@FILTRO IS NULL OR PA.nm_Perfil_Acesso LIKE ('%' + @FILTRO + '%'))
       ORDER BY @ORDER_BY
     </selecionarPerfisAcessoFiltrados>
     <inserirPerfilAcesso>
-      INSERT INTO master_colab.Perfil_Acesso (nm_Perfil_Acesso, moderador)
+      INSERT INTO dcccolab.Perfil_Acesso (nm_Perfil_Acesso, moderador)
       VALUES (@NOME, @MODERADOR)
     </inserirPerfilAcesso>
     <atualizarPerfilAcesso>
-      UPDATE master_colab.Perfil_Acesso
+      UPDATE dcccolab.Perfil_Acesso
       SET
         nm_Perfil_Acesso = @NOME,
         moderador = @MODERADOR
@@ -55,7 +55,7 @@
         id_perfil = @CODIGO
     </atualizarPerfilAcesso>
     <excluirPerfilAcesso>
-      DELETE FROM master_colab.Perfil_Acesso WHERE id_Perfil_Acesso = @ID
+      DELETE FROM dcccolab.Perfil_Acesso WHERE id_Perfil_Acesso = @ID
     </excluirPerfilAcesso>
   </PerfilAcesso>
   
@@ -70,8 +70,8 @@
         PA.nm_Perfil_Acesso,
         PA.moderador
       FROM
-        master_colab.Usuario U
-        INNER JOIN master_colab.Perfil_Acesso PA ON PA.id_Perfil_Acesso = U.id_Perfil_Acesso
+        dcccolab.Usuario U
+        INNER JOIN dcccolab.Perfil_Acesso PA ON PA.id_Perfil_Acesso = U.id_Perfil_Acesso
       WHERE
         U.email = @LOGIN AND
         DES_ENCRYPT(@SENHA) = U.senha
@@ -86,8 +86,8 @@
         PA.nm_Perfil_Acesso,
         PA.moderador
       FROM
-        master_colab.Usuario U
-        INNER JOIN master_colab.Perfil_Acesso PA ON PA.id_Perfil_Acesso = U.id_Perfil_Acesso
+        dcccolab.Usuario U
+        INNER JOIN dcccolab.Perfil_Acesso PA ON PA.id_Perfil_Acesso = U.id_Perfil_Acesso
       WHERE
         U.id_Usuario = @ID
     </selecionarUsuarioPorCodigo>
@@ -101,17 +101,17 @@
         PA.nm_Perfil_Acesso,
         PA.moderador
       FROM
-        master_colab.Usuario U
-        INNER JOIN master_colab.Perfil_Acesso PA ON PA.id_Perfil_Acesso = U.id_Perfil_Acesso
+        dcccolab.Usuario U
+        INNER JOIN dcccolab.Perfil_Acesso PA ON PA.id_Perfil_Acesso = U.id_Perfil_Acesso
       WHERE
         (@FILTRO IS NULL OR U.nm_Usuario LIKE ('%' + @FILTRO + '%'))
       ORDER BY @ORDER_BY
     </selecionarUsuariosFiltrados>
     <inserirUsuario>
-      INSERT INTO master_colab.Usuario (nm_Usuario, email, id_Perfil_Acesso, senha) VALUES (@NOME, @EMAIL, @ID_PERFIL, DES_ENCRYPT(@SENHA))
+      INSERT INTO dcccolab.Usuario (nm_Usuario, email, id_Perfil_Acesso, senha) VALUES (@NOME, @EMAIL, @ID_PERFIL, DES_ENCRYPT(@SENHA))
     </inserirUsuario>
     <atualizarUsuario>
-      UPDATE master_colab.Usuario
+      UPDATE dcccolab.Usuario
       SET
         nm_Usuario = @NOME,
         email = @EMAIL,
@@ -120,7 +120,7 @@
         id_Usuario = @ID
     </atualizarUsuario>
     <excluirUsuario>
-      DELETE FROM master_colab.Usuario WHERE id_Usuario = @ID
+      DELETE FROM dcccolab.Usuario WHERE id_Usuario = @ID
     </excluirUsuario>
   </Usuario>
   
