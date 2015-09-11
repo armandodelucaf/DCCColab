@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="IIS Web Application Name" description="" value="dcccolab" tags="IisApp">
+    <parameterEntry kind="ProviderPath" scope="IisApp" match="^C:\\Users\\adlf\\Documents\\GitHub\\dcccolab\\trunk\\fonts\\DCC\.COLAB\.Web\\obj\\Release\\Package\\PackageTmp$" />
+    <parameterEntry kind="ProviderPath" scope="setAcl" match="^C:\\Users\\adlf\\Documents\\GitHub\\dcccolab\\trunk\\fonts\\DCC\.COLAB\.Web\\obj\\Release\\Package\\PackageTmp$" />
+  </parameter>
+</parameters>

@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <parameters>
-  <parameter name="MySQLServerDesenv-Web.config Connection String" description="MySQLServerDesenv Connection String used in web.config by the application to access the database." defaultValue="Data Source=138.128.178.82;Initial Catalog=master_colab;userid=master_dccColab;password=tesi2014;Integrated Security=true;" tags="SqlConnectionString">
+  <parameter name="MySQLServerDesenv-Web.config Connection String" description="MySQLServerDesenv Connection String used in web.config by the application to access the database." defaultValue="Host=mysql2.gear.host;Database=dcccolab;UserName=dcccolab;Password=Hi2g_gg2PU^c;Integrated Security=true;Allow User Variables=True;" tags="SqlConnectionString">
     <parameterEntry kind="XmlFile" scope="C:\\Users\\adlf\\Documents\\GitHub\\dcccolab\\trunk\\fonts\\DCC\.COLAB\.WCF\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='MySQLServerDesenv']/@connectionString" />
   </parameter>
 </parameters>

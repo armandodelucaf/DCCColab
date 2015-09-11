@@ -249,6 +249,9 @@
     <Content Include="Content\img\ic_estrela_preenchida.png" />
     <Content Include="Content\img\ic_estrela_vazada.png" />
     <Content Include="Content\img\ic_excluir.png" />
+    <Content Include="Content\img\img_dcc.png" />
+    <Content Include="Content\img\img_minerva_ufrj.jpg" />
+    <Content Include="Content\img\img_minerva_ufrj_pb.gif" />
     <Content Include="Content\img\Loading\Fig1.gif" />
     <Content Include="Content\img\Loading\Fig2.gif" />
     <Content Include="Content\img\Loading\Fig3.gif" />
@@ -858,11 +861,12 @@
     <Content Include="Views\Documento\Consulta.cshtml" />
     <Content Include="Handlers\RecuperaDocumento.ashx" />
     <Content Include="Views\Usuario\Consulta.cshtml" />
+    <None Include="Properties\PublishProfiles\dcccolab - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\dcccolab - Web Deploy.pubxml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="obj\Debug\TempPE\" />
-    <Folder Include="Properties\PublishProfiles\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
