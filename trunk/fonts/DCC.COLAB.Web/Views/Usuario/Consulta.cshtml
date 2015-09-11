@@ -21,7 +21,7 @@
 
     <div class="form-group">
         <div>
-            <button id="btnNovo" name="btnNovo" class="btn btn-success">Novo usuário</button>
+            <button id="btnNovo" name="btnNovo" class="btn btn-primary">Novo usuário</button>
         </div>
     </div>
 </div>
@@ -32,7 +32,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="cadastroDeUsuarioLabel">Cadastrar Novo Usuário</h4>
+                <h4 class="modal-title" id="modalUsuarioLabel"></h4>
             </div>
             <div class="modal-body" style="overflow-y: inherit !important;">
                 <form>
@@ -46,22 +46,10 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-4">
+                        <div class="col-md-12">
                             <div class="form-group">
                                 <label for="txtEmail" class="control-label">E-mail:</label>
                                 <input id="txtEmail" name="txtEmail" type="text" placeholder="Endereço eletrônico do usuário" class="form-control input-md" required value="" />
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="txtSenha" class="control-label">Senha:</label>
-                                <input id="txtSenha" name="txtSenha" maxlength="20" type="password" placeholder="Digite a senha para o usuário" class="form-control input-md" required value="" />
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group" id="confirmaSenha">
-                                <label for="txtConfirmaSenha" class="control-label">Confirme a Senha:</label>
-                                <input id="txtConfirmaSenha" name="txtConfirmaSenha" maxlength="20" type="password" placeholder="Confirme a senha" class="form-control input-md" required value="" />
                             </div>
                         </div>
                     </div>
@@ -78,54 +66,24 @@
                             </div>
                         </div>
                     </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
-                <button type="button" class="btn btn-primary" id="btnSalvar">Cadastrar usuário</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Modal -->
-<div class="modal fade" id="edicaoDeUsuario" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="edicaoDeUsuarioLabel">Editar Usuário</h4>
-            </div>
-            <div class="modal-body">
-                <form>
-                    <input type="hidden" id="hdEditarCodUsuario" value="" />
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label for="selectEditarPerfilAcesso" class="control-label">Selecione o perfil de acesso:</label>
-                                <select id="selectEditarPerfilAcesso" class="form-control input-md" required>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="alteraSenha">
+                    <div id="divSenha">
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label for="txtAlteraSenha" class="control-label">Nova senha:</label>
-                                    <input id="txtAlteraSenha" name="txtAlteraSenha" maxlength="20" type="password" placeholder="Digite a nova senha para o usuário" class="form-control input-md" required value="" />
+                                    <label for="txtSenha" class="control-label">Senha:</label>
+                                    <input id="txtSenha" name="txtSenha" maxlength="20" type="password" placeholder="Digite a senha para o usuário" class="form-control input-md" required value="" />
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label for="txtConfirmaAlteraSenha" class="control-label">Confirme a nova senha:</label>
-                                    <input id="txtConfirmaAlteraSenha" name="txtConfirmaAlteraSenha" maxlength="20" type="password" placeholder="Confirme a nova senha" class="form-control input-md" required value="" />
+                                    <label for="txtConfirmaSenha" class="control-label">Confirme a senha:</label>
+                                    <input id="txtConfirmaSenha" name="txtConfirmaSenha" maxlength="20" type="password" placeholder="Confirme a senha" class="form-control input-md" required value="" />
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
+                        <div class="row" id="alteraSenha">
                             <div class="col-md-12">
                                 <button type="button" class="btn btn-primary pull-right" id="btnAlteraSenha">Alterar a senha do usuário</button>
                             </div>
@@ -135,9 +93,8 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
-                <button type="button" class="btn btn-warning" id="btnRecuperaSenha"><span class="glyphicon glyphicon-envelope"></span>&nbsp;Recuperar Senha</button>
                 <button type="button" class="btn btn-warning" id="btnAbreEdicaoSenha"><span class="glyphicon glyphicon-pencil"></span>&nbsp;Editar Senha</button>
-                <button type="button" class="btn btn-success" id="btnSalvarEdicao">Salvar Perfil de Acesso</button>
+                <button type="button" class="btn btn-success" id="btnSalvar">Salvar usuário</button>
             </div>
         </div>
     </div>
@@ -152,22 +109,27 @@
         };
 
         var CarregarUsuarioParaEdicao_cb = function (json) {
-            $('#edicaoDeUsuarioLabel').text(json.cpf + ' - ' + json.nome);
-            $("#hdEditarCodUsuario").val(json.codigo);
-            $("#hdEditarIdParticipante").val(json.idParticipante);
-            $("#selectEditarPerfilAcesso").val(json.perfilAcesso.codigo);
-            $('#alteraSenha').hide();
-            $('#edicaoDeUsuario').modal();
+            $('#modalUsuarioLabel').text('Editar Usuário - ' + json.nome);
+            $("#hdCodUsuario").val(json.id);
+            $('#txtNome').val(json.nome);
+            $('#txtEmail').val(json.email);
+            $('#txtSenha').val('');
+            $('#txtConfirmaSenha').val('');
+            $("#selectPerfilAcesso").val(json.perfilAcesso.id);
+
+            $('#btnAbreEdicaoSenha').show();
+            $('#divSenha').hide();
+
+            $('#cadastroDeUsuario').modal();
         };
 
         $('#btnAlteraSenha').click(function () {
-            var codigo = parseInt($("#hdEditarCodUsuario").val());
-            var idParticipante = parseInt($("#hdEditarIdParticipante").val());
-            if ($('#txtAlteraSenha').val() != '' && $('#txtAlteraSenha').val() == $('#txtConfirmaAlteraSenha').val()) {
-                var senha = $('#txtAlteraSenha').val();
+            var codigo = parseInt($("#hdCodUsuario").val());
+
+            if ($('#txtSenha').val() != '' && $('#txtSenha').val() == $('#txtConfirmaSenha').val()) {
+                var senha = $('#txtSenha').val();
                 var params = {
-                    'codigo': codigo,
-                    'idParticipante': idParticipante,
+                    'id': codigo,
                     'senha': senha
                 }
                 SRV.ChamarAjax('@Url.Action("AtualizarSenha", "Usuario")', params, AlteraSenha_cb);
@@ -177,41 +139,50 @@
         });
 
         var AlteraSenha_cb = function (response) {
-            $('#alteraSenha').hide();
-            $('#alteraSenha input').val('');
+            $('#divSenha').hide();
+            $('#txtSenha').val('');
+            $('#txtConfirmaSenha').val('');
             Msg.success('Senha alterada com sucesso.', 5000);
         };
 
-        $('#btnSalvarEdicao').click(function () {
-            var codigo = parseInt($("#hdEditarCodUsuario").val());
-            var perfilAcesso = parseInt($('#selectEditarPerfilAcesso').val());
-
-            var params = {
-                'codigo': codigo,
-                'perfilAcesso': { 'codigo': parseInt(perfilAcesso) }
+        $('#btnSalvar').click(function () {
+            var codigo = parseInt($("#hdCodUsuario").val());
+            if (codigo == 0) {
+                SalvarInsercao();
             }
-
-            SRV.ChamarAjax('@Url.Action("Salvar", "Usuario")', params, SalvarEdicao_cb);
+            else {
+                SalvarEdicao(codigo);
+            }
         });
 
-        var SalvarEdicao_cb = function (response) {
-            Msg.success('Cadastro atualizado com sucesso', 4000);
-            $('#edicaoDeUsuario').modal('hide');
-            AtualizarListagem();
-        };
+        var SalvarEdicao = function (codigo) {
+            var nome = $.trim($('#txtNome').val());
+            var email = $.trim($('#txtEmail').val());
+            var perfilAcesso = parseInt($('#selectPerfilAcesso').val());
 
-        $('#btnRecuperaSenha').click(function () {
-            var codigo = parseInt($("#hdEditarCodUsuario").val());
-            SRV.ChamarAjax('@Url.Action("RecuperarSenha", "Usuario")', { codigo: codigo }, RecuperaSenha_cb);
-        });
+            if (!nome) {
+                Msg.error('O campo "Nome" é obrigatório. Favor verificar o preenchimento do mesmo.', 4000);
+            }
+            else if (!email) {
+                Msg.error('O campo "E-mail" é obrigatório. Favor verificar o preenchimento do mesmo.', 4000);
+            }
+            else if (perfilAcesso == 0) {
+                Msg.error('O campo "Perfil de Acesso" é obrigatório. Favor verificar a seleção do mesmo.', 4000);
+            }
+            else {
+                var params = {
+                    'id': codigo,
+                    'nome': nome,
+                    'email': email,
+                    'perfilAcesso': { 'id': perfilAcesso, 'nome': $('#selectPerfilAcesso option:selected').text() }
+                }
 
-        var RecuperaSenha_cb = function (response) {
-            $('#edicaoDeUsuario').modal('hide');
-            Msg.success('Senha enviada para o e-mail cadastrado.', 5000);
+                SRV.ChamarAjax('@Url.Action("Salvar", "Usuario")', params, Salvar_cb);
+            }
         };
 
         $('#btnAbreEdicaoSenha').click(function () {
-            $('#alteraSenha').show();
+            $('#divSenha').show();
         });
 
         var ExcluirUsuario = function (codigoUsuario) {
@@ -282,6 +253,7 @@
         };
 
         $('#btnNovo').click(function () {
+            $('#modalUsuarioLabel').text('Cadastrar Novo Usuário');
             $('#hdCodUsuario').val(0);
             $('#txtNome').val('');
             $('#txtEmail').val('');
@@ -289,10 +261,14 @@
             $('#txtConfirmaSenha').val('');
             $('#selectPerfilAcesso').val(0);
 
+            $('#btnAbreEdicaoSenha').hide();
+            $('#divSenha').show();
+            $('#alteraSenha').hide();
+
             $('#cadastroDeUsuario').modal();
         });
 
-        $('#btnSalvar').click(function () {
+        var SalvarInsercao = function () {
             var nome = $.trim($('#txtNome').val());
             var email = $.trim($('#txtEmail').val());
             var senha = $.trim($('#txtSenha').val());
@@ -301,9 +277,6 @@
 
             if (!nome) {
                 Msg.error('O campo "Nome" é obrigatório. Favor verificar o preenchimento do mesmo.', 4000);
-            }
-            else if (!email) {
-                Msg.error('O campo "E-mail" é obrigatório. Favor verificar o preenchimento do mesmo.', 4000);
             }
             else if (!email) {
                 Msg.error('O campo "E-mail" é obrigatório. Favor verificar o preenchimento do mesmo.', 4000);
@@ -327,38 +300,12 @@
 
                 SRV.ChamarAjax('@Url.Action("Salvar", "Usuario")', params, Salvar_cb);
             }
-        });
+        };
 
         var Salvar_cb = function (json) {
             Msg.success('Cadastro efetuado com sucesso', 4000);
             $('#cadastroDeUsuario').modal('hide');
             AtualizarListagem();
-        };
-
-        var buscaParticipanteSigef = function (idParticipante, possuiCadastroContaSigef) {
-            var paramCallback = { possuiCadastroContaSigef: possuiCadastroContaSigef };
-            SRV.ChamarAjax('@Url.Action("ObtemDadosParticipanteSigef", "Usuario")', { idParticipante: idParticipante }, buscaParticipanteSigef_cb, paramCallback);
-        };
-
-        var buscaParticipanteSigef_cb = function (response, paramCallback) {
-            var possuiCadastroContaSigef = paramCallback.possuiCadastroContaSigef;
-
-            $('#hdCpf').val(response.cpf);
-            $('#hdIdParticipante').val(response.idParticipante);
-            $('#txtNome').val(response.nome).prop('disabled', true);
-            if (possuiCadastroContaSigef) {
-                $('#txtSenha').prop('disabled', true).prop("placeholder", "Senha do SIGEF");
-                $('#txtEmail').prop('disabled', true).prop("placeholder", response.email);
-                $('#selectFuncao').val(response.nomeFuncao);
-                $('#selectFuncao').prop('disabled', true);
-            }
-            else {
-                $('#txtEmail').val(response.email).prop("placeholder", "Endereço eletrônico do usuário");
-                $('#txtSenha').prop("placeholder", "Digite a senha para o usuário");
-                $('#necessitaCadastroSigef').val('parcial');
-            }
-            $('#selectTipoParticipante').val(response.tipoParticipante).prop('disabled', true);
-            $('#cadastroDeUsuario').modal();
         };
 
         $(document).ready(function () {

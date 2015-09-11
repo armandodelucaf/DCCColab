@@ -64,13 +64,6 @@ namespace DCC.COLAB.Business
         }
 
         [OperationBehavior(Impersonation = ImpersonationOption.Allowed)]
-        public string RecuperarSenha(Usuario usuario)
-        {
-            UsuarioBusinessFacade usuarioBusinessFacade = BusinessFactory.GetInstance().Get<UsuarioBusinessFacade>();
-            return usuarioBusinessFacade.RecuperarSenha(usuario);
-        }
-
-        [OperationBehavior(Impersonation = ImpersonationOption.Allowed)]
         public void AtualizarSenha(Usuario usuario, string usuarioLogado)
         {
             UsuarioBusinessFacade usuarioBusinessFacade = BusinessFactory.GetInstance().Get<UsuarioBusinessFacade>();

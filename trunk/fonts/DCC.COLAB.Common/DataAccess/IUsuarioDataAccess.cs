@@ -24,8 +24,6 @@ namespace DCC.COLAB.Common.DataAccess
 
         void ExcluirUsuario(int codigo);
 
-        string RecuperarSenha(Usuario usuario);
-
         void AtualizarSenha(Usuario usuario);
 
         Usuario ValidarUsuarioSenha(string login, string senha);

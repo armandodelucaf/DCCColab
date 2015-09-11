@@ -39,7 +39,7 @@
       FROM
         dcccolab.Perfil_Acesso PA
       WHERE
-        (@FILTRO IS NULL OR PA.nm_Perfil_Acesso LIKE ('%' + @FILTRO + '%'))
+        (@FILTRO IS NULL OR PA.nm_Perfil_Acesso LIKE CONCAT('%', @FILTRO, '%'))
       ORDER BY @ORDER_BY
     </selecionarPerfisAcessoFiltrados>
     <inserirPerfilAcesso>
@@ -104,7 +104,7 @@
         dcccolab.Usuario U
         INNER JOIN dcccolab.Perfil_Acesso PA ON PA.id_Perfil_Acesso = U.id_Perfil_Acesso
       WHERE
-        (@FILTRO IS NULL OR U.nm_Usuario LIKE ('%' + @FILTRO + '%'))
+        (@FILTRO IS NULL OR U.nm_Usuario LIKE CONCAT('%', @FILTRO, '%'))
       ORDER BY @ORDER_BY
     </selecionarUsuariosFiltrados>
     <inserirUsuario>
@@ -122,6 +122,13 @@
     <excluirUsuario>
       DELETE FROM dcccolab.Usuario WHERE id_Usuario = @ID
     </excluirUsuario>
+    <atualizarSenhaUsuario>
+      UPDATE dcccolab.Usuario
+      SET
+        senha = DES_ENCRYPT(@SENHA)
+      WHERE
+        id_Usuario = @ID
+    </atualizarSenhaUsuario>
   </Usuario>
   
 </Queries>

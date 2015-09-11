@@ -32,9 +32,6 @@ namespace DCC.COLAB.WCF.Interface
 
         [OperationContract]
         void ExcluirUsuario(int codigo, string usuarioLogado);
-        
-        [OperationContract]
-        string RecuperarSenha(Usuario usuario);
 
         [OperationContract]
         void AtualizarSenha(Usuario usuario, string usuarioLogado);

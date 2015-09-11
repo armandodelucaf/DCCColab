@@ -1,16 +1,10 @@
 ﻿using COLAB.DCC.Business.Util;
 using DCC.COLAB.Business.Infrastructure;
-using DCC.COLAB.Common.AuxiliarEntities;
 using DCC.COLAB.Common.DataAccess;
 using DCC.COLAB.Common.Entities;
 using DCC.COLAB.Common.Filtros;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Mail;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DCC.COLAB.Business.Entities
 {
@@ -95,26 +89,12 @@ namespace DCC.COLAB.Business.Entities
                 throw ex;
             }
         }
-                
-        public virtual string RecuperarSenha(Usuario usuario)
-        {
-            try
-            {
-                return dataAccess.RecuperarSenha(usuario);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
         
         public virtual void AtualizarSenha(Usuario usuario, string usuarioLogado)
         {
             try
             {
-                Usuario registro = SelecionarUsuarioPorCodigo(usuario.id);
-                registro.senha = usuario.senha;
-                dataAccess.AtualizarSenha(registro);
+                dataAccess.AtualizarSenha(usuario);
             }
             catch (Exception ex)
             {

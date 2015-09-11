@@ -43,7 +43,7 @@ namespace DCC.COLAB.DataAccess.SQLServer.Entities
         public void AtualizarUsuario(Usuario usuario)
         {
             Hashtable parametros = this.BuildParametrosInserirUsuario(usuario);
-            this.AtualizarObjetoPorNomeQuery("atualizarPerfilUsuario", parametros);
+            this.AtualizarObjetoPorNomeQuery("atualizarUsuario", parametros);
         }
 
         public void ExcluirUsuario(int codigo)
@@ -76,46 +76,15 @@ namespace DCC.COLAB.DataAccess.SQLServer.Entities
             }
         }
 
-        public string RecuperarSenha(Usuario usuario)
-        {
-            try
-            {
-                Hashtable parametros = this.BuildParametrosInserirUsuario(usuario);
-                usuario.senha = this.SelecionarCampoQuery("obterSenhaParticipante", parametros).ToArray().FirstOrDefault().ToString();
-                return this.montaCorpoEmail(usuario);               
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-
-        }
-
-        private string montaCorpoEmail(Usuario usuario)
-        {
-            StringBuilder html = new StringBuilder();
-            string hr = "<hr style='color:#00AEED; background-color:#00AEED; height:1px; border:0;'/>";
-            string br = "<br />";
-
-            html.Append("<h3 style='color: #00AEED; font-family: sans-serif; margin-bottom: 0;'>Recuperação de Senha</h3>" + hr + br);
-            html.Append("Conforme foi solicitado através do sistema, segue abaixo o seu login e sua senha de acesso ao COLAB do DCC." + br + br);
-            html.Append("Login:   " + usuario.email + br);
-            html.Append("Senha:   " + usuario.senha + br + br);
-            html.Append("Atenciosamente," + br);
-            html.Append("Administração");
-
-            return html.ToString();
-        }
-
         public void AtualizarSenha(Usuario usuario)
         {
             try
             {
                 Hashtable parametros = new Hashtable();
-                string query = GerenciadorDoArquivoDeQueries.Instancia.ObterQuery("atualizarSenhaPessoaFisicaConta");
-                query = query.Replace("@SENHA", usuario.senha);
-                
-                this.AtualizarObjetoPorQueryString(query, parametros);
+                parametros.Add("ID", usuario.id);
+                parametros.Add("SENHA", usuario.senha);
+
+                this.AtualizarObjetoPorNomeQuery("atualizarSenhaUsuario", parametros);
             }
             catch (Exception ex)
             {

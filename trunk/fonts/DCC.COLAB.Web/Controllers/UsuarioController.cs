@@ -4,10 +4,7 @@ using DCC.COLAB.Common.Filtros;
 using DCC.COLAB.WCF.Interface;
 using DCC.COLAB.Web.Util;
 using System;
-using System.Configuration;
 using System.Linq;
-using System.Net;
-using System.Net.Mail;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
 
@@ -65,6 +62,10 @@ namespace DCC.COLAB.Web.Controllers
                 else
                 {
                     WCFDispatcher<ICOLABServico>.UseService(u => u.AtualizarUsuario(usuario, SessaoUtil.UsuarioLogin));
+                    if (usuario.id == SessaoUtil.Usuario.id)
+                    {
+                        SessaoUtil.AlterarVariavelSessaoUsuario(usuario);
+                    }
                 }
                 return Json(usuario, JsonRequestBehavior.AllowGet);
             }
@@ -85,42 +86,6 @@ namespace DCC.COLAB.Web.Controllers
             catch (Exception ex)
             {
                 return ThrowJsonError("Não foi possível excluir o usuário.", ex);
-            }
-        }
-
-        public ActionResult RecuperarSenha(int codigo)
-        {
-            try
-            {
-                Usuario usuario = WCFDispatcher<ICOLABServico>.UseService(u => u.SelecionarUsuarioPorCodigo(codigo));
-                string htmlEmail = WCFDispatcher<ICOLABServico>.UseService(u => u.RecuperarSenha(usuario));
-                var EmailServer = ConfigurationManager.AppSettings["EmailServer"].ToString();
-                var EmailPort = int.Parse(ConfigurationManager.AppSettings["EmailPort"]);
-                var EmailFrom = ConfigurationManager.AppSettings["EmailFrom"].ToString();
-                var EmailLogin = ConfigurationManager.AppSettings["EmailLogin"].ToString();
-                var EmailPassword = ConfigurationManager.AppSettings["EmailPassword"].ToString();
-                var EmailUseSsl = Boolean.Parse(ConfigurationManager.AppSettings["EmailUseSsl"]);
-                var EmailUseDefaultCredentials = Boolean.Parse(ConfigurationManager.AppSettings["EmailUseDefaultCredentials"]);
-                MailMessage email = new MailMessage();
-                email.To.Add(usuario.email);
-                email.From = new MailAddress(EmailFrom);
-                email.Subject = "Recuperação de Senha - COLAB";
-                email.Body = htmlEmail;
-                email.IsBodyHtml = true;
-                var smtpClient = new SmtpClient
-                {
-                    EnableSsl = EmailUseSsl,
-                    Port = EmailPort,
-                    Host = EmailServer,
-                    UseDefaultCredentials = EmailUseDefaultCredentials,
-                    Credentials = new NetworkCredential(EmailLogin, EmailPassword)
-                };
-                smtpClient.Send(email);
-                return Json(new { redirectURL = Url.Action("Consulta", "Usuario"), isRedirect = true }, JsonRequestBehavior.AllowGet);
-            }
-            catch (Exception ex)
-            {
-                return ThrowJsonError("Não foi possível recuperar a senha do usuário.", ex);
             }
         }
 
