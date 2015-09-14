@@ -48,6 +48,12 @@
   <ItemGroup>
     <Compile Include="AuxiliarEntities\Ordenacao.cs" />
     <Compile Include="AuxiliarEntities\Paginacao.cs" />
+    <Compile Include="DataAccess\ITemaDataAccess.cs" />
+    <Compile Include="DataAccess\IDisciplinaDataAccess.cs" />
+    <Compile Include="Entities\Tema.cs" />
+    <Compile Include="Entities\Disciplina.cs" />
+    <Compile Include="Filtros\FiltroTema.cs" />
+    <Compile Include="Filtros\FiltroDisciplina.cs" />
     <Compile Include="IBaseDataAccess.cs" />
     <Compile Include="Basic\BusinessConfig.cs" />
     <Compile Include="Basic\Util.cs" />
@@ -63,15 +69,11 @@
     <Compile Include="DataAccess\IArquivoDataAccess.cs" />
     <Compile Include="DataAccess\IPerfilAcessoDataAccess.cs" />
     <Compile Include="DataAccess\IUsuarioDataAccess.cs" />
-    <Compile Include="Entities\Acao.cs" />
     <Compile Include="Entities\Documento.cs" />
     <Compile Include="Entities\Usuario.cs" />
-    <Compile Include="Entities\Funcionalidade.cs" />
-    <Compile Include="Entities\FuncionalidadeAcao.cs" />
     <Compile Include="Entities\Arquivo.cs" />
     <Compile Include="Entities\PerfilAcesso.cs" />
     <Compile Include="Filtros\FiltroDocumento.cs" />
-    <Compile Include="Filtros\FiltroFuncionalidadeAcao.cs" />
     <Compile Include="Filtros\FiltroBase.cs" />
     <Compile Include="Basic\Log\Message.cs" />
     <Compile Include="Filtros\FiltroUsuario.cs" />

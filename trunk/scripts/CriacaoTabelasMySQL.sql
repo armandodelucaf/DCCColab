@@ -45,26 +45,38 @@ CREATE TABLE `Usuario`(
 CREATE TABLE `Disciplina`(
 	`id_Disciplina` int AUTO_INCREMENT NOT NULL,
 	`nm_Disciplina` varchar(128) NOT NULL,
+	`nu_Periodo` int NULL,
+	`cd_Disciplina` varchar(10) NOT NULL,
 	
 	CONSTRAINT `PK_Disciplina` PRIMARY KEY 
-	(`id_Disciplina`) ,
+	(`id_Disciplina`),
 	
-	CONSTRAINT `UQ_Disciplina_nm_Disciplina` UNIQUE 
-	(`nm_Disciplina`) 
+	CONSTRAINT `UQ_Disciplina_cd_Disciplina` UNIQUE 
+	(`cd_Disciplina`) 
 );
 
 CREATE TABLE `Tema`(
 	`id_Tema` int AUTO_INCREMENT NOT NULL,
 	`nm_Tema` varchar(128) NOT NULL,
-	`id_Disciplina` int NOT NULL,
+	`ds_Tema` varchar(255) NULL,
 	
 	CONSTRAINT `PK_Tema` PRIMARY KEY 
 	(`id_Tema`) ,
 	
 	CONSTRAINT `UQ_Tema_nm_Tema` UNIQUE 
-	(`nm_Tema`) ,
+	(`nm_Tema`)
+);
+
+CREATE TABLE `Tema_Disciplina`(
+	`id_Tema` int NOT NULL,
+	`id_Disciplina` int NOT NULL,
 	
-	CONSTRAINT FOREIGN KEY (id_Disciplina) REFERENCES `Disciplina` (id_Disciplina)
+	CONSTRAINT `PK_Tema_Disciplina` UNIQUE 
+	(`id_Disciplina`, `id_Tema`) ,
+	
+	CONSTRAINT FOREIGN KEY (id_Disciplina) REFERENCES `Disciplina` (id_Disciplina),
+	
+	CONSTRAINT FOREIGN KEY (id_Tema) REFERENCES `Tema` (id_Tema)
 );
 
 CREATE TABLE `Disciplina_Professor`(

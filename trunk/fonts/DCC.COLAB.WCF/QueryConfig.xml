@@ -42,21 +42,6 @@
         (@FILTRO IS NULL OR PA.nm_Perfil_Acesso LIKE CONCAT('%', @FILTRO, '%'))
       ORDER BY @ORDER_BY
     </selecionarPerfisAcessoFiltrados>
-    <inserirPerfilAcesso>
-      INSERT INTO dcccolab.Perfil_Acesso (nm_Perfil_Acesso, moderador)
-      VALUES (@NOME, @MODERADOR)
-    </inserirPerfilAcesso>
-    <atualizarPerfilAcesso>
-      UPDATE dcccolab.Perfil_Acesso
-      SET
-        nm_Perfil_Acesso = @NOME,
-        moderador = @MODERADOR
-      WHERE 
-        id_perfil = @CODIGO
-    </atualizarPerfilAcesso>
-    <excluirPerfilAcesso>
-      DELETE FROM dcccolab.Perfil_Acesso WHERE id_Perfil_Acesso = @ID
-    </excluirPerfilAcesso>
   </PerfilAcesso>
   
   <Usuario>
@@ -130,5 +115,84 @@
         id_Usuario = @ID
     </atualizarSenhaUsuario>
   </Usuario>
+
+  <Disciplina>
+    <selecionarDisciplinaPorCodigo>
+      SELECT
+        D.id_Disciplina,
+        D.nm_Disciplina,
+        D.nu_Periodo,
+        D.cd_Disciplina
+      FROM
+        dcccolab.Disciplina D
+      WHERE
+        D.id_Disciplina = @ID
+    </selecionarDisciplinaPorCodigo>
+    <selecionarDisciplinasFiltradas>
+      SELECT
+        D.id_Disciplina,
+        D.nm_Disciplina,
+        D.nu_Periodo,
+        D.cd_Disciplina
+      FROM
+        dcccolab.Disciplina D
+      WHERE
+        (@FILTRO IS NULL OR D.nm_Disciplina LIKE CONCAT('%', @FILTRO, '%') OR D.cd_Disciplina LIKE CONCAT('%', @FILTRO, '%'))
+      ORDER BY @ORDER_BY
+    </selecionarDisciplinasFiltradas>
+    <inserirDisciplina>
+      INSERT INTO dcccolab.Disciplina (nm_Disciplina, nu_Periodo, cd_Disciplina) VALUES (@NOME, @PERIODO, @CODIGO_DISCIPLINA)
+    </inserirDisciplina>
+    <atualizarDisciplina>
+      UPDATE dcccolab.Disciplina
+      SET
+        nm_Disciplina = @NOME,
+        nu_Periodo = @PERIODO,
+        cd_Disciplina = @CODIGO_DISCIPLINA
+      WHERE
+        id_Disciplina = @ID
+    </atualizarDisciplina>
+    <excluirDisciplina>
+      DELETE FROM dcccolab.Disciplina WHERE id_Disciplina = @ID
+    </excluirDisciplina>
+  </Disciplina>
+
+  <Tema>
+    <selecionarTemaPorCodigo>
+      SELECT
+        T.id_Tema,
+        T.nm_Tema,
+        T.ds_Tema
+      FROM
+        dcccolab.Tema T
+      WHERE
+        T.id_Tema = @ID
+    </selecionarTemaPorCodigo>
+    <selecionarTemasFiltrados>
+      SELECT
+        T.id_Tema,
+        T.nm_Tema,
+        T.ds_Tema
+      FROM
+        dcccolab.Tema T
+      WHERE
+        (@FILTRO IS NULL OR T.nm_Tema LIKE CONCAT('%', @FILTRO, '%') OR T.ds_Tema LIKE CONCAT('%', @FILTRO, '%'))
+      ORDER BY @ORDER_BY
+    </selecionarTemasFiltrados>
+    <inserirTema>
+      INSERT INTO dcccolab.Tema (nm_Tema, ds_Tema) VALUES (@NOME, @DESCRICAO)
+    </inserirTema>
+    <atualizarTema>
+      UPDATE dcccolab.Tema
+      SET
+        nm_Tema = @NOME,
+        ds_Tema = @DESCRICAO
+      WHERE
+        id_Tema = @ID
+    </atualizarTema>
+    <excluirTema>
+      DELETE FROM dcccolab.Tema WHERE id_Tema = @ID
+    </excluirTema>
+  </Tema>
   
 </Queries>

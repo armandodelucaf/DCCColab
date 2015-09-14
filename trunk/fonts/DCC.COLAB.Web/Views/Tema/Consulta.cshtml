@@ -1,0 +1,212 @@
+﻿@{
+}
+
+<div>
+    <legend>Temas - Consulta</legend>
+
+    <table id="tabelaTemas" class="table hover table-bordered" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nome</th>
+                <th>Descrição</th>
+                <th></th>
+            </tr>
+        </thead>
+    </table>
+
+    <div class="form-group">
+        <div>
+            <button id="btnNovo" name="btnNovo" class="btn btn-primary">Novo tema</button>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="cadastroDeTema" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="modalTemaLabel"></h4>
+            </div>
+            <div class="modal-body" style="overflow-y: inherit !important;">
+                <form>
+                    <input type="hidden" id="hdIdTema" value="" />
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="txtNome" class="control-label">Nome:</label>
+                                <input id="txtNome" name="txtNome" type="text" placeholder="Nome do tema" class="form-control input-md" required value="" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="txtDescricao" class="control-label">Descrição:</label>
+                                <textarea id="txtDescricao" name="txtDescricao" placeholder="Descrição do tema" class="form-control input-md"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                <button type="button" class="btn btn-success" id="btnSalvar">Salvar tema</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section scripts
+{
+    <script type="text/javascript">
+        var CarregarTemaParaEdicao = function (idTema) {
+            SRV.ChamarAjax('@Url.Action("ObterTema", "Tema")', { id: idTema }, CarregarTemaParaEdicao_cb);
+        };
+
+        var CarregarTemaParaEdicao_cb = function (json) {
+            $('#modalTemaLabel').text('Editar Tema');
+            $("#hdIdTema").val(json.id);
+            $('#txtNome').val(json.nome);
+            $('#txtDescricao').val(json.descricao)
+
+            $('#cadastroDeTema').modal();
+        };
+
+        $('#btnSalvar').click(function () {
+            var id = parseInt($("#hdIdTema").val());
+            if (id == 0) {
+                SalvarInsercao();
+            }
+            else {
+                SalvarEdicao(id);
+            }
+        });
+
+        var SalvarEdicao = function (id) {
+            var nome = $.trim($('#txtNome').val());
+            var descricao = $.trim($('#txtDescricao').val());
+
+            if (!nome) {
+                Msg.error('O campo "Nome" é obrigatório. Favor verificar o preenchimento do mesmo.', 4000);
+            }
+            else {
+                var params = {
+                    'id': id,
+                    'nome': nome,
+                    'descricao': descricao
+                }
+
+                SRV.ChamarAjax('@Url.Action("Salvar", "Tema")', params, Salvar_cb);
+            }
+        };
+
+        var ExcluirTema = function (idTema) {
+            $.confirm({
+                title: "Confirmação",
+                text: "Deseja realmente excluir este usuário?",
+                confirm: function () {
+                    ExcluirTemaAjax(idTema);
+                },
+                cancel: function () {
+                    // nothing to do
+                },
+                confirmButton: "Sim",
+                cancelButton: "Não",
+                post: true
+            });
+        };
+
+        var ExcluirTemaAjax = function (id) {
+            SRV.ChamarAjax('@Url.Action("Excluir", "Tema")', { id: id }, SucessoExcluir_cb);
+        };
+
+        var SucessoExcluir_cb = function (json) {
+            Msg.success("Exclusão realizada com sucesso.", 3000);
+            AtualizarListagem();
+        };
+
+        var AtualizarListagem = function () {
+            $('#tabelaTemas').dataTable().fnDraw(false);
+        };
+
+        var InicializarListagem = function () {
+            $('#tabelaTemas').dataTable({
+                columns: [
+                    { "data": "id", "name": "T.id_Tema" },
+                    { "data": "nome", "name": "T.nm_Tema" },
+                    { "data": "resumoDescricao", "name": "T.ds_Tema" },
+                    { "data": "" }
+                ],
+                columnDefs: [
+                    { targets: 0, visible: false, orderable: false, searchable: false },
+                    { targets: 2, width: "50%", sClass: "alignCenter" },
+                    {
+                        targets: 3, orderable: false, searchable: false, width: "60px", sClass: "alignCenter", render: function (data, type, row) {
+                            var acoes = "";
+                            acoes += "<a href='#' onClick='CarregarTemaParaEdicao(" + row["id"] + ")'><img width='15px' title='editar' alt='Editar' src='/../Content/img/ic_editar.png' class='rowEditIcon'/></a>";
+                            acoes += "&nbsp;&nbsp;";
+                            acoes += "<a href='#' onClick='ExcluirTema(" + row["id"] + ")'><img width='15px' title='excluir' alt='Excluir' src='/../Content/img/bt_excluir.gif' class='rowDeleteIcon' id='" + row["id"] + "'/></a>";
+                            return acoes;
+                        }
+                    },
+                ],
+                language: { url: "/../Content/dataTable_pt_BR.js", searchPlaceholder: "nome / descrição" },
+                processing: true,
+                serverSide: true,
+                order: [[1, "asc"]],
+                ajax: {
+                    url: "@Url.Action("ListarTemas", "Tema")",
+                    async: false,
+                    type: 'POST',
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    data: function (d) {
+                        return COLAB.ObterFiltroBaseDataTable(d);
+                    }
+                }
+            });
+        };
+
+        $('#btnNovo').click(function () {
+            $('#modalTemaLabel').text('Cadastrar Novo Tema');
+            $('#hdIdTema').val(0);
+            $('#txtNome').val('');
+            $('#txtDescricao').val('');
+            
+            $('#cadastroDeTema').modal();
+        });
+
+        var SalvarInsercao = function () {
+            var nome = $.trim($('#txtNome').val());
+            var descricao = $.trim($('#txtDescricao').val());
+
+            if (!nome) {
+                Msg.error('O campo "Nome" é obrigatório. Favor verificar o preenchimento do mesmo.', 4000);
+            }
+            else {
+                var params = {
+                    'nome': nome,
+                    'descricao': descricao
+                }
+
+                SRV.ChamarAjax('@Url.Action("Salvar", "Tema")', params, Salvar_cb);
+            }
+        };
+
+        var Salvar_cb = function (json) {
+            Msg.success('Cadastro efetuado com sucesso', 4000);
+            $('#cadastroDeTema').modal('hide');
+            AtualizarListagem();
+        };
+
+        $(document).ready(function () {
+            Msg.iconMode = "fa";
+            InicializarListagem();
+            COLAB.InicializarPropriedades();
+        });
+    </script>
+}

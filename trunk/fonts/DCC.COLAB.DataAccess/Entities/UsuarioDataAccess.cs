@@ -1,13 +1,11 @@
 ﻿using DCC.COLAB.Common.DataAccess;
 using DCC.COLAB.Common.Entities;
 using DCC.COLAB.Common.Filtros;
-using DCCFramework;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace DCC.COLAB.DataAccess.SQLServer.Entities
 {

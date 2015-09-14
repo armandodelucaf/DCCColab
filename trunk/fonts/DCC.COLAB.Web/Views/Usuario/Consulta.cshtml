@@ -10,7 +10,7 @@
     <table id="tabelaUsuarios" class="table hover table-bordered" cellspacing="0" width="100%">
         <thead>
             <tr>
-                <th>Código</th>
+                <th>Id</th>
                 <th>Nome</th>
                 <th>E-mail</th>
                 <th>Perfil de Acesso</th>
@@ -36,7 +36,7 @@
             </div>
             <div class="modal-body" style="overflow-y: inherit !important;">
                 <form>
-                    <input type="hidden" id="hdCodUsuario" value="" />
+                    <input type="hidden" id="hdIdUsuario" value="" />
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
@@ -104,13 +104,13 @@
 @section scripts
 {
     <script type="text/javascript">
-        var CarregarUsuarioParaEdicao = function (codigoUsuario) {
-            SRV.ChamarAjax('@Url.Action("ObterUsuario", "Usuario")', { codigo: codigoUsuario }, CarregarUsuarioParaEdicao_cb);
+        var CarregarUsuarioParaEdicao = function (idUsuario) {
+            SRV.ChamarAjax('@Url.Action("ObterUsuario", "Usuario")', { id: idUsuario }, CarregarUsuarioParaEdicao_cb);
         };
 
         var CarregarUsuarioParaEdicao_cb = function (json) {
             $('#modalUsuarioLabel').text('Editar Usuário - ' + json.nome);
-            $("#hdCodUsuario").val(json.id);
+            $("#hdIdUsuario").val(json.id);
             $('#txtNome').val(json.nome);
             $('#txtEmail').val(json.email);
             $('#txtSenha').val('');
@@ -124,12 +124,12 @@
         };
 
         $('#btnAlteraSenha').click(function () {
-            var codigo = parseInt($("#hdCodUsuario").val());
+            var id = parseInt($("#hdIdUsuario").val());
 
             if ($('#txtSenha').val() != '' && $('#txtSenha').val() == $('#txtConfirmaSenha').val()) {
                 var senha = $('#txtSenha').val();
                 var params = {
-                    'id': codigo,
+                    'id': id,
                     'senha': senha
                 }
                 SRV.ChamarAjax('@Url.Action("AtualizarSenha", "Usuario")', params, AlteraSenha_cb);
@@ -146,16 +146,16 @@
         };
 
         $('#btnSalvar').click(function () {
-            var codigo = parseInt($("#hdCodUsuario").val());
-            if (codigo == 0) {
+            var id = parseInt($("#hdIdUsuario").val());
+            if (id == 0) {
                 SalvarInsercao();
             }
             else {
-                SalvarEdicao(codigo);
+                SalvarEdicao(id);
             }
         });
 
-        var SalvarEdicao = function (codigo) {
+        var SalvarEdicao = function (id) {
             var nome = $.trim($('#txtNome').val());
             var email = $.trim($('#txtEmail').val());
             var perfilAcesso = parseInt($('#selectPerfilAcesso').val());
@@ -171,7 +171,7 @@
             }
             else {
                 var params = {
-                    'id': codigo,
+                    'id': id,
                     'nome': nome,
                     'email': email,
                     'perfilAcesso': { 'id': perfilAcesso, 'nome': $('#selectPerfilAcesso option:selected').text() }
@@ -185,12 +185,12 @@
             $('#divSenha').show();
         });
 
-        var ExcluirUsuario = function (codigoUsuario) {
+        var ExcluirUsuario = function (idUsuario) {
             $.confirm({
                 title: "Confirmação",
                 text: "Deseja realmente excluir este usuário?",
                 confirm: function () {
-                    ExcluirUsuarioAjax(codigoUsuario);
+                    ExcluirUsuarioAjax(idUsuario);
                 },
                 cancel: function () {
                     // nothing to do
@@ -201,8 +201,8 @@
             });
         };
 
-        var ExcluirUsuarioAjax = function (codigo) {
-            SRV.ChamarAjax('@Url.Action("Excluir", "Usuario")', { codigo: codigo }, SucessoExcluir_cb);
+        var ExcluirUsuarioAjax = function (id) {
+            SRV.ChamarAjax('@Url.Action("Excluir", "Usuario")', { id: id }, SucessoExcluir_cb);
         };
 
         var SucessoExcluir_cb = function (json) {
@@ -230,7 +230,7 @@
                             var acoes = "";
                             acoes += "<a href='#' onClick='CarregarUsuarioParaEdicao(" + row["id"] + ")'><img width='15px' title='editar' alt='Editar' src='/../Content/img/ic_editar.png' class='rowEditIcon'/></a>";
                             acoes += "&nbsp;&nbsp;";
-                            acoes += "<a href='#' onClick='ExcluirUsuario(" + row["id"] + ")'><img width='15px' title='excluir' alt='Excluir' src='/../Content/img/bt_excluir.gif' class='rowDeleteIcon' codigo='" + row["id"] + "'/></a>";
+                            acoes += "<a href='#' onClick='ExcluirUsuario(" + row["id"] + ")'><img width='15px' title='excluir' alt='Excluir' src='/../Content/img/bt_excluir.gif' class='rowDeleteIcon' id='" + row["id"] + "'/></a>";
                             return acoes;
                         }
                     },
@@ -254,7 +254,7 @@
 
         $('#btnNovo').click(function () {
             $('#modalUsuarioLabel').text('Cadastrar Novo Usuário');
-            $('#hdCodUsuario').val(0);
+            $('#hdIdUsuario').val(0);
             $('#txtNome').val('');
             $('#txtEmail').val('');
             $('#txtSenha').val('');

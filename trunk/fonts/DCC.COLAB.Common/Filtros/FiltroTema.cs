@@ -1,6 +1,6 @@
 ﻿namespace DCC.COLAB.Common.Filtros
 {
-    public class FiltroUsuario : FiltroBase
+    public class FiltroTema : FiltroBase
     {
 
     }

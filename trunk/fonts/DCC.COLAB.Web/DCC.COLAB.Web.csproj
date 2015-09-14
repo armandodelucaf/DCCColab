@@ -181,10 +181,11 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\BaseFilterController.cs" />
+    <Compile Include="Controllers\TemaController.cs" />
+    <Compile Include="Controllers\DisciplinaController.cs" />
     <Compile Include="Controllers\DocumentoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
-    <Compile Include="Controllers\PerfisAcessoController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -855,7 +856,6 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Views\Shared\_LoginLayout.cshtml" />
-    <Content Include="Views\PerfisAcesso\Consulta.cshtml" />
     <Content Include="log4net.config" />
     <Content Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
     <Content Include="Views\Documento\Consulta.cshtml" />
@@ -863,6 +863,8 @@
     <Content Include="Views\Usuario\Consulta.cshtml" />
     <None Include="Properties\PublishProfiles\dcccolab - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\dcccolab - Web Deploy.pubxml" />
+    <Content Include="Views\Disciplina\Consulta.cshtml" />
+    <Content Include="Views\Tema\Consulta.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

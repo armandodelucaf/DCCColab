@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using DCC.COLAB.Common.Basic;
+using System;
 using System.Runtime.Serialization;
-using System.Text;
-using DCC.COLAB.Common.Basic;
-using System.Threading.Tasks;
 
 namespace DCC.COLAB.Common.Entities
 {

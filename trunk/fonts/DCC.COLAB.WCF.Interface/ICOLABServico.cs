@@ -44,19 +44,10 @@ namespace DCC.COLAB.WCF.Interface
         PerfilAcesso SelecionarPerfilPorCodigo(int codigoPerfil);
 
         [OperationContract]
-        int InserirPerfilAcesso(PerfilAcesso perfil, string usuario);
-
-        [OperationContract]
-        void AtualizarPerfilAcesso(PerfilAcesso perfil, string usuario);
-
-        [OperationContract]
         int SelecionarQuantidadePerfisAcessoFiltrados(FiltroBase filtro);
 
         [OperationContract]
         List<PerfilAcesso> SelecionarPerfisAcessoFiltrados(FiltroBase filtro);
-
-        [OperationContract]
-        void ExcluirPerfilAcesso(int codigoPerfil, string usuario);
 
         #endregion
 
@@ -95,6 +86,50 @@ namespace DCC.COLAB.WCF.Interface
 
         [OperationContract]
         Arquivo SelecionarArquivoDoDocumento(int codigo);
+
+        #endregion
+
+        #region Disciplina
+
+        [OperationContract]
+        Disciplina SelecionarDisciplinaPorCodigo(int codigo);
+
+        [OperationContract]
+        int SelecionarQuantidadeDisciplinasFiltradas(FiltroDisciplina filtro);
+
+        [OperationContract]
+        List<Disciplina> SelecionarDisciplinasFiltradas(FiltroDisciplina filtro);
+
+        [OperationContract]
+        int InserirDisciplina(Disciplina disciplina, string disciplinaLogado);
+
+        [OperationContract]
+        void AtualizarDisciplina(Disciplina disciplina, string disciplinaLogado);
+
+        [OperationContract]
+        void ExcluirDisciplina(int codigo, string disciplinaLogado);
+
+        #endregion
+
+        #region Tema
+
+        [OperationContract]
+        Tema SelecionarTemaPorCodigo(int codigo);
+
+        [OperationContract]
+        int SelecionarQuantidadeTemasFiltrados(FiltroTema filtro);
+
+        [OperationContract]
+        List<Tema> SelecionarTemasFiltrados(FiltroTema filtro);
+
+        [OperationContract]
+        int InserirTema(Tema usuario, string usuarioLogado);
+
+        [OperationContract]
+        void AtualizarTema(Tema usuario, string usuarioLogado);
+
+        [OperationContract]
+        void ExcluirTema(int codigo, string usuarioLogado);
 
         #endregion
 

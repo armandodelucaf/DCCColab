@@ -450,10 +450,23 @@ namespace DCCFramework
                         return (T)Enum.Parse(typeof(T), dr[nomeColuna].ToString());
                     }
                     else if (typeof(T).IsGenericType) {
-                        if (typeof(T).GetGenericTypeDefinition() == typeof(Nullable<>) && Nullable.GetUnderlyingType(typeof(T)).IsEnum)
+                        if (typeof(T).GetGenericTypeDefinition() == typeof(Nullable<>))
                         {
-                            Type I = Nullable.GetUnderlyingType(typeof(T));
-                            return (T)Enum.Parse(I, dr[nomeColuna].ToString());
+                            if (Nullable.GetUnderlyingType(typeof(T)).IsEnum)
+                            {
+                                Type I = Nullable.GetUnderlyingType(typeof(T));
+                                return (T)Enum.Parse(I, dr[nomeColuna].ToString());
+                            }
+                            else
+                            {
+                                try {
+                                    Type I = Nullable.GetUnderlyingType(typeof(T));
+                                    return (T)Convert.ChangeType(dr[nomeColuna], I);
+                                }
+                                catch(Exception e) {
+                                    return default(T);
+                                }
+                            }
                         }
                     }
 

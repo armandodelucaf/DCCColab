@@ -82,20 +82,6 @@ namespace DCC.COLAB.Business
         }
 
         [OperationBehavior(Impersonation = ImpersonationOption.Allowed)]
-        public int InserirPerfilAcesso(PerfilAcesso perfil, string usuario)
-        {
-            PerfilAcessoBusinessFacade perfilAcessoBusinessFacade = BusinessFactory.GetInstance().Get<PerfilAcessoBusinessFacade>();
-            return perfilAcessoBusinessFacade.InserirPerfilAcesso(perfil, usuario);
-        }
-
-        [OperationBehavior(Impersonation = ImpersonationOption.Allowed)]
-        public void AtualizarPerfilAcesso(PerfilAcesso perfil, string usuario)
-        {
-            PerfilAcessoBusinessFacade perfilAcessoBusinessFacade = BusinessFactory.GetInstance().Get<PerfilAcessoBusinessFacade>();
-            perfilAcessoBusinessFacade.AtualizarPerfilAcesso(perfil, usuario);
-        }
-
-        [OperationBehavior(Impersonation = ImpersonationOption.Allowed)]
         public int SelecionarQuantidadePerfisAcessoFiltrados(FiltroBase filtro)
         {
             PerfilAcessoBusinessFacade perfilAcessoBusinessFacade = BusinessFactory.GetInstance().Get<PerfilAcessoBusinessFacade>();
@@ -107,13 +93,6 @@ namespace DCC.COLAB.Business
         {
             PerfilAcessoBusinessFacade perfilAcessoBusinessFacade = BusinessFactory.GetInstance().Get<PerfilAcessoBusinessFacade>();
             return perfilAcessoBusinessFacade.SelecionarPerfisAcessoFiltrados(filtro);
-        }
-
-        [OperationBehavior(Impersonation = ImpersonationOption.Allowed)]
-        public void ExcluirPerfilAcesso(int codigoPerfil, string usuario)
-        {
-            PerfilAcessoBusinessFacade perfilAcessoBusinessFacade = BusinessFactory.GetInstance().Get<PerfilAcessoBusinessFacade>();
-            perfilAcessoBusinessFacade.ExcluirPerfilAcesso(codigoPerfil, usuario);
         }
 
         #endregion
@@ -191,6 +170,98 @@ namespace DCC.COLAB.Business
             DocumentoBusinessFacade documentoBusinessFacade = BusinessFactory.GetInstance().Get<DocumentoBusinessFacade>();
             return documentoBusinessFacade.SelecionarArquivoDoDocumento(codigo);
         }
+        #endregion
+
+        #region Disciplina
+
+        [OperationBehavior(Impersonation = ImpersonationOption.Allowed)]
+        public Disciplina SelecionarDisciplinaPorCodigo(int codigo)
+        {
+            DisciplinaBusinessFacade disciplinaBusinessFacade = BusinessFactory.GetInstance().Get<DisciplinaBusinessFacade>();
+            return disciplinaBusinessFacade.SelecionarDisciplinaPorCodigo(codigo);
+        }
+
+        [OperationBehavior(Impersonation = ImpersonationOption.Allowed)]
+        public int SelecionarQuantidadeDisciplinasFiltradas(FiltroDisciplina filtro)
+        {
+            DisciplinaBusinessFacade disciplinaBusinessFacade = BusinessFactory.GetInstance().Get<DisciplinaBusinessFacade>();
+            return disciplinaBusinessFacade.SelecionarQuantidadeDisciplinasFiltradas(filtro);
+        }
+
+        [OperationBehavior(Impersonation = ImpersonationOption.Allowed)]
+        public List<Disciplina> SelecionarDisciplinasFiltradas(FiltroDisciplina filtro)
+        {
+            DisciplinaBusinessFacade disciplinaBusinessFacade = BusinessFactory.GetInstance().Get<DisciplinaBusinessFacade>();
+            return disciplinaBusinessFacade.SelecionarDisciplinasFiltradas(filtro);
+        }
+
+        [OperationBehavior(Impersonation = ImpersonationOption.Allowed)]
+        public int InserirDisciplina(Disciplina disciplina, string disciplinaLogado)
+        {
+            DisciplinaBusinessFacade disciplinaBusinessFacade = BusinessFactory.GetInstance().Get<DisciplinaBusinessFacade>();
+            return disciplinaBusinessFacade.InserirDisciplina(disciplina, disciplinaLogado);
+        }
+
+        [OperationBehavior(Impersonation = ImpersonationOption.Allowed)]
+        public void AtualizarDisciplina(Disciplina disciplina, string disciplinaLogado)
+        {
+            DisciplinaBusinessFacade disciplinaBusinessFacade = BusinessFactory.GetInstance().Get<DisciplinaBusinessFacade>();
+            disciplinaBusinessFacade.AtualizarDisciplina(disciplina, disciplinaLogado);
+        }
+
+        [OperationBehavior(Impersonation = ImpersonationOption.Allowed)]
+        public void ExcluirDisciplina(int codigo, string disciplinaLogado)
+        {
+            DisciplinaBusinessFacade disciplinaBusinessFacade = BusinessFactory.GetInstance().Get<DisciplinaBusinessFacade>();
+            disciplinaBusinessFacade.ExcluirDisciplina(codigo, disciplinaLogado);
+        }
+
+        #endregion
+
+        #region Tema
+        
+        [OperationBehavior(Impersonation = ImpersonationOption.Allowed)]
+        public Tema SelecionarTemaPorCodigo(int codigo)
+        {
+            TemaBusinessFacade temaBusinessFacade = BusinessFactory.GetInstance().Get<TemaBusinessFacade>();
+            return temaBusinessFacade.SelecionarTemaPorCodigo(codigo);
+        }
+
+        [OperationBehavior(Impersonation = ImpersonationOption.Allowed)]
+        public int SelecionarQuantidadeTemasFiltrados(FiltroTema filtro)
+        {
+            TemaBusinessFacade temaBusinessFacade = BusinessFactory.GetInstance().Get<TemaBusinessFacade>();
+            return temaBusinessFacade.SelecionarQuantidadeTemasFiltrados(filtro);
+        }
+
+        [OperationBehavior(Impersonation = ImpersonationOption.Allowed)]
+        public List<Tema> SelecionarTemasFiltrados(FiltroTema filtro)
+        {
+            TemaBusinessFacade temaBusinessFacade = BusinessFactory.GetInstance().Get<TemaBusinessFacade>();
+            return temaBusinessFacade.SelecionarTemasFiltrados(filtro);
+        }
+
+        [OperationBehavior(Impersonation = ImpersonationOption.Allowed)]
+        public int InserirTema(Tema tema, string temaLogado)
+        {
+            TemaBusinessFacade temaBusinessFacade = BusinessFactory.GetInstance().Get<TemaBusinessFacade>();
+            return temaBusinessFacade.InserirTema(tema, temaLogado);
+        }
+
+        [OperationBehavior(Impersonation = ImpersonationOption.Allowed)]
+        public void AtualizarTema(Tema tema, string temaLogado)
+        {
+            TemaBusinessFacade temaBusinessFacade = BusinessFactory.GetInstance().Get<TemaBusinessFacade>();
+            temaBusinessFacade.AtualizarTema(tema, temaLogado);
+        }
+
+        [OperationBehavior(Impersonation = ImpersonationOption.Allowed)]
+        public void ExcluirTema(int codigo, string temaLogado)
+        {
+            TemaBusinessFacade temaBusinessFacade = BusinessFactory.GetInstance().Get<TemaBusinessFacade>();
+            temaBusinessFacade.ExcluirTema(codigo, temaLogado);
+        }
+
         #endregion
     }
 }

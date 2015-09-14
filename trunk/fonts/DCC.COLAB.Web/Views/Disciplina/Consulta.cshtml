@@ -1,0 +1,240 @@
+﻿@{
+}
+
+<div>
+    <legend>Disciplinas - Consulta</legend>
+
+    <table id="tabelaDisciplinas" class="table hover table-bordered" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nome</th>
+                <th>Período</th>
+                <th>Código</th>
+                <th></th>
+            </tr>
+        </thead>
+    </table>
+
+    <div class="form-group">
+        <div>
+            <button id="btnNovo" name="btnNovo" class="btn btn-primary">Nova disciplina</button>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="cadastroDeDisciplina" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="modalDisciplinaLabel"></h4>
+            </div>
+            <div class="modal-body" style="overflow-y: inherit !important;">
+                <form>
+                    <input type="hidden" id="hdIdDisciplina" value="" />
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="txtNome" class="control-label">Nome:</label>
+                                <input id="txtNome" name="txtNome" type="text" placeholder="Nome da disciplina" class="form-control input-md" required value="" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="txtCodigo" class="control-label">Código:</label>
+                                <input id="txtCodigo" name="txtCodigo" type="text" placeholder="Código da disciplina" class="form-control input-md" required value="" />
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="selectPeriodo" class="control-label">Período:</label>
+                                <select id="selectPeriodo" class="form-control input-md">
+                                    <option value="">Selecione um Período</option>
+                                    <option value="0">Eletiva</option>
+                                    @for (int i = 1; i < 10; i++)
+                                    {
+                                        <option value="@i">@(i)º</option>
+                                    }                                    
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                <button type="button" class="btn btn-success" id="btnSalvar">Salvar disciplina</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section scripts
+{
+    <script type="text/javascript">
+        var CarregarDisciplinaParaEdicao = function (idDisciplina) {
+            SRV.ChamarAjax('@Url.Action("ObterDisciplina", "Disciplina")', { id: idDisciplina }, CarregarDisciplinaParaEdicao_cb);
+        };
+
+        var CarregarDisciplinaParaEdicao_cb = function (json) {
+            $('#modalDisciplinaLabel').text('Editar Disciplina');
+            $("#hdIdDisciplina").val(json.id);
+            $('#txtNome').val(json.nome);
+            $('#txtCodigo').val(json.codigo);
+            $('#selectPeriodo').val(json.periodo);
+
+            $('#cadastroDeDisciplina').modal();
+        };
+
+        $('#btnSalvar').click(function () {
+            var id = parseInt($("#hdIdDisciplina").val());
+            if (id == 0) {
+                SalvarInsercao();
+            }
+            else {
+                SalvarEdicao(id);
+            }
+        });
+
+        var SalvarEdicao = function (id) {
+            var nome = $.trim($('#txtNome').val());
+            var codigo = $.trim($('#txtCodigo').val());
+            var periodo = $('#selectPeriodo').val();
+
+            if (!nome) {
+                Msg.error('O campo "Nome" é obrigatório. Favor verificar o preenchimento do mesmo.', 4000);
+            }
+            else if (!codigo) {
+                Msg.error('O campo "Código" é obrigatório. Favor verificar o preenchimento do mesmo.', 4000);
+            }
+            else {
+                var params = {
+                    'id': id,
+                    'nome': nome,
+                    'periodo': periodo,
+                    'codigo': codigo
+                }
+
+                SRV.ChamarAjax('@Url.Action("Salvar", "Disciplina")', params, Salvar_cb);
+            }
+        };
+
+        var ExcluirDisciplina = function (idDisciplina) {
+            $.confirm({
+                title: "Confirmação",
+                text: "Deseja realmente excluir este usuário?",
+                confirm: function () {
+                    ExcluirDisciplinaAjax(idDisciplina);
+                },
+                cancel: function () {
+                    // nothing to do
+                },
+                confirmButton: "Sim",
+                cancelButton: "Não",
+                post: true
+            });
+        };
+
+        var ExcluirDisciplinaAjax = function (id) {
+            SRV.ChamarAjax('@Url.Action("Excluir", "Disciplina")', { id: id }, SucessoExcluir_cb);
+        };
+
+        var SucessoExcluir_cb = function (json) {
+            Msg.success("Exclusão realizada com sucesso.", 3000);
+            AtualizarListagem();
+        };
+
+        var AtualizarListagem = function () {
+            $('#tabelaDisciplinas').dataTable().fnDraw(false);
+        };
+
+        var InicializarListagem = function () {
+            $('#tabelaDisciplinas').dataTable({
+                columns: [
+                    { "data": "id", "name": "D.id_Disciplina" },
+                    { "data": "nome", "name": "D.nm_Disciplina" },
+                    { "data": "periodoString", "name": "D.nu_Periodo" },
+                    { "data": "codigo", "name": "D.cd_Disciplina" },
+                    { "data": "" }
+                ],
+                columnDefs: [
+                    { targets: 0, visible: false, orderable: false, searchable: false },
+                    { targets: 2, sClass: "alignCenter" },
+                    { targets: 3, sClass: "alignCenter" },
+                    {
+                        targets: 4, orderable: false, searchable: false, width: "60px", sClass: "alignCenter", render: function (data, type, row) {
+                            var acoes = "";
+                            acoes += "<a href='#' onClick='CarregarDisciplinaParaEdicao(" + row["id"] + ")'><img width='15px' title='editar' alt='Editar' src='/../Content/img/ic_editar.png' class='rowEditIcon'/></a>";
+                            acoes += "&nbsp;&nbsp;";
+                            acoes += "<a href='#' onClick='ExcluirDisciplina(" + row["id"] + ")'><img width='15px' title='excluir' alt='Excluir' src='/../Content/img/bt_excluir.gif' class='rowDeleteIcon' id='" + row["id"] + "'/></a>";
+                            return acoes;
+                        }
+                    },
+                ],
+                language: { url: "/../Content/dataTable_pt_BR.js", searchPlaceholder: "nome / código" },
+                processing: true,
+                serverSide: true,
+                order: [[1, "asc"]],
+                ajax: {
+                    url: "@Url.Action("ListarDisciplinas", "Disciplina")",
+                    async: false,
+                    type: 'POST',
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    data: function (d) {
+                        return COLAB.ObterFiltroBaseDataTable(d);
+                    }
+                }
+            });
+        };
+
+        $('#btnNovo').click(function () {
+            $('#modalDisciplinaLabel').text('Cadastrar Nova Disciplina');
+            $('#hdIdDisciplina').val(0);
+            $('#txtNome').val('');
+            $('#txtCodigo').val('');
+            $('#selectPeriodo').val('');
+            
+            $('#cadastroDeDisciplina').modal();
+        });
+
+        var SalvarInsercao = function () {
+            var nome = $.trim($('#txtNome').val());
+            var codigo = $.trim($('#txtCodigo').val());
+            var periodo = $('#selectPeriodo').val();
+
+            if (!nome) {
+                Msg.error('O campo "Nome" é obrigatório. Favor verificar o preenchimento do mesmo.', 4000);
+            }
+            else if (!codigo) {
+                Msg.error('O campo "Código" é obrigatório. Favor verificar o preenchimento do mesmo.', 4000);
+            }
+            else {
+                var params = {
+                    'nome': nome,
+                    'periodo': periodo,
+                    'codigo': codigo
+                }
+
+                SRV.ChamarAjax('@Url.Action("Salvar", "Disciplina")', params, Salvar_cb);
+            }
+        };
+
+        var Salvar_cb = function (json) {
+            Msg.success('Cadastro efetuado com sucesso', 4000);
+            $('#cadastroDeDisciplina').modal('hide');
+            AtualizarListagem();
+        };
+
+        $(document).ready(function () {
+            Msg.iconMode = "fa";
+            InicializarListagem();
+            COLAB.InicializarPropriedades();
+        });
+    </script>
+}

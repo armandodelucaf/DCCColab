@@ -19,11 +19,11 @@ namespace DCC.COLAB.Web.Controllers
             return View();
         }
 
-        public JsonResult ObterUsuario(int codigo)
+        public JsonResult ObterUsuario(int id)
         {
             try
             {
-                Usuario usuario = WCFDispatcher<ICOLABServico>.UseService(u => u.SelecionarUsuarioPorCodigo(codigo));
+                Usuario usuario = WCFDispatcher<ICOLABServico>.UseService(u => u.SelecionarUsuarioPorCodigo(id));
                 return Json(usuario, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
@@ -76,11 +76,11 @@ namespace DCC.COLAB.Web.Controllers
 
         }
 
-        public ActionResult Excluir(int codigo)
+        public ActionResult Excluir(int id)
         {
             try
             {
-                WCFDispatcher<ICOLABServico>.UseService(u => u.ExcluirUsuario(codigo, SessaoUtil.UsuarioLogin));
+                WCFDispatcher<ICOLABServico>.UseService(u => u.ExcluirUsuario(id, SessaoUtil.UsuarioLogin));
                 return Json(new { redirectURL = Url.Action("Consulta", "Usuario"), isRedirect = true }, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
