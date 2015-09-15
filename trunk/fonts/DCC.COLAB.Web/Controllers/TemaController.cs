@@ -12,9 +12,11 @@ namespace DCC.COLAB.Web.Controllers
 {
     public class TemaController : BaseFilterController<FiltroTema>
     {
-        public ActionResult Consulta()
+        public ActionResult Consulta(int id = 0)
         {
             ViewBag.tema = new Tema();
+            ViewBag.idDisciplina = id;
+            ViewBag.listaDisciplinas = WCFDispatcher<ICOLABServico>.UseService(u => u.SelecionarDisciplinasFiltradas(new FiltroDisciplina())).ToList();
             return View();
         }
 

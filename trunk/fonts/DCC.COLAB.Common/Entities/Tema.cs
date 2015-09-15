@@ -7,6 +7,11 @@ namespace DCC.COLAB.Common.Entities
     [DataContract]
     public class Tema
     {
+        public Tema()
+        {
+            disciplina = new Disciplina();
+        }
+
         [DataMember]
         public int id { get; set; }
 
@@ -38,5 +43,8 @@ namespace DCC.COLAB.Common.Entities
             }
             set { }
         }
+
+        [DataMember]
+        public Disciplina disciplina { get; set; }
     }
 }

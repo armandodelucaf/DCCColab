@@ -59,12 +59,15 @@ CREATE TABLE `Tema`(
 	`id_Tema` int AUTO_INCREMENT NOT NULL,
 	`nm_Tema` varchar(128) NOT NULL,
 	`ds_Tema` varchar(255) NULL,
+	`id_Disciplina` int NOT NULL,
 	
 	CONSTRAINT `PK_Tema` PRIMARY KEY 
 	(`id_Tema`) ,
 	
-	CONSTRAINT `UQ_Tema_nm_Tema` UNIQUE 
-	(`nm_Tema`)
+	CONSTRAINT `UQ_Tema` UNIQUE 
+	(`nm_Tema`, `id_Disciplina`)
+	
+	CONSTRAINT FOREIGN KEY (id_Disciplina) REFERENCES `Disciplina` (id_Disciplina),
 );
 
 CREATE TABLE `Tema_Disciplina`(

@@ -66,6 +66,11 @@ namespace DCC.COLAB.DataAccess.SQLServer.Entities
             tema.id = CastDB<int>(dr, "id_Tema");
             tema.nome = CastDB<string>(dr, "nm_Tema");
             tema.descricao = CastDB<string>(dr, "ds_Tema");
+            tema.disciplina = new Disciplina
+            {
+                id = CastDB<int>(dr, "id_Disciplina"),
+                nome = CastDB<string>(dr, "nm_Disciplina")
+            };
             return tema;
         }
 
@@ -79,12 +84,14 @@ namespace DCC.COLAB.DataAccess.SQLServer.Entities
             parametros.Add("ID", tema.id);
             parametros.Add("NOME", tema.nome);
             parametros.Add("DESCRICAO", tema.descricao);
+            parametros.Add("ID_DISCIPLINA", (tema != null ? tema.disciplina.id : 0));
             return parametros;
         }
 
         private Hashtable BuildParametrosSelecionarTemasFiltrados(FiltroTema filtro)
         {
             Hashtable parametros = CriarHashFiltroDefault(filtro);
+            parametros.Add("ID_DISCIPLINA", filtro.idDisciplina);
             return parametros;
         }
         #endregion

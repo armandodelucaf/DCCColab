@@ -91,6 +91,7 @@ C:\Users\armando.filho\Documents\GitHub\DCCColab\trunk\fonts\DCC.COLAB.WCF\bin\D
 C:\Users\armando.filho\Documents\GitHub\DCCColab\trunk\fonts\DCC.COLAB.WCF\obj\Debug\DCC.COLAB.WCF.csprojResolveAssemblyReference.cache
 C:\Users\armando.filho\Documents\GitHub\DCCColab\trunk\fonts\DCC.COLAB.WCF\obj\Debug\DCC.COLAB.WCF.dll
 C:\Users\armando.filho\Documents\GitHub\DCCColab\trunk\fonts\DCC.COLAB.WCF\obj\Debug\DCC.COLAB.WCF.pdb
+C:\Users\adlf\Documents\GitHub\dcccolab\trunk\fonts\DCC.COLAB.WCF\obj\Debug\DCC.COLAB.WCF.csprojResolveAssemblyReference.cache
 C:\Users\adlf\Documents\GitHub\dcccolab\trunk\fonts\DCC.COLAB.WCF\bin\DCC.COLAB.WCF.dll
 C:\Users\adlf\Documents\GitHub\dcccolab\trunk\fonts\DCC.COLAB.WCF\bin\DCC.COLAB.WCF.pdb
 C:\Users\adlf\Documents\GitHub\dcccolab\trunk\fonts\DCC.COLAB.WCF\bin\DCC.COLAB.Business.dll
@@ -111,6 +112,5 @@ C:\Users\adlf\Documents\GitHub\dcccolab\trunk\fonts\DCC.COLAB.WCF\bin\DCC.COLAB.
 C:\Users\adlf\Documents\GitHub\dcccolab\trunk\fonts\DCC.COLAB.WCF\bin\DCC.COLAB.DataAccess.SQLServer.pdb
 C:\Users\adlf\Documents\GitHub\dcccolab\trunk\fonts\DCC.COLAB.WCF\bin\DCC.COLAB.WCF.Interface.pdb
 C:\Users\adlf\Documents\GitHub\dcccolab\trunk\fonts\DCC.COLAB.WCF\bin\DCCFramework.pdb
-C:\Users\adlf\Documents\GitHub\dcccolab\trunk\fonts\DCC.COLAB.WCF\obj\Debug\DCC.COLAB.WCF.csprojResolveAssemblyReference.cache
 C:\Users\adlf\Documents\GitHub\dcccolab\trunk\fonts\DCC.COLAB.WCF\obj\Debug\DCC.COLAB.WCF.dll
 C:\Users\adlf\Documents\GitHub\dcccolab\trunk\fonts\DCC.COLAB.WCF\obj\Debug\DCC.COLAB.WCF.pdb

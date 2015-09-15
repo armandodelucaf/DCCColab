@@ -127,7 +127,7 @@
         var ExcluirDisciplina = function (idDisciplina) {
             $.confirm({
                 title: "Confirmação",
-                text: "Deseja realmente excluir este usuário?",
+                text: "Deseja realmente excluir esta disciplina?",
                 confirm: function () {
                     ExcluirDisciplinaAjax(idDisciplina);
                 },
@@ -169,6 +169,8 @@
                     {
                         targets: 4, orderable: false, searchable: false, width: "60px", sClass: "alignCenter", render: function (data, type, row) {
                             var acoes = "";
+                            acoes += "<a href='#' onClick='AssociarTemas(" + row["id"] + ")'><img width='15px' title='associar temas' alt='Associar Temas' src='/../Content/img/ic_configurar.png' class='rowConfigureIcon'/></a>";
+                            acoes += "&nbsp;&nbsp;";
                             acoes += "<a href='#' onClick='CarregarDisciplinaParaEdicao(" + row["id"] + ")'><img width='15px' title='editar' alt='Editar' src='/../Content/img/ic_editar.png' class='rowEditIcon'/></a>";
                             acoes += "&nbsp;&nbsp;";
                             acoes += "<a href='#' onClick='ExcluirDisciplina(" + row["id"] + ")'><img width='15px' title='excluir' alt='Excluir' src='/../Content/img/bt_excluir.gif' class='rowDeleteIcon' id='" + row["id"] + "'/></a>";
@@ -176,7 +178,7 @@
                         }
                     },
                 ],
-                language: { url: "/../Content/dataTable_pt_BR.js", searchPlaceholder: "nome / código" },
+                language: { url: "/../Content/dataTable_pt_BR.js", searchPlaceholder: "nome/código" },
                 processing: true,
                 serverSide: true,
                 order: [[1, "asc"]],
@@ -229,6 +231,12 @@
             Msg.success('Cadastro efetuado com sucesso', 4000);
             $('#cadastroDeDisciplina').modal('hide');
             AtualizarListagem();
+        };
+
+        var AssociarTemas = function (idDisciplina) {
+            if (idDisciplina) {
+                window.location.href = '@Url.Action("Consulta", "Tema")' + '/' + idDisciplina;
+            }
         };
 
         $(document).ready(function () {

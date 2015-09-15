@@ -162,9 +162,12 @@
       SELECT
         T.id_Tema,
         T.nm_Tema,
-        T.ds_Tema
+        T.ds_Tema,
+        T.id_Disciplina,
+        D.nm_Disciplina
       FROM
         dcccolab.Tema T
+        INNER JOIN dcccolab.Disciplina D ON D.id_Disciplina = T.id_Disciplina
       WHERE
         T.id_Tema = @ID
     </selecionarTemaPorCodigo>
@@ -172,15 +175,19 @@
       SELECT
         T.id_Tema,
         T.nm_Tema,
-        T.ds_Tema
+        T.ds_Tema,
+        T.id_Disciplina,
+        D.nm_Disciplina
       FROM
         dcccolab.Tema T
+        INNER JOIN dcccolab.Disciplina D ON D.id_Disciplina = T.id_Disciplina
       WHERE
-        (@FILTRO IS NULL OR T.nm_Tema LIKE CONCAT('%', @FILTRO, '%') OR T.ds_Tema LIKE CONCAT('%', @FILTRO, '%'))
+        (@FILTRO IS NULL OR T.nm_Tema LIKE CONCAT('%', @FILTRO, '%') OR T.ds_Tema LIKE CONCAT('%', @FILTRO, '%')) AND
+        (@ID_DISCIPLINA IS NULL OR T.id_Disciplina = @ID_DISCIPLINA)
       ORDER BY @ORDER_BY
     </selecionarTemasFiltrados>
     <inserirTema>
-      INSERT INTO dcccolab.Tema (nm_Tema, ds_Tema) VALUES (@NOME, @DESCRICAO)
+      INSERT INTO dcccolab.Tema (nm_Tema, ds_Tema, id_Disciplina) VALUES (@NOME, @DESCRICAO, @ID_DISCIPLINA)
     </inserirTema>
     <atualizarTema>
       UPDATE dcccolab.Tema

@@ -22,7 +22,8 @@ namespace DCC.COLAB.Web.App_Start
         {
             var controllerName = requestContext.RouteData.Values["controller"].ToString();
             var actionController = requestContext.RouteData.Values["action"].ToString();
-            MontarRequisicao(controllerName, actionController, "", requestContext);
+            var id = requestContext.RouteData.Values["id"].ToString();
+            MontarRequisicao(controllerName, actionController, id, requestContext);
 
             return base.GetHttpHandler(requestContext);
         }

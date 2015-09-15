@@ -43,6 +43,7 @@ C:\Users\armando.filho\Documents\GitHub\DCCColab\trunk\fonts\DCC.COLAB.DataAcces
 C:\Users\armando.filho\Documents\GitHub\DCCColab\trunk\fonts\DCC.COLAB.DataAccess\obj\Debug\DCC.COLAB.DataAccess.csprojResolveAssemblyReference.cache
 C:\Users\armando.filho\Documents\GitHub\DCCColab\trunk\fonts\DCC.COLAB.DataAccess\obj\Debug\DCC.COLAB.DataAccess.SQLServer.dll
 C:\Users\armando.filho\Documents\GitHub\DCCColab\trunk\fonts\DCC.COLAB.DataAccess\obj\Debug\DCC.COLAB.DataAccess.SQLServer.pdb
+C:\Users\adlf\Documents\GitHub\dcccolab\trunk\fonts\DCC.COLAB.DataAccess\obj\Debug\DCC.COLAB.DataAccess.csprojResolveAssemblyReference.cache
 C:\Users\adlf\Documents\GitHub\dcccolab\trunk\fonts\DCC.COLAB.DataAccess\bin\Debug\DCC.COLAB.DataAccess.SQLServer.dll
 C:\Users\adlf\Documents\GitHub\dcccolab\trunk\fonts\DCC.COLAB.DataAccess\bin\Debug\DCC.COLAB.DataAccess.SQLServer.pdb
 C:\Users\adlf\Documents\GitHub\dcccolab\trunk\fonts\DCC.COLAB.DataAccess\bin\Debug\DCC.COLAB.Common.dll
@@ -55,6 +56,5 @@ C:\Users\adlf\Documents\GitHub\dcccolab\trunk\fonts\DCC.COLAB.DataAccess\bin\Deb
 C:\Users\adlf\Documents\GitHub\dcccolab\trunk\fonts\DCC.COLAB.DataAccess\bin\Debug\Microsoft.Practices.Unity.Interception.dll
 C:\Users\adlf\Documents\GitHub\dcccolab\trunk\fonts\DCC.COLAB.DataAccess\bin\Debug\DCC.COLAB.Common.pdb
 C:\Users\adlf\Documents\GitHub\dcccolab\trunk\fonts\DCC.COLAB.DataAccess\bin\Debug\DCCFramework.pdb
-C:\Users\adlf\Documents\GitHub\dcccolab\trunk\fonts\DCC.COLAB.DataAccess\obj\Debug\DCC.COLAB.DataAccess.csprojResolveAssemblyReference.cache
 C:\Users\adlf\Documents\GitHub\dcccolab\trunk\fonts\DCC.COLAB.DataAccess\obj\Debug\DCC.COLAB.DataAccess.SQLServer.dll
 C:\Users\adlf\Documents\GitHub\dcccolab\trunk\fonts\DCC.COLAB.DataAccess\obj\Debug\DCC.COLAB.DataAccess.SQLServer.pdb

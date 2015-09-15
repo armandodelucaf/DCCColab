@@ -1,4 +1,8 @@
-﻿@{
+﻿@using DCC.COLAB.Common.Entities;
+
+@{
+    int idDisciplina = Convert.ToInt32(ViewBag.idDisciplina);
+    List<Disciplina> listaDisciplinas = Convert.ChangeType(ViewBag.listaDisciplinas, typeof(List<Disciplina>));
 }
 
 <div>
@@ -8,6 +12,7 @@
         <thead>
             <tr>
                 <th>Id</th>
+                <th>Disciplina</th>
                 <th>Nome</th>
                 <th>Descrição</th>
                 <th></th>
@@ -44,6 +49,19 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
+                                <label for="selectDisciplina" class="control-label">Disciplina:</label>
+                                <select id="selectDisciplina" class="form-control input-md" required>
+                                    <option value="0">Selecione uma Disciplina</option>
+                                    @foreach (Disciplina disciplina in listaDisciplinas) {
+                                        <option value="@disciplina.id">@disciplina.nome</option>
+                                    }                                    
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
                                 <label for="txtDescricao" class="control-label">Descrição:</label>
                                 <textarea id="txtDescricao" name="txtDescricao" placeholder="Descrição do tema" class="form-control input-md"></textarea>
                             </div>
@@ -71,7 +89,9 @@
             $('#modalTemaLabel').text('Editar Tema');
             $("#hdIdTema").val(json.id);
             $('#txtNome').val(json.nome);
-            $('#txtDescricao').val(json.descricao)
+            $('#txtDescricao').val(json.descricao);
+            $('#selectDisciplina').val(json.disciplina.id);
+            $('#selectDisciplina').prop('disabled', true);
 
             $('#cadastroDeTema').modal();
         };
@@ -88,16 +108,19 @@
 
         var SalvarEdicao = function (id) {
             var nome = $.trim($('#txtNome').val());
-            var descricao = $.trim($('#txtDescricao').val());
+            var disciplina = parseInt($('#selectDisciplina').val());
 
             if (!nome) {
                 Msg.error('O campo "Nome" é obrigatório. Favor verificar o preenchimento do mesmo.', 4000);
             }
+            else if (!disciplina) {
+                Msg.error('O campo "Disciplina" é obrigatório. Favor verificar a seleção do mesmo.', 4000);
+            }
             else {
                 var params = {
-                    'id': id,
                     'nome': nome,
-                    'descricao': descricao
+                    'descricao': descricao,
+                    'disciplina': { 'id': disciplina, 'nome': $('#selectDisciplina option:selected').text() }
                 }
 
                 SRV.ChamarAjax('@Url.Action("Salvar", "Tema")', params, Salvar_cb);
@@ -107,7 +130,7 @@
         var ExcluirTema = function (idTema) {
             $.confirm({
                 title: "Confirmação",
-                text: "Deseja realmente excluir este usuário?",
+                text: "Deseja realmente excluir este tema?",
                 confirm: function () {
                     ExcluirTemaAjax(idTema);
                 },
@@ -137,15 +160,16 @@
             $('#tabelaTemas').dataTable({
                 columns: [
                     { "data": "id", "name": "T.id_Tema" },
+                    { "data": "disciplina.nome", "name": "D.nm_Disciplina" },
                     { "data": "nome", "name": "T.nm_Tema" },
                     { "data": "resumoDescricao", "name": "T.ds_Tema" },
                     { "data": "" }
                 ],
                 columnDefs: [
                     { targets: 0, visible: false, orderable: false, searchable: false },
-                    { targets: 2, width: "50%", sClass: "alignCenter" },
+                    { targets: 3, width: "40%", sClass: "alignCenter" },
                     {
-                        targets: 3, orderable: false, searchable: false, width: "60px", sClass: "alignCenter", render: function (data, type, row) {
+                        targets: 4, orderable: false, searchable: false, width: "60px", sClass: "alignCenter", render: function (data, type, row) {
                             var acoes = "";
                             acoes += "<a href='#' onClick='CarregarTemaParaEdicao(" + row["id"] + ")'><img width='15px' title='editar' alt='Editar' src='/../Content/img/ic_editar.png' class='rowEditIcon'/></a>";
                             acoes += "&nbsp;&nbsp;";
@@ -154,10 +178,10 @@
                         }
                     },
                 ],
-                language: { url: "/../Content/dataTable_pt_BR.js", searchPlaceholder: "nome / descrição" },
+                language: { url: "/../Content/dataTable_pt_BR.js", searchPlaceholder: "nome/descrição" },
                 processing: true,
                 serverSide: true,
-                order: [[1, "asc"]],
+                order: [[1, "asc"],[2, "asc"]],
                 ajax: {
                     url: "@Url.Action("ListarTemas", "Tema")",
                     async: false,
@@ -165,7 +189,8 @@
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     data: function (d) {
-                        return COLAB.ObterFiltroBaseDataTable(d);
+                        var extraParameters = [{name: 'idDisciplina', value: '@(idDisciplina > 0 ? (int?)idDisciplina : null)'}];
+                        return COLAB.ObterFiltroBaseDataTable(d, extraParameters);
                     }
                 }
             });
@@ -176,6 +201,15 @@
             $('#hdIdTema').val(0);
             $('#txtNome').val('');
             $('#txtDescricao').val('');
+
+            if (@idDisciplina) {
+                $('#selectDisciplina').val(@idDisciplina);
+                $('#selectDisciplina').prop('disabled', true);
+            }
+            else {
+                $('#selectDisciplina').val(0);
+                $('#selectDisciplina').prop('disabled', false);
+            }
             
             $('#cadastroDeTema').modal();
         });
@@ -183,14 +217,19 @@
         var SalvarInsercao = function () {
             var nome = $.trim($('#txtNome').val());
             var descricao = $.trim($('#txtDescricao').val());
+            var disciplina = parseInt($('#selectDisciplina').val());
 
             if (!nome) {
                 Msg.error('O campo "Nome" é obrigatório. Favor verificar o preenchimento do mesmo.', 4000);
             }
+            else if (!disciplina) {
+                Msg.error('O campo "Disciplina" é obrigatório. Favor verificar a seleção do mesmo.', 4000);
+            }
             else {
                 var params = {
                     'nome': nome,
-                    'descricao': descricao
+                    'descricao': descricao,
+                    'disciplina': { 'id': disciplina, 'nome': $('#selectDisciplina option:selected').text() }
                 }
 
                 SRV.ChamarAjax('@Url.Action("Salvar", "Tema")', params, Salvar_cb);
