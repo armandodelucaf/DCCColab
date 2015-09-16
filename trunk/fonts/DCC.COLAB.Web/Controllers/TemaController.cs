@@ -53,11 +53,11 @@ namespace DCC.COLAB.Web.Controllers
             {              
                 if (tema.id == 0)
                 {
-                    WCFDispatcher<ICOLABServico>.UseService(u => u.InserirTema(tema, SessaoUtil.UsuarioLogin));
+                    WCFDispatcher<ICOLABServico>.UseService(u => u.InserirTema(tema));
                 }
                 else
                 {
-                    WCFDispatcher<ICOLABServico>.UseService(u => u.AtualizarTema(tema, SessaoUtil.UsuarioLogin));
+                    WCFDispatcher<ICOLABServico>.UseService(u => u.AtualizarTema(tema));
                 }
                 return Json(tema, JsonRequestBehavior.AllowGet);
             }
@@ -72,7 +72,7 @@ namespace DCC.COLAB.Web.Controllers
         {
             try
             {
-                WCFDispatcher<ICOLABServico>.UseService(u => u.ExcluirTema(id, SessaoUtil.UsuarioLogin));
+                WCFDispatcher<ICOLABServico>.UseService(u => u.ExcluirTema(id));
                 return Json(new { redirectURL = Url.Action("Consulta", "Tema"), isRedirect = true }, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)

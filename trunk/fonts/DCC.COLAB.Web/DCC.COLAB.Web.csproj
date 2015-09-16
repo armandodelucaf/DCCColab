@@ -181,6 +181,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\BaseFilterController.cs" />
+    <Compile Include="Controllers\TurmaController.cs" />
     <Compile Include="Controllers\TemaController.cs" />
     <Compile Include="Controllers\DisciplinaController.cs" />
     <Compile Include="Controllers\DocumentoController.cs" />
@@ -865,6 +866,7 @@
     <None Include="Properties\PublishProfiles\dcccolab - Web Deploy.pubxml" />
     <Content Include="Views\Disciplina\Consulta.cshtml" />
     <Content Include="Views\Tema\Consulta.cshtml" />
+    <Content Include="Views\Turma\Consulta.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

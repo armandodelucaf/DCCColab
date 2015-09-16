@@ -50,7 +50,7 @@ namespace DCC.COLAB.Business.Entities
         }
 
         [RequiresTransaction]
-        public virtual int InserirDisciplina(Disciplina disciplina, string disciplinaLogado)
+        public virtual int InserirDisciplina(Disciplina disciplina)
         {
             try
             {
@@ -63,7 +63,7 @@ namespace DCC.COLAB.Business.Entities
         }
 
         [RequiresTransaction]
-        public virtual void AtualizarDisciplina(Disciplina disciplina, string disciplinaLogado)
+        public virtual void AtualizarDisciplina(Disciplina disciplina)
         {
             try
             {
@@ -76,7 +76,7 @@ namespace DCC.COLAB.Business.Entities
         }
 
         [RequiresTransaction]
-        public virtual void ExcluirDisciplina(int codigo, string disciplinaLogado)
+        public virtual void ExcluirDisciplina(int codigo)
         {
             try
             {

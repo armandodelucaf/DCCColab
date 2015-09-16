@@ -21,7 +21,7 @@ namespace DCC.COLAB.Business.Entities
         }
 
         [RequiresTransaction]
-        public virtual int InserirDocumento(Documento documento, string usuario)
+        public virtual int InserirDocumento(Documento documento)
         {
             ArquivoBusinessFacade arquivoBusinessFacade = ObterOutraBusiness<ArquivoBusinessFacade>();
             documento.arquivo.codigo = arquivoBusinessFacade.InserirArquivo(documento.arquivo);           
@@ -32,7 +32,7 @@ namespace DCC.COLAB.Business.Entities
         }
         
         [RequiresTransaction]
-        public virtual void AtualizarDocumento(Documento documento, string usuario)
+        public virtual void AtualizarDocumento(Documento documento)
         {
             Documento antigoRegistro = SelecionarDocumentoPorCodigo(documento.codigo);
 
@@ -60,7 +60,7 @@ namespace DCC.COLAB.Business.Entities
         }
 
         [RequiresTransaction]
-        public virtual void ExcluirDocumento(int codigo, string usuario)
+        public virtual void ExcluirDocumento(int codigo)
         {
             Documento registro = SelecionarDocumentoPorCodigo(codigo);
             ArquivoBusinessFacade arquivoBusinessFacade = ObterOutraBusiness<ArquivoBusinessFacade>();
@@ -79,7 +79,7 @@ namespace DCC.COLAB.Business.Entities
         }
         
         [RequiresTransaction]
-        public virtual void ExcluirUltimaVersaoDocumento(int codigo, string usuario)
+        public virtual void ExcluirUltimaVersaoDocumento(int codigo)
         {
             Documento versaoAtual = SelecionarDocumentoPorCodigo(codigo);
             if (versaoAtual.versao > 1)
@@ -90,7 +90,7 @@ namespace DCC.COLAB.Business.Entities
             }
             else
             {
-                ExcluirDocumento(versaoAtual.codigo, usuario);
+                ExcluirDocumento(versaoAtual.codigo);
             }
         }
 

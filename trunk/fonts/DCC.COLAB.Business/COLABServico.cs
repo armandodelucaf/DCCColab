@@ -43,31 +43,31 @@ namespace DCC.COLAB.Business
         }
 
         [OperationBehavior(Impersonation = ImpersonationOption.Allowed)]
-        public int InserirUsuario(Usuario usuario, string usuarioLogado)
+        public int InserirUsuario(Usuario usuario)
         {
             UsuarioBusinessFacade usuarioBusinessFacade = BusinessFactory.GetInstance().Get<UsuarioBusinessFacade>();
-            return usuarioBusinessFacade.InserirUsuario(usuario, usuarioLogado);
+            return usuarioBusinessFacade.InserirUsuario(usuario);
         }
 
         [OperationBehavior(Impersonation = ImpersonationOption.Allowed)]
-        public void AtualizarUsuario(Usuario usuario, string usuarioLogado)
+        public void AtualizarUsuario(Usuario usuario)
         {
             UsuarioBusinessFacade usuarioBusinessFacade = BusinessFactory.GetInstance().Get<UsuarioBusinessFacade>();
-            usuarioBusinessFacade.AtualizarUsuario(usuario, usuarioLogado);
+            usuarioBusinessFacade.AtualizarUsuario(usuario);
         }
 
         [OperationBehavior(Impersonation = ImpersonationOption.Allowed)]
-        public void ExcluirUsuario(int codigo, string usuarioLogado)
+        public void ExcluirUsuario(int codigo)
         {
             UsuarioBusinessFacade usuarioBusinessFacade = BusinessFactory.GetInstance().Get<UsuarioBusinessFacade>();
-            usuarioBusinessFacade.ExcluirUsuario(codigo, usuarioLogado);
+            usuarioBusinessFacade.ExcluirUsuario(codigo);
         }
 
         [OperationBehavior(Impersonation = ImpersonationOption.Allowed)]
-        public void AtualizarSenha(Usuario usuario, string usuarioLogado)
+        public void AtualizarSenha(Usuario usuario)
         {
             UsuarioBusinessFacade usuarioBusinessFacade = BusinessFactory.GetInstance().Get<UsuarioBusinessFacade>();
-            usuarioBusinessFacade.AtualizarSenha(usuario, usuarioLogado);
+            usuarioBusinessFacade.AtualizarSenha(usuario);
         }
 
         #endregion
@@ -124,17 +124,17 @@ namespace DCC.COLAB.Business
         }
 
         [OperationBehavior(Impersonation = ImpersonationOption.Allowed)]
-        public int InserirDocumento(Documento documento, string usuario)
+        public int InserirDocumento(Documento documento)
         {
             DocumentoBusinessFacade documentoBusinessFacade = BusinessFactory.GetInstance().Get<DocumentoBusinessFacade>();
-            return documentoBusinessFacade.InserirDocumento(documento, usuario);
+            return documentoBusinessFacade.InserirDocumento(documento);
         }
 
         [OperationBehavior(Impersonation = ImpersonationOption.Allowed)]
-        public void AtualizarDocumento(Documento documento, string usuario)
+        public void AtualizarDocumento(Documento documento)
         {
             DocumentoBusinessFacade documentoBusinessFacade = BusinessFactory.GetInstance().Get<DocumentoBusinessFacade>();
-            documentoBusinessFacade.AtualizarDocumento(documento, usuario);
+            documentoBusinessFacade.AtualizarDocumento(documento);
         }
 
         [OperationBehavior(Impersonation = ImpersonationOption.Allowed)]
@@ -152,16 +152,16 @@ namespace DCC.COLAB.Business
         }
 
         [OperationBehavior(Impersonation = ImpersonationOption.Allowed)]
-        public void ExcluirDocumento(int codigo, string usuario)
+        public void ExcluirDocumento(int codigo)
         {
             DocumentoBusinessFacade documentoBusinessFacade = BusinessFactory.GetInstance().Get<DocumentoBusinessFacade>();
-            documentoBusinessFacade.ExcluirDocumento(codigo, usuario);
+            documentoBusinessFacade.ExcluirDocumento(codigo);
         }
 
-        public void ExcluirUltimaVersaoDocumento(int codigo, string usuario)
+        public void ExcluirUltimaVersaoDocumento(int codigo)
         {
             DocumentoBusinessFacade documentoBusinessFacade = BusinessFactory.GetInstance().Get<DocumentoBusinessFacade>();
-            documentoBusinessFacade.ExcluirUltimaVersaoDocumento(codigo, usuario);
+            documentoBusinessFacade.ExcluirUltimaVersaoDocumento(codigo);
         }
 
         [OperationBehavior(Impersonation = ImpersonationOption.Allowed)]
@@ -196,24 +196,24 @@ namespace DCC.COLAB.Business
         }
 
         [OperationBehavior(Impersonation = ImpersonationOption.Allowed)]
-        public int InserirDisciplina(Disciplina disciplina, string disciplinaLogado)
+        public int InserirDisciplina(Disciplina disciplina)
         {
             DisciplinaBusinessFacade disciplinaBusinessFacade = BusinessFactory.GetInstance().Get<DisciplinaBusinessFacade>();
-            return disciplinaBusinessFacade.InserirDisciplina(disciplina, disciplinaLogado);
+            return disciplinaBusinessFacade.InserirDisciplina(disciplina);
         }
 
         [OperationBehavior(Impersonation = ImpersonationOption.Allowed)]
-        public void AtualizarDisciplina(Disciplina disciplina, string disciplinaLogado)
+        public void AtualizarDisciplina(Disciplina disciplina)
         {
             DisciplinaBusinessFacade disciplinaBusinessFacade = BusinessFactory.GetInstance().Get<DisciplinaBusinessFacade>();
-            disciplinaBusinessFacade.AtualizarDisciplina(disciplina, disciplinaLogado);
+            disciplinaBusinessFacade.AtualizarDisciplina(disciplina);
         }
 
         [OperationBehavior(Impersonation = ImpersonationOption.Allowed)]
-        public void ExcluirDisciplina(int codigo, string disciplinaLogado)
+        public void ExcluirDisciplina(int codigo)
         {
             DisciplinaBusinessFacade disciplinaBusinessFacade = BusinessFactory.GetInstance().Get<DisciplinaBusinessFacade>();
-            disciplinaBusinessFacade.ExcluirDisciplina(codigo, disciplinaLogado);
+            disciplinaBusinessFacade.ExcluirDisciplina(codigo);
         }
 
         #endregion
@@ -242,24 +242,70 @@ namespace DCC.COLAB.Business
         }
 
         [OperationBehavior(Impersonation = ImpersonationOption.Allowed)]
-        public int InserirTema(Tema tema, string temaLogado)
+        public int InserirTema(Tema tema)
         {
             TemaBusinessFacade temaBusinessFacade = BusinessFactory.GetInstance().Get<TemaBusinessFacade>();
-            return temaBusinessFacade.InserirTema(tema, temaLogado);
+            return temaBusinessFacade.InserirTema(tema);
         }
 
         [OperationBehavior(Impersonation = ImpersonationOption.Allowed)]
-        public void AtualizarTema(Tema tema, string temaLogado)
+        public void AtualizarTema(Tema tema)
         {
             TemaBusinessFacade temaBusinessFacade = BusinessFactory.GetInstance().Get<TemaBusinessFacade>();
-            temaBusinessFacade.AtualizarTema(tema, temaLogado);
+            temaBusinessFacade.AtualizarTema(tema);
         }
 
         [OperationBehavior(Impersonation = ImpersonationOption.Allowed)]
-        public void ExcluirTema(int codigo, string temaLogado)
+        public void ExcluirTema(int codigo)
         {
             TemaBusinessFacade temaBusinessFacade = BusinessFactory.GetInstance().Get<TemaBusinessFacade>();
-            temaBusinessFacade.ExcluirTema(codigo, temaLogado);
+            temaBusinessFacade.ExcluirTema(codigo);
+        }
+
+        #endregion
+
+        #region Turma
+
+        [OperationBehavior(Impersonation = ImpersonationOption.Allowed)]
+        public Turma SelecionarTurmaPorCodigo(int codigo)
+        {
+            TurmaBusinessFacade turmaBusinessFacade = BusinessFactory.GetInstance().Get<TurmaBusinessFacade>();
+            return turmaBusinessFacade.SelecionarTurmaPorCodigo(codigo);
+        }
+
+        [OperationBehavior(Impersonation = ImpersonationOption.Allowed)]
+        public int SelecionarQuantidadeTurmasFiltradas(FiltroTurma filtro)
+        {
+            TurmaBusinessFacade turmaBusinessFacade = BusinessFactory.GetInstance().Get<TurmaBusinessFacade>();
+            return turmaBusinessFacade.SelecionarQuantidadeTurmasFiltradas(filtro);
+        }
+
+        [OperationBehavior(Impersonation = ImpersonationOption.Allowed)]
+        public List<Turma> SelecionarTurmasFiltradas(FiltroTurma filtro)
+        {
+            TurmaBusinessFacade turmaBusinessFacade = BusinessFactory.GetInstance().Get<TurmaBusinessFacade>();
+            return turmaBusinessFacade.SelecionarTurmasFiltradas(filtro);
+        }
+
+        [OperationBehavior(Impersonation = ImpersonationOption.Allowed)]
+        public int InserirTurma(Turma turma)
+        {
+            TurmaBusinessFacade turmaBusinessFacade = BusinessFactory.GetInstance().Get<TurmaBusinessFacade>();
+            return turmaBusinessFacade.InserirTurma(turma);
+        }
+
+        [OperationBehavior(Impersonation = ImpersonationOption.Allowed)]
+        public void AtualizarTurma(Turma turma)
+        {
+            TurmaBusinessFacade turmaBusinessFacade = BusinessFactory.GetInstance().Get<TurmaBusinessFacade>();
+            turmaBusinessFacade.AtualizarTurma(turma);
+        }
+
+        [OperationBehavior(Impersonation = ImpersonationOption.Allowed)]
+        public void ExcluirTurma(int codigo)
+        {
+            TurmaBusinessFacade turmaBusinessFacade = BusinessFactory.GetInstance().Get<TurmaBusinessFacade>();
+            turmaBusinessFacade.ExcluirTurma(codigo);
         }
 
         #endregion

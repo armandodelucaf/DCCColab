@@ -9,15 +9,15 @@ using System.Collections.Generic;
 namespace DCC.COLAB.Business.Entities
 {
     [Transactional]
-    public class TemaBusinessFacade : BaseBusinessFacade<ITemaDataAccess>
+    public class TurmaBusinessFacade : BaseBusinessFacade<ITurmaDataAccess>
     {
         
-        public virtual Tema SelecionarTemaPorCodigo(int codigo)
+        public virtual Turma SelecionarTurmaPorCodigo(int codigo)
         {
             try
             {
-                Tema tema = dataAccess.SelecionarTemaPorCodigo(codigo);
-                return tema;
+                Turma turma = dataAccess.SelecionarTurmaPorCodigo(codigo);
+                return turma;
             }
             catch (Exception ex)
             {
@@ -25,11 +25,11 @@ namespace DCC.COLAB.Business.Entities
             }
         }
         
-        public virtual int SelecionarQuantidadeTemasFiltrados(FiltroTema filtro)
+        public virtual int SelecionarQuantidadeTurmasFiltradas(FiltroTurma filtro)
         {
             try
             {
-                return dataAccess.SelecionarQuantidadeTemasFiltrados(filtro);
+                return dataAccess.SelecionarQuantidadeTurmasFiltradas(filtro);
             }
             catch (Exception ex)
             {
@@ -37,11 +37,11 @@ namespace DCC.COLAB.Business.Entities
             }
         }
         
-        public virtual List<Tema> SelecionarTemasFiltrados(FiltroTema filtro)
+        public virtual List<Turma> SelecionarTurmasFiltradas(FiltroTurma filtro)
         {
             try
             {
-                return dataAccess.SelecionarTemasFiltrados(filtro);
+                return dataAccess.SelecionarTurmasFiltradas(filtro);
             }
             catch (Exception ex)
             {
@@ -50,11 +50,11 @@ namespace DCC.COLAB.Business.Entities
         }
 
         [RequiresTransaction]
-        public virtual int InserirTema(Tema tema)
+        public virtual int InserirTurma(Turma turma)
         {
             try
             {
-                return dataAccess.InserirTema(tema);
+                return dataAccess.InserirTurma(turma);
             }
             catch (Exception ex)
             {
@@ -63,11 +63,11 @@ namespace DCC.COLAB.Business.Entities
         }
 
         [RequiresTransaction]
-        public virtual void AtualizarTema(Tema tema)
+        public virtual void AtualizarTurma(Turma turma)
         {
             try
             {
-                dataAccess.AtualizarTema(tema);
+                dataAccess.AtualizarTurma(turma);
             }
             catch (Exception ex)
             {
@@ -76,11 +76,11 @@ namespace DCC.COLAB.Business.Entities
         }
 
         [RequiresTransaction]
-        public virtual void ExcluirTema(int codigo)
+        public virtual void ExcluirTurma(int codigo)
         {
             try
             {
-                dataAccess.ExcluirTema(codigo);
+                dataAccess.ExcluirTurma(codigo);
             }
             catch (Exception ex)
             {

@@ -65,6 +65,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entities\ArquivoBusinessFacade.cs" />
+    <Compile Include="Entities\TurmaBusinessFacade.cs" />
     <Compile Include="Entities\TemaBusinessFacade.cs" />
     <Compile Include="Entities\DisciplinaBusinessFacade.cs" />
     <Compile Include="Entities\DocumentoBusinessFacade.cs" />

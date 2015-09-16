@@ -65,8 +65,7 @@ namespace DCC.COLAB.DataAccess.SQLServer.Entities
             Disciplina disciplina = new Disciplina();
             disciplina.id = CastDB<int>(dr, "id_Disciplina");
             disciplina.nome = CastDB<string>(dr, "nm_Disciplina");
-            disciplina.periodo = CastDB<int?>(dr, "nu_Periodo");
-            disciplina.codigo = CastDB<string>(dr, "cd_Disciplina");
+            disciplina.periodoRecomendado = CastDB<int>(dr, "nu_Periodo_Recomendado");
             return disciplina;
         }
 
@@ -79,8 +78,7 @@ namespace DCC.COLAB.DataAccess.SQLServer.Entities
             Hashtable parametros = new Hashtable();
             parametros.Add("ID", disciplina.id);
             parametros.Add("NOME", disciplina.nome.ToUpper());
-            parametros.Add("PERIODO", disciplina.periodo);
-            parametros.Add("CODIGO_DISCIPLINA", disciplina.codigo.ToUpper());
+            parametros.Add("PERIODO_RECOMENDADO", disciplina.periodoRecomendado);
             return parametros;
         }
 

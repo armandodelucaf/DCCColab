@@ -57,11 +57,11 @@ namespace DCC.COLAB.Web.Controllers
             {              
                 if (usuario.id == 0)
                 {
-                    WCFDispatcher<ICOLABServico>.UseService(u => u.InserirUsuario(usuario, SessaoUtil.UsuarioLogin));
+                    WCFDispatcher<ICOLABServico>.UseService(u => u.InserirUsuario(usuario));
                 }
                 else
                 {
-                    WCFDispatcher<ICOLABServico>.UseService(u => u.AtualizarUsuario(usuario, SessaoUtil.UsuarioLogin));
+                    WCFDispatcher<ICOLABServico>.UseService(u => u.AtualizarUsuario(usuario));
                     if (usuario.id == SessaoUtil.Usuario.id)
                     {
                         SessaoUtil.AlterarVariavelSessaoUsuario(usuario);
@@ -80,7 +80,7 @@ namespace DCC.COLAB.Web.Controllers
         {
             try
             {
-                WCFDispatcher<ICOLABServico>.UseService(u => u.ExcluirUsuario(id, SessaoUtil.UsuarioLogin));
+                WCFDispatcher<ICOLABServico>.UseService(u => u.ExcluirUsuario(id));
                 return Json(new { redirectURL = Url.Action("Consulta", "Usuario"), isRedirect = true }, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
@@ -93,7 +93,7 @@ namespace DCC.COLAB.Web.Controllers
         {
             try
             {
-                WCFDispatcher<ICOLABServico>.UseService(u => u.AtualizarSenha(usuario, SessaoUtil.UsuarioLogin));
+                WCFDispatcher<ICOLABServico>.UseService(u => u.AtualizarSenha(usuario));
                 return Json(new { redirectURL = Url.Action("Consulta", "Usuario"), isRedirect = true }, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)

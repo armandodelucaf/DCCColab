@@ -58,7 +58,6 @@ C:\Users\armando.filho\Documents\GitHub\DCCColab\trunk\fonts\DCC.COLAB.Business\
 C:\Users\armando.filho\Documents\GitHub\DCCColab\trunk\fonts\DCC.COLAB.Business\obj\Debug\DCC.COLAB.Business.csprojResolveAssemblyReference.cache
 C:\Users\armando.filho\Documents\GitHub\DCCColab\trunk\fonts\DCC.COLAB.Business\obj\Debug\DCC.COLAB.Business.dll
 C:\Users\armando.filho\Documents\GitHub\DCCColab\trunk\fonts\DCC.COLAB.Business\obj\Debug\DCC.COLAB.Business.pdb
-C:\Users\adlf\Documents\GitHub\dcccolab\trunk\fonts\DCC.COLAB.Business\obj\Debug\DCC.COLAB.Business.csprojResolveAssemblyReference.cache
 C:\Users\adlf\Documents\GitHub\dcccolab\trunk\fonts\DCC.COLAB.Business\bin\Debug\DCC.COLAB.Business.dll
 C:\Users\adlf\Documents\GitHub\dcccolab\trunk\fonts\DCC.COLAB.Business\bin\Debug\DCC.COLAB.Business.pdb
 C:\Users\adlf\Documents\GitHub\dcccolab\trunk\fonts\DCC.COLAB.Business\bin\Debug\DCC.COLAB.Common.dll
@@ -76,5 +75,6 @@ C:\Users\adlf\Documents\GitHub\dcccolab\trunk\fonts\DCC.COLAB.Business\bin\Debug
 C:\Users\adlf\Documents\GitHub\dcccolab\trunk\fonts\DCC.COLAB.Business\bin\Debug\DCC.COLAB.DataAccess.SQLServer.pdb
 C:\Users\adlf\Documents\GitHub\dcccolab\trunk\fonts\DCC.COLAB.Business\bin\Debug\DCC.COLAB.WCF.Interface.pdb
 C:\Users\adlf\Documents\GitHub\dcccolab\trunk\fonts\DCC.COLAB.Business\bin\Debug\DCCFramework.pdb
+C:\Users\adlf\Documents\GitHub\dcccolab\trunk\fonts\DCC.COLAB.Business\obj\Debug\DCC.COLAB.Business.csprojResolveAssemblyReference.cache
 C:\Users\adlf\Documents\GitHub\dcccolab\trunk\fonts\DCC.COLAB.Business\obj\Debug\DCC.COLAB.Business.dll
 C:\Users\adlf\Documents\GitHub\dcccolab\trunk\fonts\DCC.COLAB.Business\obj\Debug\DCC.COLAB.Business.pdb

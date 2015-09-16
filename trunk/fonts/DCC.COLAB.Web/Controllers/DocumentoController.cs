@@ -57,7 +57,7 @@ namespace DCC.COLAB.Web.Controllers
                 List<Documento> listaDocumentos = JsonConvert.DeserializeObject<List<Documento>>(Request.Form["listaDocumentos"], new JsonSerializerSettings() { Culture = new CultureInfo("pt-BR") });
                 foreach (Documento documento in listaDocumentos)
                 {
-                    WCFDispatcher<ICOLABServico>.UseService(u => u.AtualizarDocumento(documento, SessaoUtil.UsuarioLogin));
+                    WCFDispatcher<ICOLABServico>.UseService(u => u.AtualizarDocumento(documento));
                 }
                 return Json(listaDocumentos, JsonRequestBehavior.AllowGet);
             }
@@ -87,7 +87,7 @@ namespace DCC.COLAB.Web.Controllers
                     MemoryStream target = new MemoryStream();
                     fileContent.CopyTo(target);
                     doc.arquivo.binario = target.ToArray();
-                    doc.codigo = WCFDispatcher<ICOLABServico>.UseService(u => u.InserirDocumento(doc, SessaoUtil.UsuarioLogin));
+                    doc.codigo = WCFDispatcher<ICOLABServico>.UseService(u => u.InserirDocumento(doc));
 
                     //Necessário para trazer os metadados do arquivo inserido também
                     Documento docAtualizado = WCFDispatcher<ICOLABServico>.UseService(u => u.SelecionarDocumentoPorCodigo(doc.codigo));
@@ -118,7 +118,7 @@ namespace DCC.COLAB.Web.Controllers
                 fileContent.CopyTo(target);
                 doc.arquivo.binario = target.ToArray();
                 doc.versao = ++doc.versao;
-                WCFDispatcher<ICOLABServico>.UseService(u => u.AtualizarDocumento(doc, SessaoUtil.UsuarioLogin));
+                WCFDispatcher<ICOLABServico>.UseService(u => u.AtualizarDocumento(doc));
                 JsonResult json = Json(doc, JsonRequestBehavior.AllowGet);
                 json.MaxJsonLength = Int32.MaxValue;
                 return json;
@@ -135,10 +135,10 @@ namespace DCC.COLAB.Web.Controllers
             {
                 if (excluirTudo)
                 {
-                    WCFDispatcher<ICOLABServico>.UseService(u => u.ExcluirDocumento(codigo, SessaoUtil.UsuarioLogin));
+                    WCFDispatcher<ICOLABServico>.UseService(u => u.ExcluirDocumento(codigo));
                 }
                 else { 
-                    WCFDispatcher<ICOLABServico>.UseService(u => u.ExcluirUltimaVersaoDocumento(codigo, SessaoUtil.UsuarioLogin));
+                    WCFDispatcher<ICOLABServico>.UseService(u => u.ExcluirUltimaVersaoDocumento(codigo));
                 }
                 return Json(new { redirectURL = Url.Action("Consulta", "Documento"), isRedirect = true }, JsonRequestBehavior.AllowGet);
             }

@@ -14,25 +14,19 @@ namespace DCC.COLAB.Common.Entities
         public string nome { get; set; }
 
         [DataMember]
-        public string codigo { get; set; }
+        public int periodoRecomendado { get; set; }
 
-        [DataMember]
-        public int? periodo { get; set; }
-
-        public String periodoString
+        public String periodoRecomendadoString
         {
             get
             {
-                if (periodo == null) {
-                    return "-";
-                }
-                else if (periodo == 0)
+                if (periodoRecomendado == 0)
                 {
                     return "Eletiva";
                 }
                 else
                 {
-                    return periodo.ToString();
+                    return periodoRecomendado.ToString();
                 }
             }
         }

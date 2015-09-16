@@ -9,9 +9,8 @@
             <tr>
                 <th>Id</th>
                 <th>Nome</th>
-                <th>Período</th>
-                <th>Código</th>
-                <th></th>
+                <th>Período Recomendado</th>
+                <th>Ações</th>
             </tr>
         </thead>
     </table>
@@ -45,15 +44,8 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="txtCodigo" class="control-label">Código:</label>
-                                <input id="txtCodigo" name="txtCodigo" type="text" placeholder="Código da disciplina" class="form-control input-md" required value="" />
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="selectPeriodo" class="control-label">Período:</label>
-                                <select id="selectPeriodo" class="form-control input-md">
-                                    <option value="">Selecione um Período</option>
+                                <label for="selectPeriodo" class="control-label">Período Recomendado:</label>
+                                <select id="selectPeriodo" class="form-control input-md" required>
                                     <option value="0">Eletiva</option>
                                     @for (int i = 1; i < 10; i++)
                                     {
@@ -85,7 +77,6 @@
             $('#modalDisciplinaLabel').text('Editar Disciplina');
             $("#hdIdDisciplina").val(json.id);
             $('#txtNome').val(json.nome);
-            $('#txtCodigo').val(json.codigo);
             $('#selectPeriodo').val(json.periodo);
 
             $('#cadastroDeDisciplina').modal();
@@ -103,21 +94,16 @@
 
         var SalvarEdicao = function (id) {
             var nome = $.trim($('#txtNome').val());
-            var codigo = $.trim($('#txtCodigo').val());
             var periodo = $('#selectPeriodo').val();
 
             if (!nome) {
                 Msg.error('O campo "Nome" é obrigatório. Favor verificar o preenchimento do mesmo.', 4000);
             }
-            else if (!codigo) {
-                Msg.error('O campo "Código" é obrigatório. Favor verificar o preenchimento do mesmo.', 4000);
-            }
             else {
                 var params = {
                     'id': id,
                     'nome': nome,
-                    'periodo': periodo,
-                    'codigo': codigo
+                    'periodoRecomendado': periodo
                 }
 
                 SRV.ChamarAjax('@Url.Action("Salvar", "Disciplina")', params, Salvar_cb);
@@ -158,18 +144,18 @@
                 columns: [
                     { "data": "id", "name": "D.id_Disciplina" },
                     { "data": "nome", "name": "D.nm_Disciplina" },
-                    { "data": "periodoString", "name": "D.nu_Periodo" },
-                    { "data": "codigo", "name": "D.cd_Disciplina" },
+                    { "data": "periodoRecomendadoString", "name": "D.nu_Periodo_Recomendado" },
                     { "data": "" }
                 ],
                 columnDefs: [
                     { targets: 0, visible: false, orderable: false, searchable: false },
                     { targets: 2, sClass: "alignCenter" },
-                    { targets: 3, sClass: "alignCenter" },
                     {
-                        targets: 4, orderable: false, searchable: false, width: "60px", sClass: "alignCenter", render: function (data, type, row) {
+                        targets: 3, orderable: false, searchable: false, width: "80px", sClass: "alignCenter", render: function (data, type, row) {
                             var acoes = "";
                             acoes += "<a href='#' onClick='AssociarTemas(" + row["id"] + ")'><img width='15px' title='associar temas' alt='Associar Temas' src='/../Content/img/ic_configurar.png' class='rowConfigureIcon'/></a>";
+                            acoes += "&nbsp;&nbsp;";
+                            acoes += "<a href='#' onClick='AssociarTurmas(" + row["id"] + ")'><img width='15px' title='associar turmas' alt='Associar Turmas' src='/../Content/img/ic_configurar.png' class='rowConfigureIcon'/></a>";
                             acoes += "&nbsp;&nbsp;";
                             acoes += "<a href='#' onClick='CarregarDisciplinaParaEdicao(" + row["id"] + ")'><img width='15px' title='editar' alt='Editar' src='/../Content/img/ic_editar.png' class='rowEditIcon'/></a>";
                             acoes += "&nbsp;&nbsp;";
@@ -178,7 +164,7 @@
                         }
                     },
                 ],
-                language: { url: "/../Content/dataTable_pt_BR.js", searchPlaceholder: "nome/código" },
+                language: { url: "/../Content/dataTable_pt_BR.js", searchPlaceholder: "nome" },
                 processing: true,
                 serverSide: true,
                 order: [[1, "asc"]],
@@ -199,28 +185,22 @@
             $('#modalDisciplinaLabel').text('Cadastrar Nova Disciplina');
             $('#hdIdDisciplina').val(0);
             $('#txtNome').val('');
-            $('#txtCodigo').val('');
-            $('#selectPeriodo').val('');
+            $('#selectPeriodo').val(0);
             
             $('#cadastroDeDisciplina').modal();
         });
 
         var SalvarInsercao = function () {
             var nome = $.trim($('#txtNome').val());
-            var codigo = $.trim($('#txtCodigo').val());
             var periodo = $('#selectPeriodo').val();
 
             if (!nome) {
                 Msg.error('O campo "Nome" é obrigatório. Favor verificar o preenchimento do mesmo.', 4000);
             }
-            else if (!codigo) {
-                Msg.error('O campo "Código" é obrigatório. Favor verificar o preenchimento do mesmo.', 4000);
-            }
             else {
                 var params = {
                     'nome': nome,
-                    'periodo': periodo,
-                    'codigo': codigo
+                    'periodoRecomendado': periodo
                 }
 
                 SRV.ChamarAjax('@Url.Action("Salvar", "Disciplina")', params, Salvar_cb);
@@ -236,6 +216,12 @@
         var AssociarTemas = function (idDisciplina) {
             if (idDisciplina) {
                 window.location.href = '@Url.Action("Consulta", "Tema")' + '/' + idDisciplina;
+            }
+        };
+
+        var AssociarTurmas = function (idDisciplina) {
+            if (idDisciplina) {
+                window.location.href = '@Url.Action("Consulta", "Turma")' + '/' + idDisciplina;
             }
         };
 

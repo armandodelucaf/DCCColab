@@ -52,7 +52,7 @@ namespace DCC.COLAB.Business.Entities
         }
 
         [RequiresTransaction]
-        public virtual int InserirUsuario(Usuario usuario, string usuarioLogado)
+        public virtual int InserirUsuario(Usuario usuario)
         {
             try
             {
@@ -65,7 +65,7 @@ namespace DCC.COLAB.Business.Entities
         }
 
         [RequiresTransaction]
-        public virtual void AtualizarUsuario(Usuario usuario, string usuarioLogado)
+        public virtual void AtualizarUsuario(Usuario usuario)
         {
             try
             {
@@ -78,7 +78,7 @@ namespace DCC.COLAB.Business.Entities
         }
 
         [RequiresTransaction]
-        public virtual void ExcluirUsuario(int codigo, string usuarioLogado)
+        public virtual void ExcluirUsuario(int codigo)
         {
             try
             {
@@ -90,7 +90,7 @@ namespace DCC.COLAB.Business.Entities
             }
         }
         
-        public virtual void AtualizarSenha(Usuario usuario, string usuarioLogado)
+        public virtual void AtualizarSenha(Usuario usuario)
         {
             try
             {

@@ -25,16 +25,16 @@ namespace DCC.COLAB.WCF.Interface
         List<Usuario> SelecionarUsuariosFiltrados(FiltroUsuario filtro);
 
         [OperationContract]
-        int InserirUsuario(Usuario usuario, string usuarioLogado);
+        int InserirUsuario(Usuario usuario);
 
         [OperationContract]
-        void AtualizarUsuario(Usuario usuario, string usuarioLogado);
+        void AtualizarUsuario(Usuario usuario);
 
         [OperationContract]
-        void ExcluirUsuario(int codigo, string usuarioLogado);
+        void ExcluirUsuario(int codigo);
 
         [OperationContract]
-        void AtualizarSenha(Usuario usuario, string usuarioLogado);
+        void AtualizarSenha(Usuario usuario);
 
         #endregion
 
@@ -67,10 +67,10 @@ namespace DCC.COLAB.WCF.Interface
         Documento SelecionarDocumentoPorCodigo(int codigo);
 
         [OperationContract]
-        int InserirDocumento(Documento documento, string usuario);
+        int InserirDocumento(Documento documento);
 
         [OperationContract]
-        void AtualizarDocumento(Documento documento, string usuario);
+        void AtualizarDocumento(Documento documento);
 
         [OperationContract]
         int SelecionarQuantidadeDocumentosFiltrados(FiltroDocumento filtro);
@@ -79,10 +79,10 @@ namespace DCC.COLAB.WCF.Interface
         List<Documento> SelecionarDocumentosFiltrados(FiltroDocumento filtro);
 
         [OperationContract]
-        void ExcluirUltimaVersaoDocumento(int codigo, string usuario);
+        void ExcluirUltimaVersaoDocumento(int codigo);
 
         [OperationContract]
-        void ExcluirDocumento(int codigo, string usuario);
+        void ExcluirDocumento(int codigo);
 
         [OperationContract]
         Arquivo SelecionarArquivoDoDocumento(int codigo);
@@ -101,13 +101,13 @@ namespace DCC.COLAB.WCF.Interface
         List<Disciplina> SelecionarDisciplinasFiltradas(FiltroDisciplina filtro);
 
         [OperationContract]
-        int InserirDisciplina(Disciplina disciplina, string disciplinaLogado);
+        int InserirDisciplina(Disciplina disciplina);
 
         [OperationContract]
-        void AtualizarDisciplina(Disciplina disciplina, string disciplinaLogado);
+        void AtualizarDisciplina(Disciplina disciplina);
 
         [OperationContract]
-        void ExcluirDisciplina(int codigo, string disciplinaLogado);
+        void ExcluirDisciplina(int codigo);
 
         #endregion
 
@@ -123,13 +123,35 @@ namespace DCC.COLAB.WCF.Interface
         List<Tema> SelecionarTemasFiltrados(FiltroTema filtro);
 
         [OperationContract]
-        int InserirTema(Tema usuario, string usuarioLogado);
+        int InserirTema(Tema usuario);
 
         [OperationContract]
-        void AtualizarTema(Tema usuario, string usuarioLogado);
+        void AtualizarTema(Tema usuario);
 
         [OperationContract]
-        void ExcluirTema(int codigo, string usuarioLogado);
+        void ExcluirTema(int codigo);
+
+        #endregion
+
+        #region Turma
+
+        [OperationContract]
+        Turma SelecionarTurmaPorCodigo(int codigo);
+
+        [OperationContract]
+        int SelecionarQuantidadeTurmasFiltradas(FiltroTurma filtro);
+
+        [OperationContract]
+        List<Turma> SelecionarTurmasFiltradas(FiltroTurma filtro);
+
+        [OperationContract]
+        int InserirTurma(Turma turma);
+
+        [OperationContract]
+        void AtualizarTurma(Turma turma);
+
+        [OperationContract]
+        void ExcluirTurma(int codigo);
 
         #endregion
 

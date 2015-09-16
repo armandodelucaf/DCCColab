@@ -45,14 +45,13 @@ CREATE TABLE `Usuario`(
 CREATE TABLE `Disciplina`(
 	`id_Disciplina` int AUTO_INCREMENT NOT NULL,
 	`nm_Disciplina` varchar(128) NOT NULL,
-	`nu_Periodo` int NULL,
-	`cd_Disciplina` varchar(10) NOT NULL,
+	`nu_Periodo_Recomendado` tinyint NOT NULL,
 	
 	CONSTRAINT `PK_Disciplina` PRIMARY KEY 
 	(`id_Disciplina`),
 	
-	CONSTRAINT `UQ_Disciplina_cd_Disciplina` UNIQUE 
-	(`cd_Disciplina`) 
+	CONSTRAINT `UQ_Disciplina_nm_Disciplina` UNIQUE 
+	(`nm_Disciplina`) 
 );
 
 CREATE TABLE `Tema`(
@@ -70,33 +69,32 @@ CREATE TABLE `Tema`(
 	CONSTRAINT FOREIGN KEY (id_Disciplina) REFERENCES `Disciplina` (id_Disciplina),
 );
 
-CREATE TABLE `Tema_Disciplina`(
-	`id_Tema` int NOT NULL,
+CREATE TABLE `Turma`(
+	`id_Turma` int AUTO_INCREMENT NOT NULL,
 	`id_Disciplina` int NOT NULL,
+	`nu_Ano` int NOT NULL,
+	`nu_Semestre` tinyint NOT NULL,
+	`cd_Turma` varchar(10) NOT NULL,
 	
-	CONSTRAINT `PK_Tema_Disciplina` UNIQUE 
-	(`id_Disciplina`, `id_Tema`) ,
+	CONSTRAINT `PK_Turma` UNIQUE 
+	(`id_Turma`) ,
 	
-	CONSTRAINT FOREIGN KEY (id_Disciplina) REFERENCES `Disciplina` (id_Disciplina),
+	CONSTRAINT `UQ_Turma` UNIQUE 
+	(`id_Disciplina`, `nu_Ano`, `nu_Semestre`, `cd_Turma`) ,
 	
-	CONSTRAINT FOREIGN KEY (id_Tema) REFERENCES `Tema` (id_Tema)
+	CONSTRAINT FOREIGN KEY (id_Disciplina) REFERENCES `Disciplina` (id_Disciplina)
 );
 
-CREATE TABLE `Disciplina_Professor`(
-	`id_Disciplina` int NOT NULL,
-	`id_Usuario` int NOT NULL,
-	`ano` int NOT NULL,
-	`periodo` tinyint NOT NULL,
+CREATE TABLE `Turma_Professor`(
+	`id_Turma` int NOT NULL,
+	`id_Professor` int NOT NULL,
 	
-	CONSTRAINT `PK_Disciplina_Professor` UNIQUE 
-	(`id_Disciplina`, `id_Usuario`) ,
+	CONSTRAINT `Turma_Professor` UNIQUE 
+	(`id_Turma`, `id_Professor`) ,
 	
-	CONSTRAINT `UQ_Disciplina_Professor` UNIQUE 
-	(`id_Disciplina`, `id_Usuario`, `ano`, `periodo`) ,
+	CONSTRAINT FOREIGN KEY (id_Turma) REFERENCES `Turma` (id_Turma),
 	
-	CONSTRAINT FOREIGN KEY (id_Disciplina) REFERENCES `Disciplina` (id_Disciplina),
-	
-	CONSTRAINT FOREIGN KEY (id_Usuario) REFERENCES `Usuario` (id_Usuario)
+	CONSTRAINT FOREIGN KEY (id_Professor) REFERENCES `Usuario` (id_Usuario)
 );
 
 CREATE TABLE `Prova`(
