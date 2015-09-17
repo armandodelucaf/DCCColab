@@ -18,5 +18,11 @@ namespace DCC.COLAB.Common.DataAccess
         void AtualizarTurma(Turma disciplina);
 
         void ExcluirTurma(int codigo);
+
+        List<Usuario> SelecionarProfessoresPorIdTurma(int id);
+
+        void InserirProfessorTurma(int idTurma, int idProfessor);
+
+        void ExcluirProfessorTurma(int idTurma);
     }
 }

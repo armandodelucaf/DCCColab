@@ -89,7 +89,8 @@
         dcccolab.Usuario U
         INNER JOIN dcccolab.Perfil_Acesso PA ON PA.id_Perfil_Acesso = U.id_Perfil_Acesso
       WHERE
-        (@FILTRO IS NULL OR U.nm_Usuario LIKE CONCAT('%', @FILTRO, '%'))
+        (@FILTRO IS NULL OR U.nm_Usuario LIKE CONCAT('%', @FILTRO, '%')) AND
+        (@ID_PERFIL IS NULL OR U.id_Perfil_Acesso = @ID_PERFIL)
       ORDER BY @ORDER_BY
     </selecionarUsuariosFiltrados>
     <inserirUsuario>
@@ -245,6 +246,23 @@
     <excluirTurma>
       DELETE FROM dcccolab.Turma WHERE id_Turma = @ID
     </excluirTurma>
+    
+    <selecionarProfessoresPorIdTurma>
+      SELECT
+        U.id_Usuario,
+        U.nm_Usuario
+      FROM
+        dcccolab.Turma_Professor TP
+        INNER JOIN dcccolab.Usuario U ON U.id_Usuario = TP.id_Professor
+      WHERE
+        TP.id_Turma = @ID_TURMA
+    </selecionarProfessoresPorIdTurma>
+    <inserirProfessorTurma>
+      INSERT INTO dcccolab.Turma_Professor (id_Turma, id_Professor) VALUES (@ID_TURMA, @ID_PROFESSOR)
+    </inserirProfessorTurma>
+    <excluirProfessorTurma>
+      DELETE FROM dcccolab.Turma_Professor WHERE id_Turma = @ID_TURMA
+    </excluirProfessorTurma>
   </Turma>
   
 </Queries>

@@ -125,6 +125,7 @@ namespace DCC.COLAB.DataAccess.SQLServer.Entities
         private Hashtable BuildParametrosSelecionarUsuariosFiltrados(FiltroUsuario filtro)
         {
             Hashtable parametros = CriarHashFiltroDefault(filtro);
+            parametros.Add("ID_PERFIL", filtro.idPerfil);
             return parametros;
         }
         #endregion

@@ -3,6 +3,7 @@
 @{
     int idDisciplina = Convert.ToInt32(ViewBag.idDisciplina);
     List<Disciplina> listaDisciplinas = Convert.ChangeType(ViewBag.listaDisciplinas, typeof(List<Disciplina>));
+    List<Usuario> listaProfessores = Convert.ChangeType(ViewBag.listaProfessores, typeof(List<Usuario>));
 }
 
 <div>
@@ -15,6 +16,7 @@
                 <th>Disciplina</th>
                 <th>Período</th>
                 <th>Código</th>
+                <th>Professor</th>
                 <th>Ações</th>
             </tr>
         </thead>
@@ -187,14 +189,16 @@
                     { "data": "disciplina.nome", "name": "D.nm_Disciplina" },
                     { "data": "periodo.tableString", "name": "T.nu_Ano" },
                     { "data": "codigo", "name": "T.cd_Turma" },
+                    { "data": "listaProfessoresString" },
                     { "data": "" }
                 ],
                 columnDefs: [
                     { targets: 0, visible: false, orderable: false, searchable: false },
                     { targets: 2, sClass: "alignCenter" },
                     { targets: 3, sClass: "alignCenter" },
+                    { targets: 4, sClass: "alignCenter", orderable: false },
                     {
-                        targets: 4, orderable: false, searchable: false, width: "60px", sClass: "alignCenter", render: function (data, type, row) {
+                        targets: 5, orderable: false, searchable: false, width: "60px", sClass: "alignCenter", render: function (data, type, row) {
                             var acoes = "";
                             acoes += "<a href='#' onClick='CarregarTurmaParaEdicao(" + row["id"] + ")'><img width='15px' title='editar' alt='Editar' src='/../Content/img/ic_editar.png' class='rowEditIcon'/></a>";
                             acoes += "&nbsp;&nbsp;";

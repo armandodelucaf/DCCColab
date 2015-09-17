@@ -1,4 +1,5 @@
 ﻿using DCC.COLAB.Common.AuxiliarEntities;
+using DCC.COLAB.Common.Basic;
 using DCC.COLAB.Common.Entities;
 using DCC.COLAB.Common.Filtros;
 using DCC.COLAB.WCF.Interface;
@@ -17,6 +18,7 @@ namespace DCC.COLAB.Web.Controllers
             ViewBag.turma = new Turma();
             ViewBag.idDisciplina = id;
             ViewBag.listaDisciplinas = WCFDispatcher<ICOLABServico>.UseService(u => u.SelecionarDisciplinasFiltradas(new FiltroDisciplina())).ToList();
+            ViewBag.listaProfessores = WCFDispatcher<ICOLABServico>.UseService(u => u.SelecionarUsuariosFiltrados(new FiltroUsuario() { idPerfil = BusinessConfig.IdPerfilProfessor })).ToList();
             return View();
         }
 

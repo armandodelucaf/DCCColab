@@ -59,6 +59,43 @@ namespace DCC.COLAB.DataAccess.SQLServer.Entities
             }
         }
 
+        public List<Usuario> SelecionarProfessoresPorIdTurma(int id)
+        {
+            Hashtable parametros = new Hashtable();
+            parametros.Add("ID_TURMA", id);
+            return this.SelecionarPorNomeQuery("selecionarProfessoresPorIdTurma", parametros, this.RecuperaObjetoUsuario).Cast<Usuario>().ToList();
+        
+        }
+
+        public void InserirProfessorTurma(int idTurma, int idProfessor)
+        {
+            try
+            {
+                Hashtable parametros = new Hashtable();
+                parametros.Add("ID_TURMA", idTurma);
+                parametros.Add("ID_PROFESSOR", idProfessor);
+                this.RemoverPorNomeQuery("inserirProfessorTurma", parametros);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public void ExcluirProfessorTurma(int idTurma)
+        {
+            try
+            {
+                Hashtable parametros = new Hashtable();
+                parametros.Add("ID_TURMA", idTurma);
+                this.RemoverPorNomeQuery("excluirProfessorTurma", parametros);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         #region Recupera Objeto
 
         private Turma RecuperaObjeto(MySqlDataReader dr)
@@ -77,6 +114,14 @@ namespace DCC.COLAB.DataAccess.SQLServer.Entities
                 semestre = CastDB<int>(dr, "nu_Semestre")
             };
             return turma;
+        }
+
+        private Usuario RecuperaObjetoUsuario(MySqlDataReader dr)
+        {
+            Usuario usuario = new Usuario();
+            usuario.id = CastDB<int>(dr, "id_Usuario");
+            usuario.nome = CastDB<string>(dr, "nm_Usuario");
+            return usuario;
         }
 
         #endregion

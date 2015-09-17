@@ -5,6 +5,7 @@ using DCC.COLAB.Common.Entities;
 using DCC.COLAB.Common.Filtros;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace DCC.COLAB.Business.Entities
 {
@@ -17,6 +18,7 @@ namespace DCC.COLAB.Business.Entities
             try
             {
                 Turma turma = dataAccess.SelecionarTurmaPorCodigo(codigo);
+                turma.listaProfessores = this.SelecionarProfessoresPorIdTurma(codigo);
                 return turma;
             }
             catch (Exception ex)
@@ -41,7 +43,13 @@ namespace DCC.COLAB.Business.Entities
         {
             try
             {
-                return dataAccess.SelecionarTurmasFiltradas(filtro);
+                List<Turma> lista = dataAccess.SelecionarTurmasFiltradas(filtro).ToList();
+                if (lista != null) { 
+                    foreach (Turma turma in lista) {
+                        turma.listaProfessores = this.SelecionarProfessoresPorIdTurma(turma.id);
+                    }
+                }
+                return lista;
             }
             catch (Exception ex)
             {
@@ -54,7 +62,11 @@ namespace DCC.COLAB.Business.Entities
         {
             try
             {
-                return dataAccess.InserirTurma(turma);
+                int idTurma = dataAccess.InserirTurma(turma);
+                foreach (Usuario professor in turma.listaProfessores) {
+                    this.InserirProfessorTurma(idTurma, professor.id);
+                }
+                return idTurma;
             }
             catch (Exception ex)
             {
@@ -68,6 +80,12 @@ namespace DCC.COLAB.Business.Entities
             try
             {
                 dataAccess.AtualizarTurma(turma);
+
+                this.ExcluirProfessorTurma(turma.id);
+                foreach (Usuario professor in turma.listaProfessores)
+                {
+                    this.InserirProfessorTurma(turma.id, professor.id);
+                }
             }
             catch (Exception ex)
             {
@@ -80,7 +98,46 @@ namespace DCC.COLAB.Business.Entities
         {
             try
             {
+                this.ExcluirProfessorTurma(codigo);
                 dataAccess.ExcluirTurma(codigo);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public virtual List<Usuario> SelecionarProfessoresPorIdTurma(int id)
+        {
+            try
+            {
+                return dataAccess.SelecionarProfessoresPorIdTurma(id);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        [RequiresTransaction]
+        public virtual void InserirProfessorTurma(int idTurma, int idProfessor)
+        {
+            try
+            {
+                dataAccess.InserirProfessorTurma(idTurma, idProfessor);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        [RequiresTransaction]
+        public virtual void ExcluirProfessorTurma(int idTurma)
+        {
+            try
+            {
+                dataAccess.ExcluirProfessorTurma(idTurma);
             }
             catch (Exception ex)
             {
