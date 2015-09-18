@@ -34,5 +34,6 @@ C:\Users\adlf\Documents\GitHub\dcccolab\trunk\fonts\DCCFramework\bin\Debug\Micro
 C:\Users\adlf\Documents\GitHub\dcccolab\trunk\fonts\DCCFramework\bin\Debug\Microsoft.Practices.Unity.dll
 C:\Users\adlf\Documents\GitHub\dcccolab\trunk\fonts\DCCFramework\bin\Debug\Microsoft.Practices.ServiceLocation.dll
 C:\Users\adlf\Documents\GitHub\dcccolab\trunk\fonts\DCCFramework\bin\Debug\Microsoft.Practices.Unity.Interception.dll
+C:\Users\adlf\Documents\GitHub\dcccolab\trunk\fonts\DCCFramework\obj\Debug\DCCFramework.csprojResolveAssemblyReference.cache
 C:\Users\adlf\Documents\GitHub\dcccolab\trunk\fonts\DCCFramework\obj\Debug\DCCFramework.dll
 C:\Users\adlf\Documents\GitHub\dcccolab\trunk\fonts\DCCFramework\obj\Debug\DCCFramework.pdb

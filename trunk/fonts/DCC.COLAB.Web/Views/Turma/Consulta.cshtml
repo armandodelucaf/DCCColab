@@ -54,6 +54,18 @@
                         </div>
                     </div>
                     <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="selectProfessor" class="control-label">Professor:</label>
+                                 <select id="selectProfessor" class="form-control input-md selectpicker" multiple required>
+                                    @foreach (Usuario professor in listaProfessores) {
+                                        <option value="@professor.id">@professor.nome</option>
+                                    }                                    
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="txtCodigo" class="control-label">Código:</label>
@@ -106,6 +118,7 @@
             $('#txtCodigo').val(json.codigo);            
             $('#selectAno').val(json.periodo.ano);
             $('#selectSemestre').val(json.periodo.semestre);
+            $('#selectProfessor').selectpicker('val', json.listaProfessores.map(function(x){ return x.id }));
 
             $('#selectDisciplina').val(json.disciplina.id);
             $('#selectDisciplina').prop('disabled', true);
@@ -128,6 +141,7 @@
             var disciplina = parseInt($('#selectDisciplina').val());
             var ano = parseInt($('#selectAno').val());
             var semestre = parseInt($('#selectSemestre').val());
+            var professores = $('#selectProfessor').selectpicker('val');
 
             if (!codigo) {
                 Msg.error('O campo "Código" é obrigatório. Favor verificar o preenchimento do mesmo.', 4000);
@@ -141,12 +155,21 @@
             else if (!semestre) {
                 Msg.error('O campo "Semestre" é obrigatório. Favor verificar a seleção do mesmo.', 4000);
             }
+            else if (!professores) {
+                Msg.error('O campo "Professor" é obrigatório. Favor verificar a seleção do mesmo.', 4000);
+            }
             else {
                 var params = {
                     'id': id,
                     'codigo': codigo,
                     'disciplina': { 'id': disciplina, 'nome': $('#selectDisciplina option:selected').text() },
-                    'periodo': { 'ano': ano, 'semestre': semestre }
+                    'periodo': { 'ano': ano, 'semestre': semestre },
+                    'listaProfessores': []
+                }
+
+                for(var i=0; i < professores.length; i++){
+                    var option = { 'id': professores[i] };
+                    params.listaProfessores.push(option);
                 }
 
                 SRV.ChamarAjax('@Url.Action("Salvar", "Turma")', params, Salvar_cb);
@@ -230,6 +253,7 @@
             $('#txtCodigo').val('');
             $('#selectAno').val(0);
             $('#selectSemestre').val(1);
+            $('#selectProfessor').selectpicker('val', null);
 
             if (@idDisciplina) {
                 $('#selectDisciplina').val(@idDisciplina);
@@ -248,6 +272,7 @@
             var disciplina = parseInt($('#selectDisciplina').val());
             var ano = parseInt($('#selectAno').val());
             var semestre = parseInt($('#selectSemestre').val());
+            var professores = $('#selectProfessor').selectpicker('val');
 
             if (!codigo) {
                 Msg.error('O campo "Código" é obrigatório. Favor verificar o preenchimento do mesmo.', 4000);
@@ -261,11 +286,20 @@
             else if (!semestre) {
                 Msg.error('O campo "Semestre" é obrigatório. Favor verificar a seleção do mesmo.', 4000);
             }
+            else if (!professores) {
+                Msg.error('O campo "Professor" é obrigatório. Favor verificar a seleção do mesmo.', 4000);
+            }
             else {
                 var params = {
                     'codigo': codigo,
                     'disciplina': { 'id': disciplina, 'nome': $('#selectDisciplina option:selected').text() },
-                    'periodo': { 'ano': ano, 'semestre': semestre }
+                    'periodo': { 'ano': ano, 'semestre': semestre },
+                    'listaProfessores': []
+                }
+
+                for(var i=0; i < professores.length; i++){
+                    var option = { 'id': professores[i] };
+                    params.listaProfessores.push(option);
                 }
 
                 SRV.ChamarAjax('@Url.Action("Salvar", "Turma")', params, Salvar_cb);
@@ -288,6 +322,7 @@
             Msg.iconMode = "fa";
             InicializarListagem();
             COLAB.InicializarPropriedades();
+            $('.selectpicker').selectpicker();
         });
     </script>
 }

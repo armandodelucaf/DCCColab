@@ -39,7 +39,7 @@ namespace DCC.COLAB.Common.Entities
             {
                 if (listaProfessores != null && listaProfessores.Count > 0)
                 {
-                    return String.Join(",", listaProfessores.Select(x=>x.nome).ToList());
+                    return String.Join(", ", listaProfessores.Select(x=>x.nome).ToList());
                 }
                 else {
                     return "-";

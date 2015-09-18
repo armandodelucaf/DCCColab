@@ -256,6 +256,7 @@
         INNER JOIN dcccolab.Usuario U ON U.id_Usuario = TP.id_Professor
       WHERE
         TP.id_Turma = @ID_TURMA
+      ORDER BY U.nm_Usuario
     </selecionarProfessoresPorIdTurma>
     <inserirProfessorTurma>
       INSERT INTO dcccolab.Turma_Professor (id_Turma, id_Professor) VALUES (@ID_TURMA, @ID_PROFESSOR)
