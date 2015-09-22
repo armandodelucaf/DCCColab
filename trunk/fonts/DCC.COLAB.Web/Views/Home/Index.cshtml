@@ -5,13 +5,103 @@
 
 <html>
     <body>
+        <div>
+            <div class="form-group" style="margin-top: 100px; margin-bottom: 70px;">
+                <h2 style="font-family: cursive; text-align: center; padding-bottom: 20px;">
+                    Já sabemos o que você procura, mas como você quer encontrar a informação?
+                </h2>
+
+                <div class="col-md-6 text-right">
+                    <button id="btnDisciplina" name="btnDisciplina" class="btn btn-primary">
+                        Por Disciplina
+                    </button>
+                </div>
+                <div class="col-md-6 text-left">
+                    <button id="btnProfessor" name="btnProfessor" class="btn btn-primary">
+                        Por Professor
+                    </button>
+                </div>
+            </div>
+
+            <div id="divHomeConteudo">
+                <div id="divDisciplinas" class="collapse">
+                    <div id="disciplinasObrigatorias">
+                        <div class="navPeriodoImpar col-md-6 text-right">
+                            <h4>1º Período</h4>
+                            <ul>
+                                <li><a href="#disciplina/2/Calculo-Infinitesimal-I" title="26 provas">Cálculo Infinitesimal I</a></li>
+                                <li><a href="#disciplina/1/Computacao-I" title="7 provas">Computação I</a></li>
+                                <li><a href="#disciplina/4/Fundamentos-da-Computacao-Digital" title="26 provas">Fundamentos da Computação Digital</a></li>
+                                <li><a href="#disciplina/3/Numeros-Inteiros-e-Criptografia" title="6 provas">Números Inteiros e Criptografia</a></li>
+                                <li><a href="#disciplina/5/Sistemas-de-Informacao" title="0 provas">Sistemas de Informação</a></li>
+                            </ul>
+                        </div>
+                        <div class="navPeriodoPar col-md-6 text-left">
+                            <h4>2º Período</h4>
+                            <ul>
+                                <li><a href="#disciplina/7/Calculo-Integral-e-Diferencial-II" title="15 provas">Cálculo Integral e Diferencial II</a></li>
+                                <li><a href="#disciplina/10/Circuitos-Logicos" title="15 provas">Circuitos Lógicos</a></li>
+                                <li><a href="#disciplina/6/Computacao-II" title="9 provas">Computação II</a></li>
+                                <li><a href="#disciplina/8/Matematica-Combinatoria" title="9 provas">Matemática Combinatória</a></li>
+                                <li><a href="#disciplina/9/Organizacao-da-Informacao" title="0 provas">Organização da Informação</a></li>
+                            </ul>
+                        </div>
+                        <div class="navPeriodoImpar col-md-6 text-right">
+                            <h4>3º Período</h4>
+                            <ul>
+                                <li><a href="#disciplina/12/Algebra-Linear-Algoritmica" title="16 provas">Álgebra Linear Algorítmica</a></li>
+                                <li><a href="#disciplina/16/Calculo-Integral-e-Diferencial-III" title="23 provas">Cálculo Integral e Diferencial III</a></li>
+                                <li><a href="#disciplina/15/Computadores-e-Programacao" title="11 provas">Computadores e Programação</a></li>
+                                <li><a href="#disciplina/14/Estrutura-de-Dados" title="29 provas">Estrutura de Dados</a></li>
+                                <li><a href="#disciplina/13/Linguagens-Formais" title="11 provas">Linguagens Formais</a></li>
+                                <li><a href="#disciplina/11/Mecanica,-Oscilacoes-e-Ondas" title="30 provas">Mecânica, Oscilações e Ondas</a></li>
+                            </ul>
+                        </div>
+                        <div class="navPeriodoPar col-md-6 text-left">
+                            <h4>4º Período</h4>
+                            <ul>
+                                <li><a href="#disciplina/21/Algoritmos-e-Grafos" title="6 provas">Algoritmos e Grafos</a></li>
+                                <li><a href="#disciplina/17/Calculo-Integral-e-Diferencial-IV" title="3 provas">Cálculo Integral e Diferencial IV</a></li>
+                                <li><a href="#disciplina/18/Calculo-Numerico" title="14 provas">Cálculo Numérico</a></li>
+                                <li><a href="#disciplina/20/Computacao-Concorrente" title="13 provas">Computação Concorrente</a></li>
+                                <li><a href="#disciplina/19/Eletromagnetismo-e-Otica" title="2 provas">Eletromagnetismo e Ótica</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-12 text-center">
+                        <h4 class="tituloCentralizado"><a href="#disciplinas" id="aEletivas"><img src="imagens/seta_baixo.png"> Eletivas</a>
+                        </h4>
+
+                        <div id="disciplinasEletivas" class="divCenterAlign" style="display: none;">
+                    </div>
+
+                    <nav class="navPeriodoImpar"><ul><li><a href="#disciplina/43/Analise-Numerica-de-Equacoes-Diferenciais-Parciais-I" title="0 provas">Análise Numérica de Equações Diferenciais Parciais I</a></li><li><a href="#disciplina/36/Arquitetura-de-Computadores-II" title="0 provas">Arquitetura de Computadores II</a></li><li><a href="#disciplina/47/Computacao-Algebrica-I" title="0 provas">Computação Algébrica I</a></li><li><a href="#disciplina/39/Computacao-III" title="0 provas">Computação III</a></li><li><a href="#disciplina/48/Conhecimento-e-Inovacao" title="0 provas">Conhecimento e Inovação</a></li><li><a href="#disciplina/53/Desenvolvimento-Agil" title="0 provas">Desenvolvimento Ágil</a></li><li><a href="#disciplina/49/Economia" title="3 provas">Economia</a></li><li><a href="#disciplina/50/Empreendimentos-em-Informatica" title="0 provas">Empreendimentos em Informática</a></li><li><a href="#disciplina/51/Governanca-da-Internet" title="0 provas">Governança da Internet</a></li><li><a href="#disciplina/45/Interface-Humano-Computador" title="0 provas">Interface Humano Computador</a></li><li><a href="#disciplina/37/Laboratorio-de-Sistemas-Digitais" title="0 provas">Laboratório de Sistemas Digitais</a></li><li><a href="#disciplina/44/Metodos-Numericos-I" title="0 provas">Métodos Numéricos I</a></li></ul></nav><nav class="navPeriodoPar"><ul><li><a href="#disciplina/58/Modelagem-De-Sistemas-De-Informacao" title="1 prova">Modelagem De Sistemas De Informação</a></li><li><a href="#disciplina/38/Programacao-Paralela-e-Distribuida" title="0 provas">Programação Paralela e Distribuída</a></li><li><a href="#disciplina/57/Recuperacao-da-Informacao" title="0 provas">Recuperação da Informação</a></li><li><a href="#disciplina/40/Sistemas-Complexos-Inteligentes-I" title="0 provas">Sistemas Complexos Inteligentes I</a></li><li><a href="#disciplina/54/Sistemas-Distribuidos" title="0 provas">Sistemas Distribuídos</a></li><li><a href="#disciplina/35/Topicos-Especiais-em-Algoritmos" title="0 provas">Tópicos Especiais em Algoritmos</a></li><li><a href="#disciplina/52/Topicos-Especiais-em-Engenharia-de-Software-(Jogos)" title="0 provas">Tópicos Especiais em Engenharia de Software (Jogos)</a></li><li><a href="#disciplina/42/Topicos-Especiais-em-Inteligencia-Artificial" title="0 provas">Tópicos Especiais em Inteligência Artificial</a></li><li><a href="#disciplina/41/Topicos-Especiais-em-Inteligencia-Computacional" title="0 provas">Tópicos Especiais em Inteligência Computacional</a></li><li><a href="#disciplina/55/Topicos-Especiais-em-Programacao-(Linux)" title="0 provas">Tópicos Especiais em Programação (Linux)</a></li><li><a href="#disciplina/46/Topicos-Especiais-em-Sistemas-de-Informacao" title="0 provas">Tópicos Especiais em Sistemas de Informação</a></li><li><a href="#disciplina/56/Topicos-Especiais-em-Sistemas-de-Informacao-(Seguranca)" title="0 provas">Tópicos Especiais em Sistemas de Informação (Segurança)</a></li></ul></nav>	</div>
+                </div>
+                <div id="divProfessores" class="collapse">
+                    <h4 class="tituloCentralizado">Professores</h4>
+                    <div class="divCenterAlign">
+                    <nav class="navPeriodoImpar"><ul><li><a href="#professor/2/Adriana-Santarosa-Vivacqua" title="0 provas">Adriana Santarosa Vivacqua</a></li><li><a href="#professor/3/Adriano-Joaquim-de-Oliveira-Cruz" title="20 provas">Adriano Joaquim de Oliveira Cruz</a></li><li><a href="#professor/4/Ageu-Cavalcanti-Pacheco-Junior" title="34 provas">Ageu Cavalcanti Pacheco Junior</a></li><li><a href="#professor/76/Alexandre-Soares" title="1 prova">Alexandre Soares</a></li><li><a href="#professor/63/Alexis-Hernandez" title="3 provas">Alexis Hernández</a></li><li><a href="#professor/5/Aline-Martins-Paes" title="0 provas">Aline Martins Paes</a></li><li><a href="#professor/6/Angela-Maria-Goncalves-Leal" title="0 provas">Angela Maria Gonçalves Leal</a></li><li><a href="#professor/7/Antonio-Carlos-Gay-Thome" title="2 provas">Antonio Carlos Gay Thomé</a></li><li><a href="#professor/80/Calculo-Unificado" title="3 provas">Cálculo Unificado</a></li><li><a href="#professor/8/Carla-Amor-Divino-Moreira-Delgado" title="4 provas">Carla Amor Divino Moreira Delgado</a></li><li><a href="#professor/9/Carlos-Alberto-da-Silva-Franco" title="0 provas">Carlos Alberto da Silva Franco</a></li><li><a href="#professor/73/Carlos-Renato-Mota" title="3 provas">Carlos Renato Mota</a></li><li><a href="#professor/69/Celina-Miraglia-Herrera-De-Figueiredo" title="3 provas">Celina Miraglia Herrera De Figueiredo</a></li><li><a href="#professor/65/Cesar-J.-Niche" title="6 provas">César J. Niche</a></li><li><a href="#professor/10/Claudson-Ferreira-Bornstein" title="28 provas">Claudson Ferreira Bornstein</a></li><li><a href="#professor/11/Daniel-G.-Alfaro-Vigo" title="7 provas">Daniel G. Alfaro Vigo</a></li><li><a href="#professor/12/Daniel-Sadoc-Menasche" title="3 provas">Daniel Sadoc Menasche</a></li><li><a href="#professor/88/Dora-Izzo" title="4 provas">Dora Izzo</a></li><li><a href="#professor/13/Eber-Assis-Schmitz" title="0 provas">Eber Assis Schmitz</a></li><li><a href="#professor/14/Edil-S.-T.-Fernandes" title="0 provas">Edil S. T. Fernandes</a></li><li><a href="#professor/15/Eduardo-Peixoto-Paz" title="0 provas">Eduardo Peixoto Paz</a></li><li><a href="#professor/16/Fabio-Mascarenhas" title="6 provas">Fabio Mascarenhas</a></li><li><a href="#professor/64/Fabio-Protti" title="1 prova">Fábio Protti</a></li><li><a href="#professor/67/Felipe-Sales" title="8 provas">Felipe Sales</a></li><li><a href="#professor/17/Fernando-Silva-Pereira-Manso" title="0 provas">Fernando Silva Pereira Manso</a></li><li><a href="#professor/72/Filadelfo-Cardoso-Santos" title="1 prova">Filadelfo Cardoso Santos</a></li><li><a href="#professor/18/Flavia-Delicato" title="2 provas">Flávia Delicato</a></li><li><a href="#professor/19/Flavio-Assemany" title="0 provas">Flávio Assemany</a></li><li><a href="#professor/60/Flavio-Dickstein" title="1 prova">Flávio Dickstein</a></li><li><a href="#professor/83/Francesco-Noseda" title="7 provas">Francesco Noseda</a></li><li><a href="#professor/20/Gabriel-Pereira-da-Silva" title="0 provas">Gabriel Pereira da Silva</a></li><li><a href="#professor/21/Geraldo-Bonorino-Xexeo" title="1 prova">Geraldo Bonorino Xexéo</a></li><li><a href="#professor/22/Geraldo-Zimbrao-da-Silva" title="8 provas">Geraldo Zimbrão da Silva</a></li><li><a href="#professor/23/Guilherme-Chagas-Rodrigues" title="0 provas">Guilherme Chagas Rodrigues</a></li><li><a href="#professor/71/Henrique-Bocshi-Filho" title="1 prova">Henrique Bocshi Filho</a></li><li><a href="#professor/85/Ildeu-De-Castro-Moreira" title="2 provas">Ildeu De Castro Moreira</a></li><li><a href="#professor/24/Ivan-da-Costa-Marques" title="0 provas">Ivan da Costa Marques</a></li><li><a href="#professor/61/Joao-Caminada" title="3 provas">João Caminada</a></li><li><a href="#professor/28/Joao-Carlos-Pereira-da-Silva" title="1 prova">João Carlos Pereira da Silva</a></li><li><a href="#professor/29/Joao-Lauro-Dornelles-Faco" title="0 provas">João Lauro Dornelles Facó</a></li><li><a href="#professor/66/Joaquim-Lopes-Neto" title="14 provas">Joaquim Lopes Neto</a></li><li><a href="#professor/25/Jonice-de-Oliveira-Sampaio" title="0 provas">Jonice de Oliveira Sampaio</a></li><li><a href="#professor/75/Jorge-Luis-Vivas-Barreto" title="1 prova">Jorge Luis Vivas Barreto</a></li><li><a href="#professor/27/Jose-Fabio-Marinho-de-Araujo" title="0 provas">José Fábio Marinho de Araújo</a></li></ul></nav><nav class="navPeriodoPar"><ul><li><a href="#professor/26/Josefino-Cabral-Melo-Lima" title="0 provas">Josefino Cabral Melo Lima</a></li><li><a href="#professor/84/Juan-Lopez-Gondar" title="2 provas">Juan López Gondar</a></li><li><a href="#professor/30/Juliana-Vianna-Valerio" title="16 provas">Juliana Vianna Valério</a></li><li><a href="#professor/82/Lacramioara-Marianty-Ionel" title="5 provas">Lacramioara Marianty Ionel</a></li><li><a href="#professor/68/Lacramiora-Marianty-Ionel" title="8 provas">Lacramiora Marianty Ionel</a></li><li><a href="#professor/31/Leandro-Schaeffer-Marturelli" title="0 provas">Leandro Schaeffer Marturelli</a></li><li><a href="#professor/77/Luca-Roberto-Augusto-Moriconi" title="3 provas">Luca Roberto Augusto Moriconi</a></li><li><a href="#professor/32/Luis-Menasche-Schechter" title="1 prova">Luis Menasché Schechter</a></li><li><a href="#professor/33/Luziane-Ferreira-de-Mendonca" title="2 provas">Luziane Ferreira de Mendonça</a></li><li><a href="#professor/34/Marcello-Goulart-Teixeira" title="0 provas">Marcello Goulart Teixeira</a></li><li><a href="#professor/59/Marcelo-Byrro" title="1 prova">Marcelo Byrro</a></li><li><a href="#professor/40/Marcia-Helena-da-Costa-Fampa" title="0 provas">Márcia Helena da Costa Fampa</a></li><li><a href="#professor/41/Marcia-Rosana-Cerioli" title="2 provas">Márcia Rosana Cerioli</a></li><li><a href="#professor/62/Marco-Cabral" title="9 provas">Marco Cabral</a></li><li><a href="#professor/35/Marcos-Roberto-da-Silva-Borges" title="0 provas">Marcos Roberto da Silva Borges</a></li><li><a href="#professor/36/Maria-Helena-Cautiero-Horta-Jardim" title="0 provas">Maria Helena Cautiero Horta Jardim</a></li><li><a href="#professor/1/Maria-Luiza-Machado-Campos" title="0 provas">Maria Luiza Machado Campos</a></li><li><a href="#professor/87/Marina-Silva-Paez" title="2 provas">Marina Silva Paez</a></li><li><a href="#professor/42/Mario-Roberto-F.-Benevides" title="2 provas">Mário Roberto F. Benevides</a></li><li><a href="#professor/37/Mauro-Antonio-Rincon" title="0 provas">Mauro Antonio Rincon</a></li><li><a href="#professor/38/Miguel-Jonathan" title="1 prova">Miguel Jonathan</a></li><li><a href="#professor/39/Mitre-Costa-Dourado" title="3 provas">Mitre Costa Dourado</a></li><li><a href="#professor/58/Monique-Carmona" title="6 provas">Monique Carmona</a></li><li><a href="#professor/79/Nao-Informado" title="8 provas">Não Informado</a></li><li><a href="#professor/43/Nelson-Quilula-Vasconcelos" title="19 provas">Nelson Quilula Vasconcelos</a></li><li><a href="#professor/70/Paulo-Carrilho" title="2 provas">Paulo Carrilho</a></li><li><a href="#professor/81/Paulo-Goldfeld" title="2 provas">Paulo Goldfeld</a></li><li><a href="#professor/44/Paulo-Henrique-de-Aguiar-Rodrigues" title="4 provas">Paulo Henrique de Aguiar Rodrigues</a></li><li><a href="#professor/45/Paulo-Pires" title="0 provas">Paulo Pires</a></li><li><a href="#professor/46/Paulo-Roberto-Godoy-Bordoni" title="0 provas">Paulo Roberto Godoy Bordoni</a></li><li><a href="#professor/47/Paulo-Roma-Cavalcanti" title="0 provas">Paulo Roma Cavalcanti</a></li><li><a href="#professor/48/Pedro-Manoel-da-Silveira" title="5 provas">Pedro Manoel da Silveira</a></li><li><a href="#professor/49/Raphael" title="0 provas">Raphael</a></li><li><a href="#professor/78/Raymundo-De-Oliveira" title="2 provas">Raymundo De Oliveira</a></li><li><a href="#professor/86/Ricardo-Rosa" title="1 prova">Ricardo Rosa</a></li><li><a href="#professor/50/Rodrigo-Penteado-Ribeiro-de-Toledo" title="7 provas">Rodrigo Penteado Ribeiro de Toledo</a></li><li><a href="#professor/74/Rolci-Cipolatti" title="2 provas">Rolci Cipolatti</a></li><li><a href="#professor/51/Severino-Collier-Coutinho" title="14 provas">Severino Collier Coutinho</a></li><li><a href="#professor/52/Silvana-Rossetto" title="5 provas">Silvana Rossetto</a></li><li><a href="#professor/53/Sulamita-Klein" title="7 provas">Sulamita Klein</a></li><li><a href="#professor/54/Susana-Scheimberg-de-Makler" title="0 provas">Susana Scheimberg de Makler</a></li><li><a href="#professor/55/Valeria-Bastos" title="3 provas">Valeria Bastos</a></li><li><a href="#professor/56/Vinicius-Gusmao-Pereira-de-Sa" title="0 provas">Vinícius Gusmão Pereira de Sá</a></li><li><a href="#professor/57/Wendel-Alexandre-Xavier-de-Melo" title="0 provas">Wendel Alexandre Xavier de Melo</a></li></ul></nav>	</div>
+                </div>
+                <div class="clear"></div>
+            </div>
+        </div>
     </body>
 </html>
 
 
 <script>
     $(document).ready(function () {
-        //window.location.href = "../Pagina/Consulta";
     });
+
+    $('#btnDisciplina').click(function () {
+        $('#divDisciplinas').collapse('toggle');
+        $('#divProfessores').collapse('hide');
+    });
+
+    $('#btnProfessor').click(function () {
+        $('#divDisciplinas').collapse('hide');
+        $('#divProfessores').collapse('toggle');
+    });
+
 </script>
 
