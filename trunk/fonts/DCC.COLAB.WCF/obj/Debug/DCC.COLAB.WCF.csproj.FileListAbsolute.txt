@@ -99,6 +99,9 @@ C:\Users\adlf\Documents\GitHub\dcccolab\trunk\fonts\DCC.COLAB.WCF\bin\DCC.COLAB.
 C:\Users\adlf\Documents\GitHub\dcccolab\trunk\fonts\DCC.COLAB.WCF\bin\log4net.dll
 C:\Users\adlf\Documents\GitHub\dcccolab\trunk\fonts\DCC.COLAB.WCF\bin\Microsoft.Practices.Unity.Configuration.dll
 C:\Users\adlf\Documents\GitHub\dcccolab\trunk\fonts\DCC.COLAB.WCF\bin\Microsoft.Practices.Unity.Interception.Configuration.dll
+C:\Users\adlf\Documents\GitHub\dcccolab\trunk\fonts\DCC.COLAB.WCF\bin\MySql.Data.Entity.EF5.dll
+C:\Users\adlf\Documents\GitHub\dcccolab\trunk\fonts\DCC.COLAB.WCF\bin\MySql.Data.Entity.EF6.dll
+C:\Users\adlf\Documents\GitHub\dcccolab\trunk\fonts\DCC.COLAB.WCF\bin\MySql.Fabric.Plugin.dll
 C:\Users\adlf\Documents\GitHub\dcccolab\trunk\fonts\DCC.COLAB.WCF\bin\DCC.COLAB.WCF.Interface.dll
 C:\Users\adlf\Documents\GitHub\dcccolab\trunk\fonts\DCC.COLAB.WCF\bin\Microsoft.Practices.Unity.Interception.dll
 C:\Users\adlf\Documents\GitHub\dcccolab\trunk\fonts\DCC.COLAB.WCF\bin\Microsoft.Practices.Unity.dll
