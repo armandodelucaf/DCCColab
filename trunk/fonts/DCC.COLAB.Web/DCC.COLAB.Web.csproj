@@ -245,6 +245,7 @@
     <Content Include="Content\img\bt_excluir.gif" />
     <Content Include="Content\img\bt_excluir_off.gif" />
     <Content Include="Content\img\bt_noticia.gif" />
+    <Content Include="Content\img\dcccolab_logo.png" />
     <Content Include="Content\img\ic_camera.gif" />
     <Content Include="Content\img\ic_camera_off.gif" />
     <Content Include="Content\img\ic_configurar.png" />

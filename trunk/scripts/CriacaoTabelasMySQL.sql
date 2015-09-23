@@ -1,7 +1,7 @@
 USE `dcccolab`;
 
-DROP TABLE IF EXISTS `Perfil_Acesso`;
 DROP TABLE IF EXISTS `Usuario`;
+DROP TABLE IF EXISTS `Perfil_Acesso`;
 DROP TABLE IF EXISTS `Disciplina`;
 DROP TABLE IF EXISTS `Tema`;
 DROP TABLE IF EXISTS `Disciplina_Professor`;
@@ -64,9 +64,9 @@ CREATE TABLE `Tema`(
 	(`id_Tema`) ,
 	
 	CONSTRAINT `UQ_Tema` UNIQUE 
-	(`nm_Tema`, `id_Disciplina`)
+	(`nm_Tema`, `id_Disciplina`),
 	
-	CONSTRAINT FOREIGN KEY (id_Disciplina) REFERENCES `Disciplina` (id_Disciplina),
+	CONSTRAINT FOREIGN KEY (id_Disciplina) REFERENCES `Disciplina` (id_Disciplina)
 );
 
 CREATE TABLE `Turma`(
