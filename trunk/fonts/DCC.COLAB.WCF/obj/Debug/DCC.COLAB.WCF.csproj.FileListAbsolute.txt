@@ -117,3 +117,6 @@ C:\Users\adlf\Documents\GitHub\dcccolab\trunk\fonts\DCC.COLAB.WCF\bin\DCCFramewo
 C:\Users\adlf\Documents\GitHub\dcccolab\trunk\fonts\DCC.COLAB.WCF\obj\Debug\DCC.COLAB.WCF.csprojResolveAssemblyReference.cache
 C:\Users\adlf\Documents\GitHub\dcccolab\trunk\fonts\DCC.COLAB.WCF\obj\Debug\DCC.COLAB.WCF.dll
 C:\Users\adlf\Documents\GitHub\dcccolab\trunk\fonts\DCC.COLAB.WCF\obj\Debug\DCC.COLAB.WCF.pdb
+C:\Users\armando.filho\Documents\GitHub\DCCColab\trunk\fonts\DCC.COLAB.WCF\bin\MySql.Data.Entity.EF5.dll
+C:\Users\armando.filho\Documents\GitHub\DCCColab\trunk\fonts\DCC.COLAB.WCF\bin\MySql.Data.Entity.EF6.dll
+C:\Users\armando.filho\Documents\GitHub\DCCColab\trunk\fonts\DCC.COLAB.WCF\bin\MySql.Fabric.Plugin.dll

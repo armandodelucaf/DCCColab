@@ -40,3 +40,6 @@ C:\Users\adlf\Documents\GitHub\dcccolab\trunk\fonts\DCCFramework\bin\Debug\Micro
 C:\Users\adlf\Documents\GitHub\dcccolab\trunk\fonts\DCCFramework\obj\Debug\DCCFramework.csprojResolveAssemblyReference.cache
 C:\Users\adlf\Documents\GitHub\dcccolab\trunk\fonts\DCCFramework\obj\Debug\DCCFramework.dll
 C:\Users\adlf\Documents\GitHub\dcccolab\trunk\fonts\DCCFramework\obj\Debug\DCCFramework.pdb
+C:\Users\armando.filho\Documents\GitHub\DCCColab\trunk\fonts\DCCFramework\bin\Debug\MySql.Data.Entity.EF5.dll
+C:\Users\armando.filho\Documents\GitHub\DCCColab\trunk\fonts\DCCFramework\bin\Debug\MySql.Data.Entity.EF6.dll
+C:\Users\armando.filho\Documents\GitHub\DCCColab\trunk\fonts\DCCFramework\bin\Debug\MySql.Fabric.Plugin.dll

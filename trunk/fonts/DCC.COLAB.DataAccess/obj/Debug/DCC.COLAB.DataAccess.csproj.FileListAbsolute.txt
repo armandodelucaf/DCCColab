@@ -60,3 +60,5 @@ C:\Users\adlf\Documents\GitHub\dcccolab\trunk\fonts\DCC.COLAB.DataAccess\bin\Deb
 C:\Users\adlf\Documents\GitHub\dcccolab\trunk\fonts\DCC.COLAB.DataAccess\obj\Debug\DCC.COLAB.DataAccess.csprojResolveAssemblyReference.cache
 C:\Users\adlf\Documents\GitHub\dcccolab\trunk\fonts\DCC.COLAB.DataAccess\obj\Debug\DCC.COLAB.DataAccess.SQLServer.dll
 C:\Users\adlf\Documents\GitHub\dcccolab\trunk\fonts\DCC.COLAB.DataAccess\obj\Debug\DCC.COLAB.DataAccess.SQLServer.pdb
+C:\Users\armando.filho\Documents\GitHub\DCCColab\trunk\fonts\DCC.COLAB.DataAccess\bin\Debug\MySql.Data.Entity.EF6.dll
+C:\Users\armando.filho\Documents\GitHub\DCCColab\trunk\fonts\DCC.COLAB.DataAccess\bin\Debug\MySql.Fabric.Plugin.dll
