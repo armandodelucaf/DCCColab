@@ -7,5 +7,6 @@ by editing this MSBuild file. In order to learn more about this please visit htt
   <PropertyGroup>
     <TimeStampOfAssociatedLegacyPublishXmlFile />
     <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAvIYObOM1BkGW+M8xhp8b3wAAAAACAAAAAAAQZgAAAAEAACAAAACQRzusWMU1d6n19Hu23u33NqS2GIDCxxT4lFZZKbH0MgAAAAAOgAAAAAIAACAAAACkc7Z0V6+QpcwnDRTYxda5Y0C9JsLkPfa05/Bgjb5914AAAADKDxpXqTLp8e1LpW6+CJsRzzFP5WnnlFUrnrj5fBqqOGj++R4B2+MU1bD4kHzhK+45tWA42CLeGZVHMe9H7ghw1svoYgFixOpJdV+dsmzdkyt3qpE/MwZF9pa2lY1xA9fGy9znamHohbyUdxUGKp92W7UPp4dQ6mxD/H+c/oIT4kAAAABJu2leCdnoIFx+TKcghEGOjT7ritVT1pXyKrFkAfXWYhNSo1ktaRbANr+Lv6eP2zklqkh4Q/uLhKE0KHKQVwJY</EncryptedPassword>
+    <_PublishTargetUrl>ftp://ftp.gear.host/site/wwwroot</_PublishTargetUrl>
   </PropertyGroup>
 </Project>

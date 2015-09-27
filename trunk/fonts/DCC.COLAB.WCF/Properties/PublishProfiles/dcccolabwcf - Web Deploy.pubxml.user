@@ -7,5 +7,86 @@ by editing this MSBuild file. In order to learn more about this please visit htt
   <PropertyGroup>
     <TimeStampOfAssociatedLegacyPublishXmlFile />
     <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAvIYObOM1BkGW+M8xhp8b3wAAAAACAAAAAAAQZgAAAAEAACAAAAAR/OvgFYv3WYNfVQPve2EIRDFPTfCX8UsUkdFyXvPnnAAAAAAOgAAAAAIAACAAAADGpzN2g+F0zN99qoVAorUPde6prirQ55qqV2oO41kXZIAAAACbiZ6xOnRZF2ZGa2frLAuH7e93cE0+Cl9WpdEzQIuU/0Bk7SXkXwDNja3aKojyEulB5Z40wqBpT2n40LufG80W87FhWzq/u6i5Vm6qzqL/QPSMAlS/srqgewohtHzzIqkqpVG3MRT4iwyNBryGMrsa+EiG61BzhecTGoZNNZRSRUAAAABAGJstZ60KzGNiZe1i+wCMzuv8X1eqcJ07OF3VnKP9LaOOKEZ1DeRVcgEJVmga5bIKWI3Vt6/ECe5pbVduSodj</EncryptedPassword>
+    <_PublishTargetUrl>C:\Users\adlf\Desktop</_PublishTargetUrl>
   </PropertyGroup>
+  <ItemGroup>
+    <File Include="bin/DCC.COLAB.Business.dll">
+      <publishTime>09/24/2015 19:37:01</publishTime>
+    </File>
+    <File Include="bin/DCC.COLAB.Common.dll">
+      <publishTime>09/24/2015 00:03:10</publishTime>
+    </File>
+    <File Include="bin/DCC.COLAB.DataAccess.SQLServer.dll">
+      <publishTime>09/24/2015 00:03:17</publishTime>
+    </File>
+    <File Include="bin/DCC.COLAB.WCF.dll">
+      <publishTime>09/24/2015 19:37:02</publishTime>
+    </File>
+    <File Include="bin/DCC.COLAB.WCF.Interface.dll">
+      <publishTime>09/24/2015 00:03:14</publishTime>
+    </File>
+    <File Include="bin/DCCFramework.dll">
+      <publishTime>09/24/2015 00:03:07</publishTime>
+    </File>
+    <File Include="bin/log4net.dll">
+      <publishTime>04/22/2015 13:35:40</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Practices.EnterpriseLibrary.Common.dll">
+      <publishTime>04/22/2015 13:35:40</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Practices.EnterpriseLibrary.Data.dll">
+      <publishTime>04/22/2015 13:35:40</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Practices.ServiceLocation.dll">
+      <publishTime>04/22/2015 13:35:40</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Practices.Unity.Configuration.dll">
+      <publishTime>04/22/2015 13:35:40</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Practices.Unity.dll">
+      <publishTime>04/22/2015 13:35:40</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Practices.Unity.Interception.Configuration.dll">
+      <publishTime>04/22/2015 13:35:41</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Practices.Unity.Interception.dll">
+      <publishTime>04/22/2015 13:35:40</publishTime>
+    </File>
+    <File Include="bin/MySql.Data.Entity.EF5.dll">
+      <publishTime>06/19/2015 01:01:40</publishTime>
+    </File>
+    <File Include="bin/MySql.Data.Entity.EF6.dll">
+      <publishTime>06/19/2015 01:01:46</publishTime>
+    </File>
+    <File Include="bin/MySql.Fabric.Plugin.dll">
+      <publishTime>06/19/2015 01:01:42</publishTime>
+    </File>
+    <File Include="COLABServico.svc">
+      <publishTime>05/02/2015 17:39:30</publishTime>
+    </File>
+    <File Include="log4net.config">
+      <publishTime>05/02/2015 17:38:49</publishTime>
+    </File>
+    <File Include="OldQueryConfig.xml">
+      <publishTime>08/18/2015 23:03:44</publishTime>
+    </File>
+    <File Include="QueryConfig.xml">
+      <publishTime>09/18/2015 00:53:31</publishTime>
+    </File>
+    <File Include="unity.config">
+      <publishTime>09/16/2015 01:14:35</publishTime>
+    </File>
+    <File Include="wcfBehaviors.config">
+      <publishTime>05/02/2015 17:38:12</publishTime>
+    </File>
+    <File Include="wcfBindings.config">
+      <publishTime>05/02/2015 17:38:12</publishTime>
+    </File>
+    <File Include="wcfServices.config">
+      <publishTime>05/02/2015 17:39:30</publishTime>
+    </File>
+    <File Include="Web.config">
+      <publishTime>09/23/2015 23:55:49</publishTime>
+    </File>
+  </ItemGroup>
 </Project>

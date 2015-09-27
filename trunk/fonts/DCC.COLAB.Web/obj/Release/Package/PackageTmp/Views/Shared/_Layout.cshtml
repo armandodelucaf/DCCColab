@@ -82,14 +82,54 @@
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Gerenciador de Sites<span class="caret"></span></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Administração<span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu">
-                            <li><a href="@Url.Action("Consulta", "Documento")">Documentos</a></li>
                             <li><a href="@Url.Action("Consulta", "PerfisAcesso")">Perfis de Acesso</a></li>
                             <li><a href="@Url.Action("Consulta", "Usuario")">Usuários</a></li>
                             <li class="divider"></li>
                         </ul>
                     </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Acesso Aluno<span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="@Url.Action("Consulta", "Disciplina")">Disciplinas</a></li>
+                            <li><a href="@Url.Action("Consulta", "Documento")">Documentos</a></li>
+                            <li><a href="@Url.Action("Consulta", "Professor")">Professores</a></li>
+                            <li><a href="@Url.Action("Consulta", "Tema")">Temas</a></li>
+                            <li class="divider"></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Acesso Monitor<span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="@Url.Action("Consulta", "Disciplina")">Disciplinas</a></li>
+                            <li><a href="@Url.Action("Consulta", "Documento")">Documentos</a></li>
+                            <li><a href="@Url.Action("Consulta", "Professor")">Professores</a></li>
+                            <li><a href="@Url.Action("Consulta", "Tema")">Temas</a></li>
+                            <li class="divider"></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Acesso Professor<span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="@Url.Action("Consulta", "Disciplina")">Disciplinas</a></li>
+                            <li><a href="@Url.Action("Consulta", "Documento")">Documentos</a></li>
+                            <li><a href="@Url.Action("Consulta", "Professor")">Professores</a></li>
+                            <li><a href="@Url.Action("Consulta", "Tema")">Temas</a></li>
+                            <li class="divider"></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Visão Geral<span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="@Url.Action("Consulta", "Disciplina")">Disciplinas</a></li>
+                            <li><a href="@Url.Action("Consulta", "Documento")">Documentos</a></li>
+                            <li><a href="@Url.Action("Consulta", "Professor")">Professores</a></li>
+                            <li><a href="@Url.Action("Consulta", "Tema")">Temas</a></li>
+                            <li class="divider"></li>
+                        </ul>
+                    </li>
+                    <li><a href="@Url.Action("Consulta", "Info")">Sobre o projeto</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li><p class="navbar-text">Olá, @DCC.COLAB.Web.Util.SessaoUtil.Usuario.nome</p></li>

@@ -1,0 +1,328 @@
+﻿@using DCC.COLAB.Common.Entities;
+
+@{
+    int idDisciplina = Convert.ToInt32(ViewBag.idDisciplina);
+    List<Disciplina> listaDisciplinas = Convert.ChangeType(ViewBag.listaDisciplinas, typeof(List<Disciplina>));
+    List<Usuario> listaProfessores = Convert.ChangeType(ViewBag.listaProfessores, typeof(List<Usuario>));
+}
+
+<div>
+    <legend>Turmas - Consulta</legend>
+
+    <table id="tabelaTurmas" class="table hover table-bordered" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Disciplina</th>
+                <th>Período</th>
+                <th>Código</th>
+                <th>Professor</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+    </table>
+
+    <div class="form-group">
+        <div>
+            <button id="btnNovo" name="btnNovo" class="btn btn-primary">Nova turma</button>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="cadastroDeTurma" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="modalTurmaLabel"></h4>
+            </div>
+            <div class="modal-body" style="overflow-y: inherit !important;">
+                <form>
+                    <input type="hidden" id="hdIdTurma" value="" />
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="selectDisciplina" class="control-label">Disciplina:</label>
+                                <select id="selectDisciplina" class="form-control input-md" required>
+                                    <option value="0">Selecione uma Disciplina</option>
+                                    @foreach (Disciplina disciplina in listaDisciplinas) {
+                                        <option value="@disciplina.id">@disciplina.nome</option>
+                                    }                                    
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="selectProfessor" class="control-label">Professor:</label>
+                                 <select id="selectProfessor" class="form-control input-md selectpicker" multiple required>
+                                    @foreach (Usuario professor in listaProfessores) {
+                                        <option value="@professor.id">@professor.nome</option>
+                                    }                                    
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="txtCodigo" class="control-label">Código:</label>
+                                <input id="txtCodigo" name="txtCodigo" type="text" placeholder="Código da turma" class="form-control input-md" required value="" />
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="selectAno" class="control-label">Ano:</label>
+                                <select id="selectAno" class="form-control input-md" required>
+                                    <option value="0">Selecione um ano</option>
+                                    @for (int i = 2010; i < 2017; i++)
+                                    {
+                                        <option value="@i">@(i)</option>
+                                    }                                    
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="selectSemestre" class="control-label">Semestre:</label>
+                                <select id="selectSemestre" class="form-control input-md" required>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>                                
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                <button type="button" class="btn btn-success" id="btnSalvar">Salvar turma</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section scripts
+{
+    <script type="text/javascript">
+        var CarregarTurmaParaEdicao = function (idTurma) {
+            SRV.ChamarAjax('@Url.Action("ObterTurma", "Turma")', { id: idTurma }, CarregarTurmaParaEdicao_cb);
+        };
+
+        var CarregarTurmaParaEdicao_cb = function (json) {
+            $('#modalTurmaLabel').text('Editar Turma');
+            $("#hdIdTurma").val(json.id);
+            $('#txtCodigo').val(json.codigo);            
+            $('#selectAno').val(json.periodo.ano);
+            $('#selectSemestre').val(json.periodo.semestre);
+            $('#selectProfessor').selectpicker('val', json.listaProfessores.map(function(x){ return x.id }));
+
+            $('#selectDisciplina').val(json.disciplina.id);
+            $('#selectDisciplina').prop('disabled', true);
+
+            $('#cadastroDeTurma').modal();
+        };
+
+        $('#btnSalvar').click(function () {
+            var id = parseInt($("#hdIdTurma").val());
+            if (id == 0) {
+                SalvarInsercao();
+            }
+            else {
+                SalvarEdicao(id);
+            }
+        });
+
+        var SalvarEdicao = function (id) {
+            var codigo = $.trim($('#txtCodigo').val());
+            var disciplina = parseInt($('#selectDisciplina').val());
+            var ano = parseInt($('#selectAno').val());
+            var semestre = parseInt($('#selectSemestre').val());
+            var professores = $('#selectProfessor').selectpicker('val');
+
+            if (!codigo) {
+                Msg.error('O campo "Código" é obrigatório. Favor verificar o preenchimento do mesmo.', 4000);
+            }
+            else if (!disciplina) {
+                Msg.error('O campo "Disciplina" é obrigatório. Favor verificar a seleção do mesmo.', 4000);
+            }
+            else if (!ano) {
+                Msg.error('O campo "Ano" é obrigatório. Favor verificar a seleção do mesmo.', 4000);
+            }
+            else if (!semestre) {
+                Msg.error('O campo "Semestre" é obrigatório. Favor verificar a seleção do mesmo.', 4000);
+            }
+            else if (!professores) {
+                Msg.error('O campo "Professor" é obrigatório. Favor verificar a seleção do mesmo.', 4000);
+            }
+            else {
+                var params = {
+                    'id': id,
+                    'codigo': codigo,
+                    'disciplina': { 'id': disciplina, 'nome': $('#selectDisciplina option:selected').text() },
+                    'periodo': { 'ano': ano, 'semestre': semestre },
+                    'listaProfessores': []
+                }
+
+                for(var i=0; i < professores.length; i++){
+                    var option = { 'id': professores[i] };
+                    params.listaProfessores.push(option);
+                }
+
+                SRV.ChamarAjax('@Url.Action("Salvar", "Turma")', params, Salvar_cb);
+            }
+        };
+
+        var ExcluirTurma = function (idTurma) {
+            $.confirm({
+                title: "Confirmação",
+                text: "Deseja realmente excluir esta turma?",
+                confirm: function () {
+                    ExcluirTurmaAjax(idTurma);
+                },
+                cancel: function () {
+                    // nothing to do
+                },
+                confirmButton: "Sim",
+                cancelButton: "Não",
+                post: true
+            });
+        };
+
+        var ExcluirTurmaAjax = function (id) {
+            SRV.ChamarAjax('@Url.Action("Excluir", "Turma")', { id: id }, SucessoExcluir_cb);
+        };
+
+        var SucessoExcluir_cb = function (json) {
+            Msg.success("Exclusão realizada com sucesso.", 3000);
+            AtualizarListagem();
+        };
+
+        var AtualizarListagem = function () {
+            $('#tabelaTurmas').dataTable().fnDraw(false);
+        };
+
+        var InicializarListagem = function () {
+            $('#tabelaTurmas').dataTable({
+                columns: [
+                    { "data": "id", "name": "T.id_Turma" },
+                    { "data": "disciplina.nome", "name": "D.nm_Disciplina" },
+                    { "data": "periodo.tableString", "name": "T.nu_Ano" },
+                    { "data": "codigo", "name": "T.cd_Turma" },
+                    { "data": "listaProfessoresString" },
+                    { "data": "" }
+                ],
+                columnDefs: [
+                    { targets: 0, visible: false, orderable: false, searchable: false },
+                    { targets: 2, sClass: "alignCenter" },
+                    { targets: 3, sClass: "alignCenter" },
+                    { targets: 4, sClass: "alignCenter", orderable: false },
+                    {
+                        targets: 5, orderable: false, searchable: false, width: "60px", sClass: "alignCenter", render: function (data, type, row) {
+                            var acoes = "";
+                            acoes += "<a href='#' onClick='CarregarTurmaParaEdicao(" + row["id"] + ")'><img width='15px' title='editar' alt='Editar' src='/../Content/img/ic_editar.png' class='rowEditIcon'/></a>";
+                            acoes += "&nbsp;&nbsp;";
+                            acoes += "<a href='#' onClick='ExcluirTurma(" + row["id"] + ")'><img width='15px' title='excluir' alt='Excluir' src='/../Content/img/bt_excluir.gif' class='rowDeleteIcon' id='" + row["id"] + "'/></a>";
+                            return acoes;
+                        }
+                    },
+                ],
+                language: { url: "/../Content/dataTable_pt_BR.js", searchPlaceholder: "código/disciplina" },
+                processing: true,
+                serverSide: true,
+                order: [[1, "asc"],[2, "desc"]],
+                ajax: {
+                    url: "@Url.Action("ListarTurmas", "Turma")",
+                    async: false,
+                    type: 'POST',
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    data: function (d) {
+                        return COLAB.ObterFiltroBaseDataTable(d);
+                    }
+                }
+            });
+        };
+
+        $('#btnNovo').click(function () {
+            $('#modalTurmaLabel').text('Cadastrar Nova Turma');
+            $("#hdIdTurma").val(0);
+            $('#txtCodigo').val('');
+            $('#selectAno').val(0);
+            $('#selectSemestre').val(1);
+            $('#selectProfessor').selectpicker('val', null);
+
+            if (@idDisciplina) {
+                $('#selectDisciplina').val(@idDisciplina);
+                $('#selectDisciplina').prop('disabled', true);
+            }
+            else {
+                $('#selectDisciplina').val(0);
+                $('#selectDisciplina').prop('disabled', false);
+            }
+            
+            $('#cadastroDeTurma').modal();
+        });
+
+        var SalvarInsercao = function () {
+            var codigo = $.trim($('#txtCodigo').val());
+            var disciplina = parseInt($('#selectDisciplina').val());
+            var ano = parseInt($('#selectAno').val());
+            var semestre = parseInt($('#selectSemestre').val());
+            var professores = $('#selectProfessor').selectpicker('val');
+
+            if (!codigo) {
+                Msg.error('O campo "Código" é obrigatório. Favor verificar o preenchimento do mesmo.', 4000);
+            }
+            else if (!disciplina) {
+                Msg.error('O campo "Disciplina" é obrigatório. Favor verificar a seleção do mesmo.', 4000);
+            }
+            else if (!ano) {
+                Msg.error('O campo "Ano" é obrigatório. Favor verificar a seleção do mesmo.', 4000);
+            }
+            else if (!semestre) {
+                Msg.error('O campo "Semestre" é obrigatório. Favor verificar a seleção do mesmo.', 4000);
+            }
+            else if (!professores) {
+                Msg.error('O campo "Professor" é obrigatório. Favor verificar a seleção do mesmo.', 4000);
+            }
+            else {
+                var params = {
+                    'codigo': codigo,
+                    'disciplina': { 'id': disciplina, 'nome': $('#selectDisciplina option:selected').text() },
+                    'periodo': { 'ano': ano, 'semestre': semestre },
+                    'listaProfessores': []
+                }
+
+                for(var i=0; i < professores.length; i++){
+                    var option = { 'id': professores[i] };
+                    params.listaProfessores.push(option);
+                }
+
+                SRV.ChamarAjax('@Url.Action("Salvar", "Turma")', params, Salvar_cb);
+            }
+        };
+
+        var Salvar_cb = function (json) {
+            Msg.success('Cadastro efetuado com sucesso', 4000);
+            $('#cadastroDeTurma').modal('hide');
+            AtualizarListagem();
+        };
+
+        var AssociarTemas = function (idTurma) {
+            if (idTurma) {
+                window.location.href = '@Url.Action("Consulta", "Tema")' + '/' + idTurma;
+            }
+        };
+
+        $(document).ready(function () {
+            Msg.iconMode = "fa";
+            InicializarListagem();
+            COLAB.InicializarPropriedades();
+            $('.selectpicker').selectpicker();
+        });
+    </script>
+}
