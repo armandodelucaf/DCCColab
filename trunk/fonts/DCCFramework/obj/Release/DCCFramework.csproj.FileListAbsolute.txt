@@ -11,3 +11,7 @@ C:\Users\adlf\Documents\GitHub\dcccolab\trunk\fonts\DCCFramework\obj\Release\DCC
 C:\Users\adlf\Documents\GitHub\dcccolab\trunk\fonts\DCCFramework\bin\Release\MySql.Data.Entity.EF5.dll
 C:\Users\adlf\Documents\GitHub\dcccolab\trunk\fonts\DCCFramework\bin\Release\MySql.Data.Entity.EF6.dll
 C:\Users\adlf\Documents\GitHub\dcccolab\trunk\fonts\DCCFramework\bin\Release\MySql.Fabric.Plugin.dll
+C:\Users\adlf\Documents\GitHub\dcccolab\trunk\fonts\DCCFramework\bin\Release\Microsoft.Practices.Unity.Configuration.dll
+C:\Users\adlf\Documents\GitHub\dcccolab\trunk\fonts\DCCFramework\bin\Release\Microsoft.Practices.Unity.Interception.Configuration.dll
+C:\Users\adlf\Documents\GitHub\dcccolab\trunk\fonts\DCCFramework\bin\Release\MySql.Data.dll
+C:\Users\adlf\Documents\GitHub\dcccolab\trunk\fonts\DCCFramework\bin\Release\MySql.Web.dll

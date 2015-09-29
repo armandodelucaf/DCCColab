@@ -51,6 +51,7 @@ C:\Users\adlf\Documents\GitHub\dcccolab\trunk\fonts\DCC.COLAB.DataAccess\bin\Deb
 C:\Users\adlf\Documents\GitHub\dcccolab\trunk\fonts\DCC.COLAB.DataAccess\bin\Debug\DCCFramework.dll
 C:\Users\adlf\Documents\GitHub\dcccolab\trunk\fonts\DCC.COLAB.DataAccess\bin\Debug\MySql.Data.Entity.EF6.dll
 C:\Users\adlf\Documents\GitHub\dcccolab\trunk\fonts\DCC.COLAB.DataAccess\bin\Debug\MySql.Fabric.Plugin.dll
+C:\Users\adlf\Documents\GitHub\dcccolab\trunk\fonts\DCC.COLAB.DataAccess\bin\Debug\MySql.Web.dll
 C:\Users\adlf\Documents\GitHub\dcccolab\trunk\fonts\DCC.COLAB.DataAccess\bin\Debug\log4net.dll
 C:\Users\adlf\Documents\GitHub\dcccolab\trunk\fonts\DCC.COLAB.DataAccess\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Data.dll
 C:\Users\adlf\Documents\GitHub\dcccolab\trunk\fonts\DCC.COLAB.DataAccess\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Common.dll

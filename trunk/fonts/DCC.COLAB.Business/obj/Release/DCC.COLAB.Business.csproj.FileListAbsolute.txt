@@ -18,3 +18,4 @@ C:\Users\adlf\Documents\GitHub\dcccolab\trunk\fonts\DCC.COLAB.Business\bin\Relea
 C:\Users\adlf\Documents\GitHub\dcccolab\trunk\fonts\DCC.COLAB.Business\obj\Release\DCC.COLAB.Business.csprojResolveAssemblyReference.cache
 C:\Users\adlf\Documents\GitHub\dcccolab\trunk\fonts\DCC.COLAB.Business\obj\Release\DCC.COLAB.Business.dll
 C:\Users\adlf\Documents\GitHub\dcccolab\trunk\fonts\DCC.COLAB.Business\obj\Release\DCC.COLAB.Business.pdb
+C:\Users\adlf\Documents\GitHub\dcccolab\trunk\fonts\DCC.COLAB.Business\bin\Release\MySql.Data.dll

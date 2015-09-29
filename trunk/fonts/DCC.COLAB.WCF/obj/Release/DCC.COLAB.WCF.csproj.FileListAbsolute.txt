@@ -24,3 +24,5 @@ C:\Users\adlf\Documents\GitHub\dcccolab\trunk\fonts\DCC.COLAB.WCF\obj\Release\DC
 C:\Users\adlf\Documents\GitHub\dcccolab\trunk\fonts\DCC.COLAB.WCF\bin\MySql.Data.Entity.EF5.dll
 C:\Users\adlf\Documents\GitHub\dcccolab\trunk\fonts\DCC.COLAB.WCF\bin\MySql.Data.Entity.EF6.dll
 C:\Users\adlf\Documents\GitHub\dcccolab\trunk\fonts\DCC.COLAB.WCF\bin\MySql.Fabric.Plugin.dll
+C:\Users\adlf\Documents\GitHub\dcccolab\trunk\fonts\DCC.COLAB.WCF\bin\MySql.Data.dll
+C:\Users\adlf\Documents\GitHub\dcccolab\trunk\fonts\DCC.COLAB.WCF\bin\MySql.Web.dll

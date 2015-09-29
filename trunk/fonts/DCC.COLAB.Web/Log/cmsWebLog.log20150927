@@ -1,0 +1,840 @@
+2015-09-27 14:08:20,663 [7] [ERROR] - DCC.COLAB.Web.MvcApplication: Ocorreu um erro em AutenticacaoUtil.ValidarUsuarioSenha. Detalhes: Resolution of the dependency failed, type = "DCC.COLAB.Business.Entities.UsuarioBusinessFacade", name = "(none)".
+Exception occurred while: Calling constructor DynamicModule.ns.Wrapped_UsuarioBusinessFacade_b942670b0ab245f08a4754cc41c27405().
+Exception is: ResolutionFailedException - Resolution of the dependency failed, type = "DCC.COLAB.Common.DataAccess.IUsuarioDataAccess", name = "(none)".
+Exception occurred while: Calling constructor DynamicModule.ns.Wrapped_UsuarioDataAccess_f8cfc7b5ab924fb287a49f69d0c4f20a().
+Exception is: ActivationException - Activation error occured while trying to get instance of type Database, key ""
+-----------------------------------------------
+At the time of the exception, the container was:
+
+  Resolving DCC.COLAB.DataAccess.SQLServer.Entities.UsuarioDataAccess,(none) (mapped from DCC.COLAB.Common.DataAccess.IUsuarioDataAccess, (none))
+  Calling constructor DynamicModule.ns.Wrapped_UsuarioDataAccess_f8cfc7b5ab924fb287a49f69d0c4f20a()
+
+-----------------------------------------------
+At the time of the exception, the container was:
+
+  Resolving DCC.COLAB.Business.Entities.UsuarioBusinessFacade,(none)
+  Calling constructor DynamicModule.ns.Wrapped_UsuarioBusinessFacade_b942670b0ab245f08a4754cc41c27405()
+ : 
+Server stack trace: 
+   em System.ServiceModel.Channels.ServiceChannel.ThrowIfFaultUnderstood(Message reply, MessageFault fault, String action, MessageVersion version, FaultConverter faultConverter)
+   em System.ServiceModel.Channels.ServiceChannel.HandleReply(ProxyOperationRuntime operation, ProxyRpc& rpc)
+   em System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   em System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   em System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   em DCC.COLAB.Web.Util.AutenticacaoUtil.ValidarUsuarioSenha(String login, String senha) na c:\Users\adlf\Documents\GitHub\dcccolab\trunk\fonts\DCC.COLAB.Web\Util\AutenticacaoUtil.cs:linha 22
+   em DCC.COLAB.Web.Controllers.LoginController.ValidarLogin(String email, String senha) na c:\Users\adlf\Documents\GitHub\dcccolab\trunk\fonts\DCC.COLAB.Web\Controllers\LoginController.cs:linha 32
+   em lambda_method(Closure , ControllerBase , Object[] )
+   em System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)
+   em System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   em System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass42.<BeginInvokeSynchronousActionMethod>b__41()
+   em System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass8`1.<BeginSynchronous>b__7(IAsyncResult _)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<>c__DisplayClass39.<BeginInvokeActionMethodWithFilters>b__33()
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass4f.<InvokeActionMethodFilterAsynchronously>b__49()
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<BeginInvokeActionMethodWithFilters>b__36(IAsyncResult asyncResult)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeAction(IAsyncResult asyncResult)
+   em System.Web.Mvc.Controller.<>c__DisplayClass1d.<BeginExecuteCore>b__18(IAsyncResult asyncResult)
+   em System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass4.<MakeVoidDelegate>b__3(IAsyncResult ar)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   em System.Web.Mvc.Controller.EndExecuteCore(IAsyncResult asyncResult)
+   em System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass4.<MakeVoidDelegate>b__3(IAsyncResult ar)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   em System.Web.Mvc.Controller.EndExecute(IAsyncResult asyncResult)
+   em System.Web.Mvc.Controller.System.Web.Mvc.Async.IAsyncController.EndExecute(IAsyncResult asyncResult)
+   em System.Web.Mvc.MvcHandler.<>c__DisplayClass8.<BeginProcessRequest>b__3(IAsyncResult asyncResult)
+   em System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass4.<MakeVoidDelegate>b__3(IAsyncResult ar)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   em System.Web.Mvc.MvcHandler.EndProcessRequest(IAsyncResult asyncResult)
+   em System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.EndProcessRequest(IAsyncResult result)
+   em System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   em System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+
+2015-09-27 14:10:39,712 [7] [ERROR] - DCC.COLAB.Web.MvcApplication: Ocorreu um erro em AutenticacaoUtil.ValidarUsuarioSenha. Detalhes: Resolution of the dependency failed, type = "DCC.COLAB.Business.Entities.UsuarioBusinessFacade", name = "(none)".
+Exception occurred while: Calling constructor DynamicModule.ns.Wrapped_UsuarioBusinessFacade_e1f00dd30a7b44ffaeaf2f66ae9923b0().
+Exception is: ResolutionFailedException - Resolution of the dependency failed, type = "DCC.COLAB.Common.DataAccess.IUsuarioDataAccess", name = "(none)".
+Exception occurred while: Calling constructor DynamicModule.ns.Wrapped_UsuarioDataAccess_b98a7ce5ea714e7faa750e1be551898f().
+Exception is: ConfigurationErrorsException - Ocorreu um erro ao criar o manipulador de seção de configuração de system.data: A coluna 'InvariantName' está restrita a conter valores exclusivos. O valor 'MySql.Data.MySqlClient' já existe. (C:\Users\adlf\Documents\GitHub\dcccolab\trunk\fonts\DCC.COLAB.WCF\web.config line 35)
+-----------------------------------------------
+At the time of the exception, the container was:
+
+  Resolving DCC.COLAB.DataAccess.SQLServer.Entities.UsuarioDataAccess,(none) (mapped from DCC.COLAB.Common.DataAccess.IUsuarioDataAccess, (none))
+  Calling constructor DynamicModule.ns.Wrapped_UsuarioDataAccess_b98a7ce5ea714e7faa750e1be551898f()
+
+-----------------------------------------------
+At the time of the exception, the container was:
+
+  Resolving DCC.COLAB.Business.Entities.UsuarioBusinessFacade,(none)
+  Calling constructor DynamicModule.ns.Wrapped_UsuarioBusinessFacade_e1f00dd30a7b44ffaeaf2f66ae9923b0()
+ : 
+Server stack trace: 
+   em System.ServiceModel.Channels.ServiceChannel.ThrowIfFaultUnderstood(Message reply, MessageFault fault, String action, MessageVersion version, FaultConverter faultConverter)
+   em System.ServiceModel.Channels.ServiceChannel.HandleReply(ProxyOperationRuntime operation, ProxyRpc& rpc)
+   em System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   em System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   em System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   em DCC.COLAB.Web.Util.AutenticacaoUtil.ValidarUsuarioSenha(String login, String senha) na c:\Users\adlf\Documents\GitHub\dcccolab\trunk\fonts\DCC.COLAB.Web\Util\AutenticacaoUtil.cs:linha 22
+   em DCC.COLAB.Web.Controllers.LoginController.ValidarLogin(String email, String senha) na c:\Users\adlf\Documents\GitHub\dcccolab\trunk\fonts\DCC.COLAB.Web\Controllers\LoginController.cs:linha 32
+   em lambda_method(Closure , ControllerBase , Object[] )
+   em System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)
+   em System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   em System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass42.<BeginInvokeSynchronousActionMethod>b__41()
+   em System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass8`1.<BeginSynchronous>b__7(IAsyncResult _)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<>c__DisplayClass39.<BeginInvokeActionMethodWithFilters>b__33()
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass4f.<InvokeActionMethodFilterAsynchronously>b__49()
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<BeginInvokeActionMethodWithFilters>b__36(IAsyncResult asyncResult)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeAction(IAsyncResult asyncResult)
+   em System.Web.Mvc.Controller.<>c__DisplayClass1d.<BeginExecuteCore>b__18(IAsyncResult asyncResult)
+   em System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass4.<MakeVoidDelegate>b__3(IAsyncResult ar)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   em System.Web.Mvc.Controller.EndExecuteCore(IAsyncResult asyncResult)
+   em System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass4.<MakeVoidDelegate>b__3(IAsyncResult ar)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   em System.Web.Mvc.Controller.EndExecute(IAsyncResult asyncResult)
+   em System.Web.Mvc.Controller.System.Web.Mvc.Async.IAsyncController.EndExecute(IAsyncResult asyncResult)
+   em System.Web.Mvc.MvcHandler.<>c__DisplayClass8.<BeginProcessRequest>b__3(IAsyncResult asyncResult)
+   em System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass4.<MakeVoidDelegate>b__3(IAsyncResult ar)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   em System.Web.Mvc.MvcHandler.EndProcessRequest(IAsyncResult asyncResult)
+   em System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.EndProcessRequest(IAsyncResult result)
+   em System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   em System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+
+2015-09-27 14:12:19,440 [21] [ERROR] - DCC.COLAB.Web.MvcApplication: Ocorreu um erro em AutenticacaoUtil.ValidarUsuarioSenha. Detalhes: Resolution of the dependency failed, type = "DCC.COLAB.Business.Entities.UsuarioBusinessFacade", name = "(none)".
+Exception occurred while: Calling constructor DynamicModule.ns.Wrapped_UsuarioBusinessFacade_e1f00dd30a7b44ffaeaf2f66ae9923b0().
+Exception is: ResolutionFailedException - Resolution of the dependency failed, type = "DCC.COLAB.Common.DataAccess.IUsuarioDataAccess", name = "(none)".
+Exception occurred while: Calling constructor DynamicModule.ns.Wrapped_UsuarioDataAccess_b98a7ce5ea714e7faa750e1be551898f().
+Exception is: ActivationException - Activation error occured while trying to get instance of type Database, key ""
+-----------------------------------------------
+At the time of the exception, the container was:
+
+  Resolving DCC.COLAB.DataAccess.SQLServer.Entities.UsuarioDataAccess,(none) (mapped from DCC.COLAB.Common.DataAccess.IUsuarioDataAccess, (none))
+  Calling constructor DynamicModule.ns.Wrapped_UsuarioDataAccess_b98a7ce5ea714e7faa750e1be551898f()
+
+-----------------------------------------------
+At the time of the exception, the container was:
+
+  Resolving DCC.COLAB.Business.Entities.UsuarioBusinessFacade,(none)
+  Calling constructor DynamicModule.ns.Wrapped_UsuarioBusinessFacade_e1f00dd30a7b44ffaeaf2f66ae9923b0()
+ : 
+Server stack trace: 
+   em System.ServiceModel.Channels.ServiceChannel.ThrowIfFaultUnderstood(Message reply, MessageFault fault, String action, MessageVersion version, FaultConverter faultConverter)
+   em System.ServiceModel.Channels.ServiceChannel.HandleReply(ProxyOperationRuntime operation, ProxyRpc& rpc)
+   em System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   em System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   em System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   em DCC.COLAB.Web.Util.AutenticacaoUtil.ValidarUsuarioSenha(String login, String senha) na c:\Users\adlf\Documents\GitHub\dcccolab\trunk\fonts\DCC.COLAB.Web\Util\AutenticacaoUtil.cs:linha 22
+   em DCC.COLAB.Web.Controllers.LoginController.ValidarLogin(String email, String senha) na c:\Users\adlf\Documents\GitHub\dcccolab\trunk\fonts\DCC.COLAB.Web\Controllers\LoginController.cs:linha 32
+   em lambda_method(Closure , ControllerBase , Object[] )
+   em System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)
+   em System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   em System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass42.<BeginInvokeSynchronousActionMethod>b__41()
+   em System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass8`1.<BeginSynchronous>b__7(IAsyncResult _)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<>c__DisplayClass39.<BeginInvokeActionMethodWithFilters>b__33()
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass4f.<InvokeActionMethodFilterAsynchronously>b__49()
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<BeginInvokeActionMethodWithFilters>b__36(IAsyncResult asyncResult)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeAction(IAsyncResult asyncResult)
+   em System.Web.Mvc.Controller.<>c__DisplayClass1d.<BeginExecuteCore>b__18(IAsyncResult asyncResult)
+   em System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass4.<MakeVoidDelegate>b__3(IAsyncResult ar)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   em System.Web.Mvc.Controller.EndExecuteCore(IAsyncResult asyncResult)
+   em System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass4.<MakeVoidDelegate>b__3(IAsyncResult ar)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   em System.Web.Mvc.Controller.EndExecute(IAsyncResult asyncResult)
+   em System.Web.Mvc.Controller.System.Web.Mvc.Async.IAsyncController.EndExecute(IAsyncResult asyncResult)
+   em System.Web.Mvc.MvcHandler.<>c__DisplayClass8.<BeginProcessRequest>b__3(IAsyncResult asyncResult)
+   em System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass4.<MakeVoidDelegate>b__3(IAsyncResult ar)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   em System.Web.Mvc.MvcHandler.EndProcessRequest(IAsyncResult asyncResult)
+   em System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.EndProcessRequest(IAsyncResult result)
+   em System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   em System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+
+2015-09-27 14:14:44,579 [23] [ERROR] - DCC.COLAB.Web.MvcApplication: Ocorreu um erro em AutenticacaoUtil.ValidarUsuarioSenha. Detalhes: Resolution of the dependency failed, type = "DCC.COLAB.Business.Entities.UsuarioBusinessFacade", name = "(none)".
+Exception occurred while: Calling constructor DynamicModule.ns.Wrapped_UsuarioBusinessFacade_3af92aef228547b0a9a03e3a3c3f4cdc().
+Exception is: ResolutionFailedException - Resolution of the dependency failed, type = "DCC.COLAB.Common.DataAccess.IUsuarioDataAccess", name = "(none)".
+Exception occurred while: Calling constructor DynamicModule.ns.Wrapped_UsuarioDataAccess_1320b83f1eab4784994c711a0f4e51f4().
+Exception is: ConfigurationErrorsException - Falha ao localizar ou carregar o Provedor de Dados .Net Framework registrado.
+-----------------------------------------------
+At the time of the exception, the container was:
+
+  Resolving DCC.COLAB.DataAccess.SQLServer.Entities.UsuarioDataAccess,(none) (mapped from DCC.COLAB.Common.DataAccess.IUsuarioDataAccess, (none))
+  Calling constructor DynamicModule.ns.Wrapped_UsuarioDataAccess_1320b83f1eab4784994c711a0f4e51f4()
+
+-----------------------------------------------
+At the time of the exception, the container was:
+
+  Resolving DCC.COLAB.Business.Entities.UsuarioBusinessFacade,(none)
+  Calling constructor DynamicModule.ns.Wrapped_UsuarioBusinessFacade_3af92aef228547b0a9a03e3a3c3f4cdc()
+ : 
+Server stack trace: 
+   em System.ServiceModel.Channels.ServiceChannel.ThrowIfFaultUnderstood(Message reply, MessageFault fault, String action, MessageVersion version, FaultConverter faultConverter)
+   em System.ServiceModel.Channels.ServiceChannel.HandleReply(ProxyOperationRuntime operation, ProxyRpc& rpc)
+   em System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   em System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   em System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   em DCC.COLAB.Web.Util.AutenticacaoUtil.ValidarUsuarioSenha(String login, String senha) na c:\Users\adlf\Documents\GitHub\dcccolab\trunk\fonts\DCC.COLAB.Web\Util\AutenticacaoUtil.cs:linha 22
+   em DCC.COLAB.Web.Controllers.LoginController.ValidarLogin(String email, String senha) na c:\Users\adlf\Documents\GitHub\dcccolab\trunk\fonts\DCC.COLAB.Web\Controllers\LoginController.cs:linha 32
+   em lambda_method(Closure , ControllerBase , Object[] )
+   em System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)
+   em System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   em System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass42.<BeginInvokeSynchronousActionMethod>b__41()
+   em System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass8`1.<BeginSynchronous>b__7(IAsyncResult _)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<>c__DisplayClass39.<BeginInvokeActionMethodWithFilters>b__33()
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass4f.<InvokeActionMethodFilterAsynchronously>b__49()
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<BeginInvokeActionMethodWithFilters>b__36(IAsyncResult asyncResult)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeAction(IAsyncResult asyncResult)
+   em System.Web.Mvc.Controller.<>c__DisplayClass1d.<BeginExecuteCore>b__18(IAsyncResult asyncResult)
+   em System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass4.<MakeVoidDelegate>b__3(IAsyncResult ar)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   em System.Web.Mvc.Controller.EndExecuteCore(IAsyncResult asyncResult)
+   em System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass4.<MakeVoidDelegate>b__3(IAsyncResult ar)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   em System.Web.Mvc.Controller.EndExecute(IAsyncResult asyncResult)
+   em System.Web.Mvc.Controller.System.Web.Mvc.Async.IAsyncController.EndExecute(IAsyncResult asyncResult)
+   em System.Web.Mvc.MvcHandler.<>c__DisplayClass8.<BeginProcessRequest>b__3(IAsyncResult asyncResult)
+   em System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass4.<MakeVoidDelegate>b__3(IAsyncResult ar)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   em System.Web.Mvc.MvcHandler.EndProcessRequest(IAsyncResult asyncResult)
+   em System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.EndProcessRequest(IAsyncResult result)
+   em System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   em System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+
+2015-09-27 14:24:04,479 [9] [ERROR] - DCC.COLAB.Web.MvcApplication: Ocorreu um erro em AutenticacaoUtil.ValidarUsuarioSenha. Detalhes: Resolution of the dependency failed, type = "DCC.COLAB.Business.Entities.UsuarioBusinessFacade", name = "(none)".
+Exception occurred while: Calling constructor DynamicModule.ns.Wrapped_UsuarioBusinessFacade_733986e1316f4cd58374e87c0cca95bf().
+Exception is: ResolutionFailedException - Resolution of the dependency failed, type = "DCC.COLAB.Common.DataAccess.IUsuarioDataAccess", name = "(none)".
+Exception occurred while: Calling constructor DynamicModule.ns.Wrapped_UsuarioDataAccess_d519a61df1ad4ba294c80526e11b2285().
+Exception is: ConfigurationErrorsException - An error occurred creating the configuration section handler for system.data: Column 'InvariantName' is constrained to be unique.  Value 'MySql.Data.MySqlClient' is already present. (C:\home\site\wwwroot\web.config line 35)
+-----------------------------------------------
+At the time of the exception, the container was:
+
+  Resolving DCC.COLAB.DataAccess.SQLServer.Entities.UsuarioDataAccess,(none) (mapped from DCC.COLAB.Common.DataAccess.IUsuarioDataAccess, (none))
+  Calling constructor DynamicModule.ns.Wrapped_UsuarioDataAccess_d519a61df1ad4ba294c80526e11b2285()
+
+-----------------------------------------------
+At the time of the exception, the container was:
+
+  Resolving DCC.COLAB.Business.Entities.UsuarioBusinessFacade,(none)
+  Calling constructor DynamicModule.ns.Wrapped_UsuarioBusinessFacade_733986e1316f4cd58374e87c0cca95bf()
+ : 
+Server stack trace: 
+   em System.ServiceModel.Channels.ServiceChannel.ThrowIfFaultUnderstood(Message reply, MessageFault fault, String action, MessageVersion version, FaultConverter faultConverter)
+   em System.ServiceModel.Channels.ServiceChannel.HandleReply(ProxyOperationRuntime operation, ProxyRpc& rpc)
+   em System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   em System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   em System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   em DCC.COLAB.Web.Util.AutenticacaoUtil.ValidarUsuarioSenha(String login, String senha) na c:\Users\adlf\Documents\GitHub\dcccolab\trunk\fonts\DCC.COLAB.Web\Util\AutenticacaoUtil.cs:linha 22
+   em DCC.COLAB.Web.Controllers.LoginController.ValidarLogin(String email, String senha) na c:\Users\adlf\Documents\GitHub\dcccolab\trunk\fonts\DCC.COLAB.Web\Controllers\LoginController.cs:linha 32
+   em lambda_method(Closure , ControllerBase , Object[] )
+   em System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)
+   em System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   em System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass42.<BeginInvokeSynchronousActionMethod>b__41()
+   em System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass8`1.<BeginSynchronous>b__7(IAsyncResult _)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<>c__DisplayClass39.<BeginInvokeActionMethodWithFilters>b__33()
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass4f.<InvokeActionMethodFilterAsynchronously>b__49()
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<BeginInvokeActionMethodWithFilters>b__36(IAsyncResult asyncResult)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeAction(IAsyncResult asyncResult)
+   em System.Web.Mvc.Controller.<>c__DisplayClass1d.<BeginExecuteCore>b__18(IAsyncResult asyncResult)
+   em System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass4.<MakeVoidDelegate>b__3(IAsyncResult ar)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   em System.Web.Mvc.Controller.EndExecuteCore(IAsyncResult asyncResult)
+   em System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass4.<MakeVoidDelegate>b__3(IAsyncResult ar)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   em System.Web.Mvc.Controller.EndExecute(IAsyncResult asyncResult)
+   em System.Web.Mvc.Controller.System.Web.Mvc.Async.IAsyncController.EndExecute(IAsyncResult asyncResult)
+   em System.Web.Mvc.MvcHandler.<>c__DisplayClass8.<BeginProcessRequest>b__3(IAsyncResult asyncResult)
+   em System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass4.<MakeVoidDelegate>b__3(IAsyncResult ar)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   em System.Web.Mvc.MvcHandler.EndProcessRequest(IAsyncResult asyncResult)
+   em System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.EndProcessRequest(IAsyncResult result)
+   em System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   em System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+
+2015-09-27 16:10:56,286 [83] [ERROR] - DCC.COLAB.Web.MvcApplication: Ocorreu um erro em AutenticacaoUtil.ValidarUsuarioSenha. Detalhes: Resolution of the dependency failed, type = "DCC.COLAB.Business.Entities.UsuarioBusinessFacade", name = "(none)".
+Exception occurred while: Calling constructor DynamicModule.ns.Wrapped_UsuarioBusinessFacade_733986e1316f4cd58374e87c0cca95bf().
+Exception is: ResolutionFailedException - Resolution of the dependency failed, type = "DCC.COLAB.Common.DataAccess.IUsuarioDataAccess", name = "(none)".
+Exception occurred while: Calling constructor DynamicModule.ns.Wrapped_UsuarioDataAccess_d519a61df1ad4ba294c80526e11b2285().
+Exception is: ActivationException - Activation error occured while trying to get instance of type Database, key ""
+-----------------------------------------------
+At the time of the exception, the container was:
+
+  Resolving DCC.COLAB.DataAccess.SQLServer.Entities.UsuarioDataAccess,(none) (mapped from DCC.COLAB.Common.DataAccess.IUsuarioDataAccess, (none))
+  Calling constructor DynamicModule.ns.Wrapped_UsuarioDataAccess_d519a61df1ad4ba294c80526e11b2285()
+
+-----------------------------------------------
+At the time of the exception, the container was:
+
+  Resolving DCC.COLAB.Business.Entities.UsuarioBusinessFacade,(none)
+  Calling constructor DynamicModule.ns.Wrapped_UsuarioBusinessFacade_733986e1316f4cd58374e87c0cca95bf()
+ : 
+Server stack trace: 
+   em System.ServiceModel.Channels.ServiceChannel.ThrowIfFaultUnderstood(Message reply, MessageFault fault, String action, MessageVersion version, FaultConverter faultConverter)
+   em System.ServiceModel.Channels.ServiceChannel.HandleReply(ProxyOperationRuntime operation, ProxyRpc& rpc)
+   em System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   em System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   em System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   em DCC.COLAB.Web.Util.AutenticacaoUtil.ValidarUsuarioSenha(String login, String senha) na c:\Users\adlf\Documents\GitHub\dcccolab\trunk\fonts\DCC.COLAB.Web\Util\AutenticacaoUtil.cs:linha 22
+   em DCC.COLAB.Web.Controllers.LoginController.ValidarLogin(String email, String senha) na c:\Users\adlf\Documents\GitHub\dcccolab\trunk\fonts\DCC.COLAB.Web\Controllers\LoginController.cs:linha 32
+   em lambda_method(Closure , ControllerBase , Object[] )
+   em System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)
+   em System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   em System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass42.<BeginInvokeSynchronousActionMethod>b__41()
+   em System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass8`1.<BeginSynchronous>b__7(IAsyncResult _)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<>c__DisplayClass39.<BeginInvokeActionMethodWithFilters>b__33()
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass4f.<InvokeActionMethodFilterAsynchronously>b__49()
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<BeginInvokeActionMethodWithFilters>b__36(IAsyncResult asyncResult)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeAction(IAsyncResult asyncResult)
+   em System.Web.Mvc.Controller.<>c__DisplayClass1d.<BeginExecuteCore>b__18(IAsyncResult asyncResult)
+   em System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass4.<MakeVoidDelegate>b__3(IAsyncResult ar)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   em System.Web.Mvc.Controller.EndExecuteCore(IAsyncResult asyncResult)
+   em System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass4.<MakeVoidDelegate>b__3(IAsyncResult ar)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   em System.Web.Mvc.Controller.EndExecute(IAsyncResult asyncResult)
+   em System.Web.Mvc.Controller.System.Web.Mvc.Async.IAsyncController.EndExecute(IAsyncResult asyncResult)
+   em System.Web.Mvc.MvcHandler.<>c__DisplayClass8.<BeginProcessRequest>b__3(IAsyncResult asyncResult)
+   em System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass4.<MakeVoidDelegate>b__3(IAsyncResult ar)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   em System.Web.Mvc.MvcHandler.EndProcessRequest(IAsyncResult asyncResult)
+   em System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.EndProcessRequest(IAsyncResult result)
+   em System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   em System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+
+2015-09-27 16:50:12,565 [83] [ERROR] - DCC.COLAB.Web.MvcApplication: Ocorreu um erro em AutenticacaoUtil.ValidarUsuarioSenha. Detalhes: Resolution of the dependency failed, type = "DCC.COLAB.Business.Entities.UsuarioBusinessFacade", name = "(none)".
+Exception occurred while: Calling constructor DynamicModule.ns.Wrapped_UsuarioBusinessFacade_733986e1316f4cd58374e87c0cca95bf().
+Exception is: ResolutionFailedException - Resolution of the dependency failed, type = "DCC.COLAB.Common.DataAccess.IUsuarioDataAccess", name = "(none)".
+Exception occurred while: Calling constructor DynamicModule.ns.Wrapped_UsuarioDataAccess_d519a61df1ad4ba294c80526e11b2285().
+Exception is: ActivationException - Activation error occured while trying to get instance of type Database, key ""
+-----------------------------------------------
+At the time of the exception, the container was:
+
+  Resolving DCC.COLAB.DataAccess.SQLServer.Entities.UsuarioDataAccess,(none) (mapped from DCC.COLAB.Common.DataAccess.IUsuarioDataAccess, (none))
+  Calling constructor DynamicModule.ns.Wrapped_UsuarioDataAccess_d519a61df1ad4ba294c80526e11b2285()
+
+-----------------------------------------------
+At the time of the exception, the container was:
+
+  Resolving DCC.COLAB.Business.Entities.UsuarioBusinessFacade,(none)
+  Calling constructor DynamicModule.ns.Wrapped_UsuarioBusinessFacade_733986e1316f4cd58374e87c0cca95bf()
+ : 
+Server stack trace: 
+   em System.ServiceModel.Channels.ServiceChannel.ThrowIfFaultUnderstood(Message reply, MessageFault fault, String action, MessageVersion version, FaultConverter faultConverter)
+   em System.ServiceModel.Channels.ServiceChannel.HandleReply(ProxyOperationRuntime operation, ProxyRpc& rpc)
+   em System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   em System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   em System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   em DCC.COLAB.Web.Util.AutenticacaoUtil.ValidarUsuarioSenha(String login, String senha) na c:\Users\adlf\Documents\GitHub\dcccolab\trunk\fonts\DCC.COLAB.Web\Util\AutenticacaoUtil.cs:linha 22
+   em DCC.COLAB.Web.Controllers.LoginController.ValidarLogin(String email, String senha) na c:\Users\adlf\Documents\GitHub\dcccolab\trunk\fonts\DCC.COLAB.Web\Controllers\LoginController.cs:linha 32
+   em lambda_method(Closure , ControllerBase , Object[] )
+   em System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)
+   em System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   em System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass42.<BeginInvokeSynchronousActionMethod>b__41()
+   em System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass8`1.<BeginSynchronous>b__7(IAsyncResult _)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<>c__DisplayClass39.<BeginInvokeActionMethodWithFilters>b__33()
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass4f.<InvokeActionMethodFilterAsynchronously>b__49()
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<BeginInvokeActionMethodWithFilters>b__36(IAsyncResult asyncResult)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeAction(IAsyncResult asyncResult)
+   em System.Web.Mvc.Controller.<>c__DisplayClass1d.<BeginExecuteCore>b__18(IAsyncResult asyncResult)
+   em System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass4.<MakeVoidDelegate>b__3(IAsyncResult ar)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   em System.Web.Mvc.Controller.EndExecuteCore(IAsyncResult asyncResult)
+   em System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass4.<MakeVoidDelegate>b__3(IAsyncResult ar)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   em System.Web.Mvc.Controller.EndExecute(IAsyncResult asyncResult)
+   em System.Web.Mvc.Controller.System.Web.Mvc.Async.IAsyncController.EndExecute(IAsyncResult asyncResult)
+   em System.Web.Mvc.MvcHandler.<>c__DisplayClass8.<BeginProcessRequest>b__3(IAsyncResult asyncResult)
+   em System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass4.<MakeVoidDelegate>b__3(IAsyncResult ar)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   em System.Web.Mvc.MvcHandler.EndProcessRequest(IAsyncResult asyncResult)
+   em System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.EndProcessRequest(IAsyncResult result)
+   em System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   em System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+
+2015-09-27 19:34:28,904 [8] [ERROR] - DCC.COLAB.Web.MvcApplication: Ocorreu um erro em AutenticacaoUtil.ValidarUsuarioSenha. Detalhes: Resolution of the dependency failed, type = "DCC.COLAB.Business.Entities.UsuarioBusinessFacade", name = "(none)".
+Exception occurred while: Calling constructor DynamicModule.ns.Wrapped_UsuarioBusinessFacade_32bce0a5a7b8444f96db30ff732bd418().
+Exception is: ResolutionFailedException - Resolution of the dependency failed, type = "DCC.COLAB.Common.DataAccess.IUsuarioDataAccess", name = "(none)".
+Exception occurred while: Calling constructor DynamicModule.ns.Wrapped_UsuarioDataAccess_d4a0cd01640942fea8566d7e818d6329().
+Exception is: ConfigurationErrorsException - An error occurred creating the configuration section handler for system.data: Column 'InvariantName' is constrained to be unique.  Value 'MySql.Data.MySqlClient' is already present. (C:\home\site\wwwroot\web.config line 35)
+-----------------------------------------------
+At the time of the exception, the container was:
+
+  Resolving DCC.COLAB.DataAccess.SQLServer.Entities.UsuarioDataAccess,(none) (mapped from DCC.COLAB.Common.DataAccess.IUsuarioDataAccess, (none))
+  Calling constructor DynamicModule.ns.Wrapped_UsuarioDataAccess_d4a0cd01640942fea8566d7e818d6329()
+
+-----------------------------------------------
+At the time of the exception, the container was:
+
+  Resolving DCC.COLAB.Business.Entities.UsuarioBusinessFacade,(none)
+  Calling constructor DynamicModule.ns.Wrapped_UsuarioBusinessFacade_32bce0a5a7b8444f96db30ff732bd418()
+ : 
+Server stack trace: 
+   em System.ServiceModel.Channels.ServiceChannel.ThrowIfFaultUnderstood(Message reply, MessageFault fault, String action, MessageVersion version, FaultConverter faultConverter)
+   em System.ServiceModel.Channels.ServiceChannel.HandleReply(ProxyOperationRuntime operation, ProxyRpc& rpc)
+   em System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   em System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   em System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   em DCC.COLAB.Web.Util.AutenticacaoUtil.ValidarUsuarioSenha(String login, String senha) na c:\Users\adlf\Documents\GitHub\dcccolab\trunk\fonts\DCC.COLAB.Web\Util\AutenticacaoUtil.cs:linha 22
+   em DCC.COLAB.Web.Controllers.LoginController.ValidarLogin(String email, String senha) na c:\Users\adlf\Documents\GitHub\dcccolab\trunk\fonts\DCC.COLAB.Web\Controllers\LoginController.cs:linha 32
+   em lambda_method(Closure , ControllerBase , Object[] )
+   em System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)
+   em System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   em System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass42.<BeginInvokeSynchronousActionMethod>b__41()
+   em System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass8`1.<BeginSynchronous>b__7(IAsyncResult _)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<>c__DisplayClass39.<BeginInvokeActionMethodWithFilters>b__33()
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass4f.<InvokeActionMethodFilterAsynchronously>b__49()
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<BeginInvokeActionMethodWithFilters>b__36(IAsyncResult asyncResult)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeAction(IAsyncResult asyncResult)
+   em System.Web.Mvc.Controller.<>c__DisplayClass1d.<BeginExecuteCore>b__18(IAsyncResult asyncResult)
+   em System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass4.<MakeVoidDelegate>b__3(IAsyncResult ar)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   em System.Web.Mvc.Controller.EndExecuteCore(IAsyncResult asyncResult)
+   em System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass4.<MakeVoidDelegate>b__3(IAsyncResult ar)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   em System.Web.Mvc.Controller.EndExecute(IAsyncResult asyncResult)
+   em System.Web.Mvc.Controller.System.Web.Mvc.Async.IAsyncController.EndExecute(IAsyncResult asyncResult)
+   em System.Web.Mvc.MvcHandler.<>c__DisplayClass8.<BeginProcessRequest>b__3(IAsyncResult asyncResult)
+   em System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass4.<MakeVoidDelegate>b__3(IAsyncResult ar)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   em System.Web.Mvc.MvcHandler.EndProcessRequest(IAsyncResult asyncResult)
+   em System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.EndProcessRequest(IAsyncResult result)
+   em System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   em System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+
+2015-09-27 19:37:49,104 [7] [ERROR] - DCC.COLAB.Web.MvcApplication: Ocorreu um erro em AutenticacaoUtil.ValidarUsuarioSenha. Detalhes: Resolution of the dependency failed, type = "DCC.COLAB.Business.Entities.UsuarioBusinessFacade", name = "(none)".
+Exception occurred while: Calling constructor DynamicModule.ns.Wrapped_UsuarioBusinessFacade_dc0b03c0a69b4bf79cd2d3641ecb465b().
+Exception is: ResolutionFailedException - Resolution of the dependency failed, type = "DCC.COLAB.Common.DataAccess.IUsuarioDataAccess", name = "(none)".
+Exception occurred while: Calling constructor DynamicModule.ns.Wrapped_UsuarioDataAccess_f1d0f8c158184df59bec27c3fe673da7().
+Exception is: ActivationException - Activation error occured while trying to get instance of type Database, key ""
+-----------------------------------------------
+At the time of the exception, the container was:
+
+  Resolving DCC.COLAB.DataAccess.SQLServer.Entities.UsuarioDataAccess,(none) (mapped from DCC.COLAB.Common.DataAccess.IUsuarioDataAccess, (none))
+  Calling constructor DynamicModule.ns.Wrapped_UsuarioDataAccess_f1d0f8c158184df59bec27c3fe673da7()
+
+-----------------------------------------------
+At the time of the exception, the container was:
+
+  Resolving DCC.COLAB.Business.Entities.UsuarioBusinessFacade,(none)
+  Calling constructor DynamicModule.ns.Wrapped_UsuarioBusinessFacade_dc0b03c0a69b4bf79cd2d3641ecb465b()
+ : 
+Server stack trace: 
+   em System.ServiceModel.Channels.ServiceChannel.ThrowIfFaultUnderstood(Message reply, MessageFault fault, String action, MessageVersion version, FaultConverter faultConverter)
+   em System.ServiceModel.Channels.ServiceChannel.HandleReply(ProxyOperationRuntime operation, ProxyRpc& rpc)
+   em System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   em System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   em System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   em DCC.COLAB.Web.Util.AutenticacaoUtil.ValidarUsuarioSenha(String login, String senha) na c:\Users\adlf\Documents\GitHub\dcccolab\trunk\fonts\DCC.COLAB.Web\Util\AutenticacaoUtil.cs:linha 22
+   em DCC.COLAB.Web.Controllers.LoginController.ValidarLogin(String email, String senha) na c:\Users\adlf\Documents\GitHub\dcccolab\trunk\fonts\DCC.COLAB.Web\Controllers\LoginController.cs:linha 32
+   em lambda_method(Closure , ControllerBase , Object[] )
+   em System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)
+   em System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   em System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass42.<BeginInvokeSynchronousActionMethod>b__41()
+   em System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass8`1.<BeginSynchronous>b__7(IAsyncResult _)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<>c__DisplayClass39.<BeginInvokeActionMethodWithFilters>b__33()
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass4f.<InvokeActionMethodFilterAsynchronously>b__49()
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<BeginInvokeActionMethodWithFilters>b__36(IAsyncResult asyncResult)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeAction(IAsyncResult asyncResult)
+   em System.Web.Mvc.Controller.<>c__DisplayClass1d.<BeginExecuteCore>b__18(IAsyncResult asyncResult)
+   em System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass4.<MakeVoidDelegate>b__3(IAsyncResult ar)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   em System.Web.Mvc.Controller.EndExecuteCore(IAsyncResult asyncResult)
+   em System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass4.<MakeVoidDelegate>b__3(IAsyncResult ar)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   em System.Web.Mvc.Controller.EndExecute(IAsyncResult asyncResult)
+   em System.Web.Mvc.Controller.System.Web.Mvc.Async.IAsyncController.EndExecute(IAsyncResult asyncResult)
+   em System.Web.Mvc.MvcHandler.<>c__DisplayClass8.<BeginProcessRequest>b__3(IAsyncResult asyncResult)
+   em System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass4.<MakeVoidDelegate>b__3(IAsyncResult ar)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   em System.Web.Mvc.MvcHandler.EndProcessRequest(IAsyncResult asyncResult)
+   em System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.EndProcessRequest(IAsyncResult result)
+   em System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   em System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+
+2015-09-27 21:30:49,835 [7] [ERROR] - DCC.COLAB.Web.MvcApplication: Ocorreu um erro em AutenticacaoUtil.ValidarUsuarioSenha. Detalhes: Resolution of the dependency failed, type = "DCC.COLAB.Business.Entities.UsuarioBusinessFacade", name = "(none)".
+Exception occurred while: Calling constructor DynamicModule.ns.Wrapped_UsuarioBusinessFacade_42a5fe87cbc5427f93c8e0d7a56d921f().
+Exception is: ResolutionFailedException - Resolution of the dependency failed, type = "DCC.COLAB.Common.DataAccess.IUsuarioDataAccess", name = "(none)".
+Exception occurred while: Calling constructor DynamicModule.ns.Wrapped_UsuarioDataAccess_4609d7c2baa44618b2af1fe54cb1346a().
+Exception is: ConfigurationErrorsException - An error occurred creating the configuration section handler for system.data: Column 'InvariantName' is constrained to be unique.  Value 'MySql.Data.MySqlClient' is already present. (C:\home\site\wwwroot\web.config line 35)
+-----------------------------------------------
+At the time of the exception, the container was:
+
+  Resolving DCC.COLAB.DataAccess.SQLServer.Entities.UsuarioDataAccess,(none) (mapped from DCC.COLAB.Common.DataAccess.IUsuarioDataAccess, (none))
+  Calling constructor DynamicModule.ns.Wrapped_UsuarioDataAccess_4609d7c2baa44618b2af1fe54cb1346a()
+
+-----------------------------------------------
+At the time of the exception, the container was:
+
+  Resolving DCC.COLAB.Business.Entities.UsuarioBusinessFacade,(none)
+  Calling constructor DynamicModule.ns.Wrapped_UsuarioBusinessFacade_42a5fe87cbc5427f93c8e0d7a56d921f()
+ : 
+Server stack trace: 
+   em System.ServiceModel.Channels.ServiceChannel.ThrowIfFaultUnderstood(Message reply, MessageFault fault, String action, MessageVersion version, FaultConverter faultConverter)
+   em System.ServiceModel.Channels.ServiceChannel.HandleReply(ProxyOperationRuntime operation, ProxyRpc& rpc)
+   em System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   em System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   em System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   em DCC.COLAB.Web.Util.AutenticacaoUtil.ValidarUsuarioSenha(String login, String senha) na c:\Users\adlf\Documents\GitHub\dcccolab\trunk\fonts\DCC.COLAB.Web\Util\AutenticacaoUtil.cs:linha 22
+   em DCC.COLAB.Web.Controllers.LoginController.ValidarLogin(String email, String senha) na c:\Users\adlf\Documents\GitHub\dcccolab\trunk\fonts\DCC.COLAB.Web\Controllers\LoginController.cs:linha 32
+   em lambda_method(Closure , ControllerBase , Object[] )
+   em System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)
+   em System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   em System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass42.<BeginInvokeSynchronousActionMethod>b__41()
+   em System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass8`1.<BeginSynchronous>b__7(IAsyncResult _)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<>c__DisplayClass39.<BeginInvokeActionMethodWithFilters>b__33()
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass4f.<InvokeActionMethodFilterAsynchronously>b__49()
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<BeginInvokeActionMethodWithFilters>b__36(IAsyncResult asyncResult)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeAction(IAsyncResult asyncResult)
+   em System.Web.Mvc.Controller.<>c__DisplayClass1d.<BeginExecuteCore>b__18(IAsyncResult asyncResult)
+   em System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass4.<MakeVoidDelegate>b__3(IAsyncResult ar)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   em System.Web.Mvc.Controller.EndExecuteCore(IAsyncResult asyncResult)
+   em System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass4.<MakeVoidDelegate>b__3(IAsyncResult ar)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   em System.Web.Mvc.Controller.EndExecute(IAsyncResult asyncResult)
+   em System.Web.Mvc.Controller.System.Web.Mvc.Async.IAsyncController.EndExecute(IAsyncResult asyncResult)
+   em System.Web.Mvc.MvcHandler.<>c__DisplayClass8.<BeginProcessRequest>b__3(IAsyncResult asyncResult)
+   em System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass4.<MakeVoidDelegate>b__3(IAsyncResult ar)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   em System.Web.Mvc.MvcHandler.EndProcessRequest(IAsyncResult asyncResult)
+   em System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.EndProcessRequest(IAsyncResult result)
+   em System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   em System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+
+2015-09-27 21:35:23,686 [11] [ERROR] - DCC.COLAB.Web.MvcApplication: Ocorreu um erro em AutenticacaoUtil.ValidarUsuarioSenha. Detalhes: Resolution of the dependency failed, type = "DCC.COLAB.Business.Entities.UsuarioBusinessFacade", name = "(none)".
+Exception occurred while: Calling constructor DynamicModule.ns.Wrapped_UsuarioBusinessFacade_cbe5cf8236984286a669a47b966eb41c().
+Exception is: ResolutionFailedException - Resolution of the dependency failed, type = "DCC.COLAB.Common.DataAccess.IUsuarioDataAccess", name = "(none)".
+Exception occurred while: Calling constructor DynamicModule.ns.Wrapped_UsuarioDataAccess_41bc9a7e92f343b8b78147f651d1ca86().
+Exception is: ConfigurationErrorsException - An error occurred creating the configuration section handler for system.data: Column 'InvariantName' is constrained to be unique.  Value 'MySql.Data.MySqlClient' is already present. (C:\home\site\wwwroot\web.config line 35)
+-----------------------------------------------
+At the time of the exception, the container was:
+
+  Resolving DCC.COLAB.DataAccess.SQLServer.Entities.UsuarioDataAccess,(none) (mapped from DCC.COLAB.Common.DataAccess.IUsuarioDataAccess, (none))
+  Calling constructor DynamicModule.ns.Wrapped_UsuarioDataAccess_41bc9a7e92f343b8b78147f651d1ca86()
+
+-----------------------------------------------
+At the time of the exception, the container was:
+
+  Resolving DCC.COLAB.Business.Entities.UsuarioBusinessFacade,(none)
+  Calling constructor DynamicModule.ns.Wrapped_UsuarioBusinessFacade_cbe5cf8236984286a669a47b966eb41c()
+ : 
+Server stack trace: 
+   em System.ServiceModel.Channels.ServiceChannel.ThrowIfFaultUnderstood(Message reply, MessageFault fault, String action, MessageVersion version, FaultConverter faultConverter)
+   em System.ServiceModel.Channels.ServiceChannel.HandleReply(ProxyOperationRuntime operation, ProxyRpc& rpc)
+   em System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   em System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   em System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   em DCC.COLAB.Web.Util.AutenticacaoUtil.ValidarUsuarioSenha(String login, String senha) na c:\Users\adlf\Documents\GitHub\dcccolab\trunk\fonts\DCC.COLAB.Web\Util\AutenticacaoUtil.cs:linha 22
+   em DCC.COLAB.Web.Controllers.LoginController.ValidarLogin(String email, String senha) na c:\Users\adlf\Documents\GitHub\dcccolab\trunk\fonts\DCC.COLAB.Web\Controllers\LoginController.cs:linha 32
+   em lambda_method(Closure , ControllerBase , Object[] )
+   em System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)
+   em System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   em System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass42.<BeginInvokeSynchronousActionMethod>b__41()
+   em System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass8`1.<BeginSynchronous>b__7(IAsyncResult _)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<>c__DisplayClass39.<BeginInvokeActionMethodWithFilters>b__33()
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass4f.<InvokeActionMethodFilterAsynchronously>b__49()
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<BeginInvokeActionMethodWithFilters>b__36(IAsyncResult asyncResult)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeAction(IAsyncResult asyncResult)
+   em System.Web.Mvc.Controller.<>c__DisplayClass1d.<BeginExecuteCore>b__18(IAsyncResult asyncResult)
+   em System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass4.<MakeVoidDelegate>b__3(IAsyncResult ar)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   em System.Web.Mvc.Controller.EndExecuteCore(IAsyncResult asyncResult)
+   em System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass4.<MakeVoidDelegate>b__3(IAsyncResult ar)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   em System.Web.Mvc.Controller.EndExecute(IAsyncResult asyncResult)
+   em System.Web.Mvc.Controller.System.Web.Mvc.Async.IAsyncController.EndExecute(IAsyncResult asyncResult)
+   em System.Web.Mvc.MvcHandler.<>c__DisplayClass8.<BeginProcessRequest>b__3(IAsyncResult asyncResult)
+   em System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass4.<MakeVoidDelegate>b__3(IAsyncResult ar)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   em System.Web.Mvc.MvcHandler.EndProcessRequest(IAsyncResult asyncResult)
+   em System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.EndProcessRequest(IAsyncResult result)
+   em System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   em System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+
+2015-09-27 21:39:46,074 [24] [ERROR] - DCC.COLAB.Web.MvcApplication: Ocorreu um erro em AutenticacaoUtil.ValidarUsuarioSenha. Detalhes: Resolution of the dependency failed, type = "DCC.COLAB.Business.Entities.UsuarioBusinessFacade", name = "(none)".
+Exception occurred while: Calling constructor DynamicModule.ns.Wrapped_UsuarioBusinessFacade_cbe5cf8236984286a669a47b966eb41c().
+Exception is: ResolutionFailedException - Resolution of the dependency failed, type = "DCC.COLAB.Common.DataAccess.IUsuarioDataAccess", name = "(none)".
+Exception occurred while: Calling constructor DynamicModule.ns.Wrapped_UsuarioDataAccess_41bc9a7e92f343b8b78147f651d1ca86().
+Exception is: ActivationException - Activation error occured while trying to get instance of type Database, key "defaultDB"
+-----------------------------------------------
+At the time of the exception, the container was:
+
+  Resolving DCC.COLAB.DataAccess.SQLServer.Entities.UsuarioDataAccess,(none) (mapped from DCC.COLAB.Common.DataAccess.IUsuarioDataAccess, (none))
+  Calling constructor DynamicModule.ns.Wrapped_UsuarioDataAccess_41bc9a7e92f343b8b78147f651d1ca86()
+
+-----------------------------------------------
+At the time of the exception, the container was:
+
+  Resolving DCC.COLAB.Business.Entities.UsuarioBusinessFacade,(none)
+  Calling constructor DynamicModule.ns.Wrapped_UsuarioBusinessFacade_cbe5cf8236984286a669a47b966eb41c()
+ : 
+Server stack trace: 
+   em System.ServiceModel.Channels.ServiceChannel.ThrowIfFaultUnderstood(Message reply, MessageFault fault, String action, MessageVersion version, FaultConverter faultConverter)
+   em System.ServiceModel.Channels.ServiceChannel.HandleReply(ProxyOperationRuntime operation, ProxyRpc& rpc)
+   em System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   em System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   em System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   em DCC.COLAB.Web.Util.AutenticacaoUtil.ValidarUsuarioSenha(String login, String senha) na c:\Users\adlf\Documents\GitHub\dcccolab\trunk\fonts\DCC.COLAB.Web\Util\AutenticacaoUtil.cs:linha 22
+   em DCC.COLAB.Web.Controllers.LoginController.ValidarLogin(String email, String senha) na c:\Users\adlf\Documents\GitHub\dcccolab\trunk\fonts\DCC.COLAB.Web\Controllers\LoginController.cs:linha 32
+   em lambda_method(Closure , ControllerBase , Object[] )
+   em System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)
+   em System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   em System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass42.<BeginInvokeSynchronousActionMethod>b__41()
+   em System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass8`1.<BeginSynchronous>b__7(IAsyncResult _)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<>c__DisplayClass39.<BeginInvokeActionMethodWithFilters>b__33()
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass4f.<InvokeActionMethodFilterAsynchronously>b__49()
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<BeginInvokeActionMethodWithFilters>b__36(IAsyncResult asyncResult)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeAction(IAsyncResult asyncResult)
+   em System.Web.Mvc.Controller.<>c__DisplayClass1d.<BeginExecuteCore>b__18(IAsyncResult asyncResult)
+   em System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass4.<MakeVoidDelegate>b__3(IAsyncResult ar)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   em System.Web.Mvc.Controller.EndExecuteCore(IAsyncResult asyncResult)
+   em System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass4.<MakeVoidDelegate>b__3(IAsyncResult ar)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   em System.Web.Mvc.Controller.EndExecute(IAsyncResult asyncResult)
+   em System.Web.Mvc.Controller.System.Web.Mvc.Async.IAsyncController.EndExecute(IAsyncResult asyncResult)
+   em System.Web.Mvc.MvcHandler.<>c__DisplayClass8.<BeginProcessRequest>b__3(IAsyncResult asyncResult)
+   em System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass4.<MakeVoidDelegate>b__3(IAsyncResult ar)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   em System.Web.Mvc.MvcHandler.EndProcessRequest(IAsyncResult asyncResult)
+   em System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.EndProcessRequest(IAsyncResult result)
+   em System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   em System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+
+2015-09-27 23:04:29,246 [34] [ERROR] - DCC.COLAB.Web.MvcApplication: Ocorreu um erro em AutenticacaoUtil.ValidarUsuarioSenha. Detalhes: Resolution of the dependency failed, type = "DCC.COLAB.Business.Entities.UsuarioBusinessFacade", name = "(none)".
+Exception occurred while: Calling constructor DynamicModule.ns.Wrapped_UsuarioBusinessFacade_cbe5cf8236984286a669a47b966eb41c().
+Exception is: ResolutionFailedException - Resolution of the dependency failed, type = "DCC.COLAB.Common.DataAccess.IUsuarioDataAccess", name = "(none)".
+Exception occurred while: Calling constructor DynamicModule.ns.Wrapped_UsuarioDataAccess_41bc9a7e92f343b8b78147f651d1ca86().
+Exception is: ActivationException - Activation error occured while trying to get instance of type Database, key "defaultDB"
+-----------------------------------------------
+At the time of the exception, the container was:
+
+  Resolving DCC.COLAB.DataAccess.SQLServer.Entities.UsuarioDataAccess,(none) (mapped from DCC.COLAB.Common.DataAccess.IUsuarioDataAccess, (none))
+  Calling constructor DynamicModule.ns.Wrapped_UsuarioDataAccess_41bc9a7e92f343b8b78147f651d1ca86()
+
+-----------------------------------------------
+At the time of the exception, the container was:
+
+  Resolving DCC.COLAB.Business.Entities.UsuarioBusinessFacade,(none)
+  Calling constructor DynamicModule.ns.Wrapped_UsuarioBusinessFacade_cbe5cf8236984286a669a47b966eb41c()
+ : 
+Server stack trace: 
+   em System.ServiceModel.Channels.ServiceChannel.ThrowIfFaultUnderstood(Message reply, MessageFault fault, String action, MessageVersion version, FaultConverter faultConverter)
+   em System.ServiceModel.Channels.ServiceChannel.HandleReply(ProxyOperationRuntime operation, ProxyRpc& rpc)
+   em System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   em System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   em System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   em DCC.COLAB.Web.Util.AutenticacaoUtil.ValidarUsuarioSenha(String login, String senha) na c:\Users\adlf\Documents\GitHub\dcccolab\trunk\fonts\DCC.COLAB.Web\Util\AutenticacaoUtil.cs:linha 22
+   em DCC.COLAB.Web.Controllers.LoginController.ValidarLogin(String email, String senha) na c:\Users\adlf\Documents\GitHub\dcccolab\trunk\fonts\DCC.COLAB.Web\Controllers\LoginController.cs:linha 32
+   em lambda_method(Closure , ControllerBase , Object[] )
+   em System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)
+   em System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   em System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass42.<BeginInvokeSynchronousActionMethod>b__41()
+   em System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass8`1.<BeginSynchronous>b__7(IAsyncResult _)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<>c__DisplayClass39.<BeginInvokeActionMethodWithFilters>b__33()
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass4f.<InvokeActionMethodFilterAsynchronously>b__49()
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<BeginInvokeActionMethodWithFilters>b__36(IAsyncResult asyncResult)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeAction(IAsyncResult asyncResult)
+   em System.Web.Mvc.Controller.<>c__DisplayClass1d.<BeginExecuteCore>b__18(IAsyncResult asyncResult)
+   em System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass4.<MakeVoidDelegate>b__3(IAsyncResult ar)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   em System.Web.Mvc.Controller.EndExecuteCore(IAsyncResult asyncResult)
+   em System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass4.<MakeVoidDelegate>b__3(IAsyncResult ar)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   em System.Web.Mvc.Controller.EndExecute(IAsyncResult asyncResult)
+   em System.Web.Mvc.Controller.System.Web.Mvc.Async.IAsyncController.EndExecute(IAsyncResult asyncResult)
+   em System.Web.Mvc.MvcHandler.<>c__DisplayClass8.<BeginProcessRequest>b__3(IAsyncResult asyncResult)
+   em System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass4.<MakeVoidDelegate>b__3(IAsyncResult ar)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   em System.Web.Mvc.MvcHandler.EndProcessRequest(IAsyncResult asyncResult)
+   em System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.EndProcessRequest(IAsyncResult result)
+   em System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   em System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+
+2015-09-27 23:15:44,236 [8] [ERROR] - DCC.COLAB.Web.MvcApplication: Ocorreu um erro em AutenticacaoUtil.ValidarUsuarioSenha. Detalhes: Resolution of the dependency failed, type = "DCC.COLAB.Business.Entities.UsuarioBusinessFacade", name = "(none)".
+Exception occurred while: Calling constructor DynamicModule.ns.Wrapped_UsuarioBusinessFacade_9ea8b19b0c5843a8a8e5c2aa51ae9dc3().
+Exception is: ResolutionFailedException - Resolution of the dependency failed, type = "DCC.COLAB.Common.DataAccess.IUsuarioDataAccess", name = "(none)".
+Exception occurred while: Calling constructor DynamicModule.ns.Wrapped_UsuarioDataAccess_6c44055ed06f45d4978986edadc90770().
+Exception is: ConfigurationErrorsException - An error occurred creating the configuration section handler for system.data: Column 'InvariantName' is constrained to be unique.  Value 'MySql.Data.MySqlClient' is already present. (C:\home\site\wwwroot\web.config line 35)
+-----------------------------------------------
+At the time of the exception, the container was:
+
+  Resolving DCC.COLAB.DataAccess.SQLServer.Entities.UsuarioDataAccess,(none) (mapped from DCC.COLAB.Common.DataAccess.IUsuarioDataAccess, (none))
+  Calling constructor DynamicModule.ns.Wrapped_UsuarioDataAccess_6c44055ed06f45d4978986edadc90770()
+
+-----------------------------------------------
+At the time of the exception, the container was:
+
+  Resolving DCC.COLAB.Business.Entities.UsuarioBusinessFacade,(none)
+  Calling constructor DynamicModule.ns.Wrapped_UsuarioBusinessFacade_9ea8b19b0c5843a8a8e5c2aa51ae9dc3()
+ : 
+Server stack trace: 
+   em System.ServiceModel.Channels.ServiceChannel.ThrowIfFaultUnderstood(Message reply, MessageFault fault, String action, MessageVersion version, FaultConverter faultConverter)
+   em System.ServiceModel.Channels.ServiceChannel.HandleReply(ProxyOperationRuntime operation, ProxyRpc& rpc)
+   em System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   em System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   em System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   em DCC.COLAB.Web.Util.AutenticacaoUtil.ValidarUsuarioSenha(String login, String senha) na c:\Users\adlf\Documents\GitHub\dcccolab\trunk\fonts\DCC.COLAB.Web\Util\AutenticacaoUtil.cs:linha 22
+   em DCC.COLAB.Web.Controllers.LoginController.ValidarLogin(String email, String senha) na c:\Users\adlf\Documents\GitHub\dcccolab\trunk\fonts\DCC.COLAB.Web\Controllers\LoginController.cs:linha 32
+   em lambda_method(Closure , ControllerBase , Object[] )
+   em System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)
+   em System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   em System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass42.<BeginInvokeSynchronousActionMethod>b__41()
+   em System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass8`1.<BeginSynchronous>b__7(IAsyncResult _)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<>c__DisplayClass39.<BeginInvokeActionMethodWithFilters>b__33()
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass4f.<InvokeActionMethodFilterAsynchronously>b__49()
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<BeginInvokeActionMethodWithFilters>b__36(IAsyncResult asyncResult)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   em System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeAction(IAsyncResult asyncResult)
+   em System.Web.Mvc.Controller.<>c__DisplayClass1d.<BeginExecuteCore>b__18(IAsyncResult asyncResult)
+   em System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass4.<MakeVoidDelegate>b__3(IAsyncResult ar)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   em System.Web.Mvc.Controller.EndExecuteCore(IAsyncResult asyncResult)
+   em System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass4.<MakeVoidDelegate>b__3(IAsyncResult ar)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   em System.Web.Mvc.Controller.EndExecute(IAsyncResult asyncResult)
+   em System.Web.Mvc.Controller.System.Web.Mvc.Async.IAsyncController.EndExecute(IAsyncResult asyncResult)
+   em System.Web.Mvc.MvcHandler.<>c__DisplayClass8.<BeginProcessRequest>b__3(IAsyncResult asyncResult)
+   em System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass4.<MakeVoidDelegate>b__3(IAsyncResult ar)
+   em System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   em System.Web.Mvc.MvcHandler.EndProcessRequest(IAsyncResult asyncResult)
+   em System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.EndProcessRequest(IAsyncResult result)
+   em System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   em System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+

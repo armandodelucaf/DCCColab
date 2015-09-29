@@ -13,3 +13,4 @@ C:\Users\adlf\Documents\GitHub\dcccolab\trunk\fonts\DCC.COLAB.WCF.Interface\bin\
 C:\Users\adlf\Documents\GitHub\dcccolab\trunk\fonts\DCC.COLAB.WCF.Interface\obj\Release\DCC.COLAB.WCF.Interface.csprojResolveAssemblyReference.cache
 C:\Users\adlf\Documents\GitHub\dcccolab\trunk\fonts\DCC.COLAB.WCF.Interface\obj\Release\DCC.COLAB.WCF.Interface.dll
 C:\Users\adlf\Documents\GitHub\dcccolab\trunk\fonts\DCC.COLAB.WCF.Interface\obj\Release\DCC.COLAB.WCF.Interface.pdb
+C:\Users\adlf\Documents\GitHub\dcccolab\trunk\fonts\DCC.COLAB.WCF.Interface\bin\Release\MySql.Data.dll

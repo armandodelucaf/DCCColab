@@ -13,3 +13,4 @@ C:\Users\adlf\Documents\GitHub\dcccolab\trunk\fonts\DCC.COLAB.Common\obj\Release
 C:\Users\adlf\Documents\GitHub\dcccolab\trunk\fonts\DCC.COLAB.Common\obj\Release\DCC.COLAB.Common.csproj.GenerateResource.Cache
 C:\Users\adlf\Documents\GitHub\dcccolab\trunk\fonts\DCC.COLAB.Common\obj\Release\DCC.COLAB.Common.dll
 C:\Users\adlf\Documents\GitHub\dcccolab\trunk\fonts\DCC.COLAB.Common\obj\Release\DCC.COLAB.Common.pdb
+C:\Users\adlf\Documents\GitHub\dcccolab\trunk\fonts\DCC.COLAB.Common\bin\Release\MySql.Data.dll
