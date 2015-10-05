@@ -17,3 +17,4 @@ C:\Users\adlf\Documents\GitHub\dcccolab\trunk\fonts\DCC.COLAB.Web\bin\Facebook.x
 C:\Users\adlf\Documents\GitHub\dcccolab\trunk\fonts\DCC.COLAB.Web\obj\Release\DCC.COLAB.Web.csprojResolveAssemblyReference.cache
 C:\Users\adlf\Documents\GitHub\dcccolab\trunk\fonts\DCC.COLAB.Web\obj\Release\DCC.COLAB.Web.dll
 C:\Users\adlf\Documents\GitHub\dcccolab\trunk\fonts\DCC.COLAB.Web\obj\Release\DCC.COLAB.Web.pdb
+C:\Users\adlf\Documents\GitHub\dcccolab\trunk\fonts\DCC.COLAB.Web\bin\MySql.Data.dll

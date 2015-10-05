@@ -67,6 +67,14 @@ namespace DCC.COLAB.DataAccess.SQLServer.Entities
         
         }
 
+        public List<Turma> SelecionarTurmasPorIdProfessor(int id)
+        {
+            Hashtable parametros = new Hashtable();
+            parametros.Add("ID_PROFESSOR", id);
+            return this.SelecionarPorNomeQuery("selecionarTurmasPorIdProfessor", parametros, this.RecuperaObjeto).Cast<Turma>().ToList();
+
+        }
+
         public void InserirProfessorTurma(int idTurma, int idProfessor)
         {
             try

@@ -258,6 +258,22 @@
         TP.id_Turma = @ID_TURMA
       ORDER BY U.nm_Usuario
     </selecionarProfessoresPorIdTurma>
+    <selecionarTurmasPorIdProfessor>
+      SELECT
+        T.id_Turma,
+        T.cd_Turma,
+        T.nu_Ano,
+        T.nu_Semestre,
+        T.id_Disciplina,
+        D.nm_Disciplina
+      FROM
+        dcccolab.Turma_Professor TP
+        INNER JOIN dcccolab.Turma T ON T.id_Turma = TP.id_Turma
+        INNER JOIN dcccolab.Disciplina D on D.id_Disciplina = T.id_Disciplina
+      WHERE
+        TP.id_Professor = @ID_PROFESSOR
+      ORDER BY D.nm_Disciplina
+    </selecionarTurmasPorIdProfessor>
     <inserirProfessorTurma>
       INSERT INTO dcccolab.Turma_Professor (id_Turma, id_Professor) VALUES (@ID_TURMA, @ID_PROFESSOR)
     </inserirProfessorTurma>

@@ -246,9 +246,12 @@
     <Content Include="Content\img\bt_excluir_off.gif" />
     <Content Include="Content\img\bt_noticia.gif" />
     <Content Include="Content\img\dcccolab_logo.png" />
+    <Content Include="Content\img\dcccolab_logo_pb.png" />
     <Content Include="Content\img\ic_camera.gif" />
     <Content Include="Content\img\ic_camera_off.gif" />
     <Content Include="Content\img\ic_configurar.png" />
+    <Content Include="Content\img\ic_dcc.png" />
+    <Content Include="Content\img\ic_dcc_pb.png" />
     <Content Include="Content\img\ic_estrela_preenchida.png" />
     <Content Include="Content\img\ic_estrela_vazada.png" />
     <Content Include="Content\img\ic_excluir.png" />
@@ -263,10 +266,19 @@
     <Content Include="Content\img\Loading\Fig6.gif" />
     <Content Include="Content\img\Loading\Fig7.gif" />
     <Content Include="Content\img\Loading\Fig8.gif" />
+    <Content Include="Content\img\minimonitor.png" />
+    <Content Include="Content\img\miniprofessor.png" />
+    <Content Include="Content\img\ministar.png" />
+    <Content Include="Content\img\monitor.png" />
+    <Content Include="Content\img\nostar.png" />
     <Content Include="Content\img\pdf.jpg" />
+    <Content Include="Content\img\professor.png" />
+    <Content Include="Content\img\star.png" />
     <Content Include="Content\img\template1.png" />
     <Content Include="Content\img\template2.png" />
     <Content Include="Content\img\template3.png" />
+    <Content Include="Content\img\txt_dcc.png" />
+    <Content Include="Content\img\txt_dcc_pb.png" />
     <Content Include="Content\js\base64-binary.js" />
     <Content Include="Content\img\thumbnail_pdf.jpg" />
     <Content Include="Content\img\usuario_feminino.png" />
@@ -868,6 +880,8 @@
     <Content Include="Views\Disciplina\Consulta.cshtml" />
     <Content Include="Views\Tema\Consulta.cshtml" />
     <Content Include="Views\Turma\Consulta.cshtml" />
+    <Content Include="Views\Home\Disciplina.cshtml" />
+    <Content Include="Views\Home\Professor.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

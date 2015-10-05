@@ -1,0 +1,131 @@
+﻿@using DCC.COLAB.Common.Entities;
+
+@{
+    Disciplina disciplina = Convert.ChangeType(ViewBag.disciplina, typeof(Disciplina));
+    List<Tema> listaTemas = Convert.ChangeType(ViewBag.listaTemas, typeof(List<Tema>));
+}
+
+<html>
+    <body>
+        <div>
+            <h3>@disciplina.nome</h3>
+
+            <div class="form-group"></div>
+
+            <div class="col-md-6 text-left">
+                <div>
+                    <h4>Prova 1</h4>
+                    <div id="divProvas1" class="list-group">
+                        <a href="#" class="list-group-item">
+                            <span class="badge">
+                                <img src="~/Content/img/ministar.png" alt="1"/>
+                                <img src="~/Content/img/ministar.png" alt="2"/>
+                                <img src="~/Content/img/ministar.png" alt="3"/>
+                                <img src="~/Content/img/ministar.png" alt="4"/>
+                            </span>
+                            <span class="badge">
+                                <img src="~/Content/img/minimonitor.png" alt="Monitor Recomenda"/>
+                            </span>
+                            2014/2 - Joãozinho 30
+                            
+                        </a>
+                        <a href="#" class="list-group-item">
+                            <span class="badge">
+                                <img src="~/Content/img/ministar.png" alt="1"/>
+                                <img src="~/Content/img/ministar.png" alt="2"/>
+                            </span>
+                            2014/1 - Joãozinho 30
+                        </a>
+                        <a href="#" class="list-group-item">
+                            <span class="badge">
+                                <img src="~/Content/img/ministar.png" alt="1"/>
+                                <img src="~/Content/img/ministar.png" alt="2"/>
+                                <img src="~/Content/img/ministar.png" alt="3"/>
+                            </span>
+                            2013/2 - Carlinhos de Jesus
+                        </a>
+                        <a href="#" class="list-group-item">
+                            <span class="badge">
+                                <img src="~/Content/img/ministar.png" alt="1"/>
+                                <img src="~/Content/img/ministar.png" alt="2"/>
+                                <img src="~/Content/img/ministar.png" alt="3"/>
+                                <img src="~/Content/img/ministar.png" alt="4"/>
+                                <img src="~/Content/img/ministar.png" alt="5"/>
+                            </span>
+                            <span class="badge">
+                                <img src="~/Content/img/minimonitor.png" alt="Monitor Recomenda"/>
+                            </span>
+                            <span class="badge">
+                                <img src="~/Content/img/miniprofessor.png" alt="Professor Recomenda"/>
+                            </span>
+                            2013/1 - Carlinhos de Jesus
+                        </a>
+                    </div>
+                </div>
+
+                <div>
+                    <h4>Prova 2</h4>
+                    <div id="divProvas2" class="list-group">
+                        <a href="#" class="list-group-item">
+                            <span class="badge">
+                                <img src="~/Content/img/ministar.png" alt="1"/>
+                                <img src="~/Content/img/ministar.png" alt="2"/>
+                                <img src="~/Content/img/ministar.png" alt="3"/>
+                            </span>
+                            <span class="badge">
+                                <img src="~/Content/img/minimonitor.png" alt="Monitor Recomenda"/>
+                            </span>
+                            2014/2 - Joãozinho 30
+                        </a>
+                        <a href="#" class="list-group-item">
+                            <span class="badge">
+                                <img src="~/Content/img/ministar.png" alt="1"/>
+                                <img src="~/Content/img/ministar.png" alt="2"/>
+                                <img src="~/Content/img/ministar.png" alt="3"/>
+                                <img src="~/Content/img/ministar.png" alt="4"/>
+                            </span>
+                            <span class="badge">
+                                <img src="~/Content/img/minimonitor.png" alt="Monitor Recomenda"/>
+                            </span>
+                            <span class="badge">
+                                <img src="~/Content/img/miniprofessor.png" alt="Professor Recomenda"/>
+                            </span>
+                            2014/1 - Joãozinho 30
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 text-center">
+                <div>
+                    <h4>Temas</h4>
+                    <div id="divTemas" class="list-group">
+                        <a href="#" class="list-group-item active">
+                            <span class="badge">50</span>
+                            TODOS
+                        </a>
+                    @for (int i = 0; i < listaTemas.Count; i++)
+                    {
+                        <a href="#" class="list-group-item">
+                            <span class="badge">14</span>
+                            @listaTemas[i].nome
+                        </a>
+                    }
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </body>
+</html>
+
+<script>
+    $(document).ready(function () {
+    });
+
+    $('#divTemas .list-group-item').click(function () {
+        $('#divTemas .list-group-item.active').removeClass('active');
+        $(this).addClass('active');
+    });
+
+</script>

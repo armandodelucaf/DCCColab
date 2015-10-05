@@ -68,7 +68,7 @@
                                     {
                                         if (disciplina.periodoRecomendado == i)
                                         {
-                                            <li><a href="#" title="10 provas">@disciplina.nome <span class="badge">10</span></a></li>
+                                            <li><a href="~/Home/Disciplina/@disciplina.id" title="10 provas">@disciplina.nome <span class="badge">10</span></a></li>
                                         }
                                     }
                                     </ul>
@@ -83,7 +83,7 @@
                                     {
                                         if (disciplina.periodoRecomendado == i)
                                         {
-                                            <li><a href="#" title="10 provas"><span class="badge">10</span> @disciplina.nome</a></li>
+                                            <li><a href="~/Home/Disciplina/@disciplina.id" title="10 provas"><span class="badge">10</span> @disciplina.nome</a></li>
                                         }
                                     }
                                     </ul>
@@ -99,7 +99,7 @@
                                 <ul>
                                 @for (int i = 0; i < qtdEletivas / 2; i++)
                                 {
-                                    <li><a href="#" title="10 provas">@listaEletivas[i].nome <span class="badge">10</span></a></li>
+                                    <li><a href="~/Home/Disciplina/@listaEletivas[i].id" title="10 provas">@listaEletivas[i].nome <span class="badge">10</span></a></li>
                                 }
                                 </ul>
                             </nav>
@@ -107,7 +107,7 @@
                                 <ul>
                                 @for (int i = qtdEletivas / 2; i < qtdEletivas; i++)
                                 {
-                                    <li><a href="#" title="10 provas"><span class="badge">10</span> @listaEletivas[i].nome</a></li>
+                                    <li><a href="~/Home/Disciplina/@listaEletivas[i].id" title="10 provas"><span class="badge">10</span> @listaEletivas[i].nome</a></li>
                                 }
                                 </ul>
                             </nav>	
@@ -121,7 +121,7 @@
                             <ul>
                             @for (int i = 0; i < qtdProfessores / 2; i++)
                             {
-                                <li><a href="#" title="10 provas">@listaProfessores[i].nome <span class="badge">10</span></a></li>
+                                <li><a href="~/Home/Professor/@listaProfessores[i].id" title="10 provas">@listaProfessores[i].nome <span class="badge">10</span></a></li>
                             }
                             </ul>
                         </nav>
@@ -129,7 +129,7 @@
                             <ul>
                             @for (int i = qtdProfessores / 2; i < qtdProfessores; i++)
                             {
-                                <li><a href="#" title="10 provas"><span class="badge">10</span> @listaProfessores[i].nome</a></li>
+                                <li><a href="~/Home/Professor/@listaProfessores[i].id" title="10 provas"><span class="badge">10</span> @listaProfessores[i].nome</a></li>
                             }
                             </ul>
                         </nav>	

@@ -153,6 +153,9 @@ namespace DCC.COLAB.WCF.Interface
         [OperationContract]
         void ExcluirTurma(int codigo);
 
+        [OperationContract]
+        List<Turma> SelecionarTurmasPorIdProfessor(int id);
+
         #endregion
 
     }

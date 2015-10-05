@@ -8,7 +8,7 @@
         var siteRoot = '@ViewData["siteRoot"]';
     </script>
 
-    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <link href="~/Content/img/ic_dcc.png" rel="shortcut icon" type="image/x-icon" />
     <meta name="viewport" content="width=device-width" />
 
     @Styles.Render("~/Content/css/font-awesome.min.css")
@@ -76,57 +76,20 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <img src="~/Content/img/img_dcc.png" style="width:40px;"/>
-                <a class="navbar-brand" href="#" style="float: right">DCC COLAB</a>
+                <a href="~/Home/Index">
+                    <img src="~/Content/img/ic_dcc_pb.png" style="height:40px;"/>
+                    <img src="~/Content/img/txt_dcc_pb.png" style="float: right"/>
+                </a>
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Administração<span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu">
-                            <li><a href="@Url.Action("Consulta", "PerfisAcesso")">Perfis de Acesso</a></li>
+                            <li><a href="@Url.Action("Consulta", "Disciplina")">Disciplinas</a></li>
+                            <li><a href="@Url.Action("Consulta", "Tema")">Temas</a></li>
+                            <li><a href="@Url.Action("Consulta", "Turma")">Turmas</a></li>
                             <li><a href="@Url.Action("Consulta", "Usuario")">Usuários</a></li>
-                            <li class="divider"></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Acesso Aluno<span class="caret"></span></a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li><a href="@Url.Action("Consulta", "Disciplina")">Disciplinas</a></li>
-                            <li><a href="@Url.Action("Consulta", "Documento")">Documentos</a></li>
-                            <li><a href="@Url.Action("Consulta", "Professor")">Professores</a></li>
-                            <li><a href="@Url.Action("Consulta", "Tema")">Temas</a></li>
-                            <li class="divider"></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Acesso Monitor<span class="caret"></span></a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li><a href="@Url.Action("Consulta", "Disciplina")">Disciplinas</a></li>
-                            <li><a href="@Url.Action("Consulta", "Documento")">Documentos</a></li>
-                            <li><a href="@Url.Action("Consulta", "Professor")">Professores</a></li>
-                            <li><a href="@Url.Action("Consulta", "Tema")">Temas</a></li>
-                            <li class="divider"></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Acesso Professor<span class="caret"></span></a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li><a href="@Url.Action("Consulta", "Disciplina")">Disciplinas</a></li>
-                            <li><a href="@Url.Action("Consulta", "Documento")">Documentos</a></li>
-                            <li><a href="@Url.Action("Consulta", "Professor")">Professores</a></li>
-                            <li><a href="@Url.Action("Consulta", "Tema")">Temas</a></li>
-                            <li class="divider"></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Visão Geral<span class="caret"></span></a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li><a href="@Url.Action("Consulta", "Disciplina")">Disciplinas</a></li>
-                            <li><a href="@Url.Action("Consulta", "Documento")">Documentos</a></li>
-                            <li><a href="@Url.Action("Consulta", "Professor")">Professores</a></li>
-                            <li><a href="@Url.Action("Consulta", "Tema")">Temas</a></li>
-                            <li class="divider"></li>
                         </ul>
                     </li>
                     <li><a href="@Url.Action("Consulta", "Info")">Sobre o projeto</a></li>

@@ -21,6 +21,8 @@ namespace DCC.COLAB.Common.DataAccess
 
         List<Usuario> SelecionarProfessoresPorIdTurma(int id);
 
+        List<Turma> SelecionarTurmasPorIdProfessor(int id);
+
         void InserirProfessorTurma(int idTurma, int idProfessor);
 
         void ExcluirProfessorTurma(int idTurma);

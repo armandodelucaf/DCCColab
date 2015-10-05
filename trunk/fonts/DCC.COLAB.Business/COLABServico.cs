@@ -308,6 +308,13 @@ namespace DCC.COLAB.Business
             turmaBusinessFacade.ExcluirTurma(codigo);
         }
 
+        [OperationBehavior(Impersonation = ImpersonationOption.Allowed)]
+        public List<Turma> SelecionarTurmasPorIdProfessor(int id)
+        {
+            TurmaBusinessFacade turmaBusinessFacade = BusinessFactory.GetInstance().Get<TurmaBusinessFacade>();
+            return turmaBusinessFacade.SelecionarTurmasPorIdProfessor(id);
+        }
+
         #endregion
     }
 }

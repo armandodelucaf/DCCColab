@@ -144,5 +144,17 @@ namespace DCC.COLAB.Business.Entities
                 throw ex;
             }
         }
+
+        public virtual List<Turma> SelecionarTurmasPorIdProfessor(int id)
+        {
+            try
+            {
+                return dataAccess.SelecionarTurmasPorIdProfessor(id);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }
