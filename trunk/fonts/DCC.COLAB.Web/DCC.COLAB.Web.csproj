@@ -882,6 +882,7 @@
     <Content Include="Views\Turma\Consulta.cshtml" />
     <Content Include="Views\Home\Disciplina.cshtml" />
     <Content Include="Views\Home\Professor.cshtml" />
+    <Content Include="Views\Home\Prova.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -38,7 +38,7 @@ namespace DCC.COLAB.Web.Controllers
             }
             catch (Exception ex)
             {
-                return ThrowJsonError("Não foi possível obter as informações do registro desejado.", ex);
+                return ThrowJsonError("Não foi possível obter as informações da disciplina desejada.", ex);
             }
         }
 
@@ -65,7 +65,7 @@ namespace DCC.COLAB.Web.Controllers
             }
             catch (Exception ex)
             {
-                return ThrowJsonError("Não foi possível obter as informações do registro desejado.", ex);
+                return ThrowJsonError("Não foi possível obter as informações do professor desejado.", ex);
             }
         }
 
@@ -75,5 +75,17 @@ namespace DCC.COLAB.Web.Controllers
             return Json(listaTemas, JsonRequestBehavior.AllowGet);
         }
 
+        public ActionResult Prova(int id)
+        {
+            try
+            {
+                //ViewBag.prova = WCFDispatcher<ICOLABServico>.UseService(u => u.SelecionarDocumentoPorCodigo(id));
+                return View();
+            }
+            catch (Exception ex)
+            {
+                return ThrowJsonError("Não foi possível obter as informações da prova desejada.", ex);
+            }
+        }
     }
 }

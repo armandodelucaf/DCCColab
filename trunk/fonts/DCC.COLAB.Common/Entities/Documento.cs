@@ -49,6 +49,8 @@ namespace DCC.COLAB.Common.Entities
             }
             private set { }
         }
+
+        public object id { get; set; }
     }
 
     public class DocumentoComparador : IEqualityComparer<Documento>

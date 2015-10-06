@@ -22,12 +22,12 @@
                             Já sabemos o que você procura, mas como você quer encontrar a informação?
                         </h3>
 
-                        <div class="col-md-6 text-right">
+                        <div class="col-xs-6 text-right">
                             <button id="btnDisciplina" name="btnDisciplina" class="btn btn-primary">
                                 Por Disciplina
                             </button>
                         </div>
-                        <div class="col-md-6 text-left">
+                        <div class="col-xs-6 text-left">
                             <button id="btnProfessor" name="btnProfessor" class="btn btn-primary">
                                 Por Professor
                             </button>
@@ -38,15 +38,15 @@
 
             <div id="divHomeConteudo">
                 <div id="divDisciplinas" class="collapse">
-                    <div class="col-md-12 text-center">
-                        <div class="col-md-6 text-right">
+                    <div class="col-xs-12 text-center">
+                        <div class="col-xs-6 text-right">
                             <h4 class="tituloCentralizado" id="titObrigatorias">
                                 <a href="#" id="aObrigatorias">
                                     <label class="glyphicon glyphicon-chevron-up"></label>
                                 Obrigatórias</a>
                             </h4>
                         </div>
-                        <div class="col-md-6 text-left">
+                        <div class="col-xs-6 text-left">
                             <h4 class="tituloCentralizado" id="titEletivas">
                                 <a href="#" id="aEletivas">
                                     <label class="glyphicon glyphicon-chevron-down"></label>
@@ -61,7 +61,7 @@
                         if (i % 2 == 1)
                         { 
                             @:<div class="row">
-                                <div class="navPeriodoImpar text-right col-md-6">
+                                <div class="navPeriodoImpar text-right col-xs-12 col-sm-6">
                                     <h4>@(i)º Período</h4>
                                     <ul>
                                     @foreach (Disciplina disciplina in listaDisciplinas)
@@ -76,7 +76,7 @@
                         }
                         else
                         {
-                                <div class="navPeriodoPar text-left col-md-6">
+                                <div class="navPeriodoPar text-left col-xs-12 col-sm-6">
                                     <h4>@(i)º Período</h4>
                                     <ul>
                                     @foreach (Disciplina disciplina in listaDisciplinas)
@@ -95,7 +95,7 @@
                     
                     <div id="disciplinasEletivas" class="collapse">
                         <div class="col-md-12 text-center">
-                            <nav class="navPeriodoImpar col-md-6 text-right">
+                            <nav class="navPeriodoImpar col-sm-6 text-right">
                                 <ul>
                                 @for (int i = 0; i < qtdEletivas / 2; i++)
                                 {
@@ -103,7 +103,7 @@
                                 }
                                 </ul>
                             </nav>
-                            <nav class="navPeriodoPar col-md-6 text-left">
+                            <nav class="navPeriodoPar col-sm-6 text-left">
                                 <ul>
                                 @for (int i = qtdEletivas / 2; i < qtdEletivas; i++)
                                 {
@@ -115,9 +115,9 @@
                     </div>
                 </div>
                 <div id="divProfessores" class="collapse">
-                    <div class="col-md-12 text-center">
+                    <div class="col-xs-12 text-center">
                         <h3 class="tituloCentralizado">Professores</h3>
-                        <nav class="navPeriodoImpar col-md-6 text-right">
+                        <nav class="navPeriodoImpar col-xs-6 text-right">
                             <ul>
                             @for (int i = 0; i < qtdProfessores / 2; i++)
                             {
@@ -125,7 +125,7 @@
                             }
                             </ul>
                         </nav>
-                        <nav class="navPeriodoPar col-md-6 text-left">
+                        <nav class="navPeriodoPar col-xs-6 text-left">
                             <ul>
                             @for (int i = qtdProfessores / 2; i < qtdProfessores; i++)
                             {
