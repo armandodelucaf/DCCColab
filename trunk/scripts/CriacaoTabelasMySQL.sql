@@ -5,6 +5,7 @@ DROP TABLE IF EXISTS `Perfil_Acesso`;
 DROP TABLE IF EXISTS `Disciplina`;
 DROP TABLE IF EXISTS `Tema`;
 DROP TABLE IF EXISTS `Disciplina_Professor`;
+DROP TABLE IF EXISTS `Tipo_Prova`;
 DROP TABLE IF EXISTS `Prova`;
 DROP TABLE IF EXISTS `Conteudo_Prova`;
 DROP TABLE IF EXISTS `Conteudo_Tema`;
@@ -97,22 +98,34 @@ CREATE TABLE `Turma_Professor`(
 	CONSTRAINT FOREIGN KEY (id_Professor) REFERENCES `Usuario` (id_Usuario)
 );
 
+CREATE TABLE `Tipo_Prova`(
+	`id_Tipo_Prova` int AUTO_INCREMENT NOT NULL,
+	`nm_Tipo_Prova` varchar(64) NOT NULL,
+	
+	CONSTRAINT `PK_Tipo_Prova` PRIMARY KEY 
+	(`id_Tipo_Prova`) ,
+	
+	CONSTRAINT `UQ_Tipo_Prova` UNIQUE 
+	(`nm_Tipo_Prova`) 
+);
+
 CREATE TABLE `Prova`(
 	`id_Prova` int AUTO_INCREMENT NOT NULL,
-	`src` varchar(255) NOT NULL,
-	`descricao` varchar(255) NOT NULL,
+	`src` longblob NOT NULL,
+	`titulo` varchar(100) NULL,
+	`descricao` varchar(255) NULL,
 	`id_Usuario` int NOT NULL,
-	`id_Disciplina` int NOT NULL,
-	`id_Professor` int NOT NULL,
+	`id_Turma` int NOT NULL,
+	`id_Tipo_Prova` int NOT NULL,
 	
 	CONSTRAINT `PK_Prova` PRIMARY KEY 
 	(`id_Prova`) ,
 	
 	CONSTRAINT FOREIGN KEY (id_Usuario) REFERENCES `Usuario` (id_Usuario),
 	
-	CONSTRAINT FOREIGN KEY (id_Professor) REFERENCES `Usuario` (id_Usuario),
+	CONSTRAINT FOREIGN KEY (id_Turma) REFERENCES `Turma` (id_Turma),
 	
-	CONSTRAINT FOREIGN KEY (id_Disciplina) REFERENCES `Disciplina` (id_Disciplina)
+	CONSTRAINT FOREIGN KEY (id_Tipo_Prova) REFERENCES `Tipo_Prova` (id_Tipo_Prova)
 );
 
 CREATE TABLE `Conteudo_Prova`(

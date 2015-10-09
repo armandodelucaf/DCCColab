@@ -184,15 +184,12 @@
     <Compile Include="Controllers\TurmaController.cs" />
     <Compile Include="Controllers\TemaController.cs" />
     <Compile Include="Controllers\DisciplinaController.cs" />
-    <Compile Include="Controllers\DocumentoController.cs" />
+    <Compile Include="Controllers\ProvaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
-    </Compile>
-    <Compile Include="Handlers\RecuperaDocumento.ashx.cs">
-      <DependentUpon>RecuperaDocumento.ashx</DependentUpon>
     </Compile>
     <Compile Include="obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
     <Compile Include="obj\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
@@ -872,8 +869,6 @@
     <Content Include="Views\Shared\_LoginLayout.cshtml" />
     <Content Include="log4net.config" />
     <Content Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
-    <Content Include="Views\Documento\Consulta.cshtml" />
-    <Content Include="Handlers\RecuperaDocumento.ashx" />
     <Content Include="Views\Usuario\Consulta.cshtml" />
     <None Include="Properties\PublishProfiles\dcccolab - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\dcccolab - Web Deploy.pubxml" />
@@ -883,9 +878,11 @@
     <Content Include="Views\Home\Disciplina.cshtml" />
     <Content Include="Views\Home\Professor.cshtml" />
     <Content Include="Views\Home\Prova.cshtml" />
+    <Content Include="Views\Prova\Consulta.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Handlers\" />
     <Folder Include="obj\Debug\TempPE\" />
   </ItemGroup>
   <ItemGroup>

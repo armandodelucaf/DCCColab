@@ -1,13 +1,13 @@
 ﻿@using DCC.COLAB.Common.Entities;
 
 @{
-    Documento prova = Convert.ChangeType(ViewBag.prova, typeof(Documento));
+    Prova prova = Convert.ChangeType(ViewBag.prova, typeof(Prova));
 }
 
 <html>
     <body>
         <div>
-            <!--<h3>@prova.codigo</h3>-->
+            <!--<h3>@prova.id</h3>-->
 
             <div class="col-xs-12 col-md-6 text-center">
 		        <h4>disciplina - prova - ano/período - professor</h4>
@@ -30,7 +30,7 @@
             <div id="comentarios" class="col-xs-12 col-md-6">
                 <!-- essa é a linha da magia. tem que rolar aqui um tratamento pra que ele coloque sempre um endereço único
                     é esse endereço único que é puxado para carregar os comentários do facebook p/ cada pag -->
-		        <!-- <div class="fb-comments" data-href="~/Home/Prova/@prova.codigo" data-numposts="5"></div> -->
+		        <!-- <div class="fb-comments" data-href="~/Home/Prova/@prova.id" data-numposts="5"></div> -->
                 <div class="fb-comments" data-href="~/Home/Prova/1" data-numposts="5"></div>
 	        </div>
         </div>
@@ -44,7 +44,7 @@
     window.onload = function (){
       
         var caminho = {
-            //url: "pdf/pdf"@prova.codigo".pdf",
+            //url: "pdf/pdf"@prova.id".pdf",
             url: "pdf/pdf1.pdf",
             width: "100%",
             height: "700px"

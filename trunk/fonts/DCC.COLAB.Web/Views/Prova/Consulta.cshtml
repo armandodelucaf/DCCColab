@@ -1,0 +1,307 @@
+﻿@using DCC.COLAB.Common.AuxiliarEntities;
+@using DCC.COLAB.Common.Entities;
+
+@{
+    List<TipoProva> listaTipos = Convert.ChangeType(ViewBag.listaTipos, typeof(List<TipoProva>));
+    List<Turma> listaTurmas = Convert.ChangeType(ViewBag.listaTurmas, typeof(List<Turma>));
+}
+
+<div>
+    <legend>Provas - Consulta</legend>
+
+    <table id="tabelaProvas" class="table hover table-bordered" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Título</th>
+                <th>Tipo</th>
+                <th>Turma</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+    </table>
+
+    <div class="form-group">
+        <div>
+            <button id="btnNovo" name="btnNovo" class="btn btn-primary">Nova prova</button>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="cadastroDeProva" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="modalProvaLabel"></h4>
+            </div>
+            <div class="modal-body" style="overflow-y: inherit !important;">
+                <form>
+                    <input type="hidden" id="hdIdProva" value="" />
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="txtTitulo" class="control-label">Título:</label>
+                                <input id="txtTitulo" name="txtTitulo" type="text" placeholder="Título da prova" class="form-control input-md" value="" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" id="divInputProva">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="inputProvas" class="control-label">Prova:</label>
+                                <input id="inputProvas" type="file" class="file" accept="application/pdf" data-show-preview="false" data-show-upload="false" required />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="txtDescricao" class="control-label">Descrição:</label>
+                                <textarea id="txtDescricao" name="txtDescricao" placeholder="Descrição da prova" class="form-control input-md"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="selectTipo" class="control-label">Tipo:</label>
+                                <select id="selectTipo" class="form-control input-md" required>
+                                    <option value="0">Selecione um tipo</option>
+                                    @foreach (TipoProva tipo in listaTipos)
+                                    {
+                                        <option value="@tipo.id">@tipo.nome</option>
+                                    }                                    
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="selectTurma" class="control-label">Turma:</label>
+                                <select id="selectTurma" class="form-control input-md" required>
+                                    <option value="0">Selecione uma turma</option>
+                                    @foreach (Turma turma in listaTurmas)
+                                    {
+                                        <option value="@turma.id">@turma.tableString</option>
+                                    }                                     
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    @*<input id="hdTags" name="hdTags" type="hidden" value="" />
+                        
+                    <div class="col-md-6">
+                        <div class="form-group ui-front">
+                            <label for="tagsDocumento" class="control-label">Tags:</label>
+                            <textarea id="tagsDocumento" name="tagsDocumento" placeholder="Digite aqui as tags em português para o documento" class="form-control input-md"></textarea>
+                        </div>
+                    </div>*@
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                <button type="button" class="btn btn-success" id="btnSalvar">Salvar prova</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section scripts
+{
+    <script type="text/javascript">
+        var CarregarProvaParaEdicao = function (idProva) {
+            SRV.ChamarAjax('@Url.Action("ObterProva", "Prova")', { codigo: idProva }, CarregarProvaParaEdicao_cb);
+        };
+
+        var CarregarProvaParaEdicao_cb = function (json) {
+            $('#modalProvaLabel').text('Editar Prova');
+            $("#hdIdProva").val(json.id);
+            $('#txtTitulo').val(json.titulo);
+            $('#txtDescricao').val(json.descricao);
+            $('#selectTipo').val(json.tipo.id);
+            $('#selectTurma').val(json.turma.id);
+
+            $('#divInputProva').addClass('hide');
+            $('#cadastroDeProva').modal();
+        };
+
+        $('#btnSalvar').click(function () {
+            var id = parseInt($("#hdIdProva").val());
+            if (id == 0) {
+                SalvarInsercao();
+            }
+            else {
+                SalvarEdicao(id);
+            }
+        });
+
+        var SalvarEdicao = function (id) {
+            var titulo = $.trim($('#txtTitulo').val());
+            var descricao = $.trim($('#txtDescricao').val());
+            var tipo = parseInt($('#selectTipo').val());
+            var turma = parseInt($('#selectTurma').val());
+
+            if (!tipo) {
+                Msg.error('O campo "Tipo" é obrigatório. Favor verificar a seleção do mesmo.', 4000);
+            }
+            else if (!turma) {
+                Msg.error('O campo "Turma" é obrigatório. Favor verificar a seleção do mesmo.', 4000);
+            }
+            else {
+                var params = {
+                    'id': id,
+                    'titulo': titulo,
+                    'descricao': descricao,
+                    'tipo': { 'id': tipo, 'nome': $('#selectTipo option:selected').text() },
+                    'turma': { 'id': turma }
+                }
+
+                var formData = new FormData();
+                formData.append("prova", JSON.stringify(params));
+                SRV.ChamarHttpRequest('@Url.Action("Salvar", "Prova")', formData, Salvar_cb);
+            }
+        };
+
+        var ExcluirProva = function (idProva) {
+            $.confirm({
+                title: "Confirmação",
+                text: "Deseja realmente excluir esta prova?",
+                confirm: function () {
+                    ExcluirProvaAjax(idProva);
+                },
+                cancel: function () {
+                    // nothing to do
+                },
+                confirmButton: "Sim",
+                cancelButton: "Não",
+                post: true
+            });
+        };
+
+        var ExcluirProvaAjax = function (id) {
+            SRV.ChamarAjax('@Url.Action("Excluir", "Prova")', { id: id }, SucessoExcluir_cb);
+        };
+
+        var SucessoExcluir_cb = function (json) {
+            Msg.success("Exclusão realizada com sucesso.", 3000);
+            AtualizarListagem();
+        };
+
+        var AtualizarListagem = function () {
+            $('#tabelaProvas').dataTable().fnDraw(false);
+        };
+        
+        var InicializarListagem = function () {
+            $('#tabelaProvas').dataTable({
+                columns: [
+                    { "data": "id", "name": "P.id_Prova" },
+                    { "data": "titulo", "name": "P.titulo" },
+                    { "data": "tipo.nome", "name": "TP.nm_Tipo_Prova" },
+                    { "data": "turma.tableString" },
+                    { "data": "" }
+                ],
+                columnDefs: [
+                    { targets: 0, visible: false, orderable: false, searchable: false },
+                    { targets: 3, orderable: false },
+                    {
+                        targets: 4, orderable: false, searchable: false, width: "80px", sClass: "alignCenter", render: function (data, type, row) {
+                            var acoes = "";
+                            acoes += "<a href='#' onClick='VisualizarPDF(" + row["id"] + ")'><img width='15px' title='visualizar pdf' alt='Visualizar PDF' src='/../Content/img/pdf.jpg' class='rowConfigureIcon'/></a>";
+                            acoes += "&nbsp;&nbsp;";
+                            acoes += "<a href='#' onClick='CarregarProvaParaEdicao(" + row["id"] + ")'><img width='15px' title='editar' alt='Editar' src='/../Content/img/ic_editar.png' class='rowEditIcon'/></a>";
+                            acoes += "&nbsp;&nbsp;";
+                            acoes += "<a href='#' onClick='ExcluirProva(" + row["id"] + ")'><img width='15px' title='excluir' alt='Excluir' src='/../Content/img/bt_excluir.gif' class='rowDeleteIcon' id='" + row["id"] + "'/></a>";
+                            return acoes;
+                        }
+                    },
+                ],
+                language: { url: "/../Content/dataTable_pt_BR.js", searchPlaceholder: "titulo" },
+                processing: true,
+                serverSide: true,
+                order: [[1, "asc"]],
+                ajax: {
+                    url: "@Url.Action("ListarProvas", "Prova")",
+                    async: false,
+                    type: 'POST',
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    data: function (d) {
+                        return COLAB.ObterFiltroBaseDataTable(d);
+                    }
+                }
+            });
+        };
+
+        $('#btnNovo').click(function () {
+            $('#modalProvaLabel').text('Cadastrar Nova Prova');
+            $("#hdIdProva").val(0);
+            $('#txtTitulo').val("");
+            $('#txtDescricao').val("");
+            $('#selectTipo').val(0);
+            $('#selectTurma').val(0);
+
+            $('#divInputProva').removeClass('hide');
+            $('#cadastroDeProva').modal();
+        });
+
+        var SalvarInsercao = function () {
+            var titulo = $.trim($('#txtTitulo').val());
+            var descricao = $.trim($('#txtDescricao').val());
+            var tipo = parseInt($('#selectTipo').val());
+            var turma = parseInt($('#selectTurma').val());
+            var arquivos = $('input[type=file]')[0].files;
+
+            if (arquivos.length == 0) {
+                Msg.error('O campo "Prova" é obrigatório. Favor verificar a seleção do arquivo.', 4000);
+            }
+            else if (!tipo) {
+                Msg.error('O campo "Tipo" é obrigatório. Favor verificar a seleção do mesmo.', 4000);
+            }
+            else if (!turma) {
+                Msg.error('O campo "Turma" é obrigatório. Favor verificar a seleção do mesmo.', 4000);
+            }
+            else {
+                var params = {
+                    'titulo': titulo,
+                    'descricao': descricao,
+                    'tipo': { 'id': tipo, 'nome': $('#selectTipo option:selected').text() },
+                    'turma': { 'id': turma }
+                }
+
+                var formData = new FormData();
+                formData.append("prova", JSON.stringify(params));
+                formData.append("file", arquivos[0]);
+                SRV.ChamarHttpRequest('@Url.Action("Salvar", "Prova")', formData, Salvar_cb);
+            }
+        };
+
+        var Salvar_cb = function (json) {
+            Msg.success('Cadastro efetuado com sucesso', 4000);
+            $('#cadastroDeProva').modal('hide');
+            AtualizarListagem();
+        };
+
+        var VisualizarPDF = function (idProva) {
+            if (idProva) {
+                var url = '@Url.Action("VisualizarPDF", "Prova")' + '/' + idProva;
+                window.open(url, "_blank");
+            }
+        };
+
+        var VisualizarPDF_cb = function (json) {
+            window.open("data:application/pdf;base64, " + json.srcBase64);
+        };
+
+        $(document).ready(function () {
+            Msg.iconMode = "fa";
+            InicializarListagem();
+            COLAB.InicializarPropriedades();
+        });
+    </script>
+}

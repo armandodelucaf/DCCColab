@@ -79,7 +79,7 @@ namespace DCC.COLAB.Web.Controllers
         {
             try
             {
-                //ViewBag.prova = WCFDispatcher<ICOLABServico>.UseService(u => u.SelecionarDocumentoPorCodigo(id));
+                ViewBag.prova = WCFDispatcher<ICOLABServico>.UseService(u => u.SelecionarProvaPorCodigo(id));
                 return View();
             }
             catch (Exception ex)

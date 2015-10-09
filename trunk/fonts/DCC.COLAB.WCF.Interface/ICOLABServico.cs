@@ -51,41 +51,28 @@ namespace DCC.COLAB.WCF.Interface
 
         #endregion
 
-        #region Arquivo
+        #region Prova
 
         [OperationContract]
-        int InserirArquivo(Arquivo arquivo);
+        Prova SelecionarProvaPorCodigo(int codigo);
 
         [OperationContract]
-        void ExcluirArquivo(int codigo);
-
-        #endregion
-
-        #region Documento
+        int InserirProva(Prova prova);
 
         [OperationContract]
-        Documento SelecionarDocumentoPorCodigo(int codigo);
+        void AtualizarProva(Prova prova);
 
         [OperationContract]
-        int InserirDocumento(Documento documento);
+        int SelecionarQuantidadeProvasFiltradas(FiltroProva filtro);
 
         [OperationContract]
-        void AtualizarDocumento(Documento documento);
+        List<Prova> SelecionarProvasFiltradas(FiltroProva filtro);
 
         [OperationContract]
-        int SelecionarQuantidadeDocumentosFiltrados(FiltroDocumento filtro);
+        void ExcluirProva(int codigo);
 
         [OperationContract]
-        List<Documento> SelecionarDocumentosFiltrados(FiltroDocumento filtro);
-
-        [OperationContract]
-        void ExcluirUltimaVersaoDocumento(int codigo);
-
-        [OperationContract]
-        void ExcluirDocumento(int codigo);
-
-        [OperationContract]
-        Arquivo SelecionarArquivoDoDocumento(int codigo);
+        List<TipoProva> SelecionarTiposProva();
 
         #endregion
 
@@ -110,7 +97,6 @@ namespace DCC.COLAB.WCF.Interface
         void ExcluirDisciplina(int codigo);
 
         #endregion
-
 
         #region Tema
 

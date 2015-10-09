@@ -46,5 +46,25 @@ namespace DCC.COLAB.Common.Entities
                 }
             }
         }
+
+        public String tableString
+        {
+            get
+            {
+                string str = "";
+
+                if (periodo != null) {
+                    str += periodo.tableString + " - ";
+                }
+
+                str += disciplina.nome;
+
+                if (listaProfessores != null) {
+                    str += " (" + listaProfessoresString + ")";
+                }
+
+                return str;
+            }
+        }
     }
 }

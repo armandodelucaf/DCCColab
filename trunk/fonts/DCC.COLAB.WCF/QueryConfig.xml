@@ -281,5 +281,69 @@
       DELETE FROM dcccolab.Turma_Professor WHERE id_Turma = @ID_TURMA
     </excluirProfessorTurma>
   </Turma>
+
+  <Prova>
+    <selecionarProvaPorCodigo>
+      SELECT
+        P.id_Prova,
+        P.src,
+        P.titulo,
+        P.descricao,
+        P.id_Usuario,
+        U.nm_Usuario,
+        P.id_Turma,
+        P.id_Tipo_Prova,
+        TP.nm_Tipo_Prova
+      FROM
+        dcccolab.Prova P
+        INNER JOIN dcccolab.Tipo_Prova TP ON TP.id_Tipo_Prova = P.id_Tipo_Prova
+        INNER JOIN dcccolab.Usuario U ON U.id_Usuario = P.id_Usuario
+      WHERE
+        (P.id_Prova = @ID)
+    </selecionarProvaPorCodigo>
+    <selecionarProvasFiltradas>
+      SELECT
+        P.id_Prova,
+        P.titulo,
+        P.descricao,
+        P.id_Usuario,
+        U.nm_Usuario,
+        P.id_Turma,
+        P.id_Tipo_Prova,
+        TP.nm_Tipo_Prova
+      FROM
+        dcccolab.Prova P
+        INNER JOIN dcccolab.Tipo_Prova TP ON TP.id_Tipo_Prova = P.id_Tipo_Prova
+        INNER JOIN dcccolab.Usuario U ON U.id_Usuario = P.id_Usuario
+      WHERE
+        (@FILTRO IS NULL OR P.descricao LIKE CONCAT('%', @FILTRO, '%'))
+      ORDER BY @ORDER_BY
+    </selecionarProvasFiltradas>
+    <inserirProva>
+      INSERT INTO dcccolab.Prova (src, titulo, descricao, id_Usuario, id_Turma, id_Tipo_Prova) VALUES (@SRC, @TITULO, @DESCRICAO, @ID_USUARIO, @ID_TURMA, @ID_TIPO_PROVA)
+    </inserirProva>
+    <atualizarProva>
+      UPDATE dcccolab.Prova 
+      SET 
+        src = @SRC,
+        titulo = @TITULO,
+        descricao = @DESCRICAO,
+        id_Turma = @ID_TURMA,
+        id_Tipo_Prova = @ID_TIPO_PROVA
+      WHERE 
+        id_Prova = @ID
+    </atualizarProva>
+    <excluirProva>
+      DELETE FROM dcccolab.Prova WHERE id_Prova = @ID
+    </excluirProva>
+
+    <selecionarTiposProva>
+      SELECT
+        TP.id_Tipo_Prova,
+        TP.nm_Tipo_Prova
+      FROM
+        dcccolab.Tipo_Prova TP
+    </selecionarTiposProva>
+  </Prova>
   
 </Queries>

@@ -61,11 +61,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Entities\ArquivoBusinessFacade.cs" />
     <Compile Include="Entities\TurmaBusinessFacade.cs" />
     <Compile Include="Entities\TemaBusinessFacade.cs" />
     <Compile Include="Entities\DisciplinaBusinessFacade.cs" />
-    <Compile Include="Entities\DocumentoBusinessFacade.cs" />
+    <Compile Include="Entities\ProvaBusinessFacade.cs" />
     <Compile Include="Entities\PerfilAcessoBusinessFacade.cs" />
     <Compile Include="Entities\UsuarioBusinessFacade.cs" />
     <Compile Include="COLABServico.cs" />

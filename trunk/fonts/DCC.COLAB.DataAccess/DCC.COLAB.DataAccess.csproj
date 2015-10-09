@@ -53,12 +53,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Entities\ArquivoDataAccess.cs" />
     <Compile Include="BaseDataAccess.cs" />
     <Compile Include="Entities\TurmaDataAccess.cs" />
     <Compile Include="Entities\TemaDataAccess.cs" />
     <Compile Include="Entities\DisciplinaDataAccess.cs" />
-    <Compile Include="Entities\DocumentoDataAccess.cs" />
+    <Compile Include="Entities\ProvaDataAccess.cs" />
     <Compile Include="Entities\PerfilAcessoDataAccess.cs" />
     <Compile Include="Entities\UsuarioDataAccess.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

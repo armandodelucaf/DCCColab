@@ -97,79 +97,56 @@ namespace DCC.COLAB.Business
 
         #endregion
 
-        #region Arquivo
-
+        #region Prova
         [OperationBehavior(Impersonation = ImpersonationOption.Allowed)]
-        public int InserirArquivo(Arquivo arquivo)
+        public Prova SelecionarProvaPorCodigo(int codigo)
         {
-            ArquivoBusinessFacade arquivoBusinessFacade = BusinessFactory.GetInstance().Get<ArquivoBusinessFacade>();
-            return arquivoBusinessFacade.InserirArquivo(arquivo);
-        }
-
-        [OperationBehavior(Impersonation = ImpersonationOption.Allowed)]
-        public void ExcluirArquivo(int codigo)
-        {
-            ArquivoBusinessFacade arquivoBusinessFacade = BusinessFactory.GetInstance().Get<ArquivoBusinessFacade>();
-            arquivoBusinessFacade.ExcluirArquivo(codigo);
-        }
-
-        #endregion
-
-        #region Documento
-        [OperationBehavior(Impersonation = ImpersonationOption.Allowed)]
-        public Documento SelecionarDocumentoPorCodigo(int codigo)
-        {
-            DocumentoBusinessFacade documentoBusinessFacade = BusinessFactory.GetInstance().Get<DocumentoBusinessFacade>();
-            return documentoBusinessFacade.SelecionarDocumentoPorCodigo(codigo);
+            ProvaBusinessFacade provaBusinessFacade = BusinessFactory.GetInstance().Get<ProvaBusinessFacade>();
+            return provaBusinessFacade.SelecionarProvaPorCodigo(codigo);
         }
 
         [OperationBehavior(Impersonation = ImpersonationOption.Allowed)]
-        public int InserirDocumento(Documento documento)
+        public int InserirProva(Prova prova)
         {
-            DocumentoBusinessFacade documentoBusinessFacade = BusinessFactory.GetInstance().Get<DocumentoBusinessFacade>();
-            return documentoBusinessFacade.InserirDocumento(documento);
+            ProvaBusinessFacade provaBusinessFacade = BusinessFactory.GetInstance().Get<ProvaBusinessFacade>();
+            return provaBusinessFacade.InserirProva(prova);
         }
 
         [OperationBehavior(Impersonation = ImpersonationOption.Allowed)]
-        public void AtualizarDocumento(Documento documento)
+        public void AtualizarProva(Prova prova)
         {
-            DocumentoBusinessFacade documentoBusinessFacade = BusinessFactory.GetInstance().Get<DocumentoBusinessFacade>();
-            documentoBusinessFacade.AtualizarDocumento(documento);
+            ProvaBusinessFacade provaBusinessFacade = BusinessFactory.GetInstance().Get<ProvaBusinessFacade>();
+            provaBusinessFacade.AtualizarProva(prova);
         }
 
         [OperationBehavior(Impersonation = ImpersonationOption.Allowed)]
-        public int SelecionarQuantidadeDocumentosFiltrados(FiltroDocumento filtro)
+        public int SelecionarQuantidadeProvasFiltradas(FiltroProva filtro)
         {
-            DocumentoBusinessFacade documentoBusinessFacade = BusinessFactory.GetInstance().Get<DocumentoBusinessFacade>();
-            return documentoBusinessFacade.SelecionarQuantidadeDocumentosFiltrados(filtro);
+            ProvaBusinessFacade provaBusinessFacade = BusinessFactory.GetInstance().Get<ProvaBusinessFacade>();
+            return provaBusinessFacade.SelecionarQuantidadeProvasFiltradas(filtro);
         }
 
         [OperationBehavior(Impersonation = ImpersonationOption.Allowed)]
-        public List<Documento> SelecionarDocumentosFiltrados(FiltroDocumento filtro)
+        public List<Prova> SelecionarProvasFiltradas(FiltroProva filtro)
         {
-            DocumentoBusinessFacade documentoBusinessFacade = BusinessFactory.GetInstance().Get<DocumentoBusinessFacade>();
-            return documentoBusinessFacade.SelecionarDocumentosFiltrados(filtro);
+            ProvaBusinessFacade provaBusinessFacade = BusinessFactory.GetInstance().Get<ProvaBusinessFacade>();
+            return provaBusinessFacade.SelecionarProvasFiltradas(filtro);
         }
 
         [OperationBehavior(Impersonation = ImpersonationOption.Allowed)]
-        public void ExcluirDocumento(int codigo)
+        public void ExcluirProva(int codigo)
         {
-            DocumentoBusinessFacade documentoBusinessFacade = BusinessFactory.GetInstance().Get<DocumentoBusinessFacade>();
-            documentoBusinessFacade.ExcluirDocumento(codigo);
-        }
-
-        public void ExcluirUltimaVersaoDocumento(int codigo)
-        {
-            DocumentoBusinessFacade documentoBusinessFacade = BusinessFactory.GetInstance().Get<DocumentoBusinessFacade>();
-            documentoBusinessFacade.ExcluirUltimaVersaoDocumento(codigo);
+            ProvaBusinessFacade provaBusinessFacade = BusinessFactory.GetInstance().Get<ProvaBusinessFacade>();
+            provaBusinessFacade.ExcluirProva(codigo);
         }
 
         [OperationBehavior(Impersonation = ImpersonationOption.Allowed)]
-        public Arquivo SelecionarArquivoDoDocumento(int codigo)
+        public List<TipoProva> SelecionarTiposProva()
         {
-            DocumentoBusinessFacade documentoBusinessFacade = BusinessFactory.GetInstance().Get<DocumentoBusinessFacade>();
-            return documentoBusinessFacade.SelecionarArquivoDoDocumento(codigo);
+            ProvaBusinessFacade provaBusinessFacade = BusinessFactory.GetInstance().Get<ProvaBusinessFacade>();
+            return provaBusinessFacade.SelecionarTiposProva();
         }
+        
         #endregion
 
         #region Disciplina

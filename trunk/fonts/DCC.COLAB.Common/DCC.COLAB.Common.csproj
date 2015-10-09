@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AuxiliarEntities\TipoProva.cs" />
     <Compile Include="AuxiliarEntities\Periodo.cs" />
     <Compile Include="AuxiliarEntities\Ordenacao.cs" />
     <Compile Include="AuxiliarEntities\Paginacao.cs" />
@@ -69,15 +70,13 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Messages.resx</DependentUpon>
     </Compile>
-    <Compile Include="DataAccess\IDocumentoDataAccess.cs" />
-    <Compile Include="DataAccess\IArquivoDataAccess.cs" />
+    <Compile Include="DataAccess\IProvaDataAccess.cs" />
     <Compile Include="DataAccess\IPerfilAcessoDataAccess.cs" />
     <Compile Include="DataAccess\IUsuarioDataAccess.cs" />
-    <Compile Include="Entities\Documento.cs" />
+    <Compile Include="Entities\Prova.cs" />
     <Compile Include="Entities\Usuario.cs" />
-    <Compile Include="Entities\Arquivo.cs" />
     <Compile Include="Entities\PerfilAcesso.cs" />
-    <Compile Include="Filtros\FiltroDocumento.cs" />
+    <Compile Include="Filtros\FiltroProva.cs" />
     <Compile Include="Filtros\FiltroBase.cs" />
     <Compile Include="Basic\Log\Message.cs" />
     <Compile Include="Filtros\FiltroUsuario.cs" />
