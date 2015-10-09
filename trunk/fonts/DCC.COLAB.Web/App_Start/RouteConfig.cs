@@ -21,13 +21,13 @@ namespace DCC.COLAB.Web
             routes.MapRoute(
                 null,
                 "{controller}/{action}/{id}", // URL with parameters
-                new { controller = "Login", action = "Login", id = UrlParameter.Optional }
+                new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             ).RouteHandler = new ManipuladorDeRota();
 
             routes.MapRoute(
                 "Default.aspx",
                 "Login",
-                new { controller = "Login", action = "Login", id = UrlParameter.Optional }
+                new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             ).RouteHandler = new ManipuladorDeRota();
 
         }

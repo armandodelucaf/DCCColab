@@ -44,7 +44,7 @@ namespace DCC.COLAB.Web.Controllers
         public ActionResult Logout()
         {
             SessaoUtil.RemoverSessao();
-            return RedirectToAction("Login", "Login");
+            return RedirectToAction("Index", "Home");
         }
 
     }

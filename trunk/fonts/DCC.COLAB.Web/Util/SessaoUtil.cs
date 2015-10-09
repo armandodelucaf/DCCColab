@@ -10,17 +10,10 @@ namespace DCC.COLAB.Web.Util
 {
     public class SessaoUtil
     {
-        public static System.Nullable<bool> UsuarioEstaAutenticado
+        public static bool UsuarioEstaAutenticado
         {
             get {
-                if (System.Web.HttpContext.Current.Session == null)
-                {
-                    return false;
-                }
-                else
-                {
-                    return (System.Nullable<bool>)System.Web.HttpContext.Current.Session[ConstantsEnum.CHAVE_SESSAO_AUTENTICADO];
-                }
+                return (Usuario != null);
             }
             set { System.Web.HttpContext.Current.Session[ConstantsEnum.CHAVE_SESSAO_AUTENTICADO] = value; }
         }
