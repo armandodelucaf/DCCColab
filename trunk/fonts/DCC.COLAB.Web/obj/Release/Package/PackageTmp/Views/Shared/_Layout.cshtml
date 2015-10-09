@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using DCC.COLAB.Web.Util;
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -61,6 +63,7 @@
     @Scripts.Render("~/Content/js/cms/mascara.js")
     @Scripts.Render("~/Content/js/base64-binary.js")
     @Scripts.Render("~/Content/js/facebookImageUpload.js")
+    @Scripts.Render("~/Content/js/pdfobject.js")
     @Scripts.Render("~/Content/js/cms/servidor.js")
 </head>
 
@@ -83,20 +86,34 @@
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
+                    <li><a href="@Url.Action("Index", "Home")">Home</a></li>
+
+                    @if (SessaoUtil.UsuarioEstaAutenticado)
+                    { 
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Administração<span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu">
                             <li><a href="@Url.Action("Consulta", "Disciplina")">Disciplinas</a></li>
+                            <li><a href="@Url.Action("Consulta", "Prova")">Provas</a></li>
                             <li><a href="@Url.Action("Consulta", "Tema")">Temas</a></li>
                             <li><a href="@Url.Action("Consulta", "Turma")">Turmas</a></li>
                             <li><a href="@Url.Action("Consulta", "Usuario")">Usuários</a></li>
                         </ul>
                     </li>
+                    }
+
                     <li><a href="@Url.Action("Consulta", "Info")">Sobre o projeto</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><p class="navbar-text">Olá, @DCC.COLAB.Web.Util.SessaoUtil.Usuario.nome</p></li>
-                    <li><a href="@Url.Action("Logout","Login")">[Encerrar sessão]</a></li>
+                    @if (SessaoUtil.UsuarioEstaAutenticado)
+                    { 
+                        <li><p class="navbar-text">Olá, @SessaoUtil.Usuario.nome</p></li>
+                        <li><a href="@Url.Action("Logout","Login")">[Encerrar sessão]</a></li>
+                    }
+                    else
+                    {
+                        <li><a href="@Url.Action("Login","Login")">[Login]</a></li>
+                    }
                 </ul>
             </div>
         </div>
