@@ -124,6 +124,9 @@ namespace DCC.COLAB.DataAccess.SQLServer.Entities
             {
                 id = CastDB<int>(dr, "id_Turma")
             };
+            prova.recomendadoMonitor = CastDB<bool>(dr, "aval_Monitor");
+            prova.recomendadoProfessor = CastDB<bool>(dr, "aval_Professor");
+            prova.avaliacao = CastDB<int>(dr, "nota");
             return prova;
         }
 

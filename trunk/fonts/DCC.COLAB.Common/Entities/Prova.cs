@@ -38,5 +38,13 @@ namespace DCC.COLAB.Common.Entities
         [DataMember]
         public List<Tema> temasAssociados { get; set; }
 
+        [DataMember]
+        public bool recomendadoProfessor { get; set; }
+
+        [DataMember]
+        public bool recomendadoMonitor { get; set; }
+
+        [DataMember]
+        public int avaliacao { get; set; }
     }
 }

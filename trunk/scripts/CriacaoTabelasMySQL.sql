@@ -117,6 +117,8 @@ CREATE TABLE `Prova`(
 	`id_Usuario` int NOT NULL,
 	`id_Turma` int NOT NULL,
 	`id_Tipo_Prova` int NOT NULL,
+	`aval_Professor` tinyint NOT NULL,
+	`aval_Moderador` tinyint NOT NULL,
 	
 	CONSTRAINT `PK_Prova` PRIMARY KEY 
 	(`id_Prova`) ,
@@ -173,7 +175,6 @@ CREATE TABLE `Prova_Tema`(
 CREATE TABLE `Avaliacao_Prova`(
 	`id_Usuario` int NOT NULL,
 	`id_Prova` int NOT NULL,
-	`tipo` int NOT NULL,
 	`nota` tinyint NOT NULL,
 	
 	CONSTRAINT `PK_Avaliacao_Prova` UNIQUE  

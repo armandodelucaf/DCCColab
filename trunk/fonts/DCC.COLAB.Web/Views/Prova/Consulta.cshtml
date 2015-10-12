@@ -282,7 +282,7 @@
         };
 
         var ExcluirProvaAjax = function (id) {
-            SRV.ChamarAjax('@Url.Action("Excluir", "Prova")', { id: id }, SucessoExcluir_cb);
+            SRV.ChamarAjax('@Url.Action("Excluir", "Prova")', { codigo: id }, SucessoExcluir_cb);
         };
 
         var SucessoExcluir_cb = function (json) {

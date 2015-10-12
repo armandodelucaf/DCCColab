@@ -107,6 +107,7 @@ namespace DCC.COLAB.Business.Entities
         {
             try
             {
+                ExcluirTemaProva(codigo);
                 dataAccess.ExcluirProva(codigo);
             }
             catch (Exception ex)

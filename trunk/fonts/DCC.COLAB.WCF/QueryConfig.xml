@@ -293,11 +293,17 @@
         U.nm_Usuario,
         P.id_Turma,
         P.id_Tipo_Prova,
-        TP.nm_Tipo_Prova
+        TP.nm_Tipo_Prova,
+        P.aval_Professor,
+        P.aval_Moderador,
+        AP.nota
       FROM
         dcccolab.Prova P
         INNER JOIN dcccolab.Tipo_Prova TP ON TP.id_Tipo_Prova = P.id_Tipo_Prova
         INNER JOIN dcccolab.Usuario U ON U.id_Usuario = P.id_Usuario
+        LEFT JOIN (
+          SELECT AVG(nota) As nota, id_Prova FROM dcccolab.Avaliacao_Prova GROUP BY id_Prova
+        ) AP ON AP.id_Prova = P.id_Prova
       WHERE
         (P.id_Prova = @ID)
     </selecionarProvaPorCodigo>
@@ -310,11 +316,17 @@
         U.nm_Usuario,
         P.id_Turma,
         P.id_Tipo_Prova,
-        TP.nm_Tipo_Prova
+        TP.nm_Tipo_Prova,
+        P.aval_Professor,
+        P.aval_Moderador,
+        AP.nota
       FROM
         dcccolab.Prova P
         INNER JOIN dcccolab.Tipo_Prova TP ON TP.id_Tipo_Prova = P.id_Tipo_Prova
         INNER JOIN dcccolab.Usuario U ON U.id_Usuario = P.id_Usuario
+        LEFT JOIN (
+          SELECT AVG(nota) As nota, id_Prova FROM dcccolab.Avaliacao_Prova GROUP BY id_Prova
+        ) AP ON AP.id_Prova = P.id_Prova
       WHERE
         (@FILTRO IS NULL OR P.descricao LIKE CONCAT('%', @FILTRO, '%'))
       ORDER BY @ORDER_BY
@@ -324,8 +336,7 @@
     </inserirProva>
     <atualizarProva>
       UPDATE dcccolab.Prova 
-      SET 
-        src = @SRC,
+      SET
         titulo = @TITULO,
         descricao = @DESCRICAO,
         id_Turma = @ID_TURMA,
