@@ -65,6 +65,42 @@ namespace DCC.COLAB.DataAccess.SQLServer.Entities
             Hashtable parametros = new Hashtable();
             return this.SelecionarPorNomeQuery("selecionarTiposProva", parametros, this.RecuperaObjetoTipoProva).Cast<TipoProva>().ToList();
         }
+
+        public List<Tema> SelecionarTemasPorIdProva(int id)
+        {
+            Hashtable parametros = new Hashtable();
+            parametros.Add("ID_PROVA", id);
+            return this.SelecionarPorNomeQuery("selecionarTemasPorIdProva", parametros, this.RecuperaObjetoTema).Cast<Tema>().ToList();
+        }
+
+        public void InserirTemaProva(int idTema, int idProva)
+        {
+            try
+            {
+                Hashtable parametros = new Hashtable();
+                parametros.Add("ID_TEMA", idTema);
+                parametros.Add("ID_PROVA", idProva);
+                this.RemoverPorNomeQuery("inserirTemaProva", parametros);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public void ExcluirTemaProva(int idProva)
+        {
+            try
+            {
+                Hashtable parametros = new Hashtable();
+                parametros.Add("ID_PROVA", idProva);
+                this.RemoverPorNomeQuery("excluirTemaProva", parametros);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
        
         #region RecuperaObjeto
 
@@ -98,6 +134,20 @@ namespace DCC.COLAB.DataAccess.SQLServer.Entities
             tipoProva.id = CastDB<int>(dr, "id_Tipo_Prova");
             tipoProva.nome = CastDB<string>(dr, "nm_Tipo_Prova");
             return tipoProva;
+        }
+
+        private Tema RecuperaObjetoTema(MySqlDataReader dr)
+        {
+            Tema tema = new Tema();
+            tema.id = CastDB<int>(dr, "id_Tema");
+            tema.nome = CastDB<string>(dr, "nm_Tema");
+            tema.descricao = CastDB<string>(dr, "ds_Tema");
+            tema.disciplina = new Disciplina
+            {
+                id = CastDB<int>(dr, "id_Disciplina"),
+                nome = CastDB<string>(dr, "nm_Disciplina")
+            };
+            return tema;
         }
 
         #endregion

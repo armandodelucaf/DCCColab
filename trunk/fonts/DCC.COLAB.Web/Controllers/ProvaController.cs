@@ -5,6 +5,7 @@ using DCC.COLAB.WCF.Interface;
 using DCC.COLAB.Web.Util;
 using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -43,7 +44,12 @@ namespace DCC.COLAB.Web.Controllers
             try
             {
                 Prova prova = WCFDispatcher<ICOLABServico>.UseService(u => u.SelecionarProvaPorCodigo(codigo));
-                return Json(prova, JsonRequestBehavior.AllowGet);
+                return new JsonResult()
+                    {
+                        Data = prova,
+                        JsonRequestBehavior = JsonRequestBehavior.AllowGet,
+                        MaxJsonLength = Int32.MaxValue
+                    };
             }
             catch (Exception ex)
             {
@@ -99,68 +105,6 @@ namespace DCC.COLAB.Web.Controllers
             }
         }
 
-        //public JsonResult SalvarArquivoObterMetadados()
-        //{
-        //    try
-        //    {
-        //        List<Prova> listaProvas = new List<Prova>();
-        //        for (int i = 0; i < Request.Files.Count; i++)
-        //        {
-        //            HttpPostedFileBase file = Request.Files[i];
-        //            Prova doc = new Prova();
-        //            doc.versao = 1;
-        //            doc.tamanho = file.ContentLength;
-        //            doc.titulo = file.FileName;
-        //            doc.nome = file.FileName;
-        //            doc.extensao = Path.GetExtension(file.FileName).ToUpper();
-        //            Stream fileContent = file.InputStream;
-        //            fileContent.Seek(0, SeekOrigin.Begin);
-        //            doc.arquivo = new Arquivo();
-        //            MemoryStream target = new MemoryStream();
-        //            fileContent.CopyTo(target);
-        //            doc.arquivo.binario = target.ToArray();
-        //            doc.id = WCFDispatcher<ICOLABServico>.UseService(u => u.InserirProva(doc));
-
-        //            //Necessário para trazer os metadados do arquivo inserido também
-        //            Prova docAtualizado = WCFDispatcher<ICOLABServico>.UseService(u => u.SelecionarProvaPorCodigo(doc.id));
-        //            listaProvas.Add(docAtualizado);
-        //        }
-        //        JsonResult json = Json(listaProvas, JsonRequestBehavior.AllowGet);
-        //        json.MaxJsonLength = Int32.MaxValue;
-        //        return json;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return ThrowJsonError("Não foi possível obter as informações do registro desejado.", ex);
-        //    }
-        //}
-
-        //public JsonResult AtualizarProva()
-        //{
-        //    try
-        //    {
-        //        int codigoProva = int.Parse(Request.Form["codigo"]);
-        //        HttpPostedFileBase file = Request.Files[0];
-        //        Prova doc = WCFDispatcher<ICOLABServico>.UseService(u=>u.SelecionarProvaPorCodigo(codigoProva));               
-        //        doc.tamanho = file.ContentLength;
-        //        Stream fileContent = file.InputStream;
-        //        fileContent.Seek(0, SeekOrigin.Begin);
-        //        doc.arquivo = new Arquivo();
-        //        MemoryStream target = new MemoryStream();
-        //        fileContent.CopyTo(target);
-        //        doc.arquivo.binario = target.ToArray();
-        //        doc.versao = ++doc.versao;
-        //        WCFDispatcher<ICOLABServico>.UseService(u => u.AtualizarProva(doc));
-        //        JsonResult json = Json(doc, JsonRequestBehavior.AllowGet);
-        //        json.MaxJsonLength = Int32.MaxValue;
-        //        return json;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return ThrowJsonError("Não foi possível obter as informações do registro desejado.", ex);
-        //    }
-        //}
-
         public ActionResult Excluir(int codigo)
         {
             try
@@ -171,6 +115,19 @@ namespace DCC.COLAB.Web.Controllers
             catch (Exception ex)
             {
                 return ThrowJsonError("Não foi possível excluir o prova. O registro pode estar sendo utilizado no sistema.", ex);
+            }
+        }
+
+        public JsonResult ObterTemas(int idDisciplina)
+        {
+            try
+            {
+                List<Tema> listaTemas = WCFDispatcher<ICOLABServico>.UseService(u => u.SelecionarTemasFiltrados(new FiltroTema() { idDisciplina = idDisciplina })).ToList();
+                return Json(listaTemas, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return ThrowJsonError("Não foi possível obter as informações do registro desejado.", ex);
             }
         }
 

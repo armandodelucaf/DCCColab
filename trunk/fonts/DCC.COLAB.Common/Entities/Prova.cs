@@ -1,5 +1,6 @@
 ﻿using DCC.COLAB.Common.AuxiliarEntities;
 using System;
+using System.Collections.Generic;
 using System.Runtime.Serialization;
 
 namespace DCC.COLAB.Common.Entities
@@ -8,6 +9,10 @@ namespace DCC.COLAB.Common.Entities
     [DataContract]
     public class Prova
     {
+        public Prova()
+        {
+            temasAssociados = new List<Tema>();
+        }
 
         [DataMember]
         public int id { get; set; }
@@ -29,6 +34,9 @@ namespace DCC.COLAB.Common.Entities
 
         [DataMember]
         public Turma turma { get; set; }
+
+        [DataMember]
+        public List<Tema> temasAssociados { get; set; }
 
     }
 }

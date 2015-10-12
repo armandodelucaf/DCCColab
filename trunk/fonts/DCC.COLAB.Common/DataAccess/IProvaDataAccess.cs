@@ -20,7 +20,15 @@ namespace DCC.COLAB.Common.DataAccess
 
         void ExcluirProva(int codigo);
 
+
         List<TipoProva> SelecionarTiposProva();
+
+
+        List<Tema> SelecionarTemasPorIdProva(int id);
+
+        void InserirTemaProva(int idTema, int idProva);
+
+        void ExcluirTemaProva(int idProva);
 
     }
 }

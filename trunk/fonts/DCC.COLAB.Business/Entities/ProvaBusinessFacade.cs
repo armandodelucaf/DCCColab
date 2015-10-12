@@ -22,6 +22,7 @@ namespace DCC.COLAB.Business.Entities
 
                 TurmaBusinessFacade turmaBF = ObterOutraBusiness<TurmaBusinessFacade>();
                 prova.turma = turmaBF.SelecionarTurmaPorCodigo(prova.turma.id);
+                prova.temasAssociados = SelecionarTemasPorIdProva(codigo);
 
                 return prova;
             }
@@ -37,6 +38,10 @@ namespace DCC.COLAB.Business.Entities
             try
             {
                 int codigo = dataAccess.InserirProva(prova);
+                foreach (Tema tema in prova.temasAssociados)
+                {
+                    InserirTemaProva(tema.id, prova.id);
+                }
                 return codigo;
             }
             catch (Exception ex)
@@ -51,6 +56,12 @@ namespace DCC.COLAB.Business.Entities
             try
             {
                 dataAccess.AtualizarProva(prova);
+                
+                ExcluirTemaProva(prova.id);
+                foreach (Tema tema in prova.temasAssociados)
+                {
+                    InserirTemaProva(tema.id, prova.id);
+                }
             }
             catch (Exception ex)
             {
@@ -114,7 +125,44 @@ namespace DCC.COLAB.Business.Entities
             {
                 throw ex;
             }
+        }
 
+        public virtual List<Tema> SelecionarTemasPorIdProva(int id)
+        {
+            try
+            {
+                return dataAccess.SelecionarTemasPorIdProva(id);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        [RequiresTransaction]
+        public virtual void InserirTemaProva(int idTema, int idProva)
+        {
+            try
+            {
+                dataAccess.InserirTemaProva(idTema, idProva);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        [RequiresTransaction]
+        public virtual void ExcluirTemaProva(int idProva)
+        {
+            try
+            {
+                dataAccess.ExcluirTemaProva(idProva);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
         
     }

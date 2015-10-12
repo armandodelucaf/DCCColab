@@ -344,6 +344,28 @@
       FROM
         dcccolab.Tipo_Prova TP
     </selecionarTiposProva>
+
+    <selecionarTemasPorIdProva>
+      SELECT
+      PT.id_Tema,
+      T.nm_Tema,
+      T.ds_Tema,
+      T.id_Disciplina,
+      D.nm_Disciplina
+      FROM
+      dcccolab.Prova_Tema PT
+      INNER JOIN dcccolab.Tema T ON T.id_Tema = PT.id_Tema
+      INNER JOIN dcccolab.Disciplina D ON D.id_Disciplina = T.id_Disciplina
+      WHERE
+      (PT.id_Prova = @ID_PROVA)
+      ORDER BY T.nm_Tema ASC
+    </selecionarTemasPorIdProva>
+    <inserirTemaProva>
+      INSERT INTO dcccolab.Prova_Tema (id_Prova, id_Tema) VALUES (@ID_PROVA, @ID_TEMA)
+    </inserirTemaProva>
+    <excluirTemaProva>
+      DELETE FROM dcccolab.Prova_Tema WHERE id_Prova = @ID_PROVA
+    </excluirTemaProva>
   </Prova>
   
 </Queries>
