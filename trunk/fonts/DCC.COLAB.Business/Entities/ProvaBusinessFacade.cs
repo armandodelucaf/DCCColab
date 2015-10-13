@@ -37,6 +37,23 @@ namespace DCC.COLAB.Business.Entities
         {
             try
             {
+                TurmaBusinessFacade turmaBF = ObterOutraBusiness<TurmaBusinessFacade>();
+                FiltroTurma filtro = new FiltroTurma() { 
+                    idDisciplina = prova.turma.disciplina.id,
+                    ano = prova.turma.periodo.ano,
+                    semestre = prova.turma.periodo.semestre
+                };
+                Turma resultado = turmaBF.SelecionarTurmasFiltradas(filtro).ToList().FirstOrDefault();
+
+                if (resultado == null)
+                {
+                    prova.turma.id = turmaBF.InserirTurma(prova.turma);
+                }
+                else 
+                {
+                    prova.turma.id = resultado.id;
+                }
+
                 int codigo = dataAccess.InserirProva(prova);
                 foreach (Tema tema in prova.temasAssociados)
                 {
@@ -55,6 +72,24 @@ namespace DCC.COLAB.Business.Entities
         {
             try
             {
+                TurmaBusinessFacade turmaBF = ObterOutraBusiness<TurmaBusinessFacade>();
+                FiltroTurma filtro = new FiltroTurma()
+                {
+                    idDisciplina = prova.turma.disciplina.id,
+                    ano = prova.turma.periodo.ano,
+                    semestre = prova.turma.periodo.semestre
+                };
+                Turma resultado = turmaBF.SelecionarTurmasFiltradas(filtro).ToList().FirstOrDefault();
+
+                if (resultado == null)
+                {
+                    prova.turma.id = turmaBF.InserirTurma(prova.turma);
+                }
+                else
+                {
+                    prova.turma.id = resultado.id;
+                }
+
                 dataAccess.AtualizarProva(prova);
                 
                 ExcluirTemaProva(prova.id);

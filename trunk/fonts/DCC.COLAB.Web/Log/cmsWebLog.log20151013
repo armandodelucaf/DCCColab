@@ -32,3 +32,11 @@
    em System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
    em System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
 
+2015-10-13 07:25:43,274 [52] [ERROR] - DCC.COLAB.Web.MvcApplication: Ocorreu um erro em .. Detalhes:  : 
+
+2015-10-13 07:26:16,418 [47] [ERROR] - DCC.COLAB.Web.MvcApplication: Ocorreu um erro em .. Detalhes:  : 
+
+2015-10-13 07:28:09,781 [47] [ERROR] - DCC.COLAB.Web.MvcApplication: Ocorreu um erro em .. Detalhes:  : 
+
+2015-10-13 07:31:17,759 [47] [ERROR] - DCC.COLAB.Web.MvcApplication: Ocorreu um erro em .. Detalhes:  : 
+

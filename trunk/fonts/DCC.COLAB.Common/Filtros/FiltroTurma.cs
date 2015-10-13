@@ -9,5 +9,11 @@ namespace DCC.COLAB.Common.Filtros
 
         [DataMember]
         public int? idProfessor { get; set; }
+
+        [DataMember]
+        public int? ano { get; set; }
+
+        [DataMember]
+        public int? semestre { get; set; }
     }
 }

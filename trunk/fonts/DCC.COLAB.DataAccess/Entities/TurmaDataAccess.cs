@@ -140,7 +140,7 @@ namespace DCC.COLAB.DataAccess.SQLServer.Entities
         {
             Hashtable parametros = new Hashtable();
             parametros.Add("ID", turma.id);
-            parametros.Add("CODIGO", turma.codigo.ToUpper());
+            parametros.Add("CODIGO", (turma.codigo != null ? turma.codigo.ToUpper() : null));
             parametros.Add("ANO", turma.periodo.ano);
             parametros.Add("SEMESTRE", turma.periodo.semestre);
             parametros.Add("DISCIPLINA", turma.disciplina.id);
@@ -150,6 +150,9 @@ namespace DCC.COLAB.DataAccess.SQLServer.Entities
         private Hashtable BuildParametrosSelecionarTurmasFiltradas(FiltroTurma filtro)
         {
             Hashtable parametros = CriarHashFiltroDefault(filtro);
+            parametros.Add("ID_DISCIPLINA", filtro.idDisciplina);
+            parametros.Add("ANO", filtro.ano);
+            parametros.Add("SEMESTRE", filtro.semestre);
             return parametros;
         }
         #endregion

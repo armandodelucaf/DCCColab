@@ -227,7 +227,10 @@
         dcccolab.Turma T
         INNER JOIN dcccolab.Disciplina D ON D.id_Disciplina = T.id_Disciplina
       WHERE
-        (@FILTRO IS NULL OR T.cd_Turma LIKE CONCAT('%', @FILTRO, '%') OR D.nm_Disciplina LIKE CONCAT('%', @FILTRO, '%'))
+        (@FILTRO IS NULL OR T.cd_Turma LIKE CONCAT('%', @FILTRO, '%') OR D.nm_Disciplina LIKE CONCAT('%', @FILTRO, '%')) AND
+        (@ID_DISCIPLINA IS NULL OR T.id_Disciplina = @ID_DISCIPLINA) AND
+        (@ANO IS NULL OR T.nu_Ano = @ANO) AND
+        (@SEMESTRE IS NULL OR T.nu_Semestre = @SEMESTRE)
       ORDER BY @ORDER_BY
     </selecionarTurmasFiltradas>
     <inserirTurma>
@@ -295,7 +298,7 @@
         P.id_Tipo_Prova,
         TP.nm_Tipo_Prova,
         P.aval_Professor,
-        P.aval_Moderador,
+        P.aval_Monitor,
         AP.nota
       FROM
         dcccolab.Prova P
@@ -318,7 +321,7 @@
         P.id_Tipo_Prova,
         TP.nm_Tipo_Prova,
         P.aval_Professor,
-        P.aval_Moderador,
+        P.aval_Monitor,
         AP.nota
       FROM
         dcccolab.Prova P
@@ -332,7 +335,7 @@
       ORDER BY @ORDER_BY
     </selecionarProvasFiltradas>
     <inserirProva>
-      INSERT INTO dcccolab.Prova (src, titulo, descricao, id_Usuario, id_Turma, id_Tipo_Prova) VALUES (@SRC, @TITULO, @DESCRICAO, @ID_USUARIO, @ID_TURMA, @ID_TIPO_PROVA)
+      INSERT INTO dcccolab.Prova (src, titulo, descricao, id_Usuario, id_Turma, id_Tipo_Prova, aval_Professor, aval_Monitor) VALUES (@SRC, @TITULO, @DESCRICAO, @ID_USUARIO, @ID_TURMA, @ID_TIPO_PROVA, 0, 0)
     </inserirProva>
     <atualizarProva>
       UPDATE dcccolab.Prova 
