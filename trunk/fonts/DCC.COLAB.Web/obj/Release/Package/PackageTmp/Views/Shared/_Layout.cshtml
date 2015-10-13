@@ -118,7 +118,7 @@
                 <ul class="nav navbar-nav navbar-right">
                     @if (SessaoUtil.UsuarioEstaAutenticado)
                     { 
-                        <li><p class="navbar-text">Olá, @SessaoUtil.Usuario.nome</p></li>
+                        <li><p style="font-weight:bolder;" class="navbar-text">Olá, @SessaoUtil.Usuario.nome</p></li>
                         <li><a href="@Url.Action("Logout","Login")">[Encerrar sessão]</a></li>
                     }
                     else

@@ -58,7 +58,7 @@ namespace DCC.COLAB.Web.Controllers
                 }
                 else
                 {
-                    ViewBag.listaTemas= null;
+                    ViewBag.listaTemas= new List<Tema>();
                 }
 
                 return View();

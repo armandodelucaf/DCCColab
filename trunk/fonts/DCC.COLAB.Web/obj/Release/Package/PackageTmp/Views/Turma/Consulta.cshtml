@@ -15,7 +15,6 @@
                 <th>Id</th>
                 <th>Disciplina</th>
                 <th>Período</th>
-                <th>Código</th>
                 <th>Professor</th>
                 <th>Ações</th>
             </tr>
@@ -69,7 +68,7 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="txtCodigo" class="control-label">Código:</label>
-                                <input id="txtCodigo" name="txtCodigo" type="text" placeholder="Código da turma" class="form-control input-md" required value="" />
+                                <input id="txtCodigo" name="txtCodigo" type="text" placeholder="Código da turma" class="form-control input-md" value="" />
                             </div>
                         </div>
                         <div class="col-md-4">
@@ -143,10 +142,7 @@
             var semestre = parseInt($('#selectSemestre').val());
             var professores = $('#selectProfessor').selectpicker('val');
 
-            if (!codigo) {
-                Msg.error('O campo "Código" é obrigatório. Favor verificar o preenchimento do mesmo.', 4000);
-            }
-            else if (!disciplina) {
+            if (!disciplina) {
                 Msg.error('O campo "Disciplina" é obrigatório. Favor verificar a seleção do mesmo.', 4000);
             }
             else if (!ano) {
@@ -211,17 +207,15 @@
                     { "data": "id", "name": "T.id_Turma" },
                     { "data": "disciplina.nome", "name": "D.nm_Disciplina" },
                     { "data": "periodo.tableString", "name": "T.nu_Ano" },
-                    { "data": "codigo", "name": "T.cd_Turma" },
                     { "data": "listaProfessoresString" },
                     { "data": "" }
                 ],
                 columnDefs: [
                     { targets: 0, visible: false, orderable: false, searchable: false },
                     { targets: 2, sClass: "alignCenter" },
-                    { targets: 3, sClass: "alignCenter" },
-                    { targets: 4, sClass: "alignCenter", orderable: false },
+                    { targets: 3, sClass: "alignCenter", orderable: false },
                     {
-                        targets: 5, orderable: false, searchable: false, width: "60px", sClass: "alignCenter", render: function (data, type, row) {
+                        targets: 4, orderable: false, searchable: false, width: "60px", sClass: "alignCenter", render: function (data, type, row) {
                             var acoes = "";
                             acoes += "<a href='#' onClick='CarregarTurmaParaEdicao(" + row["id"] + ")'><img width='15px' title='editar' alt='Editar' src='/../Content/img/ic_editar.png' class='rowEditIcon'/></a>";
                             acoes += "&nbsp;&nbsp;";
@@ -274,10 +268,7 @@
             var semestre = parseInt($('#selectSemestre').val());
             var professores = $('#selectProfessor').selectpicker('val');
 
-            if (!codigo) {
-                Msg.error('O campo "Código" é obrigatório. Favor verificar o preenchimento do mesmo.', 4000);
-            }
-            else if (!disciplina) {
+            if (!disciplina) {
                 Msg.error('O campo "Disciplina" é obrigatório. Favor verificar a seleção do mesmo.', 4000);
             }
             else if (!ano) {
