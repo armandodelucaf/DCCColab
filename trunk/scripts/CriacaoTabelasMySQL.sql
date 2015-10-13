@@ -75,7 +75,7 @@ CREATE TABLE `Turma`(
 	`id_Disciplina` int NOT NULL,
 	`nu_Ano` int NOT NULL,
 	`nu_Semestre` tinyint NOT NULL,
-	`cd_Turma` varchar(10) NOT NULL,
+	`cd_Turma` varchar(10) NULL,
 	
 	CONSTRAINT `PK_Turma` UNIQUE 
 	(`id_Turma`) ,

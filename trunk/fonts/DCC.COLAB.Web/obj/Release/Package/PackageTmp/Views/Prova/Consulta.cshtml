@@ -81,25 +81,28 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label for="selectTurma" class="control-label">Turma:</label>
-                                <select id="selectTurma" class="form-control input-md" required>
-                                    <option value="0">Selecione uma turma</option>
+                                <select id="selectTurma" class="form-control input-md" onchange="TurmaAlterada()" required>
+                                    <option value="0" idDisciplina="0">Selecione uma turma</option>
                                     @foreach (Turma turma in listaTurmas)
                                     {
-                                        <option value="@turma.id">@turma.tableString</option>
+                                        <option value="@turma.id" idDisciplina="@turma.disciplina.id">@turma.tableString</option>
                                     }                                     
                                 </select>
                             </div>
                         </div>
                     </div>
 
-                    @*<input id="hdTags" name="hdTags" type="hidden" value="" />
-                        
-                    <div class="col-md-6">
-                        <div class="form-group ui-front">
-                            <label for="tagsDocumento" class="control-label">Tags:</label>
-                            <textarea id="tagsDocumento" name="tagsDocumento" placeholder="Digite aqui as tags em português para o documento" class="form-control input-md"></textarea>
+                    <div class="row">
+                        <div class="col-md-12">
+
+                            <input id="hdTemas" name="hdTemas" type="hidden" value="" />
+
+                            <div class="form-group ui-front">
+                                <label for="temasProva" class="control-label">Temas:</label>
+                                <textarea id="temasProva" name="temasProva" placeholder="Digite aqui os temas para associar a esta prova" class="form-control input-md"></textarea>
+                            </div>
                         </div>
-                    </div>*@
+                    </div>
 
                 </form>
             </div>
@@ -126,9 +129,102 @@
             $('#txtDescricao').val(json.descricao);
             $('#selectTipo').val(json.tipo.id);
             $('#selectTurma').val(json.turma.id);
+            $('#selectTurma').prop('disabled', true);
+
+            $("#hdTemas").val(JSON.stringify(json.temasAssociados));
+            if (json.temasAssociados.length > 0) {
+                var temas = JSON.parse($('#hdTemas').val());
+                var txtTemas = []
+                for (i = 0; i < temas.length; i++) {
+                    txtTemas.push(temas[i].nome);
+                }
+                $('#temasProva').val(txtTemas.join(", "));
+            }
+            else {
+                $('#temasProva').val('');
+            }
+            ObterTemas(json.turma.disciplina.id);
 
             $('#divInputProva').addClass('hide');
             $('#cadastroDeProva').modal();
+        };
+
+        var TurmaAlterada = function () {
+            var idDisciplina = parseInt($('#selectTurma option:selected').attr('idDisciplina'));
+
+            $("#hdTemas").val('');
+            $('#temasProva').val('');
+
+            if (idDisciplina > 0) {
+                ObterTemas(idDisciplina);
+            }
+        };
+
+        var ObterTemas = function (idDisciplina) {
+            SRV.ChamarAjax('@Url.Action("ObterTemas", "Prova")', { idDisciplina: idDisciplina }, ObterTemas_cb);
+        }
+
+        var split = function (val) {
+            return val.split(/,\s*/);
+        }
+
+        var extractLast = function (term) {
+            return split(term).pop();
+        }
+
+        var ObterTemas_cb = function (json) {
+            var dataSet = $.map(json, function (value, index) {
+                return { value: value.id, label: value.nome };
+            });
+
+            $('#temasProva').autocomplete({
+                minLength: 0,
+                source: function (request, response) {
+                    // delegate back to autocomplete, but extract the last term
+                    response($.ui.autocomplete.filter(dataSet, extractLast(request.term)));
+                },
+                focus: function () {
+                    // prevent value inserted on focus
+                    return false;
+                },
+                select: function (event, ui) {
+                    var temas = split(this.value);
+                    // remove the current input
+                    temas.pop();
+                    // add the selected item
+                    temas.push(ui.item.label);
+                    // add placeholder to get the comma-and-space at the end
+                    temas.push("");
+                    this.value = temas.join(", ");
+
+                    metrics = jQuery.grep(dataSet, function (element) {
+                        return element.label != ui.item.label;
+                    });
+
+                    return false;
+                },
+                change: function (event, ui) {
+                    var temas = split(this.value);
+                    if (temas[temas.length - 1] === '') {
+                        temas.pop();
+                    }
+
+                    var uniqueTemas = temas.filter(function (item, pos, self) {
+                        return self.indexOf(item) == pos;
+                    })
+                    temas = uniqueTemas;
+
+                    var temasObj = [];
+
+                    $.each(temas, function (index, value) {
+                        temaEncontrado = dataSet.filter(function (tag) { return tag.label.toUpperCase() == value.toUpperCase() })
+                        if (temaEncontrado.length > 0) {
+                            temasObj.push({ nome: temaEncontrado[0].label.toUpperCase(), id: temaEncontrado[0].value });
+                        }
+                    });
+                    $('#hdTemas').val(JSON.stringify(temasObj));
+                }
+            });
         };
 
         $('#btnSalvar').click(function () {
@@ -159,7 +255,8 @@
                     'titulo': titulo,
                     'descricao': descricao,
                     'tipo': { 'id': tipo, 'nome': $('#selectTipo option:selected').text() },
-                    'turma': { 'id': turma }
+                    'turma': { 'id': turma },
+                    'temasAssociados': JSON.parse($.trim($("#hdTemas").val()))
                 }
 
                 var formData = new FormData();
@@ -185,7 +282,7 @@
         };
 
         var ExcluirProvaAjax = function (id) {
-            SRV.ChamarAjax('@Url.Action("Excluir", "Prova")', { id: id }, SucessoExcluir_cb);
+            SRV.ChamarAjax('@Url.Action("Excluir", "Prova")', { codigo: id }, SucessoExcluir_cb);
         };
 
         var SucessoExcluir_cb = function (json) {
@@ -245,6 +342,9 @@
             $('#txtDescricao').val("");
             $('#selectTipo').val(0);
             $('#selectTurma').val(0);
+            $('#selectTurma').prop('disabled', false);
+            $("#hdTemas").val("");
+            $('#temasProva').val("");
 
             $('#divInputProva').removeClass('hide');
             $('#cadastroDeProva').modal();

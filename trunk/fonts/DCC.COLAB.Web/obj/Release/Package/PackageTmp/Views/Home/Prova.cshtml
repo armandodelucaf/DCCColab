@@ -7,7 +7,7 @@
 <html>
     <body>
         <div>
-            <div class="col-xs-12 col-md-6 text-center">
+            <div class="col-md-6 text-center">
                 <h3>@prova.tipo.nome - @prova.titulo</h3>
                 <h4>@prova.turma.periodo.tableString - @prova.turma.disciplina.nome</h4>
                 <h4>@prova.turma.listaProfessoresString</h4>
@@ -24,17 +24,31 @@
                         <a href="#" class="starRating"><img src="~/Content/img/star.png" alt="3"/></a>
                         <a href="#" class="starRating"><img src="~/Content/img/star.png" alt="4"/></a>
                         <a href="#" class="starRating"><img src="~/Content/img/nostar.png" alt="5"/></a>
+                        &nbsp;
+                        <a href="#" ><img src="~/Content/img/red_flag.png" alt="Denunciar" height="22" width="22" style="vertical-align:bottom; margin-bottom:3px;"/></a>
                     </div>
                 </div>
 
                 <div id="provapdf" class="col-xs-12"></div>
             </div>
 
-            <div id="comentarios" class="col-xs-12 col-md-6">
-                <!-- essa é a linha da magia. tem que rolar aqui um tratamento pra que ele coloque sempre um endereço único
-                é esse endereço único que é puxado para carregar os comentários do facebook p/ cada pag -->
-                <!-- <div class="fb-comments" data-href="~/Home/Prova/prova.id" data-numposts="5"></div> -->
-                <div class="fb-comments" data-href="~/Home/Prova/1" data-numposts="5"></div>
+            <div class="col-md-6 text-center">
+                <div class="row">
+                    <h4>Temas Associados</h4>
+                    <ul id="divTemas" class="list-group">
+                    @for (int i = 0; i < prova.temasAssociados.Count; i++)
+                    {
+                        <li class="list-group-item">
+                            @prova.temasAssociados[i].nome
+                        </li>
+                    }
+                    </ul>
+                </div>
+                <div id="comentarios" class="row">
+                    <!-- essa é a linha da magia. tem que rolar aqui um tratamento pra que ele coloque sempre um endereço único
+                    é esse endereço único que é puxado para carregar os comentários do facebook p/ cada pag -->
+                    <div class="fb-comments" data-href="www.dcccolab.gear.host/Home/Prova/@prova.id" data-numposts="5"></div>
+                </div>
             </div>
         </div>
     </body>

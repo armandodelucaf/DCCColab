@@ -293,11 +293,17 @@
         U.nm_Usuario,
         P.id_Turma,
         P.id_Tipo_Prova,
-        TP.nm_Tipo_Prova
+        TP.nm_Tipo_Prova,
+        P.aval_Professor,
+        P.aval_Moderador,
+        AP.nota
       FROM
         dcccolab.Prova P
         INNER JOIN dcccolab.Tipo_Prova TP ON TP.id_Tipo_Prova = P.id_Tipo_Prova
         INNER JOIN dcccolab.Usuario U ON U.id_Usuario = P.id_Usuario
+        LEFT JOIN (
+          SELECT AVG(nota) As nota, id_Prova FROM dcccolab.Avaliacao_Prova GROUP BY id_Prova
+        ) AP ON AP.id_Prova = P.id_Prova
       WHERE
         (P.id_Prova = @ID)
     </selecionarProvaPorCodigo>
@@ -310,11 +316,17 @@
         U.nm_Usuario,
         P.id_Turma,
         P.id_Tipo_Prova,
-        TP.nm_Tipo_Prova
+        TP.nm_Tipo_Prova,
+        P.aval_Professor,
+        P.aval_Moderador,
+        AP.nota
       FROM
         dcccolab.Prova P
         INNER JOIN dcccolab.Tipo_Prova TP ON TP.id_Tipo_Prova = P.id_Tipo_Prova
         INNER JOIN dcccolab.Usuario U ON U.id_Usuario = P.id_Usuario
+        LEFT JOIN (
+          SELECT AVG(nota) As nota, id_Prova FROM dcccolab.Avaliacao_Prova GROUP BY id_Prova
+        ) AP ON AP.id_Prova = P.id_Prova
       WHERE
         (@FILTRO IS NULL OR P.descricao LIKE CONCAT('%', @FILTRO, '%'))
       ORDER BY @ORDER_BY
@@ -324,8 +336,7 @@
     </inserirProva>
     <atualizarProva>
       UPDATE dcccolab.Prova 
-      SET 
-        src = @SRC,
+      SET
         titulo = @TITULO,
         descricao = @DESCRICAO,
         id_Turma = @ID_TURMA,
@@ -344,6 +355,28 @@
       FROM
         dcccolab.Tipo_Prova TP
     </selecionarTiposProva>
+
+    <selecionarTemasPorIdProva>
+      SELECT
+      PT.id_Tema,
+      T.nm_Tema,
+      T.ds_Tema,
+      T.id_Disciplina,
+      D.nm_Disciplina
+      FROM
+      dcccolab.Prova_Tema PT
+      INNER JOIN dcccolab.Tema T ON T.id_Tema = PT.id_Tema
+      INNER JOIN dcccolab.Disciplina D ON D.id_Disciplina = T.id_Disciplina
+      WHERE
+      (PT.id_Prova = @ID_PROVA)
+      ORDER BY T.nm_Tema ASC
+    </selecionarTemasPorIdProva>
+    <inserirTemaProva>
+      INSERT INTO dcccolab.Prova_Tema (id_Prova, id_Tema) VALUES (@ID_PROVA, @ID_TEMA)
+    </inserirTemaProva>
+    <excluirTemaProva>
+      DELETE FROM dcccolab.Prova_Tema WHERE id_Prova = @ID_PROVA
+    </excluirTemaProva>
   </Prova>
   
 </Queries>
