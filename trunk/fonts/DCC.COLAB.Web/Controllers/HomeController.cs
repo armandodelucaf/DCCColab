@@ -32,8 +32,10 @@ namespace DCC.COLAB.Web.Controllers
             try
             {
                 ViewBag.disciplina = WCFDispatcher<ICOLABServico>.UseService(u => u.SelecionarDisciplinaPorCodigo(id));
-                ViewBag.listaTemas = WCFDispatcher<ICOLABServico>.UseService(u => u.SelecionarTemasFiltrados(new FiltroTema() { comPaginacao = false, idDisciplina = id })).ToList();
-            
+                ViewBag.listaTemas = WCFDispatcher<ICOLABServico>.UseService(u => u.SelecionarTemasFiltrados(new FiltroTema() { idDisciplina = id })).ToList();
+                ViewBag.listaProvas = WCFDispatcher<ICOLABServico>.UseService(u => u.SelecionarProvasFiltradas(new FiltroProva() { idDisciplina = id })).ToList();
+                ViewBag.listaTipos = WCFDispatcher<ICOLABServico>.UseService(u => u.SelecionarTiposProva()).ToList();
+
                 return View();
             }
             catch (Exception ex)
@@ -46,19 +48,23 @@ namespace DCC.COLAB.Web.Controllers
         {
             try
             {
+                ViewBag.listaTipos = WCFDispatcher<ICOLABServico>.UseService(u => u.SelecionarTiposProva()).ToList();
+
                 Usuario usuario = WCFDispatcher<ICOLABServico>.UseService(u => u.SelecionarUsuarioPorCodigo(id));
                 ViewBag.professor = (usuario.perfilAcesso.id == BusinessConfig.IdPerfilProfessor ? usuario : null);
 
                 List<Turma> listaTurmas = WCFDispatcher<ICOLABServico>.UseService(u => u.SelecionarTurmasPorIdProfessor(id)).ToList();
-                ViewBag.listaDisciplinas = (listaTurmas != null ? listaTurmas.Select(x => x.disciplina).ToList() : null);
+                ViewBag.listaDisciplinas = (listaTurmas != null ? listaTurmas.Select(x => x.disciplina).Distinct().ToList() : null);
 
                 if (listaTurmas != null && listaTurmas.Count > 0)
                 {
                     ViewBag.listaTemas = WCFDispatcher<ICOLABServico>.UseService(u => u.SelecionarTemasFiltrados(new FiltroTema() { comPaginacao = false, idDisciplina = listaTurmas.First().disciplina.id })).ToList();
+                    ViewBag.listaProvas = WCFDispatcher<ICOLABServico>.UseService(u => u.SelecionarProvasFiltradas(new FiltroProva() { idDisciplina = listaTurmas.First().disciplina.id, idProfessor = id })).ToList();
                 }
                 else
                 {
                     ViewBag.listaTemas= new List<Tema>();
+                    ViewBag.listaProvas = new List<Prova>();
                 }
 
                 return View();
@@ -69,10 +75,12 @@ namespace DCC.COLAB.Web.Controllers
             }
         }
 
-        public JsonResult SelecionarDadosDisciplina(int id)
+        public JsonResult SelecionarDadosDisciplina(int idDisciplina, int idProfessor)
         {
-            List<Tema> listaTemas = WCFDispatcher<ICOLABServico>.UseService(u => u.SelecionarTemasFiltrados(new FiltroTema() { comPaginacao = false, idDisciplina = id })).ToList();
-            return Json(listaTemas, JsonRequestBehavior.AllowGet);
+            List<Tema> listaTemas = WCFDispatcher<ICOLABServico>.UseService(u => u.SelecionarTemasFiltrados(new FiltroTema() { comPaginacao = false, idDisciplina = idDisciplina })).ToList();
+            List<Prova> listaProvas = WCFDispatcher<ICOLABServico>.UseService(u => u.SelecionarProvasFiltradas(new FiltroProva() { idDisciplina = idDisciplina, idProfessor = idProfessor })).ToList();
+            
+            return Json(new { listaTemas = listaTemas, listaProvas = listaProvas }, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult Prova(int id)

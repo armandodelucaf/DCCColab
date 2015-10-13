@@ -10,5 +10,5 @@ INSERT INTO `Usuario` (id_Facebook ,nm_Usuario, id_Perfil_Acesso, email, senha)
 	
 INSERT INTO `Tipo_Prova` (nm_Tipo_Prova) VALUES ('Prova 1');
 INSERT INTO `Tipo_Prova` (nm_Tipo_Prova) VALUES ('Prova 2');
-INSERT INTO `Tipo_Prova` (nm_Tipo_Prova) VALUES ('Prova 3');
+INSERT INTO `Tipo_Prova` (nm_Tipo_Prova) VALUES ('Prova Final');
 INSERT INTO `Tipo_Prova` (nm_Tipo_Prova) VALUES ('Lista de Exercícios');

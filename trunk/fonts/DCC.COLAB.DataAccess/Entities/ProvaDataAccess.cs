@@ -12,7 +12,7 @@ namespace DCC.COLAB.DataAccess.SQLServer.Entities
 {
     public class ProvaDataAccess : BaseDataAccess, IProvaDataAccess
     {
-        protected override string ObterOrdenacaoDefault() { return "P.titulo ASC"; }
+        protected override string ObterOrdenacaoDefault() { return "TP.nm_Tipo_Prova ASC, T.nu_Ano DESC, T.nu_Semestre DESC"; }
 
         public Prova SelecionarProvaPorCodigo(int codigo)
         {
@@ -172,6 +172,8 @@ namespace DCC.COLAB.DataAccess.SQLServer.Entities
         private Hashtable BuildParametrosSelecionarProvasFiltradas(FiltroProva filtro)
         {
             Hashtable parametros = CriarHashFiltroDefault(filtro);
+            parametros.Add("ID_DISCIPLINA", filtro.idDisciplina);
+            parametros.Add("ID_PROFESSOR", filtro.idProfessor);
             return parametros;
         }
 

@@ -284,6 +284,7 @@
             var ano = parseInt($('#selectAno').val());
             var semestre = parseInt($('#selectSemestre').val());
             var professores = $('#selectProfessor').selectpicker('val');
+            var temas = $.trim($("#hdTemas").val());
 
             if (!tipo) {
                 Msg.error('O campo "Tipo" é obrigatório. Favor verificar a seleção do mesmo.', 4000);
@@ -310,8 +311,11 @@
                         'disciplina': { 'id': disciplina, 'nome': $('#selectDisciplina option:selected').text() },
                         'periodo': { 'ano': ano, 'semestre': semestre },
                         'listaProfessores': []
-                    },
-                    'temasAssociados': JSON.parse($.trim($("#hdTemas").val()))
+                    }
+                }
+
+                if (temas) {
+                    params.temasAssociados = JSON.parse(temas);
                 }
 
                 for (var i = 0; i < professores.length; i++) {
@@ -425,6 +429,7 @@
             var semestre = parseInt($('#selectSemestre').val());
             var professores = $('#selectProfessor').selectpicker('val');
             var arquivos = $('input[type=file]')[0].files;
+            var temas = $.trim($("#hdTemas").val());
 
             if (arquivos.length == 0) {
                 Msg.error('O campo "Prova" é obrigatório. Favor verificar a seleção do arquivo.', 4000);
@@ -453,8 +458,11 @@
                         'disciplina': { 'id': disciplina, 'nome': $('#selectDisciplina option:selected').text() },
                         'periodo': { 'ano': ano, 'semestre': semestre },
                         'listaProfessores': []
-                    },
-                    'temasAssociados': JSON.parse($.trim($("#hdTemas").val()))
+                    }
+                }
+
+                if (temas) {
+                    params.temasAssociados = JSON.parse(temas);
                 }
 
                 for (var i = 0; i < professores.length; i++) {

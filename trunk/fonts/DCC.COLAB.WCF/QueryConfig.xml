@@ -311,7 +311,7 @@
         (P.id_Prova = @ID)
     </selecionarProvaPorCodigo>
     <selecionarProvasFiltradas>
-      SELECT
+      SELECT DISTINCT
         P.id_Prova,
         P.titulo,
         P.descricao,
@@ -327,11 +327,15 @@
         dcccolab.Prova P
         INNER JOIN dcccolab.Tipo_Prova TP ON TP.id_Tipo_Prova = P.id_Tipo_Prova
         INNER JOIN dcccolab.Usuario U ON U.id_Usuario = P.id_Usuario
+        INNER JOIN dcccolab.Turma T ON T.id_Turma = P.id_Turma
+        LEFT JOIN dcccolab.Turma_Professor TUP ON TUP.id_Turma = T.id_Turma
         LEFT JOIN (
           SELECT AVG(nota) As nota, id_Prova FROM dcccolab.Avaliacao_Prova GROUP BY id_Prova
         ) AP ON AP.id_Prova = P.id_Prova
       WHERE
-        (@FILTRO IS NULL OR P.descricao LIKE CONCAT('%', @FILTRO, '%'))
+        (@FILTRO IS NULL OR P.descricao LIKE CONCAT('%', @FILTRO, '%')) AND
+        (@ID_DISCIPLINA IS NULL OR T.id_Disciplina = @ID_DISCIPLINA) AND
+        (@ID_PROFESSOR IS NULL OR TUP.id_Professor = @ID_PROFESSOR)
       ORDER BY @ORDER_BY
     </selecionarProvasFiltradas>
     <inserirProva>
