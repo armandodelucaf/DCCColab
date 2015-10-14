@@ -39,7 +39,7 @@
                 @if (listaProvas.Count == 0 && listaDisciplinas.Count > 0)
                 { 
                     <div class="noResults">
-                        <h4 style="color:red">Não há provas cadastradas para esta disciplina.</h4>
+                        <h4 style="color:red">Não há provas cadastradas para esta disciplina com os temas selecionados.</h4>
                     </div>
                 }
                 else
@@ -88,15 +88,15 @@
             <div class="col-md-6 text-center">
                 <div>
                     <h4>Temas</h4>
-                    <div id="divTemas" class="list-group">
+                    <div id="divTemas" class="list-group" idTema="">
                         <a href="#" class="list-group-item active">
-                            <span class="badge">50</span>
+                            <span class="badge">@listaProvas.Count</span>
                             TODOS
                         </a>
                     @for (int i = 0; i < listaTemas.Count; i++)
                     {
-                        <a href="#" class="list-group-item">
-                            <span class="badge">14</span>
+                        <a href="#" class="list-group-item" idTema="@listaTemas[i].id">
+                            <span class="badge">@listaTemas[i].qtdProvas</span>
                             @listaTemas[i].nome
                         </a>
                     }
@@ -123,7 +123,6 @@
     $('#divDisciplinas .list-group-item').click(function () {
         $('#divDisciplinas .list-group-item.active').removeClass('active');
         $(this).addClass('active');
-
         var codigoDisciplina = parseInt($(this).attr('codigo'));
         SelecionarDadosDisciplina(codigoDisciplina);
     });
@@ -131,41 +130,60 @@
     $('#divTemas .list-group-item').click(function () {
         $('#divTemas .list-group-item.active').removeClass('active');
         $(this).addClass('active');
+        var idTema = $(this).attr('idTema');
+        SelecionarDadosTema(idTema);
     });
+
+    var SelecionarDadosTema = function (id) {
+        var codigoDisciplina = parseInt($('#divDisciplinas .list-group-item.active').attr('codigo'));
+        SRV.ChamarAjax('@Url.Action("SelecionarDadosTema", "Home")', { idTema: id, idProfessor:@professor.id, idDisciplina: codigoDisciplina }, SelecionarDadosTema_cb);
+    };
+
+    var SelecionarDadosTema_cb = function (json) {
+        AtualizarCampoProvas(json);
+    };
 
     var SelecionarDadosDisciplina = function (id) {
         SRV.ChamarAjax('@Url.Action("SelecionarDadosDisciplina", "Home")', { idDisciplina: id, idProfessor: @professor.id }, SelecionarDadosDisciplina_cb);
     };
 
     var SelecionarDadosDisciplina_cb = function (json) {
-        AtualizarCampoTemas(json.listaTemas);
+        AtualizarCampoTemas(json.listaTemas, json.listaProvas.length);
         AtualizarCampoProvas(json.listaProvas);
     };
 
-    var AtualizarCampoTemas = function (listaTemas) {
+    var AtualizarCampoTemas = function (listaTemas, qtdProvas) {
         $('#divTemas .list-group-item').remove();
 
-        var span = $('<span>').addClass('badge').text('50');
-        var a = $('<a>').prop('href', '#').addClass('list-group-item active').text('TODOS');
+        var span = $('<span>').addClass('badge').text(qtdProvas);
+        var a = $('<a>').prop('href', '#').addClass('list-group-item active').attr('idTema', '').text('TODOS');
         a.append(span);
         $('#divTemas').append(a);
 
         if (listaTemas) {
             for (var i = 0; i < listaTemas.length; i++) {
-                span = $('<span>').addClass('badge').text('10');
-                a = $('<a>').prop('href', '#').addClass('list-group-item').text(listaTemas[i].nome);
+                span = $('<span>').addClass('badge').text(listaTemas[i].qtdProvas);
+                a = $('<a>').prop('href', '#').addClass('list-group-item').attr('idTema', listaTemas[i].id).text(listaTemas[i].nome);
                 a.append(span);
                 $('#divTemas').append(a);
             }
         }
+
+        $('#divTemas .list-group-item').click(function () {
+            $('#divTemas .list-group-item.active').removeClass('active');
+            $(this).addClass('active');
+            var idTema = $(this).attr('idTema');
+            SelecionarDadosTema(idTema);
+        });
     };
 
     var AtualizarCampoProvas = function (listaProvas) {
         $('#divProvas .divTipoProva').remove();
+        $('#divProvas .noResults').remove();
 
         if (listaProvas.length == 0) {
             var divNoResults = $('<div>').addClass('noResults');
-            var h4 = $('<h4>').css('color', 'red').text('Não há provas cadastradas para esta disciplina.');
+            var h4 = $('<h4>').css('color', 'red').text('Não há provas cadastradas para esta disciplina com os temas selecionados.');
             divNoResults.append(h4);
             $('#divProvas').append(divNoResults);
         }

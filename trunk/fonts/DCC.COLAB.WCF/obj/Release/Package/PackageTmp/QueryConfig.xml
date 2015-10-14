@@ -329,13 +329,15 @@
         INNER JOIN dcccolab.Usuario U ON U.id_Usuario = P.id_Usuario
         INNER JOIN dcccolab.Turma T ON T.id_Turma = P.id_Turma
         LEFT JOIN dcccolab.Turma_Professor TUP ON TUP.id_Turma = T.id_Turma
+        LEFT JOIN dcccolab.Prova_Tema PT ON PT.id_Prova = P.id_Prova
         LEFT JOIN (
           SELECT AVG(nota) As nota, id_Prova FROM dcccolab.Avaliacao_Prova GROUP BY id_Prova
         ) AP ON AP.id_Prova = P.id_Prova
       WHERE
         (@FILTRO IS NULL OR P.descricao LIKE CONCAT('%', @FILTRO, '%')) AND
         (@ID_DISCIPLINA IS NULL OR T.id_Disciplina = @ID_DISCIPLINA) AND
-        (@ID_PROFESSOR IS NULL OR TUP.id_Professor = @ID_PROFESSOR)
+        (@ID_PROFESSOR IS NULL OR TUP.id_Professor = @ID_PROFESSOR) AND
+        (@ID_TEMA IS NULL OR PT.id_Tema = @ID_TEMA)
       ORDER BY @ORDER_BY
     </selecionarProvasFiltradas>
     <inserirProva>
