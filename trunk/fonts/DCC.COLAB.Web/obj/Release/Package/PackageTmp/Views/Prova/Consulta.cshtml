@@ -3,7 +3,8 @@
 
 @{
     List<TipoProva> listaTipos = Convert.ChangeType(ViewBag.listaTipos, typeof(List<TipoProva>));
-    List<Turma> listaTurmas = Convert.ChangeType(ViewBag.listaTurmas, typeof(List<Turma>));
+    List<Disciplina> listaDisciplinas = Convert.ChangeType(ViewBag.listaDisciplinas, typeof(List<Disciplina>));
+    List<Usuario> listaProfessores = Convert.ChangeType(ViewBag.listaProfessores, typeof(List<Usuario>));
 }
 
 <div>
@@ -64,7 +65,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-4">
                             <div class="form-group">
                                 <label for="selectTipo" class="control-label">Tipo:</label>
                                 <select id="selectTipo" class="form-control input-md" required>
@@ -76,17 +77,49 @@
                                 </select>
                             </div>
                         </div>
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <label for="selectDisciplina" class="control-label">Disciplina:</label>
+                                <select id="selectDisciplina" class="form-control input-md" onchange="DisciplinaAlterada()" required>
+                                    <option value="0">Selecione uma Disciplina</option>
+                                    @foreach (Disciplina disciplina in listaDisciplinas) {
+                                        <option value="@disciplina.id">@disciplina.nome</option>
+                                    }                                    
+                                </select>
+                            </div>
+                        </div>
                     </div>
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label for="selectTurma" class="control-label">Turma:</label>
-                                <select id="selectTurma" class="form-control input-md" onchange="TurmaAlterada()" required>
-                                    <option value="0" idDisciplina="0">Selecione uma turma</option>
-                                    @foreach (Turma turma in listaTurmas)
+                                <label for="selectProfessor" class="control-label">Professor:</label>
+                                 <select id="selectProfessor" class="form-control input-md selectpicker" multiple required>
+                                    @foreach (Usuario professor in listaProfessores) {
+                                        <option value="@professor.id">@professor.nome</option>
+                                    }                                    
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="selectAno" class="control-label">Ano:</label>
+                                <select id="selectAno" class="form-control input-md" required>
+                                    <option value="0">Selecione um ano</option>
+                                    @for (int i = 2000; i < 2017; i++)
                                     {
-                                        <option value="@turma.id" idDisciplina="@turma.disciplina.id">@turma.tableString</option>
-                                    }                                     
+                                        <option value="@i">@(i)</option>
+                                    }                                    
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="selectSemestre" class="control-label">Semestre:</label>
+                                <select id="selectSemestre" class="form-control input-md" required>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>                                
                                 </select>
                             </div>
                         </div>
@@ -128,8 +161,14 @@
             $('#txtTitulo').val(json.titulo);
             $('#txtDescricao').val(json.descricao);
             $('#selectTipo').val(json.tipo.id);
-            $('#selectTurma').val(json.turma.id);
-            $('#selectTurma').prop('disabled', true);
+            $('#inputProvas').fileinput('reset');
+            
+            $('#selectAno').val(json.turma.periodo.ano);
+            $('#selectSemestre').val(json.turma.periodo.semestre);
+            $('#selectProfessor').selectpicker('val', json.turma.listaProfessores.map(function (x) { return x.id }));
+
+            $('#selectDisciplina').val(json.turma.disciplina.id);
+            $('#selectDisciplina').prop('disabled', true);
 
             $("#hdTemas").val(JSON.stringify(json.temasAssociados));
             if (json.temasAssociados.length > 0) {
@@ -149,8 +188,8 @@
             $('#cadastroDeProva').modal();
         };
 
-        var TurmaAlterada = function () {
-            var idDisciplina = parseInt($('#selectTurma option:selected').attr('idDisciplina'));
+        var DisciplinaAlterada = function () {
+            var idDisciplina = parseInt($('#selectDisciplina').val());
 
             $("#hdTemas").val('');
             $('#temasProva').val('');
@@ -241,13 +280,26 @@
             var titulo = $.trim($('#txtTitulo').val());
             var descricao = $.trim($('#txtDescricao').val());
             var tipo = parseInt($('#selectTipo').val());
-            var turma = parseInt($('#selectTurma').val());
+            var disciplina = parseInt($('#selectDisciplina').val());
+            var ano = parseInt($('#selectAno').val());
+            var semestre = parseInt($('#selectSemestre').val());
+            var professores = $('#selectProfessor').selectpicker('val');
+            var temas = $.trim($("#hdTemas").val());
 
             if (!tipo) {
                 Msg.error('O campo "Tipo" é obrigatório. Favor verificar a seleção do mesmo.', 4000);
             }
-            else if (!turma) {
-                Msg.error('O campo "Turma" é obrigatório. Favor verificar a seleção do mesmo.', 4000);
+            else if (!disciplina) {
+                Msg.error('O campo "Disciplina" é obrigatório. Favor verificar a seleção do mesmo.', 4000);
+            }
+            else if (!ano) {
+                Msg.error('O campo "Ano" é obrigatório. Favor verificar a seleção do mesmo.', 4000);
+            }
+            else if (!semestre) {
+                Msg.error('O campo "Semestre" é obrigatório. Favor verificar a seleção do mesmo.', 4000);
+            }
+            else if (!professores) {
+                Msg.error('O campo "Professor" é obrigatório. Favor verificar a seleção do mesmo.', 4000);
             }
             else {
                 var params = {
@@ -255,8 +307,20 @@
                     'titulo': titulo,
                     'descricao': descricao,
                     'tipo': { 'id': tipo, 'nome': $('#selectTipo option:selected').text() },
-                    'turma': { 'id': turma },
-                    'temasAssociados': JSON.parse($.trim($("#hdTemas").val()))
+                    'turma': {
+                        'disciplina': { 'id': disciplina, 'nome': $('#selectDisciplina option:selected').text() },
+                        'periodo': { 'ano': ano, 'semestre': semestre },
+                        'listaProfessores': []
+                    }
+                }
+
+                if (temas) {
+                    params.temasAssociados = JSON.parse(temas);
+                }
+
+                for (var i = 0; i < professores.length; i++) {
+                    var option = { 'id': professores[i] };
+                    params.turma.listaProfessores.push(option);
                 }
 
                 var formData = new FormData();
@@ -341,8 +405,14 @@
             $('#txtTitulo').val("");
             $('#txtDescricao').val("");
             $('#selectTipo').val(0);
-            $('#selectTurma').val(0);
-            $('#selectTurma').prop('disabled', false);
+            $('#inputProvas').fileinput('reset');
+
+            $('#selectAno').val(0);
+            $('#selectSemestre').val(1);
+            $('#selectProfessor').selectpicker('val', null);
+            $('#selectDisciplina').val(0);
+            $('#selectDisciplina').prop('disabled', false);
+
             $("#hdTemas").val("");
             $('#temasProva').val("");
 
@@ -354,8 +424,12 @@
             var titulo = $.trim($('#txtTitulo').val());
             var descricao = $.trim($('#txtDescricao').val());
             var tipo = parseInt($('#selectTipo').val());
-            var turma = parseInt($('#selectTurma').val());
+            var disciplina = parseInt($('#selectDisciplina').val());
+            var ano = parseInt($('#selectAno').val());
+            var semestre = parseInt($('#selectSemestre').val());
+            var professores = $('#selectProfessor').selectpicker('val');
             var arquivos = $('input[type=file]')[0].files;
+            var temas = $.trim($("#hdTemas").val());
 
             if (arquivos.length == 0) {
                 Msg.error('O campo "Prova" é obrigatório. Favor verificar a seleção do arquivo.', 4000);
@@ -363,15 +437,37 @@
             else if (!tipo) {
                 Msg.error('O campo "Tipo" é obrigatório. Favor verificar a seleção do mesmo.', 4000);
             }
-            else if (!turma) {
-                Msg.error('O campo "Turma" é obrigatório. Favor verificar a seleção do mesmo.', 4000);
+            else if (!disciplina) {
+                Msg.error('O campo "Disciplina" é obrigatório. Favor verificar a seleção do mesmo.', 4000);
+            }
+            else if (!ano) {
+                Msg.error('O campo "Ano" é obrigatório. Favor verificar a seleção do mesmo.', 4000);
+            }
+            else if (!semestre) {
+                Msg.error('O campo "Semestre" é obrigatório. Favor verificar a seleção do mesmo.', 4000);
+            }
+            else if (!professores) {
+                Msg.error('O campo "Professor" é obrigatório. Favor verificar a seleção do mesmo.', 4000);
             }
             else {
                 var params = {
                     'titulo': titulo,
                     'descricao': descricao,
                     'tipo': { 'id': tipo, 'nome': $('#selectTipo option:selected').text() },
-                    'turma': { 'id': turma }
+                    'turma': {
+                        'disciplina': { 'id': disciplina, 'nome': $('#selectDisciplina option:selected').text() },
+                        'periodo': { 'ano': ano, 'semestre': semestre },
+                        'listaProfessores': []
+                    }
+                }
+
+                if (temas) {
+                    params.temasAssociados = JSON.parse(temas);
+                }
+
+                for (var i = 0; i < professores.length; i++) {
+                    var option = { 'id': professores[i] };
+                    params.turma.listaProfessores.push(option);
                 }
 
                 var formData = new FormData();

@@ -227,7 +227,10 @@
         dcccolab.Turma T
         INNER JOIN dcccolab.Disciplina D ON D.id_Disciplina = T.id_Disciplina
       WHERE
-        (@FILTRO IS NULL OR T.cd_Turma LIKE CONCAT('%', @FILTRO, '%') OR D.nm_Disciplina LIKE CONCAT('%', @FILTRO, '%'))
+        (@FILTRO IS NULL OR T.cd_Turma LIKE CONCAT('%', @FILTRO, '%') OR D.nm_Disciplina LIKE CONCAT('%', @FILTRO, '%')) AND
+        (@ID_DISCIPLINA IS NULL OR T.id_Disciplina = @ID_DISCIPLINA) AND
+        (@ANO IS NULL OR T.nu_Ano = @ANO) AND
+        (@SEMESTRE IS NULL OR T.nu_Semestre = @SEMESTRE)
       ORDER BY @ORDER_BY
     </selecionarTurmasFiltradas>
     <inserirTurma>
@@ -295,7 +298,7 @@
         P.id_Tipo_Prova,
         TP.nm_Tipo_Prova,
         P.aval_Professor,
-        P.aval_Moderador,
+        P.aval_Monitor,
         AP.nota
       FROM
         dcccolab.Prova P
@@ -308,7 +311,7 @@
         (P.id_Prova = @ID)
     </selecionarProvaPorCodigo>
     <selecionarProvasFiltradas>
-      SELECT
+      SELECT DISTINCT
         P.id_Prova,
         P.titulo,
         P.descricao,
@@ -318,21 +321,25 @@
         P.id_Tipo_Prova,
         TP.nm_Tipo_Prova,
         P.aval_Professor,
-        P.aval_Moderador,
+        P.aval_Monitor,
         AP.nota
       FROM
         dcccolab.Prova P
         INNER JOIN dcccolab.Tipo_Prova TP ON TP.id_Tipo_Prova = P.id_Tipo_Prova
         INNER JOIN dcccolab.Usuario U ON U.id_Usuario = P.id_Usuario
+        INNER JOIN dcccolab.Turma T ON T.id_Turma = P.id_Turma
+        LEFT JOIN dcccolab.Turma_Professor TUP ON TUP.id_Turma = T.id_Turma
         LEFT JOIN (
           SELECT AVG(nota) As nota, id_Prova FROM dcccolab.Avaliacao_Prova GROUP BY id_Prova
         ) AP ON AP.id_Prova = P.id_Prova
       WHERE
-        (@FILTRO IS NULL OR P.descricao LIKE CONCAT('%', @FILTRO, '%'))
+        (@FILTRO IS NULL OR P.descricao LIKE CONCAT('%', @FILTRO, '%')) AND
+        (@ID_DISCIPLINA IS NULL OR T.id_Disciplina = @ID_DISCIPLINA) AND
+        (@ID_PROFESSOR IS NULL OR TUP.id_Professor = @ID_PROFESSOR)
       ORDER BY @ORDER_BY
     </selecionarProvasFiltradas>
     <inserirProva>
-      INSERT INTO dcccolab.Prova (src, titulo, descricao, id_Usuario, id_Turma, id_Tipo_Prova) VALUES (@SRC, @TITULO, @DESCRICAO, @ID_USUARIO, @ID_TURMA, @ID_TIPO_PROVA)
+      INSERT INTO dcccolab.Prova (src, titulo, descricao, id_Usuario, id_Turma, id_Tipo_Prova, aval_Professor, aval_Monitor) VALUES (@SRC, @TITULO, @DESCRICAO, @ID_USUARIO, @ID_TURMA, @ID_TIPO_PROVA, 0, 0)
     </inserirProva>
     <atualizarProva>
       UPDATE dcccolab.Prova 

@@ -29,5 +29,8 @@ namespace DCC.COLAB.Common.Entities
 
         [DataMember]
         public PerfilAcesso perfilAcesso { get; set; }
+
+        [DataMember]
+        public int qtdProvas { get; set; }
     }
 }

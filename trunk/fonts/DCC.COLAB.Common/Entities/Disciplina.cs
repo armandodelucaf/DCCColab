@@ -30,5 +30,8 @@ namespace DCC.COLAB.Common.Entities
                 }
             }
         }
+
+        [DataMember]
+        public int qtdProvas { get; set; }
     }
 }

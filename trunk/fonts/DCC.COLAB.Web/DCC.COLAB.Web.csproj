@@ -270,6 +270,7 @@
     <Content Include="Content\img\nostar.png" />
     <Content Include="Content\img\pdf.jpg" />
     <Content Include="Content\img\professor.png" />
+    <Content Include="Content\img\red_flag.png" />
     <Content Include="Content\img\star.png" />
     <Content Include="Content\img\template1.png" />
     <Content Include="Content\img\template2.png" />

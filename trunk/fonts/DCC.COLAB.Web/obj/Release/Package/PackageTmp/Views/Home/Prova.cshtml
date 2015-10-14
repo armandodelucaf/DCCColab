@@ -8,8 +8,7 @@
     <body>
         <div>
             <div class="col-md-6 text-center">
-                <h3>@prova.tipo.nome - @prova.titulo</h3>
-                <h4>@prova.turma.periodo.tableString - @prova.turma.disciplina.nome</h4>
+                <h3>@prova.tipo.nome - @prova.turma.periodo.tableString - @prova.turma.disciplina.nome</h3>
                 <h4>@prova.turma.listaProfessoresString</h4>
 
                 <div class="form-group"></div>
@@ -60,7 +59,7 @@
 
     window.onload = function (){
         var caminho = {
-            url: '@Url.Action("VisualizarPDF", "Prova")' + '/' + 1,
+            url: '@Url.Action("VisualizarPDF", "Prova")' + '/' + @prova.id,
             width: "100%",
             height: "700px"
         };

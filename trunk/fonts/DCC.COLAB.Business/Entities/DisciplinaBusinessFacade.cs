@@ -5,6 +5,7 @@ using DCC.COLAB.Common.Entities;
 using DCC.COLAB.Common.Filtros;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace DCC.COLAB.Business.Entities
 {
@@ -41,7 +42,17 @@ namespace DCC.COLAB.Business.Entities
         {
             try
             {
-                return dataAccess.SelecionarDisciplinasFiltradas(filtro);
+                List<Disciplina> listaDisciplinas = dataAccess.SelecionarDisciplinasFiltradas(filtro).ToList();
+                if (filtro.comQtdProvas && listaDisciplinas != null)
+                {
+                    ProvaBusinessFacade provaBF = ObterOutraBusiness<ProvaBusinessFacade>();
+
+                    foreach (Disciplina disciplina in listaDisciplinas)
+                    {
+                        disciplina.qtdProvas = provaBF.SelecionarQuantidadeProvasFiltradas(new FiltroProva() { idDisciplina = disciplina.id });
+                    }
+                }
+                return listaDisciplinas;
             }
             catch (Exception ex)
             {
