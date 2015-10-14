@@ -18,52 +18,70 @@
             
             <div class="col-md-3 text-left">
                 <h4>Disciplinas</h4>
-                <div id="divDisciplinas" class="list-group">
-                @for (int i = 0; i < listaDisciplinas.Count; i++)
-                {
-                    <a href="#" codigo="@listaDisciplinas[i].id" class="list-group-item @(i == 0 ? "active" : "")">@listaDisciplinas[i].nome</a>
+                @if (listaDisciplinas.Count == 0)
+                { 
+                    <div class="noResults">
+                        <h4 style="color:red">Não há disciplinas cadastradas para este professor.</h4>
+                    </div>
                 }
-                </div>
+                else
+                {
+                    <div id="divDisciplinas" class="list-group">
+                    @for (int i = 0; i < listaDisciplinas.Count; i++)
+                    {
+                        <a href="#" codigo="@listaDisciplinas[i].id" class="list-group-item @(i == 0 ? "active" : "")">@listaDisciplinas[i].nome</a>
+                    }
+                    </div>
+                }
             </div>
 
             <div id="divProvas" class="col-md-3 text-left">
-                @foreach (TipoProva tipo in listaTipos)
+                @if (listaProvas.Count == 0 && listaDisciplinas.Count > 0)
                 { 
-                    <div class="divTipoProva">
-                        <h4>@tipo.nome</h4>
-                        <div class="list-group">
-                        @for (int i = 0; i < listaProvas.Count; i++)
-                        {
-                            if (listaProvas[i].tipo.id == tipo.id)
-                            { 
-                                <a href="~/Home/Prova/@listaProvas[i].id" class="list-group-item">
-                                @if (listaProvas[i].avaliacao > 0)
-                                {
-                                    <span class="badge">
-                                    @for (int j = 1; j <= listaProvas[i].avaliacao; j++)
-                                    {
-                                        <img src="~/Content/img/ministar.png" alt="@j"/>
-                                    }
-                                    </span>
-                                }
-                                @if (listaProvas[i].recomendadoMonitor)
-                                {
-                                    <span class="badge">
-                                        <img src="~/Content/img/minimonitor.png" alt="Monitor Recomenda"/>
-                                    </span>
-                                }
-                                @if (listaProvas[i].recomendadoProfessor)
-                                {
-                                    <span class="badge">
-                                        <img src="~/Content/img/miniprofessor.png" alt="Professor Recomenda"/>
-                                    </span>
-                                }
-                                    @listaProvas[i].turma.periodo.tableString
-                                </a>
-                            }
-                        }
-                        </div>
+                    <div class="noResults">
+                        <h4 style="color:red">Não há provas cadastradas para esta disciplina.</h4>
                     </div>
+                }
+                else
+                {
+                    foreach (TipoProva tipo in listaTipos)
+                    { 
+                        <div class="divTipoProva">
+                            <h4>@tipo.nome</h4>
+                            <div class="list-group">
+                            @for (int i = 0; i < listaProvas.Count; i++)
+                            {
+                                if (listaProvas[i].tipo.id == tipo.id)
+                                { 
+                                    <a href="~/Home/Prova/@listaProvas[i].id" class="list-group-item">
+                                    @if (listaProvas[i].avaliacao > 0)
+                                    {
+                                        <span class="badge">
+                                        @for (int j = 1; j <= listaProvas[i].avaliacao; j++)
+                                        {
+                                            <img src="~/Content/img/ministar.png" alt="@j"/>
+                                        }
+                                        </span>
+                                    }
+                                    @if (listaProvas[i].recomendadoMonitor)
+                                    {
+                                        <span class="badge">
+                                            <img src="~/Content/img/minimonitor.png" alt="Monitor Recomenda"/>
+                                        </span>
+                                    }
+                                    @if (listaProvas[i].recomendadoProfessor)
+                                    {
+                                        <span class="badge">
+                                            <img src="~/Content/img/miniprofessor.png" alt="Professor Recomenda"/>
+                                        </span>
+                                    }
+                                        @listaProvas[i].turma.periodo.tableString
+                                    </a>
+                                }
+                            }
+                            </div>
+                        </div>
+                    }
                 }
             </div>
 
@@ -145,47 +163,55 @@
     var AtualizarCampoProvas = function (listaProvas) {
         $('#divProvas .divTipoProva').remove();
 
-        for (var i = 0; i < listaTiposProva.length; i++) {
-            var divTipo = $('<div>').addClass('divTipoProva');
-            var h4 = $('<h4>').text(listaTiposProva[i].nome);
-            divTipo.append(h4);
+        if (listaProvas.length == 0) {
+            var divNoResults = $('<div>').addClass('noResults');
+            var h4 = $('<h4>').css('color', 'red').text('Não há provas cadastradas para esta disciplina.');
+            divNoResults.append(h4);
+            $('#divProvas').append(divNoResults);
+        }
+        else {
+            for (var i = 0; i < listaTiposProva.length; i++) {
+                var divTipo = $('<div>').addClass('divTipoProva');
+                var h4 = $('<h4>').text(listaTiposProva[i].nome);
+                divTipo.append(h4);
 
-            var divGrupo = $('<div>').addClass('list-group');
+                var divGrupo = $('<div>').addClass('list-group');
 
-            for (var j = 0; j < listaProvas.length; j++) {
-                if (listaProvas[j].tipo.id == listaTiposProva[i].id) {
-                    var a = $('<a>').prop('href', '/Home/Prova/' + listaProvas[j].id).addClass('list-group-item').text(listaProvas[j].turma.periodo.tableString);
+                for (var j = 0; j < listaProvas.length; j++) {
+                    if (listaProvas[j].tipo.id == listaTiposProva[i].id) {
+                        var a = $('<a>').prop('href', '/Home/Prova/' + listaProvas[j].id).addClass('list-group-item').text(listaProvas[j].turma.periodo.tableString);
 
-                    if (listaProvas[j].avaliacao > 0) {
-                        var spanBadge = $('<span>').addClass('badge');
-                        for (var k = 1; k < listaProvas[j].avaliacao; k++) {
-                            var img = $('<img>').prop('src', '/Content/img/ministar.png').prop('alt', k);
-                            spanBadge.append(img);
+                        if (listaProvas[j].avaliacao > 0) {
+                            var spanBadge = $('<span>').addClass('badge');
+                            for (var k = 1; k < listaProvas[j].avaliacao; k++) {
+                                var img = $('<img>').prop('src', '/Content/img/ministar.png').prop('alt', k);
+                                spanBadge.append(img);
+                            }
+                            a.append(spanBadge);
                         }
-                        a.append(spanBadge);
-                    }
-                    if (listaProvas[j].recomendadoMonitor) {
-                        var spanBadge = $('<span>').addClass('badge');
-                        var img = $('<img>').prop('src', '/Content/img/minimonitor.png').prop('alt', 'Monitor Recomenda');
-                        spanBadge.append(img);
-                        a.append(spanBadge);
-                    }
-                    if (listaProvas[j].recomendadoProfessor) {
-                        var spanBadge = $('<span>').addClass('badge');
-                        var img = $('<img>').prop('src', '/Content/img/miniprofessor.png').prop('alt', 'Professor Recomenda');
-                        spanBadge.append(img);
-                        a.append(spanBadge);
-                    }
+                        if (listaProvas[j].recomendadoMonitor) {
+                            var spanBadge = $('<span>').addClass('badge');
+                            var img = $('<img>').prop('src', '/Content/img/minimonitor.png').prop('alt', 'Monitor Recomenda');
+                            spanBadge.append(img);
+                            a.append(spanBadge);
+                        }
+                        if (listaProvas[j].recomendadoProfessor) {
+                            var spanBadge = $('<span>').addClass('badge');
+                            var img = $('<img>').prop('src', '/Content/img/miniprofessor.png').prop('alt', 'Professor Recomenda');
+                            spanBadge.append(img);
+                            a.append(spanBadge);
+                        }
 
-                    divGrupo.append(a);
+                        divGrupo.append(a);
+                    }
                 }
-            }
 
-            divTipo.append(divGrupo);
+                divTipo.append(divGrupo);
 
-            var itensAdicionados = $(divGrupo).find('.list-group-item').length;
-            if (itensAdicionados > 0) {
-                $('#divProvas').append(divTipo);
+                var itensAdicionados = $(divGrupo).find('.list-group-item').length;
+                if (itensAdicionados > 0) {
+                    $('#divProvas').append(divTipo);
+                }
             }
         }
     };

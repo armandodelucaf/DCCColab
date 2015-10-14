@@ -355,3 +355,19 @@ Exception rethrown at [0]:
    em System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
    em System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
 
+2015-10-13 23:46:15,981 [14] [ERROR] - DCC.COLAB.Web.MvcApplication: Ocorreu um erro em .. Detalhes:  : 
+
+2015-10-13 23:46:26,235 [14] [ERROR] - DCC.COLAB.Web.MvcApplication: Ocorreu um erro em .. Detalhes:  : 
+
+2015-10-13 23:47:16,360 [14] [ERROR] - DCC.COLAB.Web.MvcApplication: Ocorreu um erro em .. Detalhes:  : 
+
+2015-10-13 23:47:29,885 [14] [ERROR] - DCC.COLAB.Web.MvcApplication: Ocorreu um erro em .. Detalhes:  : 
+
+2015-10-13 23:48:12,774 [14] [ERROR] - DCC.COLAB.Web.MvcApplication: Ocorreu um erro em .. Detalhes:  : 
+
+2015-10-13 23:55:23,212 [28] [ERROR] - DCC.COLAB.Web.MvcApplication: Ocorreu um erro em .. Detalhes:  : 
+
+2015-10-13 23:55:25,116 [26] [ERROR] - DCC.COLAB.Web.MvcApplication: Ocorreu um erro em .. Detalhes:  : 
+
+2015-10-13 23:55:39,369 [27] [ERROR] - DCC.COLAB.Web.MvcApplication: Ocorreu um erro em .. Detalhes:  : 
+

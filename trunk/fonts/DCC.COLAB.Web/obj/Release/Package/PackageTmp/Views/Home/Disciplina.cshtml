@@ -16,43 +16,52 @@
             <div class="form-group"></div>
 
             <div class="col-md-6 text-left">
-                @foreach (TipoProva tipo in listaTipos)
+                @if (listaProvas.Count == 0)
                 { 
-                    <div class="divTipoProva">
-                        <h4>@tipo.nome</h4>
-                        <div class="list-group">
-                        @for (int i = 0; i < listaProvas.Count; i++)
-                        {
-                            if (listaProvas[i].tipo.id == tipo.id)
-                            { 
-                                <a href="~/Home/Prova/@listaProvas[i].id" class="list-group-item">
-                                @if (listaProvas[i].avaliacao > 0)
-                                {
-                                    <span class="badge">
-                                    @for (int j = 1; j <= listaProvas[i].avaliacao; j++)
-                                    {
-                                        <img src="~/Content/img/ministar.png" alt="@j"/>
-                                    }
-                                    </span>
-                                }
-                                @if (listaProvas[i].recomendadoMonitor)
-                                {
-                                    <span class="badge">
-                                        <img src="~/Content/img/minimonitor.png" alt="Monitor Recomenda"/>
-                                    </span>
-                                }
-                                @if (listaProvas[i].recomendadoProfessor)
-                                {
-                                    <span class="badge">
-                                        <img src="~/Content/img/miniprofessor.png" alt="Professor Recomenda"/>
-                                    </span>
-                                }
-                                    @listaProvas[i].turma.periodo.tableString - @listaProvas[i].turma.listaProfessoresString
-                                </a>
-                            }
-                        }
-                        </div>
+                    <div class="noResults">
+                        <h4 style="color:red">Não há provas cadastradas para esta disciplina.</h4>
                     </div>
+                }
+                else
+                {
+                    foreach (TipoProva tipo in listaTipos)
+                    { 
+                        <div class="divTipoProva">
+                            <h4>@tipo.nome</h4>
+                            <div class="list-group">
+                            @for (int i = 0; i < listaProvas.Count; i++)
+                            {
+                                if (listaProvas[i].tipo.id == tipo.id)
+                                { 
+                                    <a href="~/Home/Prova/@listaProvas[i].id" class="list-group-item">
+                                    @if (listaProvas[i].avaliacao > 0)
+                                    {
+                                        <span class="badge">
+                                        @for (int j = 1; j <= listaProvas[i].avaliacao; j++)
+                                        {
+                                            <img src="~/Content/img/ministar.png" alt="@j"/>
+                                        }
+                                        </span>
+                                    }
+                                    @if (listaProvas[i].recomendadoMonitor)
+                                    {
+                                        <span class="badge">
+                                            <img src="~/Content/img/minimonitor.png" alt="Monitor Recomenda"/>
+                                        </span>
+                                    }
+                                    @if (listaProvas[i].recomendadoProfessor)
+                                    {
+                                        <span class="badge">
+                                            <img src="~/Content/img/miniprofessor.png" alt="Professor Recomenda"/>
+                                        </span>
+                                    }
+                                        @listaProvas[i].turma.periodo.tableString - @listaProvas[i].turma.listaProfessoresString
+                                    </a>
+                                }
+                            }
+                            </div>
+                        </div>
+                    }
                 }
             </div>
 

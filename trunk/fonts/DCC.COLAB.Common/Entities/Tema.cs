@@ -46,5 +46,9 @@ namespace DCC.COLAB.Common.Entities
 
         [DataMember]
         public Disciplina disciplina { get; set; }
+
+        [DataMember]
+        public int qtdProvas { get; set; }
+
     }
 }
