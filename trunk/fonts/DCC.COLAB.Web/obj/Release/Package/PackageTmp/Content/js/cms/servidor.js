@@ -65,7 +65,7 @@
         $.ajax({
             url: url,
             data: (isGet ? params : JSON.stringify(params)),
-            async: false,
+            async: true,
             type: (isGet ? 'GET' : 'POST'),
             contentType: "application/json; charset=utf-8",
             dataType: "json",

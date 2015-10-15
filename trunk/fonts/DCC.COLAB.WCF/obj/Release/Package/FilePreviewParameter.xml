@@ -4,7 +4,10 @@
     <parameterEntry kind="ProviderPath" scope="IisApp" match="^C:\\Users\\adlf\\Documents\\GitHub\\dcccolab\\trunk\\fonts\\DCC\.COLAB\.WCF\\obj\\Release\\Package\\PackageTmp$" />
     <parameterEntry kind="ProviderPath" scope="setAcl" match="^C:\\Users\\adlf\\Documents\\GitHub\\dcccolab\\trunk\\fonts\\DCC\.COLAB\.WCF\\obj\\Release\\Package\\PackageTmp$" />
   </parameter>
-  <parameter name="MySQLServerDesenv-Web.config Connection String" description="" value="Host=mysql2.gear.host;Database=dcccolab;UserName=dcccolab;Password=Hi2g_gg2PU^c;Integrated Security=true;Allow User Variables=True;" tags="">
+  <parameter name="MySQLServerDesenv-Web.config Connection String" description="MySQLServerDesenv Connection String used in web.config by the application to access the database." value="Server=localhost;Database=dcccolab;Uid=root;Pwd=root;Persist Security Info=true;Allow User Variables=True;" tags="SqlConnectionString">
     <parameterEntry kind="XmlFile" scope="C:\\Users\\adlf\\Documents\\GitHub\\dcccolab\\trunk\\fonts\\DCC\.COLAB\.WCF\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='MySQLServerDesenv']/@connectionString" />
+  </parameter>
+  <parameter name="MySQLServerGearHost-Web.config Connection String" description="MySQLServerGearHost Connection String used in web.config by the application to access the database." value="Server=mysql2.gear.host;Database=dcccolab;Uid=dcccolab;Pwd=dccCol@b!;Persist Security Info=true;Allow User Variables=True;" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\adlf\\Documents\\GitHub\\dcccolab\\trunk\\fonts\\DCC\.COLAB\.WCF\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='MySQLServerGearHost']/@connectionString" />
   </parameter>
 </parameters>
