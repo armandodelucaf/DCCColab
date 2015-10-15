@@ -40,31 +40,19 @@
             <div class="modal-body" style="overflow-y: inherit !important;">
                 <form>
                     <input type="hidden" id="hdIdProva" value="" />
+                                        
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-8">
                             <div class="form-group">
-                                <label for="txtTitulo" class="control-label">Título:</label>
-                                <input id="txtTitulo" name="txtTitulo" type="text" placeholder="Título da prova" class="form-control input-md" value="" />
+                                <label for="selectDisciplina" class="control-label">Disciplina:</label>
+                                <select id="selectDisciplina" class="form-control input-md" onchange="DisciplinaAlterada()" required>
+                                    <option value="0">Selecione uma Disciplina</option>
+                                    @foreach (Disciplina disciplina in listaDisciplinas) {
+                                        <option value="@disciplina.id">@disciplina.nome</option>
+                                    }                                    
+                                </select>
                             </div>
                         </div>
-                    </div>
-                    <div class="row" id="divInputProva">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label for="inputProvas" class="control-label">Prova:</label>
-                                <input id="inputProvas" type="file" class="file" accept="application/pdf" data-show-preview="false" data-show-upload="false" required />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label for="txtDescricao" class="control-label">Descrição:</label>
-                                <textarea id="txtDescricao" name="txtDescricao" placeholder="Descrição da prova" class="form-control input-md"></textarea>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="selectTipo" class="control-label">Tipo:</label>
@@ -77,22 +65,21 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="col-md-8">
+                    </div>
+
+                    <div class="row" id="divInputProva">
+                        <div class="col-md-12">
                             <div class="form-group">
-                                <label for="selectDisciplina" class="control-label">Disciplina:</label>
-                                <select id="selectDisciplina" class="form-control input-md" onchange="DisciplinaAlterada()" required>
-                                    <option value="0">Selecione uma Disciplina</option>
-                                    @foreach (Disciplina disciplina in listaDisciplinas) {
-                                        <option value="@disciplina.id">@disciplina.nome</option>
-                                    }                                    
-                                </select>
+                                <label for="inputProvas" class="control-label">Prova:</label>
+                                <input id="inputProvas" type="file" class="file" accept="application/pdf" data-show-preview="false" data-show-upload="false" required />
                             </div>
                         </div>
                     </div>
+
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label for="selectProfessor" class="control-label">Professor:</label>
+                                <label for="selectProfessor" class="control-label">Professores:</label>
                                  <select id="selectProfessor" class="form-control input-md selectpicker" multiple required>
                                     @foreach (Usuario professor in listaProfessores) {
                                         <option value="@professor.id">@professor.nome</option>
@@ -101,13 +88,14 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="selectAno" class="control-label">Ano:</label>
                                 <select id="selectAno" class="form-control input-md" required>
                                     <option value="0">Selecione um ano</option>
-                                    @for (int i = 2000; i < 2017; i++)
+                                    @for (int i = 2016; i >= 2000; i--)
                                     {
                                         <option value="@i">@(i)</option>
                                     }                                    
@@ -133,6 +121,24 @@
                             <div class="form-group ui-front">
                                 <label for="temasProva" class="control-label">Temas:</label>
                                 <textarea id="temasProva" name="temasProva" placeholder="Digite aqui os temas para associar a esta prova" class="form-control input-md"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="txtTitulo" class="control-label">Título:</label>
+                                <input id="txtTitulo" name="txtTitulo" type="text" placeholder="Título da prova" class="form-control input-md" value="" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="txtDescricao" class="control-label">Descrição:</label>
+                                <textarea id="txtDescricao" name="txtDescricao" placeholder="Descrição da prova" class="form-control input-md"></textarea>
                             </div>
                         </div>
                     </div>
@@ -263,6 +269,10 @@
                     });
                     $('#hdTemas').val(JSON.stringify(temasObj));
                 }
+            }).focus(function () {
+                $(this).data("uiAutocomplete").search($(this).val());
+            }).click(function () {
+                $(this).data("uiAutocomplete").search($(this).val());
             });
         };
 

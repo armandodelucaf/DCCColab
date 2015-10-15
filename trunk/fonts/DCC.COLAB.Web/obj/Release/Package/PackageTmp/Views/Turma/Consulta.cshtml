@@ -55,7 +55,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label for="selectProfessor" class="control-label">Professor:</label>
+                                <label for="selectProfessor" class="control-label">Professores:</label>
                                  <select id="selectProfessor" class="form-control input-md selectpicker" multiple required>
                                     @foreach (Usuario professor in listaProfessores) {
                                         <option value="@professor.id">@professor.nome</option>
@@ -76,7 +76,7 @@
                                 <label for="selectAno" class="control-label">Ano:</label>
                                 <select id="selectAno" class="form-control input-md" required>
                                     <option value="0">Selecione um ano</option>
-                                    @for (int i = 2000; i < 2017; i++)
+                                    @for (int i = 2016; i >= 2000; i--)
                                     {
                                         <option value="@i">@(i)</option>
                                     }                                    
