@@ -54,12 +54,12 @@ namespace DCC.COLAB.Business.Entities
                     prova.turma.id = resultado.id;
                 }
 
-                int codigo = dataAccess.InserirProva(prova);
+                prova.id = dataAccess.InserirProva(prova);
                 foreach (Tema tema in prova.temasAssociados)
                 {
                     InserirTemaProva(tema.id, prova.id);
                 }
-                return codigo;
+                return prova.id;
             }
             catch (Exception ex)
             {
