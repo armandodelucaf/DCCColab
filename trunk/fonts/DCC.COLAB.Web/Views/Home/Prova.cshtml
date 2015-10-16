@@ -17,23 +17,23 @@
                     <div id="selos" class="" >
                     @if (prova.recomendadoProfessor)
                     {
-                        <img src="~/Content/img/professor.png" alt="Professor Recomenda"/>
+                        <img src="~/Content/img/professor.png" title="Professor Recomenda"/>
                     }
                     @if (prova.recomendadoMonitor)
                     {
-                        <img src="~/Content/img/monitor.png" alt="Monitor Recomenda"/>
+                        <img src="~/Content/img/monitor.png" title="Monitor Recomenda"/>
                     }
                         &nbsp; &nbsp;
                     @for (int i = 1; i <= prova.avaliacao; i++)
                     {
-                        <a href="#" class="starRating"><img src="~/Content/img/ministar.png" alt="@i"/></a>
+                        <a href="#" class="starRating"><img src="~/Content/img/ministar.png" title="@i"/></a>
                     }
-                    @for (int i = prova.avaliacao; i < 5; i++)
+                    @for (int i = prova.avaliacao + 1; i <= 5; i++)
                     {
-                        <a href="#" class="starRating"><img src="~/Content/img/nostar.png" alt="@i"/></a>
+                        <a href="#" class="starRating"><img src="~/Content/img/nostar.png" title="@i"/></a>
                     }
                         &nbsp;
-                        <a href="#" ><img src="~/Content/img/red_flag.png" alt="Denunciar" height="22" width="22" style="vertical-align:bottom; margin-bottom:3px;"/></a>
+                        <a href="#" ><img src="~/Content/img/red_flag.png" title="Denunciar" height="22" width="22" style="vertical-align:bottom; margin-bottom:3px;"/></a>
                     </div>
                 </div>
 
