@@ -17,11 +17,11 @@
                     <div id="selos" class="" >
                     @if (prova.recomendadoProfessor)
                     {
-                        <img src="~/Content/img/professor.png" alt="Professor Recomenda"/>
+                        <img src="~/Content/img/professor.png" alt="Professor Recomenda" title="Professor Recomenda"/>
                     }
                     @if (prova.recomendadoMonitor)
                     {
-                        <img src="~/Content/img/monitor.png" alt="Monitor Recomenda"/>
+                        <img src="~/Content/img/monitor.png" alt="Monitor Recomenda" title="Monitor Recomenda"/>
                     }
                         &nbsp; &nbsp;
                     @for (int i = 1; i <= prova.avaliacao; i++)
@@ -33,20 +33,21 @@
                         <a href="#" class="starRating"><img src="~/Content/img/nostar.png" alt="@i"/></a>
                     }
                         &nbsp;
-                        <a href="#" ><img src="~/Content/img/red_flag.png" alt="Denunciar" height="22" width="22" style="vertical-align:bottom; margin-bottom:3px;"/></a>
+                        <a href="#" ><img src="~/Content/img/red_flag.png" alt="Denunciar" height="22" width="22" style="vertical-align:bottom;"/><span style="vertical-align:bottom; color:#EF583F;">Denuncie</span></a>
                     </div>
                 </div>
 
                 <div id="provapdf" class="col-xs-12"></div>
+                <p style="font-size:18px; margin-top:10px;">Não consegue visualizar a prova? <a href="www.dcccolab.gear.host/Prova/VisualizarPDF/@prova.id">Clique aqui</a> para baixar o arquivo .pdf</p>
             </div>
 
-            <div class="col-md-6 text-center">
+            <div class="col-md-6 text-center" style="margin-top:20px;">
                 <div class="row">
                     <h4>Temas Associados</h4>
                     @if (prova.temasAssociados.Count == 0)
                     { 
                         <div class="noResults">
-                            <h4 style="color:red">Não há temas cadastrados para esta prova.</h4>
+                            <h5 style="color:grey;">Não há temas cadastrados para esta prova.</h5>
                         </div>
                     }
                     else
@@ -61,6 +62,7 @@
                         </ul>
                     }
                 </div>
+                <h4>Dúvidas e Discussões</h4>
                 <div id="comentarios" class="row">
                     <!-- essa é a linha da magia. tem que rolar aqui um tratamento pra que ele coloque sempre um endereço único
                     é esse endereço único que é puxado para carregar os comentários do facebook p/ cada pag -->
