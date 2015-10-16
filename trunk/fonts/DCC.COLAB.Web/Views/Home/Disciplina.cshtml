@@ -39,20 +39,20 @@
                                         <span class="badge">
                                         @for (int j = 1; j <= listaProvas[i].avaliacao; j++)
                                         {
-                                            <img src="~/Content/img/ministar.png" alt="@j"/>
+                                            <img src="~/Content/img/ministar.png" title="@j"/>
                                         }
                                         </span>
                                     }
                                     @if (listaProvas[i].recomendadoMonitor)
                                     {
                                         <span class="badge">
-                                            <img src="~/Content/img/minimonitor.png" alt="Monitor Recomenda"/>
+                                            <img src="~/Content/img/minimonitor.png" title="Monitor Recomenda"/>
                                         </span>
                                     }
                                     @if (listaProvas[i].recomendadoProfessor)
                                     {
                                         <span class="badge">
-                                            <img src="~/Content/img/miniprofessor.png" alt="Professor Recomenda"/>
+                                            <img src="~/Content/img/miniprofessor.png" title="Professor Recomenda"/>
                                         </span>
                                     }
                                         @listaProvas[i].turma.periodo.tableString - @listaProvas[i].turma.listaProfessoresString
@@ -67,7 +67,7 @@
 
             <div class="col-md-6 text-center">
                 <div>
-                    <h4>Temas</h4>
+                    <h4>Filtro de Temas</h4>
                     <div id="divTemas" class="list-group">
                         <a href="#" class="list-group-item active" idTema="">
                             <span class="badge">@listaProvas.Count</span>
@@ -140,20 +140,20 @@
                         if (listaProvas[j].avaliacao > 0) {
                             var spanBadge = $('<span>').addClass('badge');
                             for (var k = 1; k < listaProvas[j].avaliacao; k++) {
-                                var img = $('<img>').prop('src', '/Content/img/ministar.png').prop('alt', k);
+                                var img = $('<img>').prop('src', '/Content/img/ministar.png').prop('title', k);
                                 spanBadge.append(img);
                             }
                             a.append(spanBadge);
                         }
                         if (listaProvas[j].recomendadoMonitor) {
                             var spanBadge = $('<span>').addClass('badge');
-                            var img = $('<img>').prop('src', '/Content/img/minimonitor.png').prop('alt', 'Monitor Recomenda');
+                            var img = $('<img>').prop('src', '/Content/img/minimonitor.png').prop('title', 'Monitor Recomenda');
                             spanBadge.append(img);
                             a.append(spanBadge);
                         }
                         if (listaProvas[j].recomendadoProfessor) {
                             var spanBadge = $('<span>').addClass('badge');
-                            var img = $('<img>').prop('src', '/Content/img/miniprofessor.png').prop('alt', 'Professor Recomenda');
+                            var img = $('<img>').prop('src', '/Content/img/miniprofessor.png').prop('title', 'Professor Recomenda');
                             spanBadge.append(img);
                             a.append(spanBadge);
                         }
