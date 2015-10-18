@@ -58,7 +58,7 @@ namespace DCC.COLAB.Web.Controllers
 
                 if (listaTurmas != null && listaTurmas.Count > 0)
                 {
-                    ViewBag.listaTemas = WCFDispatcher<ICOLABServico>.UseService(u => u.SelecionarTemasFiltrados(new FiltroTema() { comQtdProvas = true, idDisciplina = listaTurmas.First().disciplina.id })).ToList();
+                    ViewBag.listaTemas = WCFDispatcher<ICOLABServico>.UseService(u => u.SelecionarTemasFiltrados(new FiltroTema() { comQtdProvas = true, idDisciplina = listaTurmas.First().disciplina.id, idProfessor = id })).ToList();
                     ViewBag.listaProvas = WCFDispatcher<ICOLABServico>.UseService(u => u.SelecionarProvasFiltradas(new FiltroProva() { idDisciplina = listaTurmas.First().disciplina.id, idProfessor = id })).ToList();
                 }
                 else

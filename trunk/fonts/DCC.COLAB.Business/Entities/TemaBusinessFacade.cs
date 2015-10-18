@@ -49,7 +49,7 @@ namespace DCC.COLAB.Business.Entities
 
                     foreach (Tema tema in listaTemas)
                     {
-                        tema.qtdProvas = provaBF.SelecionarQuantidadeProvasFiltradas(new FiltroProva() { idTema = tema.id });
+                        tema.qtdProvas = provaBF.SelecionarQuantidadeProvasFiltradas(new FiltroProva() { idTema = tema.id, idProfessor = filtro.idProfessor });
                     }
                 }
                 return listaTemas;

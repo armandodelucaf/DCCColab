@@ -11,5 +11,8 @@ namespace DCC.COLAB.Common.Filtros
 
         [DataMember]
         public int? idDisciplina { get; set; }
+
+        [DataMember]
+        public int? idProfessor { get; set; }
     }
 }
