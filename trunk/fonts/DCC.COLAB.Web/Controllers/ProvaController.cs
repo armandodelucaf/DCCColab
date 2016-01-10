@@ -90,7 +90,7 @@ namespace DCC.COLAB.Web.Controllers
             }
             catch (Exception ex)
             {
-                return ThrowJsonError("Não foi possível salvar o prova. Verifique se o registro já existe.", ex);
+                return ThrowJsonError("Não foi possível salvar a prova. Verifique se o registro já existe.", ex);
             }
         }
 
@@ -116,7 +116,7 @@ namespace DCC.COLAB.Web.Controllers
             }
             catch (Exception ex)
             {
-                return ThrowJsonError("Não foi possível excluir o prova. O registro pode estar sendo utilizado no sistema.", ex);
+                return ThrowJsonError("Não foi possível excluir a prova. O registro pode estar sendo utilizado no sistema.", ex);
             }
         }
 

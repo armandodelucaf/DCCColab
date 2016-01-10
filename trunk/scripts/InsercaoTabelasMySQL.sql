@@ -10,5 +10,13 @@ INSERT INTO `Usuario` (id_Facebook ,nm_Usuario, id_Perfil_Acesso, email, senha)
 	
 INSERT INTO `Tipo_Prova` (nm_Tipo_Prova) VALUES ('Prova 1');
 INSERT INTO `Tipo_Prova` (nm_Tipo_Prova) VALUES ('Prova 2');
+INSERT INTO `Tipo_Prova` (nm_Tipo_Prova) VALUES ('Prova 3');
 INSERT INTO `Tipo_Prova` (nm_Tipo_Prova) VALUES ('Prova Final');
+INSERT INTO `Tipo_Prova` (nm_Tipo_Prova) VALUES ('Segunda Chamada');
 INSERT INTO `Tipo_Prova` (nm_Tipo_Prova) VALUES ('Lista de Exercícios');
+
+INSERT INTO `Tipo_Link` (nm_Tipo_Link) VALUES ('Artigo/Texto');
+INSERT INTO `Tipo_Link` (nm_Tipo_Link) VALUES ('Apostila/Livro');
+INSERT INTO `Tipo_Link` (nm_Tipo_Link) VALUES ('Imagem');
+INSERT INTO `Tipo_Link` (nm_Tipo_Link) VALUES ('Vídeo');
+INSERT INTO `Tipo_Link` (nm_Tipo_Link) VALUES ('Outro');

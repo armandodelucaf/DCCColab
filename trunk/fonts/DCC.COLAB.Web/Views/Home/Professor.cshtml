@@ -34,7 +34,7 @@
                 @if (listaDisciplinas.Count == 0)
                 { 
                     <div class="noResults">
-                        <h4 style="color:red">Não há disciplinas cadastradas para este professor.</h4>
+                        <h5 style="color:gray">Não há disciplinas cadastradas para este professor.</h5>
                     </div>
                 }
                 else
@@ -52,7 +52,7 @@
                 @if (listaProvas.Count == 0 && listaDisciplinas.Count > 0)
                 { 
                     <div class="noResults">
-                        <h4 style="color:red; padding:30px 0;">Não há provas cadastradas para esta disciplina com os temas selecionados.</h4>
+                        <h5 style="color:gray; padding:30px 0;">Não há provas cadastradas para esta disciplina com os temas selecionados.</h5>
                     </div>
                 }
                 else
@@ -153,7 +153,7 @@
     };
 
     var SelecionarDadosTema_cb = function (json) {
-        AtualizarCampoProvas(json);
+        AtualizarCampoProvas(json.listaProvas);
     };
 
     var SelecionarDadosDisciplina = function (id) {

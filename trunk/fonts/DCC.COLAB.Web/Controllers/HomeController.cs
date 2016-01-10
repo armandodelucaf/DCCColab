@@ -34,7 +34,9 @@ namespace DCC.COLAB.Web.Controllers
                 ViewBag.disciplina = WCFDispatcher<ICOLABServico>.UseService(u => u.SelecionarDisciplinaPorCodigo(id));
                 ViewBag.listaTemas = WCFDispatcher<ICOLABServico>.UseService(u => u.SelecionarTemasFiltrados(new FiltroTema() { idDisciplina = id, comQtdProvas = true })).ToList();
                 ViewBag.listaProvas = WCFDispatcher<ICOLABServico>.UseService(u => u.SelecionarProvasFiltradas(new FiltroProva() { idDisciplina = id })).ToList();
-                ViewBag.listaTipos = WCFDispatcher<ICOLABServico>.UseService(u => u.SelecionarTiposProva()).ToList();
+                ViewBag.listaLinks = WCFDispatcher<ICOLABServico>.UseService(u => u.SelecionarLinksFiltrados(new FiltroLink() { idDisciplina = id })).ToList();
+                ViewBag.listaTiposProva = WCFDispatcher<ICOLABServico>.UseService(u => u.SelecionarTiposProva()).ToList();
+                ViewBag.listaTiposLink = WCFDispatcher<ICOLABServico>.UseService(u => u.SelecionarTiposLink()).ToList();
 
                 return View();
             }
@@ -88,6 +90,7 @@ namespace DCC.COLAB.Web.Controllers
             try
             {
                 ViewBag.prova = WCFDispatcher<ICOLABServico>.UseService(u => u.SelecionarProvaPorCodigo(id));
+                ViewBag.estaLogado = SessaoUtil.UsuarioEstaAutenticado;
                 return View();
             }
             catch (Exception ex)
@@ -99,8 +102,9 @@ namespace DCC.COLAB.Web.Controllers
         public JsonResult SelecionarDadosTema(int? idTema, int? idProfessor, int idDisciplina)
         {
             List<Prova> listaProvas = WCFDispatcher<ICOLABServico>.UseService(u => u.SelecionarProvasFiltradas(new FiltroProva() { idTema = idTema, idDisciplina = idDisciplina, idProfessor = idProfessor })).ToList();
+            List<Link> listaLinks = WCFDispatcher<ICOLABServico>.UseService(u => u.SelecionarLinksFiltrados(new FiltroLink() { idTema = idTema, idDisciplina = idDisciplina })).ToList();
 
-            return Json(listaProvas, JsonRequestBehavior.AllowGet);
+            return Json(new { listaLinks = listaLinks, listaProvas = listaProvas }, JsonRequestBehavior.AllowGet);
         }
     }
 }

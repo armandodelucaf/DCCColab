@@ -181,6 +181,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\BaseFilterController.cs" />
+    <Compile Include="Controllers\LinkController.cs" />
     <Compile Include="Controllers\TurmaController.cs" />
     <Compile Include="Controllers\TemaController.cs" />
     <Compile Include="Controllers\DisciplinaController.cs" />
@@ -265,12 +266,14 @@
     <Content Include="Content\img\Loading\Fig8.gif" />
     <Content Include="Content\img\minimonitor.png" />
     <Content Include="Content\img\miniprofessor.png" />
+    <Content Include="Content\img\minisemistar.png" />
     <Content Include="Content\img\ministar.png" />
     <Content Include="Content\img\monitor.png" />
     <Content Include="Content\img\nostar.png" />
     <Content Include="Content\img\pdf.jpg" />
     <Content Include="Content\img\professor.png" />
     <Content Include="Content\img\red_flag.png" />
+    <Content Include="Content\img\semistar.png" />
     <Content Include="Content\img\star.png" />
     <Content Include="Content\img\template1.png" />
     <Content Include="Content\img\template2.png" />
@@ -881,6 +884,7 @@
     <Content Include="Views\Home\Professor.cshtml" />
     <Content Include="Views\Home\Prova.cshtml" />
     <Content Include="Views\Prova\Consulta.cshtml" />
+    <Content Include="Views\Link\Consulta.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -923,7 +927,7 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>0</DevelopmentServerPort>
+          <DevelopmentServerPort>50462</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>http://localhost:3842/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>

@@ -7,7 +7,7 @@
 <html>
     <body>
         <div>
-            <div class="col-md-6 text-center">
+            <div class="col-md-7 text-center">
                 <h3>@prova.tipo.nome - @prova.turma.periodo.tableString - @prova.turma.disciplina.nome</h3>
                 <h4>@prova.turma.listaProfessoresString</h4>
 
@@ -41,7 +41,7 @@
                 <p style="font-size:18px; margin-top:10px;">Não consegue visualizar a prova? <a href="http://dcccolab.gear.host/Prova/VisualizarPDF/@prova.id">Clique aqui</a> para baixar o arquivo .pdf</p>
             </div>
 
-            <div class="col-md-6 text-center" style="margin-top:20px;">
+            <div class="col-md-5 text-center" style="margin-top:20px;">
                 <div class="row">
                     <h4>Temas Associados</h4>
                     @if (prova.temasAssociados.Count == 0)
@@ -52,14 +52,14 @@
                     }
                     else
                     {
-                        <ul id="divTemas" class="list-group">
+                        <div id="divTemas">
                         @for (int i = 0; i < prova.temasAssociados.Count; i++)
                         {
-                            <li class="list-group-item">
+                            <span class="badge">
                                 @prova.temasAssociados[i].nome
-                            </li>
+                            </span>
                         }
-                        </ul>
+                        </div>
                     }
                 </div>
                 <h4>Dúvidas e Discussões</h4>

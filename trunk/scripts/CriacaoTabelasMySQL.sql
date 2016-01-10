@@ -130,21 +130,6 @@ CREATE TABLE `Prova`(
 	CONSTRAINT FOREIGN KEY (id_Tipo_Prova) REFERENCES `Tipo_Prova` (id_Tipo_Prova)
 );
 
-CREATE TABLE `Conteudo_Prova`(
-	`id_Conteudo_Prova` int AUTO_INCREMENT NOT NULL,
-	`src` varchar(255) NOT NULL,
-	`descricao` varchar(255) NOT NULL,
-	`id_Usuario` int NOT NULL,
-	`id_Prova` int NOT NULL,
-	
-	CONSTRAINT `PK_Conteudo_Prova` PRIMARY KEY 
-	(`id_Conteudo_Prova`) ,
-	
-	CONSTRAINT FOREIGN KEY (id_Usuario) REFERENCES `Usuario` (id_Usuario),
-	
-	CONSTRAINT FOREIGN KEY (id_Prova) REFERENCES `Prova` (id_Prova)
-);
-
 CREATE TABLE `Conteudo_Tema`(
 	`id_Conteudo_Tema` int AUTO_INCREMENT NOT NULL,
 	`src` varchar(255) NOT NULL,
@@ -211,4 +196,61 @@ CREATE TABLE `Avaliacao_Conteudo_Tema`(
 	CONSTRAINT FOREIGN KEY (id_Usuario) REFERENCES `Usuario` (id_Usuario),
 	
 	CONSTRAINT FOREIGN KEY (id_Conteudo_Tema) REFERENCES `Conteudo_Tema` (id_Conteudo_Tema)
+);
+
+CREATE TABLE `Tipo_Link`(
+	`id_Tipo_Link` int AUTO_INCREMENT NOT NULL,
+	`nm_Tipo_Link` varchar(64) NOT NULL,
+	
+	CONSTRAINT `PK_Tipo_Link` PRIMARY KEY 
+	(`id_Tipo_Link`) ,
+	
+	CONSTRAINT `UQ_Tipo_Link` UNIQUE 
+	(`nm_Tipo_Link`) 
+);
+
+CREATE TABLE `Link`(
+	`id_Link` int AUTO_INCREMENT NOT NULL,
+	`url` varchar(255) NOT NULL,
+	`titulo` varchar(100) NULL,
+	`descricao` varchar(255) NULL,
+	`id_Usuario` int NOT NULL,
+	`id_Disciplina` int NOT NULL,
+	`id_Tipo_Link` int NOT NULL,
+	`aval_Professor` tinyint NOT NULL,
+	`aval_Monitor` tinyint NOT NULL,
+	
+	CONSTRAINT `PK_Link` PRIMARY KEY 
+	(`id_Link`) ,
+	
+	CONSTRAINT FOREIGN KEY (id_Usuario) REFERENCES `Usuario` (id_Usuario),
+	
+	CONSTRAINT FOREIGN KEY (id_Tipo_Link) REFERENCES `Tipo_Link` (id_Tipo_Link),
+	
+	CONSTRAINT FOREIGN KEY (id_Disciplina) REFERENCES `Disciplina` (id_Disciplina)
+);
+
+CREATE TABLE `Link_Tema`(
+	`id_Link` int NOT NULL,
+	`id_Tema` int NOT NULL,
+	
+	CONSTRAINT `PK_Link_Tema` UNIQUE  
+	(`id_Link`, `id_Tema`) ,
+	
+	CONSTRAINT FOREIGN KEY (id_Link) REFERENCES `Link` (id_Link),
+	
+	CONSTRAINT FOREIGN KEY (id_Tema) REFERENCES `Tema` (id_Tema)
+);
+
+CREATE TABLE `Avaliacao_Link`(
+	`id_Usuario` int NOT NULL,
+	`id_Link` int NOT NULL,
+	`nota` tinyint NOT NULL,
+	
+	CONSTRAINT `PK_Avaliacao_Link` UNIQUE  
+	(`id_Usuario`, `id_Link`) ,
+	
+	CONSTRAINT FOREIGN KEY (id_Usuario) REFERENCES `Usuario` (id_Usuario),
+	
+	CONSTRAINT FOREIGN KEY (id_Link) REFERENCES `Link` (id_Link)
 );

@@ -145,5 +145,30 @@ namespace DCC.COLAB.WCF.Interface
 
         #endregion
 
+        #region Link
+
+        [OperationContract]
+        Link SelecionarLinkPorCodigo(int codigo);
+
+        [OperationContract]
+        int InserirLink(Link link);
+
+        [OperationContract]
+        void AtualizarLink(Link link);
+
+        [OperationContract]
+        int SelecionarQuantidadeLinksFiltrados(FiltroLink filtro);
+
+        [OperationContract]
+        List<Link> SelecionarLinksFiltrados(FiltroLink filtro);
+
+        [OperationContract]
+        void ExcluirLink(int codigo);
+
+        [OperationContract]
+        List<TipoLink> SelecionarTiposLink();
+
+        #endregion
+
     }
 }

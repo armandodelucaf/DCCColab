@@ -1,0 +1,374 @@
+﻿@using DCC.COLAB.Common.AuxiliarEntities;
+@using DCC.COLAB.Common.Entities;
+
+@{
+    List<TipoLink> listaTipos = Convert.ChangeType(ViewBag.listaTipos, typeof(List<TipoLink>));
+    List<Disciplina> listaDisciplinas = Convert.ChangeType(ViewBag.listaDisciplinas, typeof(List<Disciplina>));
+}
+
+<div>
+    <legend>Links - Consulta</legend>
+
+    <table id="tabelaLinks" class="table hover table-bordered" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Título</th>
+                <th>Tipo</th>
+                <th>Disciplina</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+    </table>
+
+    <div class="form-group">
+        <div>
+            <button id="btnNovo" name="btnNovo" class="btn btn-primary">Novo link</button>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="cadastroDeLink" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="modalLinkLabel"></h4>
+            </div>
+            <div class="modal-body" style="overflow-y: inherit !important;">
+                <form>
+                    <input type="hidden" id="hdIdLink" value="" />
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="txtTitulo" class="control-label">Título:</label>
+                                <input id="txtTitulo" name="txtTitulo" type="text" placeholder="Título do link" class="form-control input-md" value="" required/>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="txtUrl" class="control-label">URL:</label>
+                                <input id="txtUrl" name="txtUrl" type="text" placeholder="URL do link" class="form-control input-md" value="" required />
+                            </div>
+                        </div>
+                    </div>
+                           
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <label for="selectDisciplina" class="control-label">Disciplina:</label>
+                                <select id="selectDisciplina" class="form-control input-md" onchange="DisciplinaAlterada()" required>
+                                    <option value="0">Selecione uma Disciplina</option>
+                                    @foreach (Disciplina disciplina in listaDisciplinas) {
+                                        <option value="@disciplina.id">@disciplina.nome</option>
+                                    }                                    
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="selectTipo" class="control-label">Tipo:</label>
+                                <select id="selectTipo" class="form-control input-md" required>
+                                    <option value="0">Selecione um tipo</option>
+                                    @foreach (TipoLink tipo in listaTipos)
+                                    {
+                                        <option value="@tipo.id">@tipo.nome</option>
+                                    }                                    
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+
+                            <input id="hdTemas" name="hdTemas" type="hidden" value="" />
+
+                            <div class="form-group ui-front">
+                                <label for="temasLink" class="control-label">Temas:</label>
+                                <textarea id="temasLink" name="temasLink" placeholder="Digite aqui os temas para associar a este link" class="form-control input-md"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="txtDescricao" class="control-label">Descrição:</label>
+                                <textarea id="txtDescricao" name="txtDescricao" placeholder="Descrição do link" class="form-control input-md"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                <button type="button" class="btn btn-success" id="btnSalvar">Salvar link</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section scripts
+{
+    <script type="text/javascript">
+        var CarregarLinkParaEdicao = function (idLink) {
+            SRV.ChamarAjax('@Url.Action("ObterLink", "Link")', { codigo: idLink }, CarregarLinkParaEdicao_cb);
+        };
+
+        var CarregarLinkParaEdicao_cb = function (json) {
+            $('#modalLinkLabel').text('Editar Link');
+            $("#hdIdLink").val(json.id);
+            $('#txtUrl').val(json.url);
+            $('#txtTitulo').val(json.titulo);
+            $('#txtDescricao').val(json.descricao);
+            $('#selectTipo').val(json.tipo.id);
+            
+            $('#selectDisciplina').val(json.disciplina.id);
+            $('#selectDisciplina').prop('disabled', true);
+
+            $("#hdTemas").val(JSON.stringify(json.temasAssociados));
+            if (json.temasAssociados.length > 0) {
+                var temas = JSON.parse($('#hdTemas').val());
+                var txtTemas = []
+                for (i = 0; i < temas.length; i++) {
+                    txtTemas.push(temas[i].nome);
+                }
+                $('#temasLink').val(txtTemas.join(", "));
+            }
+            else {
+                $('#temasLink').val('');
+            }
+            ObterTemas(json.disciplina.id);
+
+            $('#cadastroDeLink').modal();
+        };
+
+        var DisciplinaAlterada = function () {
+            var idDisciplina = parseInt($('#selectDisciplina').val());
+
+            $("#hdTemas").val('');
+            $('#temasLink').val('');
+
+            if (idDisciplina > 0) {
+                ObterTemas(idDisciplina);
+            }
+        };
+
+        var ObterTemas = function (idDisciplina) {
+            SRV.ChamarAjax('@Url.Action("ObterTemas", "Link")', { idDisciplina: idDisciplina }, ObterTemas_cb);
+        }
+
+        var split = function (val) {
+            return val.split(/,\s*/);
+        }
+
+        var extractLast = function (term) {
+            return split(term).pop();
+        }
+
+        var ObterTemas_cb = function (json) {
+            var dataSet = $.map(json, function (value, index) {
+                return { value: value.id, label: value.nome };
+            });
+
+            $('#temasLink').autocomplete({
+                minLength: 0,
+                source: function (request, response) {
+                    // delegate back to autocomplete, but extract the last term
+                    response($.ui.autocomplete.filter(dataSet, extractLast(request.term)));
+                },
+                focus: function () {
+                    // prevent value inserted on focus
+                    return false;
+                },
+                select: function (event, ui) {
+                    var temas = split(this.value);
+                    // remove the current input
+                    temas.pop();
+                    // add the selected item
+                    temas.push(ui.item.label);
+                    // add placeholder to get the comma-and-space at the end
+                    temas.push("");
+                    this.value = temas.join(", ");
+
+                    metrics = jQuery.grep(dataSet, function (element) {
+                        return element.label != ui.item.label;
+                    });
+
+                    return false;
+                },
+                change: function (event, ui) {
+                    var temas = split(this.value);
+                    if (temas[temas.length - 1] === '') {
+                        temas.pop();
+                    }
+
+                    var uniqueTemas = temas.filter(function (item, pos, self) {
+                        return self.indexOf(item) == pos;
+                    })
+                    temas = uniqueTemas;
+
+                    var temasObj = [];
+
+                    $.each(temas, function (index, value) {
+                        temaEncontrado = dataSet.filter(function (tag) { return tag.label.toUpperCase() == value.toUpperCase() })
+                        if (temaEncontrado.length > 0) {
+                            temasObj.push({ nome: temaEncontrado[0].label.toUpperCase(), id: temaEncontrado[0].value });
+                        }
+                    });
+                    $('#hdTemas').val(JSON.stringify(temasObj));
+                }
+            }).focus(function () {
+                $(this).data("uiAutocomplete").search($(this).val());
+            }).click(function () {
+                $(this).data("uiAutocomplete").search($(this).val());
+            });
+        };
+
+        var ExcluirLink = function (idLink) {
+            $.confirm({
+                title: "Confirmação",
+                text: "Deseja realmente excluir este link?",
+                confirm: function () {
+                    ExcluirLinkAjax(idLink);
+                },
+                cancel: function () {
+                    // nothing to do
+                },
+                confirmButton: "Sim",
+                cancelButton: "Não",
+                post: true
+            });
+        };
+
+        var ExcluirLinkAjax = function (id) {
+            SRV.ChamarAjax('@Url.Action("Excluir", "Link")', { codigo: id }, SucessoExcluir_cb);
+        };
+
+        var SucessoExcluir_cb = function (json) {
+            Msg.success("Exclusão realizada com sucesso.", 3000);
+            AtualizarListagem();
+        };
+
+        var AtualizarListagem = function () {
+            $('#tabelaLinks').dataTable().fnDraw(false);
+        };
+        
+        var InicializarListagem = function () {
+            $('#tabelaLinks').dataTable({
+                columns: [
+                    { "data": "id", "name": "L.id_Link" },
+                    { "data": "titulo", "name": "L.titulo" },
+                    { "data": "tipo.nome", "name": "TL.nm_Tipo_Link" },
+                    { "data": "disciplina.nome", "name": "D.nm_Disciplina" },
+                    { "data": "" }
+                ],
+                columnDefs: [
+                    { targets: 0, visible: false, orderable: false, searchable: false },
+                    { targets: 3, orderable: false },
+                    {
+                        targets: 4, orderable: false, searchable: false, width: "80px", sClass: "alignCenter", render: function (data, type, row) {
+                            var acoes = "";
+                            acoes += "<a href='#' onClick='CarregarLinkParaEdicao(" + row["id"] + ")'><img width='15px' title='editar' alt='Editar' src='/../Content/img/ic_editar.png' class='rowEditIcon'/></a>";
+                            acoes += "&nbsp;&nbsp;";
+                            acoes += "<a href='#' onClick='ExcluirLink(" + row["id"] + ")'><img width='15px' title='excluir' alt='Excluir' src='/../Content/img/bt_excluir.gif' class='rowDeleteIcon' id='" + row["id"] + "'/></a>";
+                            return acoes;
+                        }
+                    },
+                ],
+                language: { url: "/../Content/dataTable_pt_BR.js", searchPlaceholder: "titulo" },
+                processing: true,
+                serverSide: true,
+                order: [[1, "asc"]],
+                ajax: {
+                    url: "@Url.Action("ListarLinks", "Link")",
+                    async: false,
+                    type: 'POST',
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    data: function (d) {
+                        return COLAB.ObterFiltroBaseDataTable(d);
+                    }
+                }
+            });
+        };
+
+        $('#btnNovo').click(function () {
+            $('#modalLinkLabel').text('Cadastrar Novo Link');
+            $("#hdIdLink").val(0);
+            $('#txtTitulo').val("");
+            $('#txtDescricao').val("");
+            $('#selectTipo').val(0);
+            $('#txtUrl').val("");
+
+            $('#selectDisciplina').val(0);
+            $('#selectDisciplina').prop('disabled', false);
+
+            $("#hdTemas").val("");
+            $('#temasLink').val("");
+
+            $('#cadastroDeLink').modal();
+        });
+
+
+
+        $('#btnSalvar').click(function () {
+            var id = parseInt($("#hdIdLink").val());
+            var titulo = $.trim($('#txtTitulo').val());
+            var descricao = $.trim($('#txtDescricao').val());
+            var tipo = parseInt($('#selectTipo').val());
+            var disciplina = parseInt($('#selectDisciplina').val());
+            var url = $.trim($('#txtUrl').val());
+            var temas = $.trim($("#hdTemas").val());
+
+            if (!tipo) {
+                Msg.error('O campo "Tipo" é obrigatório. Favor verificar a seleção do mesmo.', 4000);
+            }
+            else if (!disciplina) {
+                Msg.error('O campo "Disciplina" é obrigatório. Favor verificar a seleção do mesmo.', 4000);
+            }
+            else if (!titulo) {
+                Msg.error('O campo "Título" é obrigatório. Favor verificar o preenchimento do mesmo.', 4000);
+            }
+            else if (!url) {
+                Msg.error('O campo "URL" é obrigatório. Favor verificar o preenchimento do mesmo.', 4000);
+            }
+            else {
+                var params = {
+                    'id': id,
+                    'url': url,
+                    'titulo': titulo,
+                    'descricao': descricao,
+                    'tipo': { 'id': tipo, 'nome': $('#selectTipo option:selected').text() },
+                    'disciplina': { 'id': disciplina, 'nome': $('#selectDisciplina option:selected').text() }
+                }
+
+                if (temas) {
+                    params.temasAssociados = JSON.parse(temas);
+                }
+
+                SRV.ChamarAjax('@Url.Action("Salvar", "Link")', params, Salvar_cb);
+            }
+        });
+
+        var Salvar_cb = function (json) {
+            Msg.success('Cadastro efetuado com sucesso', 4000);
+            $('#cadastroDeLink').modal('hide');
+            AtualizarListagem();
+        };
+
+        $(document).ready(function () {
+            Msg.iconMode = "fa";
+            InicializarListagem();
+            COLAB.InicializarPropriedades();
+        });
+    </script>
+}

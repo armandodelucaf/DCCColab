@@ -13,6 +13,11 @@ namespace DCC.COLAB.Common.Basic
         private static int _idPerfilMonitor;
         private static int _idPerfilAluno;
 
+        private static int _idTipoLinkArtigoTexto;
+        private static int _idTipoLinkApostilaLivro;
+        private static int _idTipoLinkImagem;
+        private static int _idTipoLinkVideo;
+
         public static string StringDeConexaoBD
         {
             get
@@ -60,6 +65,46 @@ namespace DCC.COLAB.Common.Basic
                 if (_idPerfilAluno == 0)
                     _idPerfilAluno = Convert.ToInt32(ConfigurationManager.AppSettings["idPerfilAluno"]);
                 return _idPerfilAluno;
+            }
+        }
+
+        public static int IdTipoLinkApostilaLivro
+        {
+            get
+            {
+                if (_idTipoLinkApostilaLivro == 0)
+                    _idTipoLinkApostilaLivro = Convert.ToInt32(ConfigurationManager.AppSettings["idTipoLinkApostilaLivro"]);
+                return _idTipoLinkApostilaLivro;
+            }
+        }
+
+        public static int IdTipoLinkArtigoTexto
+        {
+            get
+            {
+                if (_idTipoLinkArtigoTexto == 0)
+                    _idTipoLinkArtigoTexto = Convert.ToInt32(ConfigurationManager.AppSettings["idTipoLinkArtigoTexto"]);
+                return _idTipoLinkArtigoTexto;
+            }
+        }
+
+        public static int IdTipoLinkImagem
+        {
+            get
+            {
+                if (_idTipoLinkImagem == 0)
+                    _idTipoLinkImagem = Convert.ToInt32(ConfigurationManager.AppSettings["idTipoLinkImagem"]);
+                return _idTipoLinkImagem;
+            }
+        }
+
+        public static int IdTipoLinkVideo
+        {
+            get
+            {
+                if (_idTipoLinkVideo == 0)
+                    _idTipoLinkVideo = Convert.ToInt32(ConfigurationManager.AppSettings["idTipoLinkVideo"]);
+                return _idTipoLinkVideo;
             }
         }
     }

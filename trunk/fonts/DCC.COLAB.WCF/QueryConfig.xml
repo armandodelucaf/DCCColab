@@ -367,17 +367,17 @@
 
     <selecionarTemasPorIdProva>
       SELECT
-      PT.id_Tema,
-      T.nm_Tema,
-      T.ds_Tema,
-      T.id_Disciplina,
-      D.nm_Disciplina
+        PT.id_Tema,
+        T.nm_Tema,
+        T.ds_Tema,
+        T.id_Disciplina,
+        D.nm_Disciplina
       FROM
-      dcccolab.Prova_Tema PT
-      INNER JOIN dcccolab.Tema T ON T.id_Tema = PT.id_Tema
-      INNER JOIN dcccolab.Disciplina D ON D.id_Disciplina = T.id_Disciplina
+        dcccolab.Prova_Tema PT
+        INNER JOIN dcccolab.Tema T ON T.id_Tema = PT.id_Tema
+        INNER JOIN dcccolab.Disciplina D ON D.id_Disciplina = T.id_Disciplina
       WHERE
-      (PT.id_Prova = @ID_PROVA)
+        (PT.id_Prova = @ID_PROVA)
       ORDER BY T.nm_Tema ASC
     </selecionarTemasPorIdProva>
     <inserirTemaProva>
@@ -387,5 +387,110 @@
       DELETE FROM dcccolab.Prova_Tema WHERE id_Prova = @ID_PROVA
     </excluirTemaProva>
   </Prova>
+
+  <Link>
+    <selecionarLinkPorCodigo>
+      SELECT
+        L.id_Link,
+        L.url,
+        L.titulo,
+        L.descricao,
+        L.id_Usuario,
+        U.nm_Usuario,
+        L.id_Disciplina,
+        D.nm_Disciplina,
+        L.id_Tipo_Link,
+        TL.nm_Tipo_Link,
+        L.aval_Professor,
+        L.aval_Monitor,
+        AL.nota
+      FROM
+        dcccolab.Link L
+        INNER JOIN dcccolab.Tipo_Link TL ON TL.id_Tipo_Link = L.id_Tipo_Link
+        INNER JOIN dcccolab.Disciplina D ON D.id_Disciplina = L.id_Disciplina
+        INNER JOIN dcccolab.Usuario U ON U.id_Usuario = L.id_Usuario
+        LEFT JOIN (
+          SELECT AVG(nota) As nota, id_Link FROM dcccolab.Avaliacao_Link GROUP BY id_Link
+        ) AL ON AL.id_Link = L.id_Link
+      WHERE
+        (L.id_Link = @ID)
+    </selecionarLinkPorCodigo>
+    <selecionarLinksFiltrados>
+      SELECT DISTINCT
+        L.id_Link,
+        L.url,
+        L.titulo,
+        L.descricao,
+        L.id_Usuario,
+        U.nm_Usuario,
+        L.id_Disciplina,
+        D.nm_Disciplina,
+        L.id_Tipo_Link,
+        TL.nm_Tipo_Link,
+        L.aval_Professor,
+        L.aval_Monitor,
+        AL.nota
+      FROM
+        dcccolab.Link L
+        INNER JOIN dcccolab.Tipo_Link TL ON TL.id_Tipo_Link = L.id_Tipo_Link
+        INNER JOIN dcccolab.Disciplina D ON D.id_Disciplina = L.id_Disciplina
+        INNER JOIN dcccolab.Usuario U ON U.id_Usuario = L.id_Usuario
+        LEFT JOIN dcccolab.Link_Tema LT ON LT.id_Link = L.id_Link
+        LEFT JOIN (
+          SELECT AVG(nota) As nota, id_Link FROM dcccolab.Avaliacao_Link GROUP BY id_Link
+        ) AL ON AL.id_Link = L.id_Link
+      WHERE
+        (@FILTRO IS NULL OR L.descricao LIKE CONCAT('%', @FILTRO, '%')) AND
+        (@ID_DISCIPLINA IS NULL OR L.id_Disciplina = @ID_DISCIPLINA) AND
+        (@ID_TEMA IS NULL OR LT.id_Tema = @ID_TEMA)
+      ORDER BY @ORDER_BY
+    </selecionarLinksFiltrados>
+    <inserirLink>
+      INSERT INTO dcccolab.Link (url, titulo, descricao, id_Usuario, id_Disciplina, id_Tipo_Link, aval_Professor, aval_Monitor) VALUES (@URL, @TITULO, @DESCRICAO, @ID_USUARIO, @id_Disciplina, @ID_TIPO_LINK, 0, 0)
+    </inserirLink>
+    <atualizarLink>
+      UPDATE dcccolab.Link
+      SET
+        titulo = @TITULO,
+        descricao = @DESCRICAO,
+        id_Disciplina = @ID_DISCIPLINA,
+        id_Tipo_Link = @ID_TIPO_LINK
+      WHERE
+        id_Link = @ID
+    </atualizarLink>
+    <excluirLink>
+      DELETE FROM dcccolab.Link WHERE id_Link = @ID
+    </excluirLink>
+
+    <selecionarTiposLink>
+      SELECT
+        TL.id_Tipo_Link,
+        TL.nm_Tipo_Link
+      FROM
+        dcccolab.Tipo_Link TL
+    </selecionarTiposLink>
+
+    <selecionarTemasPorIdLink>
+      SELECT
+        LT.id_Tema,
+        T.nm_Tema,
+        T.ds_Tema,
+        T.id_Disciplina,
+        D.nm_Disciplina
+      FROM
+        dcccolab.Link_Tema LT
+        INNER JOIN dcccolab.Tema T ON T.id_Tema = LT.id_Tema
+        INNER JOIN dcccolab.Disciplina D ON D.id_Disciplina = T.id_Disciplina
+      WHERE
+        (LT.id_Link = @ID_LINK)
+      ORDER BY T.nm_Tema ASC
+    </selecionarTemasPorIdLink>
+    <inserirTemaLink>
+      INSERT INTO dcccolab.Link_Tema (id_Link, id_Tema) VALUES (@ID_LINK, @ID_TEMA)
+    </inserirTemaLink>
+    <excluirTemaLink>
+      DELETE FROM dcccolab.Link_Tema WHERE id_Link = @ID_LINK
+    </excluirTemaLink>
+  </Link>
   
 </Queries>

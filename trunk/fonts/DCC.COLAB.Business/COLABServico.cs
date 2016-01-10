@@ -293,5 +293,57 @@ namespace DCC.COLAB.Business
         }
 
         #endregion
+
+        #region Link
+        [OperationBehavior(Impersonation = ImpersonationOption.Allowed)]
+        public Link SelecionarLinkPorCodigo(int codigo)
+        {
+            LinkBusinessFacade linkBusinessFacade = BusinessFactory.GetInstance().Get<LinkBusinessFacade>();
+            return linkBusinessFacade.SelecionarLinkPorCodigo(codigo);
+        }
+
+        [OperationBehavior(Impersonation = ImpersonationOption.Allowed)]
+        public int InserirLink(Link link)
+        {
+            LinkBusinessFacade linkBusinessFacade = BusinessFactory.GetInstance().Get<LinkBusinessFacade>();
+            return linkBusinessFacade.InserirLink(link);
+        }
+
+        [OperationBehavior(Impersonation = ImpersonationOption.Allowed)]
+        public void AtualizarLink(Link link)
+        {
+            LinkBusinessFacade linkBusinessFacade = BusinessFactory.GetInstance().Get<LinkBusinessFacade>();
+            linkBusinessFacade.AtualizarLink(link);
+        }
+
+        [OperationBehavior(Impersonation = ImpersonationOption.Allowed)]
+        public int SelecionarQuantidadeLinksFiltrados(FiltroLink filtro)
+        {
+            LinkBusinessFacade linkBusinessFacade = BusinessFactory.GetInstance().Get<LinkBusinessFacade>();
+            return linkBusinessFacade.SelecionarQuantidadeLinksFiltrados(filtro);
+        }
+
+        [OperationBehavior(Impersonation = ImpersonationOption.Allowed)]
+        public List<Link> SelecionarLinksFiltrados(FiltroLink filtro)
+        {
+            LinkBusinessFacade linkBusinessFacade = BusinessFactory.GetInstance().Get<LinkBusinessFacade>();
+            return linkBusinessFacade.SelecionarLinksFiltrados(filtro);
+        }
+
+        [OperationBehavior(Impersonation = ImpersonationOption.Allowed)]
+        public void ExcluirLink(int codigo)
+        {
+            LinkBusinessFacade linkBusinessFacade = BusinessFactory.GetInstance().Get<LinkBusinessFacade>();
+            linkBusinessFacade.ExcluirLink(codigo);
+        }
+
+        [OperationBehavior(Impersonation = ImpersonationOption.Allowed)]
+        public List<TipoLink> SelecionarTiposLink()
+        {
+            LinkBusinessFacade linkBusinessFacade = BusinessFactory.GetInstance().Get<LinkBusinessFacade>();
+            return linkBusinessFacade.SelecionarTiposLink();
+        }
+
+        #endregion
     }
 }
