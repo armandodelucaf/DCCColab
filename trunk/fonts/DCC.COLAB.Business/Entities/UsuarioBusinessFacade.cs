@@ -126,5 +126,17 @@ namespace DCC.COLAB.Business.Entities
                 throw ex;
             }
         }
+
+        public virtual Usuario ValidarUsuarioFacebook(string idFacebook)
+        {
+            try
+            {
+                return dataAccess.ValidarUsuarioFacebook(idFacebook);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

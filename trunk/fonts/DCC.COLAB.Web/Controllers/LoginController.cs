@@ -41,10 +41,43 @@ namespace DCC.COLAB.Web.Controllers
             }
         }
 
-        public ActionResult Logout()
+        public JsonResult ValidarLoginFacebook(Usuario usuario)
         {
-            SessaoUtil.RemoverSessao();
-            return RedirectToAction("Index", "Home");
+            try
+            { 
+                Usuario usuarioAutenticado = AutenticacaoUtil.ValidarUsuarioFacebook(usuario.idFacebook);
+                if (usuarioAutenticado != null)
+                {
+                    SessaoUtil.AlterarVariavelSessaoUsuario(usuarioAutenticado);
+                    return Json(usuario, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    usuario.perfilAcesso = new PerfilAcesso() { id = BusinessConfig.IdPerfilAluno, nome = "Aluno", perfilModerador = false };
+                    usuario.id = WCFDispatcher<ICOLABServico>.UseService(u => u.InserirUsuario(usuario));
+                    SessaoUtil.AlterarVariavelSessaoUsuario(usuario);
+                    return Json(new { redirectURL = Url.Action("Index", "Home"), isRedirect = true, changePassword = false }, JsonRequestBehavior.AllowGet);
+                }
+            }
+            catch (Exception ex)
+            {
+                return ThrowJsonError("Não foi possível recuperar o usuário.", ex);
+            }
+        }
+
+        public JsonResult Logout()
+        {
+            try
+            { 
+                SessaoUtil.RemoverSessao();
+                return Json(new { redirectURL = Url.Action("Index", "Home"), isRedirect = true }, JsonRequestBehavior.AllowGet);
+
+                //return RedirectToAction("Index", "Home");
+            }
+            catch (Exception ex)
+            {
+                return ThrowJsonError("Não foi possível remover a sessão.", ex);
+            }
         }
 
     }

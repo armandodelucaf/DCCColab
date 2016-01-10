@@ -2,29 +2,29 @@
     Layout = "~/Views/Shared/_LoginLayout.cshtml";
 }
 
-
-
 <html>
 <body>
     <div class="container">
         <div class="row">
             <div class="col-xs-8 col-sm-8 col-md-6 col-lg-6 col-xs-offset-2 col-sm-offset-2 col-md-offset-3 col-lg-offset-3">
                 <div class="account-wall">
+                    <div class="col-md-12">
+                        <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
+                        </fb:login-button>
+                    </div>
                     <img class="profile-img img-responsive" src="~/Content/img/dcccolab_logo.png" alt="DCCColab" style="width: 250px;">
                     <div class="form-signin">
                         <input type="text" id="txtEmail" class="form-control" placeholder="Digite o e-mail cadastrado" required="required" autofocus="autofocus" />
                         <br />
                         <input type="password" id="txtSenha" class="form-control" placeholder="Digite a senha" required="required" />
                         <br />
+
+                        <div id="status">
+                        </div>
+
                         <a id="btnLogin" class="btn btn-lg btn-primary btn-block" href="#" role="button">Entrar</a>
                     </div>
-                </div>
-
-                <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
-                </fb:login-button>
-
-                <div id="status">
-                </div>
+                </div>                
             </div>
         </div>
     </div>
@@ -202,7 +202,7 @@
         var js, fjs = d.getElementsByTagName(s)[0];
         if (d.getElementById(id)) return;
         js = d.createElement(s); js.id = id;
-        js.src = "//connect.facebook.net/en_US/sdk.js";
+        js.src = "//connect.facebook.net/pt_BR/sdk.js";
         fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));
 

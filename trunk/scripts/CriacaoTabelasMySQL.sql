@@ -28,7 +28,7 @@ CREATE TABLE `Perfil_Acesso`(
 
 CREATE TABLE `Usuario`(
 	`id_Usuario` int AUTO_INCREMENT NOT NULL,
-	`id_Facebook` int NULL,
+	`id_Facebook` varchar(30) NULL,
 	`nm_Usuario` varchar(128) NOT NULL,
 	`email` varchar(64) NOT NULL,
 	`id_Perfil_Acesso` int NOT NULL,
@@ -130,21 +130,6 @@ CREATE TABLE `Prova`(
 	CONSTRAINT FOREIGN KEY (id_Tipo_Prova) REFERENCES `Tipo_Prova` (id_Tipo_Prova)
 );
 
-CREATE TABLE `Conteudo_Tema`(
-	`id_Conteudo_Tema` int AUTO_INCREMENT NOT NULL,
-	`src` varchar(255) NOT NULL,
-	`descricao` varchar(255) NOT NULL,
-	`id_Usuario` int NOT NULL,
-	`id_Tema` int NOT NULL,
-	
-	CONSTRAINT `PK_Conteudo_Tema` PRIMARY KEY 
-	(`id_Conteudo_Tema`) ,
-	
-	CONSTRAINT FOREIGN KEY (id_Usuario) REFERENCES `Usuario` (id_Usuario),
-	
-	CONSTRAINT FOREIGN KEY (id_Tema) REFERENCES `Tema` (id_Tema)
-);
-
 CREATE TABLE `Prova_Tema`(
 	`id_Prova` int NOT NULL,
 	`id_Tema` int NOT NULL,
@@ -168,34 +153,6 @@ CREATE TABLE `Avaliacao_Prova`(
 	CONSTRAINT FOREIGN KEY (id_Usuario) REFERENCES `Usuario` (id_Usuario),
 	
 	CONSTRAINT FOREIGN KEY (id_Prova) REFERENCES `Prova` (id_Prova)
-);
-
-CREATE TABLE `Avaliacao_Conteudo_Prova`(
-	`id_Usuario` int NOT NULL,
-	`id_Conteudo_Prova` int NOT NULL,
-	`tipo` int NOT NULL,
-	`nota` tinyint NOT NULL,
-	
-	CONSTRAINT `PK_Avaliacao_Conteudo_Prova` UNIQUE  
-	(`id_Usuario`, `id_Conteudo_Prova`) ,
-	
-	CONSTRAINT FOREIGN KEY (id_Usuario) REFERENCES `Usuario` (id_Usuario),
-	
-	CONSTRAINT FOREIGN KEY (id_Conteudo_Prova) REFERENCES `Conteudo_Prova` (id_Conteudo_Prova)
-);
-
-CREATE TABLE `Avaliacao_Conteudo_Tema`(
-	`id_Usuario` int NOT NULL,
-	`id_Conteudo_Tema` int NOT NULL,
-	`tipo` int NOT NULL,
-	`nota` tinyint NOT NULL,
-	
-	CONSTRAINT `PK_Avaliacao_Conteudo_Tema` UNIQUE  
-	(`id_Usuario`, `id_Conteudo_Tema`) ,
-	
-	CONSTRAINT FOREIGN KEY (id_Usuario) REFERENCES `Usuario` (id_Usuario),
-	
-	CONSTRAINT FOREIGN KEY (id_Conteudo_Tema) REFERENCES `Conteudo_Tema` (id_Conteudo_Tema)
 );
 
 CREATE TABLE `Tipo_Link`(

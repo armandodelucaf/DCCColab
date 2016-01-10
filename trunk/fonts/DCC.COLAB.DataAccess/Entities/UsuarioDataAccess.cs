@@ -74,6 +74,21 @@ namespace DCC.COLAB.DataAccess.SQLServer.Entities
             }
         }
 
+        public Usuario ValidarUsuarioFacebook(string idFacebook)
+        {
+            try
+            {
+                Hashtable parametros = new Hashtable();
+                parametros.Add("ID_FACEBOOK", idFacebook);
+                Usuario usuario = this.SelecionarPorNomeQuery("validaUsuarioFacebook", parametros, this.RecuperaObjeto).Cast<Usuario>().FirstOrDefault();
+                return usuario;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public void AtualizarSenha(Usuario usuario)
         {
             try
@@ -98,7 +113,7 @@ namespace DCC.COLAB.DataAccess.SQLServer.Entities
             usuario.id = CastDB<int>(dr, "id_Usuario");
             usuario.nome = CastDB<string>(dr, "nm_Usuario");
             usuario.email = CastDB<string>(dr, "email");
-            usuario.idFacebook = CastDB<int>(dr, "id_Facebook");
+            usuario.idFacebook = CastDB<string>(dr, "id_Facebook");
             usuario.perfilAcesso = new PerfilAcesso() {
                 id = CastDB<int>(dr, "id_Perfil_Acesso"),
                 nome = CastDB<string>(dr, "nm_Perfil_Acesso"),

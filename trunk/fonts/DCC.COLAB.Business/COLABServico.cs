@@ -22,6 +22,13 @@ namespace DCC.COLAB.Business
         }
 
         [OperationBehavior(Impersonation = ImpersonationOption.Allowed)]
+        public Usuario ValidarUsuarioFacebook(string idFacebook)
+        {
+            UsuarioBusinessFacade usuarioLogadoBusinessFacade = BusinessFactory.GetInstance().Get<UsuarioBusinessFacade>();
+            return usuarioLogadoBusinessFacade.ValidarUsuarioFacebook(idFacebook);
+        }
+
+        [OperationBehavior(Impersonation = ImpersonationOption.Allowed)]
         public Usuario SelecionarUsuarioPorCodigo(int codigo)
         {
             UsuarioBusinessFacade usuarioBusinessFacade = BusinessFactory.GetInstance().Get<UsuarioBusinessFacade>();

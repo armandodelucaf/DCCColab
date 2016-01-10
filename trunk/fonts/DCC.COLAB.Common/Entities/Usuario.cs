@@ -25,7 +25,7 @@ namespace DCC.COLAB.Common.Entities
         public string email { get; set; }
 
         [DataMember]
-        public int idFacebook { get; set; }
+        public string idFacebook { get; set; }
 
         [DataMember]
         public PerfilAcesso perfilAcesso { get; set; }

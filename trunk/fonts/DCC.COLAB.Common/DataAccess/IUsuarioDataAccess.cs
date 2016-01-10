@@ -22,5 +22,7 @@ namespace DCC.COLAB.Common.DataAccess
         void AtualizarSenha(Usuario usuario);
 
         Usuario ValidarUsuarioSenha(string login, string senha);
+
+        Usuario ValidarUsuarioFacebook(string idFacebook);
     }
 }

@@ -73,7 +73,6 @@ namespace DCC.COLAB.Web.Controllers
             {
                 return ThrowJsonError("Não foi possível salvar o usuário.", ex);
             }
-
         }
 
         public ActionResult Excluir(int id)

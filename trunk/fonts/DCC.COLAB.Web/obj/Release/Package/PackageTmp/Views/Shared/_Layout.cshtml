@@ -1,4 +1,5 @@
 ﻿@using DCC.COLAB.Web.Util;
+@using DCC.COLAB.Common.Basic;
 
 <!DOCTYPE html>
 <html lang="en">
@@ -70,16 +71,102 @@
 <body>
     <div id="fb-root"></div>
     <script>
+
+        // Load the SDK asynchronously
         (function (d, s, id) {
             var js, fjs = d.getElementsByTagName(s)[0];
             if (d.getElementById(id)) return;
             js = d.createElement(s); js.id = id;
-            js.src = "//connect.facebook.net/pt_BR/sdk.js#xfbml=1&version=v2.5&appId=251309015074551";
+            js.src = "//connect.facebook.net/pt_BR/sdk.js";
             fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));
 
         var ExibirDescricaoProjeto = function () {
             $('#aboutModal').modal();
+        };
+
+        // This is called with the results from from FB.getLoginStatus().
+        function statusChangeCallback(response) {
+            console.log('statusChangeCallback');
+            console.log(response);
+            // The response object is returned with a status field that lets the
+            // app know the current login status of the person.
+            // Full docs on the response object can be found in the documentation
+            // for FB.getLoginStatus().
+            if (response.status === 'connected') {
+                // Logged into your app and Facebook.
+                @if (!SessaoUtil.UsuarioEstaAutenticado) {
+                    @: connectedAPI();
+                }
+            } else if (response.status === 'not_authorized') {
+                // The person is logged into Facebook, but not your app.
+                @if (SessaoUtil.UsuarioEstaAutenticado) {
+                    @: SRV.ChamarAjax('@Url.Action("Logout", "Login")', null, connectedAPI_cb);
+                }
+            } else {
+                // The person is not logged into Facebook, so we're not sure if
+                // they are logged into this app or not.
+                @if (SessaoUtil.UsuarioEstaAutenticado) {
+                    @: SRV.ChamarAjax('@Url.Action("Logout", "Login")', null, connectedAPI_cb);
+                }
+            }
+        }
+
+        // This function is called when someone finishes with the Login
+        // Button.  See the onlogin handler attached to it in the sample
+        // code below.
+        function checkLoginState() {
+            FB.getLoginStatus(function (response) {
+                statusChangeCallback(response);
+            });
+        }
+
+        window.fbAsyncInit = function () {
+            FB.init({
+                //appId: '424317664440351', //desenvolvimento
+                appId: '251309015074551', //produção
+                cookie: true,  // enable cookies to allow the server to access 
+                // the session
+                xfbml: true,  // parse social plugins on this page
+                version: 'v2.2' // use version 2.2
+            });
+
+            // Now that we've initialized the JavaScript SDK, we call 
+            // FB.getLoginStatus().  This function gets the state of the
+            // person visiting this page and can return one of three states to
+            // the callback you provide.  They can be:
+            //
+            // 1. Logged into your app ('connected')
+            // 2. Logged into Facebook, but not your app ('not_authorized')
+            // 3. Not logged into Facebook and can't tell if they are logged into
+            //    your app or not.
+            //
+            // These three cases are handled in the callback function.
+
+            FB.getLoginStatus(function (response) {
+                statusChangeCallback(response);
+            });
+        };
+
+        function connectedAPI() {
+            FB.api('/me', function (response) {
+                var params = {
+                    'idFacebook': response.id,
+                    'nome': response.name,
+                    'email': response.email
+                }
+
+                SRV.ChamarAjax('@Url.Action("ValidarLoginFacebook", "Login")', params, connectedAPI_cb);
+            });
+        }
+
+        var connectedAPI_cb = function (json) {
+            if (json.isRedirect) {
+                window.location.href = json.redirectURL;
+            }
+            else {
+                window.location.reload();
+            }
         };
     </script>
 
@@ -117,7 +204,7 @@
                 <ul class="nav navbar-nav">
                     <li><a href="@Url.Action("Index", "Home")">Home</a></li>
 
-                    @if (SessaoUtil.UsuarioEstaAutenticado)
+                    @if (SessaoUtil.UsuarioEstaAutenticado && SessaoUtil.Usuario.perfilAcesso.perfilModerador)
                     { 
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Administração<span class="caret"></span></a>
@@ -138,12 +225,17 @@
                     @if (SessaoUtil.UsuarioEstaAutenticado)
                     { 
                         <li><p style="font-weight:bolder;" class="navbar-text">Olá, @SessaoUtil.Usuario.nome</p></li>
-                        <li><a href="@Url.Action("Logout","Login")">[Encerrar sessão]</a></li>
+                    }
+                        @*<li><a href="@Url.Action("Logout","Login")">[Encerrar sessão]</a></li>
                     }
                     else
                     {
                         <li><a href="@Url.Action("Login","Login")">[Login]</a></li>
-                    }
+                    }*@
+                    <li>
+                        <fb:login-button scope="public_profile,email" data-auto-logout-link="true" style="margin-top: 15px;" onlogin="checkLoginState();">
+                        </fb:login-button>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -160,7 +252,7 @@
 
 <footer class="footer">
     <div class="container">
-        <p class="text-muted legal">© Copyright 2015 - Armando De Luca Filho e Hugo Santos Nascimento - Todos os direitos reservados.</p>
+        <p class="text-muted legal">© Copyright 2016 - Armando De Luca Filho e Hugo Santos Nascimento - Todos os direitos reservados.</p>
     </div>
 </footer>
 

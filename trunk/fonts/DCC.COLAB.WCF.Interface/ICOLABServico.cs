@@ -16,6 +16,9 @@ namespace DCC.COLAB.WCF.Interface
         Usuario ValidarUsuarioSenha(string login, string senha);
 
         [OperationContract]
+        Usuario ValidarUsuarioFacebook(string idFacebook);
+
+        [OperationContract]
         Usuario SelecionarUsuarioPorCodigo(int codigo);
 
         [OperationContract]

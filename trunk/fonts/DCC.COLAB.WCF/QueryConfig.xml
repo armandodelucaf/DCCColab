@@ -61,6 +61,21 @@
         U.email = @LOGIN AND
         DES_ENCRYPT(@SENHA) = U.senha
     </validaUsuarioSenha>
+    <validaUsuarioFacebook>
+      SELECT
+        U.id_Usuario,
+        U.id_Facebook,
+        U.nm_Usuario,
+        U.email,
+        PA.id_Perfil_Acesso,
+        PA.nm_Perfil_Acesso,
+        PA.moderador
+      FROM
+        dcccolab.Usuario U
+        INNER JOIN dcccolab.Perfil_Acesso PA ON PA.id_Perfil_Acesso = U.id_Perfil_Acesso
+      WHERE
+        U.id_Facebook = @ID_FACEBOOK
+    </validaUsuarioFacebook>
     <selecionarUsuarioPorCodigo>
       SELECT
         U.id_Usuario,

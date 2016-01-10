@@ -23,5 +23,18 @@ namespace DCC.COLAB.Web.Util
             }
         }
 
+        public static Usuario ValidarUsuarioFacebook(String idFacebook)
+        {
+            try
+            {
+                Usuario usuarioLogado = WCFDispatcher<ICOLABServico>.UseService(u => u.ValidarUsuarioFacebook(idFacebook));
+                return usuarioLogado;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
     }
 }
