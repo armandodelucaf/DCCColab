@@ -174,13 +174,13 @@
                     <h4>Filtro de Temas</h4>
                     <div id="divTemas" class="list-group text-center">
                         <a href="#" class="list-group-item active" idTema="">
-                            <span class="badge">@listaProvas.Count</span>
+                            <span class="badge">@(listaProvas.Count + listaLinks.Count)</span>
                             TODOS
                         </a>
                     @for (int i = 0; i < listaTemas.Count; i++)
                     {
                         <a href="#" class="list-group-item" idTema="@listaTemas[i].id">
-                            <span class="badge">@listaTemas[i].qtdProvas</span>
+                            <span class="badge">@listaTemas[i].qtdConteudo</span>
                             @listaTemas[i].nome
                         </a>
                     }
@@ -247,8 +247,8 @@
 
         if (listaProvas.length == 0) {
             var divNoResults = $('<div>').addClass('noResults');
-            var h4 = $('<h4>').css('color', 'red').text('Não há provas cadastradas para esta disciplina com os temas selecionados.');
-            divNoResults.append(h4);
+            var h5 = $('<h5>').css('color', 'gray').text('Não há provas cadastradas para esta disciplina com os temas selecionados.');
+            divNoResults.append(h5);
             $('#divProvas').append(divNoResults);
         }
         else {
@@ -304,8 +304,8 @@
 
         if (listaLinks.length == 0) {
             var divNoResults = $('<div>').addClass('noResults');
-            var h4 = $('<h4>').css('color', 'red').text('Não há material de apoio cadastrado para esta disciplina com os temas selecionados.');
-            divNoResults.append(h4);
+            var h5 = $('<h5>').css('color', 'gray').text('Não há material de apoio cadastrado para esta disciplina com os temas selecionados.');
+            divNoResults.append(h5);
             $('#divLinks').append(divNoResults);
         }
         else {

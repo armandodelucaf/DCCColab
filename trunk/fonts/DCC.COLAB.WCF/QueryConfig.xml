@@ -435,6 +435,8 @@
         INNER JOIN dcccolab.Tipo_Link TL ON TL.id_Tipo_Link = L.id_Tipo_Link
         INNER JOIN dcccolab.Disciplina D ON D.id_Disciplina = L.id_Disciplina
         INNER JOIN dcccolab.Usuario U ON U.id_Usuario = L.id_Usuario
+        LEFT JOIN dcccolab.Turma T ON T.id_Disciplina = D.id_Disciplina
+        LEFT JOIN dcccolab.Turma_Professor TUP ON TUP.id_Turma = T.id_Turma
         LEFT JOIN dcccolab.Link_Tema LT ON LT.id_Link = L.id_Link
         LEFT JOIN (
           SELECT AVG(nota) As nota, id_Link FROM dcccolab.Avaliacao_Link GROUP BY id_Link
@@ -442,7 +444,8 @@
       WHERE
         (@FILTRO IS NULL OR L.descricao LIKE CONCAT('%', @FILTRO, '%')) AND
         (@ID_DISCIPLINA IS NULL OR L.id_Disciplina = @ID_DISCIPLINA) AND
-        (@ID_TEMA IS NULL OR LT.id_Tema = @ID_TEMA)
+        (@ID_TEMA IS NULL OR LT.id_Tema = @ID_TEMA) AND
+        (@ID_PROFESSOR IS NULL OR TUP.id_Professor = @ID_PROFESSOR)
       ORDER BY @ORDER_BY
     </selecionarLinksFiltrados>
     <inserirLink>

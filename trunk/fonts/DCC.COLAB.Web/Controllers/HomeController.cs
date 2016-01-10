@@ -50,7 +50,8 @@ namespace DCC.COLAB.Web.Controllers
         {
             try
             {
-                ViewBag.listaTipos = WCFDispatcher<ICOLABServico>.UseService(u => u.SelecionarTiposProva()).ToList();
+                ViewBag.listaTiposProva = WCFDispatcher<ICOLABServico>.UseService(u => u.SelecionarTiposProva()).ToList();
+                ViewBag.listaTiposLink = WCFDispatcher<ICOLABServico>.UseService(u => u.SelecionarTiposLink()).ToList();
 
                 Usuario usuario = WCFDispatcher<ICOLABServico>.UseService(u => u.SelecionarUsuarioPorCodigo(id));
                 ViewBag.professor = (usuario.perfilAcesso.id == BusinessConfig.IdPerfilProfessor ? usuario : null);
@@ -62,11 +63,13 @@ namespace DCC.COLAB.Web.Controllers
                 {
                     ViewBag.listaTemas = WCFDispatcher<ICOLABServico>.UseService(u => u.SelecionarTemasFiltrados(new FiltroTema() { comQtdProvas = true, idDisciplina = listaTurmas.First().disciplina.id, idProfessor = id })).ToList();
                     ViewBag.listaProvas = WCFDispatcher<ICOLABServico>.UseService(u => u.SelecionarProvasFiltradas(new FiltroProva() { idDisciplina = listaTurmas.First().disciplina.id, idProfessor = id })).ToList();
+                    ViewBag.listaLinks = WCFDispatcher<ICOLABServico>.UseService(u => u.SelecionarLinksFiltrados(new FiltroLink() { idDisciplina = listaTurmas.First().disciplina.id, idProfessor = id })).ToList();
                 }
                 else
                 {
                     ViewBag.listaTemas= new List<Tema>();
                     ViewBag.listaProvas = new List<Prova>();
+                    ViewBag.listaLinks = new List<Link>();
                 }
 
                 return View();
@@ -81,8 +84,9 @@ namespace DCC.COLAB.Web.Controllers
         {
             List<Tema> listaTemas = WCFDispatcher<ICOLABServico>.UseService(u => u.SelecionarTemasFiltrados(new FiltroTema() { comQtdProvas = true, idDisciplina = idDisciplina })).ToList();
             List<Prova> listaProvas = WCFDispatcher<ICOLABServico>.UseService(u => u.SelecionarProvasFiltradas(new FiltroProva() { idDisciplina = idDisciplina, idProfessor = idProfessor })).ToList();
+            List<Link> listaLinks = WCFDispatcher<ICOLABServico>.UseService(u => u.SelecionarLinksFiltrados(new FiltroLink() { idDisciplina = idDisciplina, idProfessor = idProfessor })).ToList();
             
-            return Json(new { listaTemas = listaTemas, listaProvas = listaProvas }, JsonRequestBehavior.AllowGet);
+            return Json(new { listaTemas = listaTemas, listaProvas = listaProvas, listaLinks = listaLinks }, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult Prova(int id)

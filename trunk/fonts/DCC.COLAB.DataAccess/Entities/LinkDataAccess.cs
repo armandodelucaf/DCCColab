@@ -175,6 +175,7 @@ namespace DCC.COLAB.DataAccess.SQLServer.Entities
             Hashtable parametros = CriarHashFiltroDefault(filtro);
             parametros.Add("ID_DISCIPLINA", filtro.idDisciplina);
             parametros.Add("ID_TEMA", filtro.idTema);
+            parametros.Add("ID_PROFESSOR", filtro.idProfessor);
             return parametros;
         }
 

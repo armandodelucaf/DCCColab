@@ -8,5 +8,8 @@ namespace DCC.COLAB.Common.Filtros
         
         [DataMember]
         public int? idTema { get; set; }
+
+        [DataMember]
+        public int? idProfessor { get; set; }
     }
 }

@@ -50,5 +50,15 @@ namespace DCC.COLAB.Common.Entities
         [DataMember]
         public int qtdProvas { get; set; }
 
+        [DataMember]
+        public int qtdLinks { get; set; }
+
+        public int qtdConteudo
+        {
+            get
+            {
+                return qtdProvas + qtdLinks;
+            }
+        }
     }
 }

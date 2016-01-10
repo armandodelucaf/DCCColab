@@ -1,4 +1,5 @@
 ﻿@using DCC.COLAB.Common.AuxiliarEntities;
+@using DCC.COLAB.Common.Basic;
 @using DCC.COLAB.Common.Entities;
 
 @{
@@ -6,14 +7,16 @@
     List<Disciplina> listaDisciplinas = Convert.ChangeType(ViewBag.listaDisciplinas, typeof(List<Disciplina>));
     List<Tema> listaTemas = Convert.ChangeType(ViewBag.listaTemas, typeof(List<Tema>));
     List<Prova> listaProvas = Convert.ChangeType(ViewBag.listaProvas, typeof(List<Prova>));
-    List<TipoProva> listaTipos = Convert.ChangeType(ViewBag.listaTipos, typeof(List<TipoProva>));
+    List<Link> listaLinks = Convert.ChangeType(ViewBag.listaLinks, typeof(List<Link>));
+    List<TipoProva> listaTiposProva = Convert.ChangeType(ViewBag.listaTiposProva, typeof(List<TipoProva>));
+    List<TipoLink> listaTiposLink = Convert.ChangeType(ViewBag.listaTiposLink, typeof(List<TipoLink>));
 }
 
 <html>
     <body>
         <div>
             <h3 class="col-xs-12 col-sm-6 col-lg-9">@professor.nome</h3>
-            <div class="col-xs-12 col-sm-6 col-lg-3" style="padding:20px 0 20px 15px;">
+            <div class="col-xs-12 col-sm-6 col-lg-3">
                 <ul class="list-unstyled">
                     <span class="">Legenda:</span>
                     <li><img src="~/Content/img/miniprofessor.png" title="Monitor Recomenda"/> - Prova recomendada pelo Professor</li>
@@ -29,103 +32,211 @@
 
             <div class="form-group"></div>
             
-            <div class="col-sm-6 col-md-3 text-left">
-                <h4>Escolha uma Disciplina</h4>
-                @if (listaDisciplinas.Count == 0)
-                { 
-                    <div class="noResults">
-                        <h5 style="color:gray">Não há disciplinas cadastradas para este professor.</h5>
+            <div id="divConteudo" class="col-md-6 text-left">
+                <ul class="nav nav-tabs">
+                  <li class="active"><a data-toggle="tab" href="#divProvas">Provas e Exercícios</a></li>
+                  <li><a data-toggle="tab" href="#divLinks">Material de Apoio</a></li>
+                </ul>
+
+                <div class="tab-content">
+                    <div id="divProvas" class="tab-pane fade in active">
+                        @if (listaProvas.Count == 0 && listaDisciplinas.Count > 0)
+                        { 
+                            <div class="noResults">
+                                <h5 style="color:gray; padding:30px 0;">Não há provas cadastradas para esta disciplina com os temas selecionados.</h5>
+                            </div>
+                        }
+                        else
+                        {
+                            foreach (TipoProva tipo in listaTiposProva)
+                            { 
+                                <div class="divTipoProva">
+                                    <h4>@tipo.nome</h4>
+                                    <div class="list-group">
+                                    @for (int i = 0; i < listaProvas.Count; i++)
+                                    {
+                                        if (listaProvas[i].tipo.id == tipo.id)
+                                        { 
+                                            <a href="~/Home/Prova/@listaProvas[i].id" class="list-group-item">
+                                            @if (listaProvas[i].avaliacao > 0)
+                                            {
+                                                <span class="badge">
+                                                @for (int j = 1; j <= listaProvas[i].avaliacao; j++)
+                                                {
+                                                    <img src="~/Content/img/ministar.png" title="@j"/>
+                                                }
+                                                </span>
+                                            }
+                                            @if (listaProvas[i].recomendadoMonitor)
+                                            {
+                                                <span class="badge">
+                                                    <img src="~/Content/img/minimonitor.png" title="Monitor Recomenda"/>
+                                                </span>
+                                            }
+                                            @if (listaProvas[i].recomendadoProfessor)
+                                            {
+                                                <span class="badge">
+                                                    <img src="~/Content/img/miniprofessor.png" title="Professor Recomenda"/>
+                                                </span>
+                                            }
+                                                @listaProvas[i].turma.periodo.tableString - @listaProvas[i].turma.listaProfessoresString
+                                            </a>
+                                        }
+                                    }
+                                    </div>
+                                </div>
+                            }
+                        }
                     </div>
-                }
-                else
-                {
-                    <div id="divDisciplinas" class="list-group">
-                    @for (int i = 0; i < listaDisciplinas.Count; i++)
-                    {
-                        <a href="#" codigo="@listaDisciplinas[i].id" class="list-group-item @(i == 0 ? "active" : "")">@listaDisciplinas[i].nome</a>
-                    }
+
+                    <div id="divLinks" class="tab-pane fade">
+                        @if (listaLinks.Count == 0)
+                        { 
+                            <div class="noResults">
+                                <h5 style="color:gray">Não há material de apoio cadastrado para esta disciplina com os temas selecionados.</h5>
+                            </div>
+                        }
+                        else
+                        {
+                            foreach (TipoLink tipo in listaTiposLink)
+                            { 
+                                <div class="divTipoLink">
+                                    <h4>@tipo.nome</h4>
+                                    <div class="list-group">
+                                    @for (int i = 0; i < listaLinks.Count; i++)
+                                    {
+                                        if (listaLinks[i].tipo.id == tipo.id)
+                                        {
+                                            <a href="@listaLinks[i].url" target="_blank" class="list-group-item clearfix">
+
+                                            @if (tipo.id == BusinessConfig.IdTipoLinkApostilaLivro)
+                                            {
+                                                <span class="glyphicon glyphicon-book" style="margin-right: 5px;"></span>
+                                            }
+                                            else if (tipo.id == BusinessConfig.IdTipoLinkArtigoTexto)
+                                            {
+                                                <span class="glyphicon glyphicon-file" style="margin-right: 5px;"></span>
+                                            }
+                                            else if (tipo.id == BusinessConfig.IdTipoLinkImagem)
+                                            {
+                                                <span class="glyphicon glyphicon-picture" style="margin-right: 5px;"></span>
+                                            }
+                                            else if (tipo.id == BusinessConfig.IdTipoLinkVideo)
+                                            {
+                                                <span class="glyphicon glyphicon-film" style="margin-right: 5px;"></span>
+                                            }
+                                            else
+                                            {
+                                                <span class="glyphicon glyphicon-globe" style="margin-right: 5px;"></span>
+                                            }
+
+                                            @if (listaLinks[i].avaliacao > 0)
+                                            {
+                                                <span class="badge">
+                                                @for (int j = 1; j <= listaLinks[i].avaliacao; j++)
+                                                {
+                                                    <img src="~/Content/img/ministar.png" title="@j"/>
+                                                }
+                                                </span>
+                                            }
+                                            @if (listaLinks[i].recomendadoMonitor)
+                                            {
+                                                <span class="badge">
+                                                    <img src="~/Content/img/minimonitor.png" title="Monitor Recomenda"/>
+                                                </span>
+                                            }
+                                            @if (listaLinks[i].recomendadoProfessor)
+                                            {
+                                                <span class="badge">
+                                                    <img src="~/Content/img/miniprofessor.png" title="Professor Recomenda"/>
+                                                </span>
+                                            }
+                                                @listaLinks[i].titulo
+
+                                                <span class="pull-right">
+                                                  <button class="btn btn-xs btn-info" onclick="AbrirModalMaterialApoio('@listaLinks[i].titulo');return false;">
+                                                      <span class="glyphicon glyphicon-star"></span>
+                                                  </button>
+                                                </span>
+                                            </a>
+                                        }
+                                    }
+                                    </div>
+                                </div>
+                            }
+                        }
                     </div>
-                }
+                </div>
             </div>
 
-            <div id="divProvas" class="col-sm-6 col-md-3 text-left">
-                @if (listaProvas.Count == 0 && listaDisciplinas.Count > 0)
-                { 
-                    <div class="noResults">
-                        <h5 style="color:gray; padding:30px 0;">Não há provas cadastradas para esta disciplina com os temas selecionados.</h5>
-                    </div>
-                }
-                else
-                {
-                    foreach (TipoProva tipo in listaTipos)
+            <div class="col-md-6 text-left">
+                <div>
+                    <h4>Seleção de Disciplinas Lecionadas</h4>
+                    @if (listaDisciplinas.Count == 0)
                     { 
-                        <div class="divTipoProva">
-                            <h4>@tipo.nome</h4>
-                            <div class="list-group">
-                            @for (int i = 0; i < listaProvas.Count; i++)
-                            {
-                                if (listaProvas[i].tipo.id == tipo.id)
-                                { 
-                                    <a href="~/Home/Prova/@listaProvas[i].id" class="list-group-item">
-                                    @if (listaProvas[i].avaliacao > 0)
-                                    {
-                                        <span class="badge">
-                                        @for (int j = 1; j <= listaProvas[i].avaliacao; j++)
-                                        {
-                                            <img src="~/Content/img/ministar.png" title="@j"/>
-                                        }
-                                        </span>
-                                    }
-                                    @if (listaProvas[i].recomendadoMonitor)
-                                    {
-                                        <span class="badge">
-                                            <img src="~/Content/img/minimonitor.png" title="Monitor Recomenda"/>
-                                        </span>
-                                    }
-                                    @if (listaProvas[i].recomendadoProfessor)
-                                    {
-                                        <span class="badge">
-                                            <img src="~/Content/img/miniprofessor.png" title="Professor Recomenda"/>
-                                        </span>
-                                    }
-                                        @listaProvas[i].turma.periodo.tableString
-                                    </a>
-                                }
-                            }
-                            </div>
+                        <div class="noResults">
+                            <h5 style="color:gray">Não há disciplinas cadastradas para este professor.</h5>
                         </div>
                     }
-                }
-            </div>
+                    else
+                    {
+                        <div id="divDisciplinas" class="list-group">
+                        @for (int i = 0; i < listaDisciplinas.Count; i++)
+                        {
+                            <a href="#" codigo="@listaDisciplinas[i].id" class="list-group-item @(i == 0 ? "active" : "")">@listaDisciplinas[i].nome</a>
+                        }
+                        </div>
+                    }
+                </div>
 
-            <div class="col-sm-12 col-md-6 text-left">
                 <div>
                     <h4>Filtro de Temas</h4>
                     <div id="divTemas" class="list-group text-center" idTema="">
                         <a href="#" class="list-group-item active">
-                            <span class="badge">@listaProvas.Count</span>
+                            <span class="badge">@(listaProvas.Count + listaLinks.Count)</span>
                             TODOS
                         </a>
                     @for (int i = 0; i < listaTemas.Count; i++)
                     {
                         <a href="#" class="list-group-item" idTema="@listaTemas[i].id">
-                            <span class="badge">@listaTemas[i].qtdProvas</span>
+                            <span class="badge">@listaTemas[i].qtdConteudo</span>
                             @listaTemas[i].nome
                         </a>
                     }
                     </div>
                 </div>
             </div>
-
         </div>
+
+        <div class="modal fade" id="linkModal" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 id="tituloLink" class="modal-title"></h4>
+                    </div>
+                    <div class="modal-body" style="overflow-y: inherit !important;">
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </body>
 </html>
 
 <script>
-    var listaTiposProva = @Html.Raw(Json.Encode(listaTipos));
+    var listaTiposProva = @Html.Raw(Json.Encode(listaTiposProva));
+    var listaTiposLink = @Html.Raw(Json.Encode(listaTiposLink));
 
     $(document).ready(function () {
         $('.divTipoProva').each(function () {
+            var count = $(this).find('.list-group-item').length;
+            if (count == 0) {
+                $(this).remove();
+            }
+        });
+
+        $('.divTipoLink').each(function () {
             var count = $(this).find('.list-group-item').length;
             if (count == 0) {
                 $(this).remove();
@@ -154,6 +265,7 @@
 
     var SelecionarDadosTema_cb = function (json) {
         AtualizarCampoProvas(json.listaProvas);
+        AtualizarCampoMaterialApoio(json.listaLinks);
     };
 
     var SelecionarDadosDisciplina = function (id) {
@@ -163,6 +275,7 @@
     var SelecionarDadosDisciplina_cb = function (json) {
         AtualizarCampoTemas(json.listaTemas, json.listaProvas.length);
         AtualizarCampoProvas(json.listaProvas);
+        AtualizarCampoMaterialApoio(json.listaLinks);
     };
 
     var AtualizarCampoTemas = function (listaTemas, qtdProvas) {
@@ -196,8 +309,8 @@
 
         if (listaProvas.length == 0) {
             var divNoResults = $('<div>').addClass('noResults');
-            var h4 = $('<h4>').css('color', 'red').text('Não há provas cadastradas para esta disciplina com os temas selecionados.');
-            divNoResults.append(h4);
+            var h5 = $('<h5>').css('color', 'gray').text('Não há provas cadastradas para esta disciplina com os temas selecionados.');
+            divNoResults.append(h5);
             $('#divProvas').append(divNoResults);
         }
         else {
@@ -245,6 +358,98 @@
                 }
             }
         }
+    };
+
+    var AtualizarCampoMaterialApoio = function (listaLinks) {
+        $('#divLinks .divTipoLink').remove();
+        $('#divLinks .noResults').remove();
+
+        if (listaLinks.length == 0) {
+            var divNoResults = $('<div>').addClass('noResults');
+            var h5 = $('<h5>').css('color', 'gray').text('Não há material de apoio cadastrado para esta disciplina com os temas selecionados.');
+            divNoResults.append(h5);
+            $('#divLinks').append(divNoResults);
+        }
+        else {
+            for (var i = 0; i < listaTiposLink.length; i++) {
+                var divTipo = $('<div>').addClass('divTipoLink');
+                var h4 = $('<h4>').text(listaTiposLink[i].nome);
+                divTipo.append(h4);
+
+                var divGrupo = $('<div>').addClass('list-group');
+
+                for (var j = 0; j < listaLinks.length; j++) {
+                    if (listaLinks[j].tipo.id == listaTiposLink[i].id) {
+                        var a = $('<a>').prop('href', listaLinks[j].url).prop('target', '_blank').addClass('list-group-item clearfix').text(listaLinks[j].titulo);
+                        var spanGlyphicon;
+
+                        if (listaLinks[j].tipo.id == @BusinessConfig.IdTipoLinkApostilaLivro)
+                        {
+                            spanGlyphicon = $('<span>').addClass('glyphicon glyphicon-book').css('margin-right', '5px');
+                        }
+                        else if (listaLinks[j].tipo.id == @BusinessConfig.IdTipoLinkArtigoTexto)
+                            {
+                            spanGlyphicon = $('<span>').addClass('glyphicon glyphicon-file').css('margin-right', '5px');
+                        }
+                        else if (listaLinks[j].tipo.id == @BusinessConfig.IdTipoLinkImagem)
+                            {
+                                spanGlyphicon = $('<span>').addClass('glyphicon glyphicon-picture').css('margin-right', '5px');
+                            }
+                        else if (listaLinks[j].tipo.id == @BusinessConfig.IdTipoLinkVideo)
+                            {
+                                spanGlyphicon = $('<span>').addClass('glyphicon glyphicon-film').css('margin-right', '5px');
+                            }
+                        else 
+                        {
+                                spanGlyphicon = $('<span>').addClass('glyphicon glyphicon-globe').css('margin-right', '5px');
+                        }
+                        a.prepend(spanGlyphicon);
+
+                        if (listaLinks[j].avaliacao > 0) {
+                            var spanBadge = $('<span>').addClass('badge');
+                            for (var k = 1; k < listaLinks[j].avaliacao; k++) {
+                                var img = $('<img>').prop('src', '/Content/img/ministar.png').prop('title', k);
+                                spanBadge.append(img);
+                            }
+                            a.append(spanBadge);
+                        }
+                        if (listaLinks[j].recomendadoMonitor) {
+                            var spanBadge = $('<span>').addClass('badge');
+                            var img = $('<img>').prop('src', '/Content/img/minimonitor.png').prop('title', 'Monitor Recomenda');
+                            spanBadge.append(img);
+                            a.append(spanBadge);
+                        }
+                        if (listaLinks[j].recomendadoProfessor) {
+                            var spanBadge = $('<span>').addClass('badge');
+                            var img = $('<img>').prop('src', '/Content/img/miniprofessor.png').prop('title', 'Professor Recomenda');
+                            spanBadge.append(img);
+                            a.append(spanBadge);
+                        }
+
+                        var spanA = $('<span>').addClass('pull-right');
+                        var buttonA = $('<button>').addClass('btn btn-xs btn-info').attr('onclick', 'AbrirModalMaterialApoio("' + listaLinks[j].titulo + '");return false;');
+                        var spanButtonA = $('<span>').addClass('glyphicon glyphicon-star');
+                        buttonA.append(spanButtonA);
+                        spanA.append(buttonA);
+                        a.append(spanA);
+
+                        divGrupo.append(a);
+                    }
+                }
+
+                divTipo.append(divGrupo);
+
+                var itensAdicionados = $(divGrupo).find('.list-group-item').length;
+                if (itensAdicionados > 0) {
+                    $('#divLinks').append(divTipo);
+                }
+            }
+        }
+    };
+
+    var AbrirModalMaterialApoio = function (titulo) {
+        $('#tituloLink').html(titulo);
+        $('#linkModal').modal();
     };
 
 </script>

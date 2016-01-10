@@ -48,10 +48,12 @@ namespace DCC.COLAB.Business.Entities
                 if (filtro.comQtdProvas && listaUsuarios != null)
                 {
                     ProvaBusinessFacade provaBF = ObterOutraBusiness<ProvaBusinessFacade>();
+                    LinkBusinessFacade linkBF = ObterOutraBusiness<LinkBusinessFacade>();
 
                     foreach (Usuario usuario in listaUsuarios)
                     {
                         usuario.qtdProvas = provaBF.SelecionarQuantidadeProvasFiltradas(new FiltroProva() { idProfessor = usuario.id });
+                        usuario.qtdLinks = linkBF.SelecionarQuantidadeLinksFiltrados(new FiltroLink() { idProfessor = usuario.id });
                     }
                 }
                 return listaUsuarios;

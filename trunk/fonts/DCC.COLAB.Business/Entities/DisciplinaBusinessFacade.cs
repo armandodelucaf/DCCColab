@@ -46,10 +46,12 @@ namespace DCC.COLAB.Business.Entities
                 if (filtro.comQtdProvas && listaDisciplinas != null)
                 {
                     ProvaBusinessFacade provaBF = ObterOutraBusiness<ProvaBusinessFacade>();
+                    LinkBusinessFacade linkBF = ObterOutraBusiness<LinkBusinessFacade>();
 
                     foreach (Disciplina disciplina in listaDisciplinas)
                     {
                         disciplina.qtdProvas = provaBF.SelecionarQuantidadeProvasFiltradas(new FiltroProva() { idDisciplina = disciplina.id });
+                        disciplina.qtdLinks = linkBF.SelecionarQuantidadeLinksFiltrados(new FiltroLink() { idDisciplina = disciplina.id });
                     }
                 }
                 return listaDisciplinas;
