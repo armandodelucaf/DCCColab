@@ -55,6 +55,7 @@
     <Compile Include="DataAccess\ITurmaDataAccess.cs" />
     <Compile Include="DataAccess\ITemaDataAccess.cs" />
     <Compile Include="DataAccess\IDisciplinaDataAccess.cs" />
+    <Compile Include="Entities\AvaliacaoUsuario.cs" />
     <Compile Include="Entities\Link.cs" />
     <Compile Include="Entities\Turma.cs" />
     <Compile Include="Entities\Tema.cs" />

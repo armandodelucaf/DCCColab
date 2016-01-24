@@ -101,6 +101,30 @@ namespace DCC.COLAB.DataAccess.SQLServer.Entities
                 throw ex;
             }
         }
+
+        public void SalvarAvaliacaoLink(AvaliacaoUsuario aval)
+        {
+            try
+            {
+                Hashtable parametros = new Hashtable();
+                parametros.Add("ID_USUARIO", aval.idUsuario);
+                parametros.Add("ID_LINK", aval.id);
+                parametros.Add("NOTA", aval.valor);
+                this.RemoverPorNomeQuery("salvarAvaliacaoLink", parametros);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public AvaliacaoUsuario ObterAvaliacaoLink(int idLink, int idUsuario)
+        {
+            Hashtable parametros = new Hashtable();
+            parametros.Add("ID_LINK", idLink);
+            parametros.Add("ID_USUARIO", idUsuario);
+            return this.SelecionarPorNomeQuery("selecionarAvaliacaoLinkPorIds", parametros, this.RecuperaObjetoAvaliacao).Cast<AvaliacaoUsuario>().FirstOrDefault();
+        }        
        
         #region RecuperaObjeto
 
@@ -152,6 +176,17 @@ namespace DCC.COLAB.DataAccess.SQLServer.Entities
                 nome = CastDB<string>(dr, "nm_Disciplina")
             };
             return tema;
+        }
+
+        private AvaliacaoUsuario RecuperaObjetoAvaliacao(MySqlDataReader dr)
+        {
+            AvaliacaoUsuario aval = new AvaliacaoUsuario();
+
+            aval.id = CastDB<int>(dr, "id_Link");
+            aval.idUsuario = CastDB<int>(dr, "id_Usuario");
+            aval.valor = CastDB<int>(dr, "nota");
+
+            return aval;
         }
 
         #endregion

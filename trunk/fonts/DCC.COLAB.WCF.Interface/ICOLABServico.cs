@@ -57,7 +57,7 @@ namespace DCC.COLAB.WCF.Interface
         #region Prova
 
         [OperationContract]
-        Prova SelecionarProvaPorCodigo(int codigo);
+        Prova SelecionarProvaPorCodigo(int codigo, int? idUsuario = null);
 
         [OperationContract]
         int InserirProva(Prova prova);
@@ -76,6 +76,9 @@ namespace DCC.COLAB.WCF.Interface
 
         [OperationContract]
         List<TipoProva> SelecionarTiposProva();
+
+        [OperationContract]
+        void SalvarAvaliacaoProva(AvaliacaoUsuario aval);
 
         #endregion
 
@@ -151,7 +154,7 @@ namespace DCC.COLAB.WCF.Interface
         #region Link
 
         [OperationContract]
-        Link SelecionarLinkPorCodigo(int codigo);
+        Link SelecionarLinkPorCodigo(int codigo, int? idUsuario = null);
 
         [OperationContract]
         int InserirLink(Link link);
@@ -170,6 +173,9 @@ namespace DCC.COLAB.WCF.Interface
 
         [OperationContract]
         List<TipoLink> SelecionarTiposLink();
+
+        [OperationContract]
+        void SalvarAvaliacaoLink(AvaliacaoUsuario aval);
 
         #endregion
 

@@ -13,8 +13,8 @@ namespace DCC.COLAB.Business.Entities
     [Transactional]
     public class ProvaBusinessFacade : BaseBusinessFacade<IProvaDataAccess>
     {
-        
-        public virtual Prova SelecionarProvaPorCodigo(int codigo)
+
+        public virtual Prova SelecionarProvaPorCodigo(int codigo, int? idUsuario = null)
         {
             try
             {
@@ -23,6 +23,12 @@ namespace DCC.COLAB.Business.Entities
                 TurmaBusinessFacade turmaBF = ObterOutraBusiness<TurmaBusinessFacade>();
                 prova.turma = turmaBF.SelecionarTurmaPorCodigo(prova.turma.id);
                 prova.temasAssociados = SelecionarTemasPorIdProva(codigo);
+
+                if (idUsuario != null)
+                {
+                    AvaliacaoUsuario aval = ObterAvaliacaoProva(codigo, (int)idUsuario);
+                    prova.avaliacaoLogado = (aval != null ? aval.valor : 0);
+                }
 
                 return prova;
             }
@@ -194,6 +200,31 @@ namespace DCC.COLAB.Business.Entities
             try
             {
                 dataAccess.ExcluirTemaProva(idProva);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        [RequiresTransaction]
+        public virtual void SalvarAvaliacaoProva(AvaliacaoUsuario aval)
+        {
+            try
+            {
+                dataAccess.SalvarAvaliacaoProva(aval);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public virtual AvaliacaoUsuario ObterAvaliacaoProva(int idProva, int idUsuario)
+        {
+            try
+            {
+                return dataAccess.ObterAvaliacaoProva(idProva, idUsuario);
             }
             catch (Exception ex)
             {

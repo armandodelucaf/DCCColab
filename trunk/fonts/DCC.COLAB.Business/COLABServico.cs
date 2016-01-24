@@ -106,10 +106,10 @@ namespace DCC.COLAB.Business
 
         #region Prova
         [OperationBehavior(Impersonation = ImpersonationOption.Allowed)]
-        public Prova SelecionarProvaPorCodigo(int codigo)
+        public Prova SelecionarProvaPorCodigo(int codigo, int? idUsuario = null)
         {
             ProvaBusinessFacade provaBusinessFacade = BusinessFactory.GetInstance().Get<ProvaBusinessFacade>();
-            return provaBusinessFacade.SelecionarProvaPorCodigo(codigo);
+            return provaBusinessFacade.SelecionarProvaPorCodigo(codigo, idUsuario);
         }
 
         [OperationBehavior(Impersonation = ImpersonationOption.Allowed)]
@@ -152,6 +152,13 @@ namespace DCC.COLAB.Business
         {
             ProvaBusinessFacade provaBusinessFacade = BusinessFactory.GetInstance().Get<ProvaBusinessFacade>();
             return provaBusinessFacade.SelecionarTiposProva();
+        }
+
+        [OperationBehavior(Impersonation = ImpersonationOption.Allowed)]
+        public void SalvarAvaliacaoProva(AvaliacaoUsuario aval)
+        {
+            ProvaBusinessFacade provaBusinessFacade = BusinessFactory.GetInstance().Get<ProvaBusinessFacade>();
+            provaBusinessFacade.SalvarAvaliacaoProva(aval);
         }
         
         #endregion
@@ -303,10 +310,10 @@ namespace DCC.COLAB.Business
 
         #region Link
         [OperationBehavior(Impersonation = ImpersonationOption.Allowed)]
-        public Link SelecionarLinkPorCodigo(int codigo)
+        public Link SelecionarLinkPorCodigo(int codigo, int? idUsuario = null)
         {
             LinkBusinessFacade linkBusinessFacade = BusinessFactory.GetInstance().Get<LinkBusinessFacade>();
-            return linkBusinessFacade.SelecionarLinkPorCodigo(codigo);
+            return linkBusinessFacade.SelecionarLinkPorCodigo(codigo, idUsuario);
         }
 
         [OperationBehavior(Impersonation = ImpersonationOption.Allowed)]
@@ -349,6 +356,13 @@ namespace DCC.COLAB.Business
         {
             LinkBusinessFacade linkBusinessFacade = BusinessFactory.GetInstance().Get<LinkBusinessFacade>();
             return linkBusinessFacade.SelecionarTiposLink();
+        }
+
+        [OperationBehavior(Impersonation = ImpersonationOption.Allowed)]
+        public void SalvarAvaliacaoLink(AvaliacaoUsuario aval)
+        {
+            LinkBusinessFacade linkBusinessFacade = BusinessFactory.GetInstance().Get<LinkBusinessFacade>();
+            linkBusinessFacade.SalvarAvaliacaoLink(aval);
         }
 
         #endregion

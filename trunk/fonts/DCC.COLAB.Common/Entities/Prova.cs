@@ -46,5 +46,8 @@ namespace DCC.COLAB.Common.Entities
 
         [DataMember]
         public int avaliacao { get; set; }
+
+        [DataMember]
+        public int avaliacaoLogado { get; set; }
     }
 }

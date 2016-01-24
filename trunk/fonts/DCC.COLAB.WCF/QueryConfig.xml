@@ -401,6 +401,24 @@
     <excluirTemaProva>
       DELETE FROM dcccolab.Prova_Tema WHERE id_Prova = @ID_PROVA
     </excluirTemaProva>
+
+    <selecionarAvaliacaoProvaPorIds>
+      SELECT
+        AP.id_Prova,
+        AP.id_Usuario,
+        AP.nota
+      FROM
+        dcccolab.Avaliacao_Prova AP
+      WHERE
+        (AP.id_Prova = @ID_PROVA) AND
+        (AP.id_Usuario = @ID_USUARIO)
+    </selecionarAvaliacaoProvaPorIds>
+    <salvarAvaliacaoProva>
+      INSERT INTO dcccolab.Avaliacao_Prova (id_Usuario, id_Prova, nota)
+        VALUES (@ID_USUARIO, @ID_PROVA, @NOTA)
+      ON DUPLICATE KEY 
+        UPDATE nota=@NOTA
+    </salvarAvaliacaoProva>
   </Prova>
 
   <Link>
@@ -509,6 +527,24 @@
     <excluirTemaLink>
       DELETE FROM dcccolab.Link_Tema WHERE id_Link = @ID_LINK
     </excluirTemaLink>
+
+    <selecionarAvaliacaoLinkPorIds>
+      SELECT
+        AL.id_Link,
+        AL.id_Usuario,
+        AL.nota
+      FROM
+        dcccolab.Avaliacao_Link AL
+      WHERE
+        (AL.id_Link = @ID_LINK) AND
+        (AL.id_Usuario = @ID_USUARIO)
+    </selecionarAvaliacaoLinkPorIds>
+    <salvarAvaliacaoLink>
+      INSERT INTO dcccolab.Avaliacao_Link (id_Usuario, id_Link, nota)
+        VALUES (@ID_USUARIO, @ID_LINK, @NOTA)
+      ON DUPLICATE KEY
+        UPDATE nota=@NOTA
+    </salvarAvaliacaoLink>
   </Link>
   
 </Queries>

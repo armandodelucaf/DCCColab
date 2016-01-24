@@ -13,13 +13,18 @@ namespace DCC.COLAB.Business.Entities
     [Transactional]
     public class LinkBusinessFacade : BaseBusinessFacade<ILinkDataAccess>
     {
-        
-        public virtual Link SelecionarLinkPorCodigo(int codigo)
+
+        public virtual Link SelecionarLinkPorCodigo(int codigo, int? idUsuario = null)
         {
             try
             {
                 Link link = dataAccess.SelecionarLinkPorCodigo(codigo);
                 link.temasAssociados = SelecionarTemasPorIdLink(codigo);
+                if (idUsuario != null)
+                {
+                    AvaliacaoUsuario aval = ObterAvaliacaoLink(codigo, (int)idUsuario);
+                    link.avaliacaoLogado = (aval != null ? aval.valor : 0);
+                }
 
                 return link;
             }
@@ -149,6 +154,31 @@ namespace DCC.COLAB.Business.Entities
             try
             {
                 dataAccess.ExcluirTemaLink(idLink);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        [RequiresTransaction]
+        public virtual void SalvarAvaliacaoLink(AvaliacaoUsuario aval)
+        {
+            try
+            {
+                dataAccess.SalvarAvaliacaoLink(aval);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public virtual AvaliacaoUsuario ObterAvaliacaoLink(int idLink, int idUsuario)
+        {
+            try
+            {
+                return dataAccess.ObterAvaliacaoLink(idLink, idUsuario);
             }
             catch (Exception ex)
             {

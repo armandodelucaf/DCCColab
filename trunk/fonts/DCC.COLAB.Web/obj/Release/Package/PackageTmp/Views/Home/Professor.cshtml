@@ -1,6 +1,7 @@
 ﻿@using DCC.COLAB.Common.AuxiliarEntities;
 @using DCC.COLAB.Common.Basic;
 @using DCC.COLAB.Common.Entities;
+@using DCC.COLAB.Web.Util;
 
 @{
     Usuario professor = Convert.ChangeType(ViewBag.professor, typeof(Usuario));
@@ -32,7 +33,45 @@
 
             <div class="form-group"></div>
             
-            <div id="divConteudo" class="col-md-6 text-left">
+            <div class="col-md-5 text-left">
+                <div>
+                    <h4>Seleção de Disciplinas Lecionadas</h4>
+                    @if (listaDisciplinas.Count == 0)
+                    { 
+                        <div class="noResults">
+                            <h5 style="color:gray">Não há disciplinas cadastradas para este professor.</h5>
+                        </div>
+                    }
+                    else
+                    {
+                        <div id="divDisciplinas" class="list-group">
+                        @for (int i = 0; i < listaDisciplinas.Count; i++)
+                        {
+                            <a href="#" codigo="@listaDisciplinas[i].id" class="list-group-item @(i == 0 ? "active" : "")">@listaDisciplinas[i].nome</a>
+                        }
+                        </div>
+                    }
+                </div>
+
+                <div>
+                    <h4>Filtro de Temas</h4>
+                    <div id="divTemas" class="list-group text-center" idTema="">
+                        <a href="#" class="list-group-item active">
+                            <span class="badge">@(listaProvas.Count + listaLinks.Count)</span>
+                            TODOS
+                        </a>
+                    @for (int i = 0; i < listaTemas.Count; i++)
+                    {
+                        <a href="#" class="list-group-item" idTema="@listaTemas[i].id">
+                            <span class="badge">@listaTemas[i].qtdConteudo</span>
+                            @listaTemas[i].nome
+                        </a>
+                    }
+                    </div>
+                </div>
+            </div>
+
+            <div id="divConteudo" class="col-md-7 text-left">
                 <ul class="nav nav-tabs">
                   <li class="active"><a data-toggle="tab" href="#divProvas">Provas e Exercícios</a></li>
                   <li><a data-toggle="tab" href="#divLinks">Material de Apoio</a></li>
@@ -130,6 +169,15 @@
                                                 <span class="glyphicon glyphicon-globe" style="margin-right: 5px;"></span>
                                             }
 
+                                            @if (SessaoUtil.UsuarioEstaAutenticado)
+                                            {
+                                                <span class="pull-right" style="margin-left: 3px;">
+                                                  <button class="btn btn-xs btn-info" onclick="ObterLinkExibicao(@listaLinks[i].id);return false;">
+                                                      <span class="glyphicon glyphicon-star"></span>
+                                                  </button>
+                                                </span>
+                                            }
+
                                             @if (listaLinks[i].avaliacao > 0)
                                             {
                                                 <span class="badge">
@@ -152,12 +200,6 @@
                                                 </span>
                                             }
                                                 @listaLinks[i].titulo
-
-                                                <span class="pull-right">
-                                                  <button class="btn btn-xs btn-info" onclick="AbrirModalMaterialApoio('@listaLinks[i].titulo');return false;">
-                                                      <span class="glyphicon glyphicon-star"></span>
-                                                  </button>
-                                                </span>
                                             </a>
                                         }
                                     }
@@ -165,44 +207,6 @@
                                 </div>
                             }
                         }
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-6 text-left">
-                <div>
-                    <h4>Seleção de Disciplinas Lecionadas</h4>
-                    @if (listaDisciplinas.Count == 0)
-                    { 
-                        <div class="noResults">
-                            <h5 style="color:gray">Não há disciplinas cadastradas para este professor.</h5>
-                        </div>
-                    }
-                    else
-                    {
-                        <div id="divDisciplinas" class="list-group">
-                        @for (int i = 0; i < listaDisciplinas.Count; i++)
-                        {
-                            <a href="#" codigo="@listaDisciplinas[i].id" class="list-group-item @(i == 0 ? "active" : "")">@listaDisciplinas[i].nome</a>
-                        }
-                        </div>
-                    }
-                </div>
-
-                <div>
-                    <h4>Filtro de Temas</h4>
-                    <div id="divTemas" class="list-group text-center" idTema="">
-                        <a href="#" class="list-group-item active">
-                            <span class="badge">@(listaProvas.Count + listaLinks.Count)</span>
-                            TODOS
-                        </a>
-                    @for (int i = 0; i < listaTemas.Count; i++)
-                    {
-                        <a href="#" class="list-group-item" idTema="@listaTemas[i].id">
-                            <span class="badge">@listaTemas[i].qtdConteudo</span>
-                            @listaTemas[i].nome
-                        </a>
-                    }
                     </div>
                 </div>
             </div>
@@ -216,6 +220,52 @@
                         <h4 id="tituloLink" class="modal-title"></h4>
                     </div>
                     <div class="modal-body" style="overflow-y: inherit !important;">
+                        <center>
+                            <input type="hidden" id="hdIdLink" value="" />
+
+                            <a id="linkRef" href="#" target="_blank"></a>
+                            <br /><br />
+
+                            <label>Classifique esse Material de Apoio:</label>
+                            <div class="rating">
+                                <input type="radio" id="star5" name="rating" value="5" /><label for="star5" class="starRating" ref="5" refText="Esse conteúdo é extremamente útil e importante para o estudo da disciplina.">5 stars</label>
+                                <input type="radio" id="star4" name="rating" value="4" /><label for="star4" class="starRating" ref="4" refText="Esse conteúdo geralmente é muito útil para o estudo da disciplina.">4 stars</label>
+                                <input type="radio" id="star3" name="rating" value="3" /><label for="star3" class="starRating" ref="3" refText="Esse conteúdo é útil para o estudo da disciplina.">3 stars</label>
+                                <input type="radio" id="star2" name="rating" value="2" /><label for="star2" class="starRating" ref="2" refText="Esse conteúdo pode vir a ser útil para o estudo da disciplina.">2 stars</label>
+                                <input type="radio" id="star1" name="rating" value="1" /><label for="star1" class="starRating" ref="1" refText="Esse conteúdo não é útil para o estudo da disciplina.">1 star</label>
+                            </div>
+
+                            <div id="ratingText" class="col-md-12">
+                                <b></b>
+                                <span></span>
+                            </div>
+
+                            <br /><br />
+                            <div style="width:80%">
+                                <b>Importante:</b> 
+                                Para problemas relacionados a qualidade de visualização dos arquivos ou conteúdo impróprio, 
+                                <a href="#" onclick="ShowDivDenuncie()" style="color:red;font-weight:bold">notifique aqui</a>.
+                            </div>
+
+                            <div id="divNotificacao" style="margin-top: 15px; border-top: dotted 1px gray; padding-top: 15px;">
+                                <label>
+                                <img src="/Content/img/red_flag.png" />
+                                <font color="red"> Notifique sobre esse conteúdo:</font></label>
+                                <br />
+                                <label>Qual o motivo da sua notificação?</label>
+                                <br />
+                                
+                                <div class="text-left" style="margin:0 5% 0 5%">
+                                    <input type="radio" name="notificacao" value="inadequado"> O conteúdo é inadequado. Ex: Arquivo ou abordagem indevida.<br>
+                                    <input type="radio" name="notificacao" value="qualidade"> Má qualidade do arquivo. Ex: Difícil leitura.<br>
+                                    <input type="radio" name="notificacao" value="cadastro"> Conteúdo cadastrado incorretamente. Ex: Professor/Matéria errada.<br>
+                                    <input type="radio" name="notificacao" id="rad_outro" value="outro"> Outro
+                                    <textarea name="outro" id="outro" style="width:100%" placeholder="Digite o motivo da sua notificação aqui..." ></textarea>
+                                </div>
+
+                                <button id="btnNotificacao" name="btnNotificacao" class="btn btn-primary">Enviar</button>
+                            </div>
+                        </center>
                     </div>
                 </div>
             </div>
@@ -323,11 +373,11 @@
 
                 for (var j = 0; j < listaProvas.length; j++) {
                     if (listaProvas[j].tipo.id == listaTiposProva[i].id) {
-                        var a = $('<a>').prop('href', '/Home/Prova/' + listaProvas[j].id).addClass('list-group-item').text(listaProvas[j].turma.periodo.tableString);
+                        var a = $('<a>').prop('href', '/Home/Prova/' + listaProvas[j].id).addClass('list-group-item').text(listaProvas[j].turma.periodo.tableString + " - " + listaProvas[j].turma.listaProfessoresString);
 
                         if (listaProvas[j].avaliacao > 0) {
                             var spanBadge = $('<span>').addClass('badge');
-                            for (var k = 1; k < listaProvas[j].avaliacao; k++) {
+                            for (var k = 1; k <= listaProvas[j].avaliacao; k++) {
                                 var img = $('<img>').prop('src', '/Content/img/ministar.png').prop('title', k);
                                 spanBadge.append(img);
                             }
@@ -405,9 +455,21 @@
                         }
                         a.prepend(spanGlyphicon);
 
+                        @if (SessaoUtil.UsuarioEstaAutenticado)
+                        {
+                            <text>
+                                var spanA = $('<span>').addClass('pull-right').css('margin-left', '3px');
+                                var buttonA = $('<button>').addClass('btn btn-xs btn-info').attr('onclick', 'ObterLinkExibicao(' + listaLinks[j].id +');return false;');
+                                var spanButtonA = $('<span>').addClass('glyphicon glyphicon-star');
+                                buttonA.append(spanButtonA);
+                                spanA.append(buttonA);
+                                a.append(spanA);
+                            </text>
+                        }
+
                         if (listaLinks[j].avaliacao > 0) {
                             var spanBadge = $('<span>').addClass('badge');
-                            for (var k = 1; k < listaLinks[j].avaliacao; k++) {
+                            for (var k = 1; k <= listaLinks[j].avaliacao; k++) {
                                 var img = $('<img>').prop('src', '/Content/img/ministar.png').prop('title', k);
                                 spanBadge.append(img);
                             }
@@ -426,13 +488,6 @@
                             a.append(spanBadge);
                         }
 
-                        var spanA = $('<span>').addClass('pull-right');
-                        var buttonA = $('<button>').addClass('btn btn-xs btn-info').attr('onclick', 'AbrirModalMaterialApoio("' + listaLinks[j].titulo + '");return false;');
-                        var spanButtonA = $('<span>').addClass('glyphicon glyphicon-star');
-                        buttonA.append(spanButtonA);
-                        spanA.append(buttonA);
-                        a.append(spanA);
-
                         divGrupo.append(a);
                     }
                 }
@@ -447,9 +502,88 @@
         }
     };
 
-    var AbrirModalMaterialApoio = function (titulo) {
-        $('#tituloLink').html(titulo);
+    var ObterLinkExibicao = function (idLink) {
+        SRV.ChamarAjax('@Url.Action("ObterLinkExibicao", "Link")', { codigo: idLink }, ObterLinkExibicao_cb);
+    };
+
+    var ObterLinkExibicao_cb = function (json) {
+        $('#hdIdLink').val(json.id);
+        $('#tituloLink').html(json.titulo);
+        
+        $('#linkRef').text(json.url);
+        $('#linkRef').prop('href', json.url);
+
+        $('input[name=rating]').prop('checked', false);
+        
+        if (json.avaliacaoLogado > 0) {
+            $('input[name=rating][value=' + json.avaliacaoLogado + ']').prop('checked', true);
+
+            var idVal = 'star' + json.avaliacaoLogado;
+            var ref = $("label[for='"+idVal+"']").attr('ref');
+            var refText = $("label[for='"+idVal+"']").attr('refText');
+
+            $('#ratingText b').text(ref + ' de 5:');
+            $('#ratingText span').text(refText);
+        }
+
+        $('#divNotificacao').hide();
+        $('.ratingText').hide();
+        $("#outro").hide();
+
         $('#linkModal').modal();
     };
+
+    var ShowDivDenuncie = function() {
+        $('#divNotificacao').toggle();
+    };
+
+    $('#linkModal').on('hidden.bs.modal', function () {
+        $('#divNotificacao').hide();
+    });
+
+    $(".starRating").mouseenter(function(){
+        var ref = parseInt($(this).attr('ref'));
+        var refText = $(this).attr('refText');
+        
+        $('#ratingText b').text(ref + ' de 5:');
+        $('#ratingText span').text(refText);
+    });
+
+    $(".starRating").mouseleave(function(){
+        if ($('input[name=rating]:checked').length > 0) {
+            var idVal = $('input[name=rating]:checked').eq(0).attr("id");
+            var ref = $("label[for='"+idVal+"']").attr('ref');
+            var refText = $("label[for='"+idVal+"']").attr('refText');
+
+            $('#ratingText b').text(ref + ' de 5:');
+            $('#ratingText span').text(refText);
+        }
+        else {
+            $('#ratingText b').text('');
+            $('#ratingText span').text('');
+        }
+    });
+
+    $(".starRating").click(function(){
+        var aval = {
+            id: parseInt($('#hdIdLink').val()),
+            valor: $(this).attr('ref')
+        };
+        SRV.ChamarAjax('@Url.Action("SalvarAvaliacao", "Link")', { registro: aval }, null);
+    });
+
+    $('#rad_outro').click(function(){
+        $("#outro").slideDown()
+    });
+
+    $('input[name=notificacao]').click(function(){
+        if (!$('#rad_outro').prop("checked")) {
+            $("#outro").slideUp()
+        }
+    });
+
+    $("#outro").focusin(function() {
+        $('#rad_outro').prop("checked", true);
+    });
 
 </script>

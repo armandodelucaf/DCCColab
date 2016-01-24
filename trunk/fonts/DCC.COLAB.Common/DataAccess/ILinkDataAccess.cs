@@ -30,5 +30,10 @@ namespace DCC.COLAB.Common.DataAccess
 
         void ExcluirTemaLink(int idLink);
 
+
+        void SalvarAvaliacaoLink(AvaliacaoUsuario aval);
+
+        AvaliacaoUsuario ObterAvaliacaoLink(int idLink, int idUsuario);
+
     }
 }
