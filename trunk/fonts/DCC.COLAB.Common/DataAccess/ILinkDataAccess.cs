@@ -10,9 +10,9 @@ namespace DCC.COLAB.Common.DataAccess
     {
         Link SelecionarLinkPorCodigo(int codigo);
 
-        int InserirLink(Link prova);
+        int InserirLink(Link link);
 
-        void AtualizarLink(Link prova);
+        void AtualizarLink(Link link);
 
         int SelecionarQuantidadeLinksFiltrados(FiltroLink filtro);
 

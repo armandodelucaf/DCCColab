@@ -181,6 +181,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\BaseFilterController.cs" />
+    <Compile Include="Controllers\NotificacaoController.cs" />
     <Compile Include="Controllers\LinkController.cs" />
     <Compile Include="Controllers\TurmaController.cs" />
     <Compile Include="Controllers\TemaController.cs" />
@@ -885,6 +886,10 @@
     <Content Include="Views\Home\Prova.cshtml" />
     <Content Include="Views\Prova\Consulta.cshtml" />
     <Content Include="Views\Link\Consulta.cshtml" />
+    <Content Include="Views\Notificacao\Consulta.cshtml" />
+    <Content Include="Views\Shared\AboutModal.cshtml" />
+    <Content Include="Views\Prova\Modal.cshtml" />
+    <Content Include="Views\Shared\LinkModal.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

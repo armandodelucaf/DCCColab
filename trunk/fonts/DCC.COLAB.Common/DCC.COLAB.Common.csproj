@@ -46,20 +46,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AuxiliarEntities\EnumConteudo.cs" />
     <Compile Include="AuxiliarEntities\TipoLink.cs" />
     <Compile Include="AuxiliarEntities\TipoProva.cs" />
     <Compile Include="AuxiliarEntities\Periodo.cs" />
     <Compile Include="AuxiliarEntities\Ordenacao.cs" />
     <Compile Include="AuxiliarEntities\Paginacao.cs" />
+    <Compile Include="DataAccess\INotificacaoDataAccess.cs" />
     <Compile Include="DataAccess\ILinkDataAccess.cs" />
     <Compile Include="DataAccess\ITurmaDataAccess.cs" />
     <Compile Include="DataAccess\ITemaDataAccess.cs" />
     <Compile Include="DataAccess\IDisciplinaDataAccess.cs" />
     <Compile Include="Entities\AvaliacaoUsuario.cs" />
+    <Compile Include="Entities\Notificacao.cs" />
     <Compile Include="Entities\Link.cs" />
     <Compile Include="Entities\Turma.cs" />
     <Compile Include="Entities\Tema.cs" />
     <Compile Include="Entities\Disciplina.cs" />
+    <Compile Include="Filtros\FiltroNotificacao.cs" />
     <Compile Include="Filtros\FiltroLink.cs" />
     <Compile Include="Filtros\FiltroTurma.cs" />
     <Compile Include="Filtros\FiltroTema.cs" />

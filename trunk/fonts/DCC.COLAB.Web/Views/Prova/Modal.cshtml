@@ -1,0 +1,305 @@
+﻿@using DCC.COLAB.Common.AuxiliarEntities;
+@using DCC.COLAB.Common.Entities;
+
+@{
+    List<TipoProva> listaTipos = Convert.ChangeType(ViewBag.listaTipos, typeof(List<TipoProva>));
+    List<Disciplina> listaDisciplinas = Convert.ChangeType(ViewBag.listaDisciplinas, typeof(List<Disciplina>));
+    List<Usuario> listaProfessores = Convert.ChangeType(ViewBag.listaProfessores, typeof(List<Usuario>));
+}
+
+<div class="modal fade" id="provaModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="modalProvaLabel"></h4>
+            </div>
+            <div class="modal-body" style="overflow-y: inherit !important;">
+                <form>
+                    <input type="hidden" id="hdIdProva" value="" />
+                                        
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <label for="selectDisciplina" class="control-label">Disciplina:</label>
+                                <select id="selectDisciplina" class="form-control input-md" onchange="ProvaModal.DisciplinaAlterada()" required>
+                                    <option value="0">Selecione uma Disciplina</option>
+                                    @foreach (Disciplina disciplina in listaDisciplinas) {
+                                        <option value="@disciplina.id">@disciplina.nome</option>
+                                    }                                    
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="selectTipo" class="control-label">Tipo:</label>
+                                <select id="selectTipo" class="form-control input-md" required>
+                                    <option value="0">Selecione um tipo</option>
+                                    @foreach (TipoProva tipo in listaTiposProva)
+                                    {
+                                        <option value="@tipo.id">@tipo.nome</option>
+                                    }                                    
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row" id="divInputProva">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="inputProvas" class="control-label">Prova:</label>
+                                <input id="inputProvas" type="file" class="file" accept="application/pdf" data-show-preview="false" data-show-upload="false" required />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="selectProfessor" class="control-label">Professores:</label>
+                                 <select id="selectProfessor" class="form-control input-md selectpicker" multiple required>
+                                    @foreach (Usuario professor in listaProfessores) {
+                                        <option value="@professor.id">@professor.nome</option>
+                                    }                                    
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="selectAno" class="control-label">Ano:</label>
+                                <select id="selectAno" class="form-control input-md" required>
+                                    <option value="0">Selecione um ano</option>
+                                    @for (int i = 2016; i >= 2000; i--)
+                                    {
+                                        <option value="@i">@(i)</option>
+                                    }                                    
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="selectSemestre" class="control-label">Semestre:</label>
+                                <select id="selectSemestre" class="form-control input-md" required>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>                                
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+
+                            <input id="hdTemasProva" name="hdTemasProva" type="hidden" value="" />
+
+                            <div class="form-group ui-front">
+                                <label for="temasProva" class="control-label">Temas:</label>
+                                <textarea id="temasProva" name="temasProva" placeholder="Digite aqui os temas para associar a esta prova" class="form-control input-md"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="txtTitulo" class="control-label">Título:</label>
+                                <input id="txtTitulo" name="txtTitulo" type="text" placeholder="Título da prova" class="form-control input-md" value="" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="txtDescricao" class="control-label">Descrição:</label>
+                                <textarea id="txtDescricao" name="txtDescricao" placeholder="Descrição da prova" class="form-control input-md"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                <button type="button" class="btn btn-success" id="btnSalvarProva" onclick="ProvaModal.Salvar()">Enviar prova</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    var ProvaModal =
+    {
+        Abrir: function() {
+            $('#modalProvaLabel').text('Cadastrar Nova Prova');
+            $("#hdIdProva").val(0);
+            $('#txtTitulo').val("");
+            $('#txtDescricao').val("");
+            $('#selectTipo').val(0);
+            $('#inputProvas').fileinput('reset');
+
+            $('#selectAno').val(0);
+            $('#selectSemestre').val(1);
+            $('#selectProfessor').selectpicker('val', null);
+            $('#selectDisciplina').val(0);
+            $('#selectDisciplina').prop('disabled', false);
+
+            $("#hdTemasProva").val("");
+            $('#temasProva').val("");
+
+            $('#divInputProva').removeClass('hide');
+            $('#provaModal').modal();
+        },
+
+        DisciplinaAlterada: function () {
+            var idDisciplina = parseInt($('#selectDisciplina').val());
+
+            $("#hdTemasProva").val('');
+            $('#temasProva').val('');
+
+            if (idDisciplina > 0) {
+                ProvaModal.ObterTemas(idDisciplina);
+            }
+        },
+
+        ObterTemas: function (idDisciplina) {
+            SRV.ChamarAjax('@Url.Action("ObterTemas", "Prova")', { idDisciplina: idDisciplina }, ProvaModal.ObterTemas_cb);
+        },
+
+        split: function (val) {
+            return val.split(/,\s*/);
+        },
+
+        extractLast: function (term) {
+            return ProvaModal.split(term).pop();
+        },
+
+        ObterTemas_cb: function (json) {
+            var dataSet = $.map(json, function (value, index) {
+                return { value: value.id, label: value.nome };
+            });
+
+            $('#temasProva').autocomplete({
+                minLength: 0,
+                source: function (request, response) {
+                    // delegate back to autocomplete, but extract the last term
+                    response($.ui.autocomplete.filter(dataSet, ProvaModal.extractLast(request.term)));
+                },
+                focus: function () {
+                    // prevent value inserted on focus
+                    return false;
+                },
+                select: function (event, ui) {
+                    var temas = ProvaModal.split(this.value);
+                    // remove the current input
+                    temas.pop();
+                    // add the selected item
+                    temas.push(ui.item.label);
+                    // add placeholder to get the comma-and-space at the end
+                    temas.push("");
+                    this.value = temas.join(", ");
+
+                    metrics = jQuery.grep(dataSet, function (element) {
+                        return element.label != ui.item.label;
+                    });
+
+                    return false;
+                },
+                change: function (event, ui) {
+                    var temas = ProvaModal.split(this.value);
+                    if (temas[temas.length - 1] === '') {
+                        temas.pop();
+                    }
+
+                    var uniqueTemas = temas.filter(function (item, pos, self) {
+                        return self.indexOf(item) == pos;
+                    })
+                    temas = uniqueTemas;
+
+                    var temasObj = [];
+
+                    $.each(temas, function (index, value) {
+                        temaEncontrado = dataSet.filter(function (tag) { return tag.label.toUpperCase() == value.toUpperCase() })
+                        if (temaEncontrado.length > 0) {
+                            temasObj.push({ nome: temaEncontrado[0].label.toUpperCase(), id: temaEncontrado[0].value });
+                        }
+                    });
+                    $('#hdTemasProva').val(JSON.stringify(temasObj));
+                }
+            }).focus(function () {
+                $(this).data("uiAutocomplete").search($(this).val());
+            }).click(function () {
+                $(this).data("uiAutocomplete").search($(this).val());
+            });
+        },
+
+        Salvar: function () {
+            var titulo = $.trim($('#txtTitulo').val());
+            var descricao = $.trim($('#txtDescricao').val());
+            var tipo = parseInt($('#selectTipo').val());
+            var disciplina = parseInt($('#selectDisciplina').val());
+            var ano = parseInt($('#selectAno').val());
+            var semestre = parseInt($('#selectSemestre').val());
+            var professores = $('#selectProfessor').selectpicker('val');
+            var arquivos = $('input[type=file]')[0].files;
+            var temas = $.trim($("#hdTemasProva").val());
+
+            if (arquivos.length == 0) {
+                Msg.error('O campo "Prova" é obrigatório. Favor verificar a seleção do arquivo.', 4000);
+            }
+            else if (!tipo) {
+                Msg.error('O campo "Tipo" é obrigatório. Favor verificar a seleção do mesmo.', 4000);
+            }
+            else if (!disciplina) {
+                Msg.error('O campo "Disciplina" é obrigatório. Favor verificar a seleção do mesmo.', 4000);
+            }
+            else if (!ano) {
+                Msg.error('O campo "Ano" é obrigatório. Favor verificar a seleção do mesmo.', 4000);
+            }
+            else if (!semestre) {
+                Msg.error('O campo "Semestre" é obrigatório. Favor verificar a seleção do mesmo.', 4000);
+            }
+            else if (!professores) {
+                Msg.error('O campo "Professor" é obrigatório. Favor verificar a seleção do mesmo.', 4000);
+            }
+            else {
+                var params = {
+                    'titulo': titulo,
+                    'descricao': descricao,
+                    'tipo': { 'id': tipo, 'nome': $('#selectTipo option:selected').text() },
+                    'turma': {
+                        'disciplina': { 'id': disciplina, 'nome': $('#selectDisciplina option:selected').text() },
+                        'periodo': { 'ano': ano, 'semestre': semestre },
+                        'listaProfessores': []
+                    }
+                }
+
+                if (temas) {
+                    params.temasAssociados = JSON.parse(temas);
+                }
+
+                for (var i = 0; i < professores.length; i++) {
+                    var option = { 'id': professores[i] };
+                    params.turma.listaProfessores.push(option);
+                }
+
+                var formData = new FormData();
+                formData.append("prova", JSON.stringify(params));
+                formData.append("file", arquivos[0]);
+                SRV.ChamarHttpRequest('@Url.Action("Salvar", "Prova")', formData, ProvaModal.Salvar_cb);
+            }
+        },
+
+        Salvar_cb: function (json) {
+            Msg.success('Prova submetida com sucesso', 4000);
+            $('#provaModal').modal('hide');
+        }
+    }
+
+    $(document).ready(function () {
+        COLAB.InicializarPropriedades();
+    });
+</script>

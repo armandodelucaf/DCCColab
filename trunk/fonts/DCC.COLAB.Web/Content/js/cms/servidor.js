@@ -94,6 +94,40 @@
         });
     },
 
+    ChamarAjaxView: function (url, params, callback, paramCallback, block, divBlock) {
+        var self = this;
+        block = block || true;
+
+        if (block) {
+            self.BloquearTela(divBlock);
+        }
+
+        $.ajax({
+            url: url,
+            data: JSON.stringify(params),
+            async: true,
+            type: 'POST',
+            contentType: "application/json; charset=utf-8",
+            success: function (json) {
+                if (block) {
+                    self.DesbloquearTela(divBlock);
+                }
+                callback(json, paramCallback);
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                if (block) {
+                    self.DesbloquearTela(divBlock);
+                }
+                Msg.error(errorThrown, 5000);
+            }
+        }).fail(function (xhr, textStatus, error) {
+            if (block) {
+                self.DesbloquearTela(divBlock);
+            }
+            Msg.error(error, 5000);
+        });
+    },
+
     ChamarHttpRequest: function (url, formData, callback, paramCallback, block, divBlock) {
         var self = this;
         block = block || true;

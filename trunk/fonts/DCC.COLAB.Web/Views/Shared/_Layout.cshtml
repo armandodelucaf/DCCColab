@@ -81,8 +81,16 @@
             fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));
 
-        var ExibirDescricaoProjeto = function () {
-            $('#aboutModal').modal();
+        function CarregarModalProva() {
+            debugger;
+            SRV.ChamarAjaxView('@Url.Action("Modal", "Prova")', null, CarregarModalProva_cb);
+        }
+
+        function CarregarModalProva_cb(data) {
+            debugger;
+            var expr = new RegExp('>[ \t\r\n\v\f]*<', 'g');
+            $('#provaModalDivContainer').html(data.replace(expr, '><'));
+            ProvaModal.Abrir();
         };
 
         // This is called with the results from from FB.getLoginStatus().
@@ -168,22 +176,12 @@
                 window.location.reload();
             }
         };
+
+        COLAB.InicializarPropriedades();
     </script>
 
-    <div class="modal fade" id="aboutModal" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title">Sobre o Projeto</h4>
-                </div>
-                <div class="modal-body" style="overflow-y: inherit !important;">
-                    <p>Estudar é uma tarefa que todos nós precisamos em nossas vidas. Quem nunca passou horas enterrado em um livro para aprender uma disciplina? Há diversas formas de se estudar, seja com livros, cadernos, áudios e até mesmo vídeo-aulas.</p>
-                    <p>Para muitas pessoas, a maneira mais fácil de se entender algo é quando estão em grupo. Seja pela pluralidade de abordagens, pelo dinamismo, ou até mesmo pela possibilidade de usar outros sentidos que não somente a leitura. Muitos são os métodos para tentar facilitar essa interação mesmo à distância, se comunicando via vídeo pelo Skype, em grupos de conversa escrita a partir de uma rede social como o Facebook, pela utilização de uma lista de e-mails e até por documentos online colaborativos. Estas preferências decorrem, tanto da facilidade de uso, como também devido à imersão das pessoas durante o dia-a-dia em uma rede social.</p>
-                    <p>Assim, nossa pesquisa surgiu da necessidade de se encontrar um modelo de organização do conhecimento que facilite a interação entre professores, monitores e alunos, visando uma melhor disseminação do conhecimento acadêmico. Esta disseminação deve estar sempre em conjunto com a geração de novos conhecimentos, o que ocorre a partir da interação entre os agentes envolvidos. Em nossos estudos, veremos que os meios utilizados atualmente não conseguem englobar um ambiente propício para troca de conteúdo e mensagens de forma natural e ferramentas que contribuam na atuação dos facilitadores (professores e monitores).</p>
-                </div>
-            </div>
-        </div>
+    <div id="provaModalDivContainer">
+        @*@Html.Partial("AboutModal")*@
     </div>
 
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -219,19 +217,20 @@
                     </li>
                     }
 
-                    <li><a href="#" onclick="ExibirDescricaoProjeto()">Sobre o projeto</a></li>
+                    @if (SessaoUtil.UsuarioEstaAutenticado)
+                    { 
+                        <li><a href="#" onclick="CarregarModalProva()">Enviar Prova</a></li>
+                        <li><a href="#" onclick="LinkModal.Abrir()">Enviar Material de Apoio</a></li>
+                    }
+
+                    <li><a href="#" onclick="AboutModal.Abrir()">Sobre o projeto</a></li>
+                    
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     @if (SessaoUtil.UsuarioEstaAutenticado)
                     { 
                         <li><p style="font-weight:bolder;" class="navbar-text">Olá, @SessaoUtil.Usuario.nome</p></li>
                     }
-                        @*<li><a href="@Url.Action("Logout","Login")">[Encerrar sessão]</a></li>
-                    }
-                    else
-                    {
-                        <li><a href="@Url.Action("Login","Login")">[Login]</a></li>
-                    }*@
                     <li>
                         <fb:login-button scope="public_profile,email" data-auto-logout-link="true" style="margin-top: 15px;" onlogin="checkLoginState();">
                         </fb:login-button>

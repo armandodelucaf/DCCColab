@@ -61,6 +61,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entities\NotificacaoBusinessFacade.cs" />
     <Compile Include="Entities\LinkBusinessFacade.cs" />
     <Compile Include="Entities\TurmaBusinessFacade.cs" />
     <Compile Include="Entities\TemaBusinessFacade.cs" />

@@ -546,5 +546,44 @@
         UPDATE nota=@NOTA
     </salvarAvaliacaoLink>
   </Link>
+
+  <Notificacao>
+    <selecionarNotificacaoPorCodigo>
+      SELECT
+        N.id_Notificacao,
+        N.txt_Notificacao,
+        N.id_Usuario,
+        U.nm_Usuario,
+        N.id_Referencia,
+        N.tipo_Referencia,
+        N.dt_Notificacao
+      FROM
+        dcccolab.Notificacao N
+        INNER JOIN dcccolab.Usuario U ON U.id_Usuario = N.id_Usuario
+      WHERE
+        (N.id_Notificao = @ID)
+    </selecionarNotificacaoPorCodigo>
+    <selecionarNotificacoesFiltradas>
+      SELECT
+        N.id_Notificacao,
+        N.txt_Notificacao,
+        N.id_Usuario,
+        U.nm_Usuario,
+        N.id_Referencia,
+        N.tipo_Referencia,
+        N.dt_Notificacao
+      FROM
+        dcccolab.Notificacao N
+        INNER JOIN dcccolab.Usuario U ON U.id_Usuario = N.id_Usuario
+      WHERE
+        (@ID_REFERENCIA IS NULL OR N.id_Referencia = @ID_REFERENCIA) AND
+        (@TIPO_REFERENCIA IS NULL OR N.tipo_Referencia = @TIPO_REFERENCIA) AND
+        (@ID_USUARIO IS NULL OR N.id_Usuario = @ID_USUARIO)
+    </selecionarNotificacoesFiltradas>
+    <inserirNotificacao>
+      INSERT INTO dcccolab.Notificacao (txt_Notificacao, id_Usuario, id_Referencia, tipo_Referencia, dt_Notificacao)
+      VALUES (@TXT_NOTIFICACAO, @ID_USUARIO, @ID_REFERENCIA, @TIPO_REFERENCIA, NOW())
+    </inserirNotificacao>
+  </Notificacao>
   
 </Queries>

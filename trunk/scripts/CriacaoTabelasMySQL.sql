@@ -211,3 +211,20 @@ CREATE TABLE `Avaliacao_Link`(
 	
 	CONSTRAINT FOREIGN KEY (id_Link) REFERENCES `Link` (id_Link)
 );
+
+CREATE TABLE `Notificacao`(
+	`id_Notificacao` int NOT NULL,
+	`id_Referencia` int NOT NULL,
+	`tipo_Referencia` int NOT NULL,
+	`txt_Notificacao` varchar(255) NOT NULL,
+	`id_Usuario` int NOT NULL,
+	`dt_Notificacao` DATETIME NOT NULL,
+	
+	CONSTRAINT `PK_Notificacao` PRIMARY KEY  
+	(`id_Notificacao`) ,
+	
+	CONSTRAINT `UK_Notificacao` UNIQUE  
+	(`id_Referencia`, `tipo_Referencia`, `id_Usuario`) ,
+	
+	CONSTRAINT FOREIGN KEY (id_Usuario) REFERENCES `Usuario` (id_Usuario)
+);

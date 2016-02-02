@@ -179,5 +179,21 @@ namespace DCC.COLAB.WCF.Interface
 
         #endregion
 
+        #region Notificacao
+
+        [OperationContract]
+        Notificacao SelecionarNotificacaoPorCodigo(int codigo);
+
+        [OperationContract]
+        int InserirNotificacao(Notificacao notificacao);
+
+        [OperationContract]
+        int SelecionarQuantidadeNotificacoesFiltradas(FiltroNotificacao filtro);
+
+        [OperationContract]
+        List<Notificacao> SelecionarNotificacoesFiltradas(FiltroNotificacao filtro);
+
+        #endregion
+
     }
 }

@@ -366,5 +366,37 @@ namespace DCC.COLAB.Business
         }
 
         #endregion
+
+        #region Notificacao
+
+        [OperationBehavior(Impersonation = ImpersonationOption.Allowed)]
+        public Notificacao SelecionarNotificacaoPorCodigo(int codigo)
+        {
+            NotificacaoBusinessFacade notificacaoBusinessFacade = BusinessFactory.GetInstance().Get<NotificacaoBusinessFacade>();
+            return notificacaoBusinessFacade.SelecionarNotificacaoPorCodigo(codigo);
+        }
+
+        [OperationBehavior(Impersonation = ImpersonationOption.Allowed)]
+        public int InserirNotificacao(Notificacao notificacao)
+        {
+            NotificacaoBusinessFacade notificacaoBusinessFacade = BusinessFactory.GetInstance().Get<NotificacaoBusinessFacade>();
+            return notificacaoBusinessFacade.InserirNotificacao(notificacao);
+        }
+
+        [OperationBehavior(Impersonation = ImpersonationOption.Allowed)]
+        public int SelecionarQuantidadeNotificacoesFiltradas(FiltroNotificacao filtro)
+        {
+            NotificacaoBusinessFacade notificacaoBusinessFacade = BusinessFactory.GetInstance().Get<NotificacaoBusinessFacade>();
+            return notificacaoBusinessFacade.SelecionarQuantidadeNotificacoesFiltradas(filtro);
+        }
+
+        [OperationBehavior(Impersonation = ImpersonationOption.Allowed)]
+        public List<Notificacao> SelecionarNotificacoesFiltradas(FiltroNotificacao filtro)
+        {
+            NotificacaoBusinessFacade notificacaoBusinessFacade = BusinessFactory.GetInstance().Get<NotificacaoBusinessFacade>();
+            return notificacaoBusinessFacade.SelecionarNotificacoesFiltradas(filtro);
+        }
+
+        #endregion
     }
 }

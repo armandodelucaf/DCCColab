@@ -54,6 +54,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseDataAccess.cs" />
+    <Compile Include="Entities\NotificacaoDataAccess.cs" />
     <Compile Include="Entities\LinkDataAccess.cs" />
     <Compile Include="Entities\TurmaDataAccess.cs" />
     <Compile Include="Entities\TemaDataAccess.cs" />

@@ -21,16 +21,16 @@ namespace DCC.COLAB.DataAccess.SQLServer.Entities
             return this.SelecionarPorNomeQuery("selecionarLinkPorCodigo", parametros, this.RecuperaObjeto).Cast<Link>().FirstOrDefault();
         }
         
-        public int InserirLink(Link prova)
+        public int InserirLink(Link link)
         {                        
-            Hashtable parametrosLink = this.BuildParametrosLink(prova);
+            Hashtable parametrosLink = this.BuildParametrosLink(link);
             int idLink = this.InserirObjetoPorNomeQueryERetornarId("inserirLink", parametrosLink);
             return idLink;
         }
 
-        public void AtualizarLink(Link prova)
+        public void AtualizarLink(Link link)
         {
-            Hashtable parametros = this.BuildParametrosLink(prova);    
+            Hashtable parametros = this.BuildParametrosLink(link);    
             this.AtualizarObjetoPorNomeQuery("atualizarLink", parametros);
         }
 
@@ -192,16 +192,16 @@ namespace DCC.COLAB.DataAccess.SQLServer.Entities
         #endregion
 
         #region BuildParametros
-        private Hashtable BuildParametrosLink(Link prova)
+        private Hashtable BuildParametrosLink(Link link)
         {
             Hashtable parametros = new Hashtable();
-            parametros.Add("ID", prova.id);
-            parametros.Add("TITULO", prova.titulo);            
-            parametros.Add("DESCRICAO", prova.descricao);
-            parametros.Add("URL", prova.url);
-            parametros.Add("ID_USUARIO", prova.usuario.id);
-            parametros.Add("ID_DISCIPLINA", prova.disciplina.id);
-            parametros.Add("ID_TIPO_LINK", prova.tipo.id);
+            parametros.Add("ID", link.id);
+            parametros.Add("TITULO", link.titulo);            
+            parametros.Add("DESCRICAO", link.descricao);
+            parametros.Add("URL", link.url);
+            parametros.Add("ID_USUARIO", link.usuario.id);
+            parametros.Add("ID_DISCIPLINA", link.disciplina.id);
+            parametros.Add("ID_TIPO_LINK", link.tipo.id);
             return parametros;
         }
 
