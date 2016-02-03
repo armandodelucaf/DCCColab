@@ -4,8 +4,6 @@ using System.Runtime.Serialization;
 
 namespace DCC.COLAB.Common.AuxiliarEntities
 {
-    [Serializable]
-    [DataContract]
     public enum EnumConteudo
     {
         [Descricao("Prova")] prova = 1,

@@ -109,7 +109,7 @@
       ORDER BY @ORDER_BY
     </selecionarUsuariosFiltrados>
     <inserirUsuario>
-      INSERT INTO dcccolab.Usuario (nm_Usuario, email, id_Perfil_Acesso, senha) VALUES (@NOME, @EMAIL, @ID_PERFIL, DES_ENCRYPT(@SENHA))
+      INSERT INTO dcccolab.Usuario (id_Facebook, nm_Usuario, email, id_Perfil_Acesso, senha) VALUES (@ID_FACEBOOK, @NOME, @EMAIL, @ID_PERFIL, DES_ENCRYPT(@SENHA))
     </inserirUsuario>
     <atualizarUsuario>
       UPDATE dcccolab.Usuario
@@ -576,6 +576,7 @@
         dcccolab.Notificacao N
         INNER JOIN dcccolab.Usuario U ON U.id_Usuario = N.id_Usuario
       WHERE
+        (@FILTRO IS NULL OR N.txt_Notificacao LIKE CONCAT('%', @FILTRO, '%')) AND
         (@ID_REFERENCIA IS NULL OR N.id_Referencia = @ID_REFERENCIA) AND
         (@TIPO_REFERENCIA IS NULL OR N.tipo_Referencia = @TIPO_REFERENCIA) AND
         (@ID_USUARIO IS NULL OR N.id_Usuario = @ID_USUARIO)

@@ -60,7 +60,7 @@ namespace DCC.COLAB.Web.Controllers
             }
             catch (Exception ex)
             {
-                return ThrowJsonError("Não foi possível salvar a notificação. Verifique se o registro já existe.", ex);
+                return ThrowJsonError("Não foi possível salvar a notificação. Caso você já tenha notificado este conteúdo anteriormente, aguarde a análise da plataforma.", ex);
             }
         }        
     }
