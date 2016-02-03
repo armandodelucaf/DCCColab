@@ -168,7 +168,9 @@ CREATE TABLE `Tipo_Link`(
 
 CREATE TABLE `Link`(
 	`id_Link` int AUTO_INCREMENT NOT NULL,
-	`url` varchar(255) NOT NULL,
+	`url` varchar(255) NULL,
+	`src` longblob NULL,
+	`flag_upload` tinyint NOT NULL,
 	`titulo` varchar(100) NULL,
 	`descricao` varchar(255) NULL,
 	`id_Usuario` int NOT NULL,
