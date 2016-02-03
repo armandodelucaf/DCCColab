@@ -135,5 +135,13 @@ namespace DCC.COLAB.Web.Controllers
                 return ThrowJsonError("Não foi possível obter as informações do registro desejado.", ex);
             }
         }
+
+        public ActionResult Modal()
+        {
+            ViewBag.listaTipos = WCFDispatcher<ICOLABServico>.UseService(u => u.SelecionarTiposLink()).ToList();
+            ViewBag.listaDisciplinas = WCFDispatcher<ICOLABServico>.UseService(u => u.SelecionarDisciplinasFiltradas(new FiltroDisciplina())).ToList();
+            string html = RenderPartialViewToString("Modal");
+            return Json(html);
+        }
     }
 }

@@ -12,17 +12,15 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="modalProvaLabel"></h4>
+                <h4 class="modal-title">Enviar nova Prova</h4>
             </div>
             <div class="modal-body" style="overflow-y: inherit !important;">
-                <form>
-                    <input type="hidden" id="hdIdProva" value="" />
-                                        
+                <form>                                        
                     <div class="row">
                         <div class="col-md-8">
                             <div class="form-group">
-                                <label for="selectDisciplina" class="control-label">Disciplina:</label>
-                                <select id="selectDisciplina" class="form-control input-md" onchange="ProvaModal.DisciplinaAlterada()" required>
+                                <label for="selectDisciplinaProva" class="control-label">Disciplina:</label>
+                                <select id="selectDisciplinaProva" class="form-control input-md" onchange="ProvaModal.DisciplinaAlterada()" required>
                                     <option value="0">Selecione uma Disciplina</option>
                                     @foreach (Disciplina disciplina in listaDisciplinas) {
                                         <option value="@disciplina.id">@disciplina.nome</option>
@@ -32,10 +30,10 @@
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label for="selectTipo" class="control-label">Tipo:</label>
-                                <select id="selectTipo" class="form-control input-md" required>
+                                <label for="selectTipoProva" class="control-label">Tipo:</label>
+                                <select id="selectTipoProva" class="form-control input-md" required>
                                     <option value="0">Selecione um tipo</option>
-                                    @foreach (TipoProva tipo in listaTiposProva)
+                                    @foreach (TipoProva tipo in listaTipos)
                                     {
                                         <option value="@tipo.id">@tipo.nome</option>
                                     }                                    
@@ -56,8 +54,8 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label for="selectProfessor" class="control-label">Professores:</label>
-                                 <select id="selectProfessor" class="form-control input-md selectpicker" multiple required>
+                                <label for="selectProfessorProva" class="control-label">Professores:</label>
+                                 <select id="selectProfessorProva" class="form-control input-md selectpicker" multiple required>
                                     @foreach (Usuario professor in listaProfessores) {
                                         <option value="@professor.id">@professor.nome</option>
                                     }                                    
@@ -69,8 +67,8 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="selectAno" class="control-label">Ano:</label>
-                                <select id="selectAno" class="form-control input-md" required>
+                                <label for="selectAnoProva" class="control-label">Ano:</label>
+                                <select id="selectAnoProva" class="form-control input-md" required>
                                     <option value="0">Selecione um ano</option>
                                     @for (int i = 2016; i >= 2000; i--)
                                     {
@@ -81,8 +79,8 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="selectSemestre" class="control-label">Semestre:</label>
-                                <select id="selectSemestre" class="form-control input-md" required>
+                                <label for="selectSemestreProva" class="control-label">Semestre:</label>
+                                <select id="selectSemestreProva" class="form-control input-md" required>
                                     <option value="1">1</option>
                                     <option value="2">2</option>                                
                                 </select>
@@ -105,8 +103,8 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label for="txtTitulo" class="control-label">Título:</label>
-                                <input id="txtTitulo" name="txtTitulo" type="text" placeholder="Título da prova" class="form-control input-md" value="" />
+                                <label for="txtTituloProva" class="control-label">Título:</label>
+                                <input id="txtTituloProva" name="txtTituloProva" type="text" placeholder="Título da prova" class="form-control input-md" value="" />
                             </div>
                         </div>
                     </div>
@@ -114,8 +112,8 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label for="txtDescricao" class="control-label">Descrição:</label>
-                                <textarea id="txtDescricao" name="txtDescricao" placeholder="Descrição da prova" class="form-control input-md"></textarea>
+                                <label for="txtDescricaoProva" class="control-label">Descrição:</label>
+                                <textarea id="txtDescricaoProva" name="txtDescricaoProva" placeholder="Descrição da prova" class="form-control input-md"></textarea>
                             </div>
                         </div>
                     </div>
@@ -134,18 +132,16 @@
     var ProvaModal =
     {
         Abrir: function() {
-            $('#modalProvaLabel').text('Cadastrar Nova Prova');
-            $("#hdIdProva").val(0);
-            $('#txtTitulo').val("");
-            $('#txtDescricao').val("");
-            $('#selectTipo').val(0);
+            $('#txtTituloProva').val("");
+            $('#txtDescricaoProva').val("");
+            $('#selectTipoProva').val(0);
             $('#inputProvas').fileinput('reset');
 
-            $('#selectAno').val(0);
-            $('#selectSemestre').val(1);
-            $('#selectProfessor').selectpicker('val', null);
-            $('#selectDisciplina').val(0);
-            $('#selectDisciplina').prop('disabled', false);
+            $('#selectAnoProva').val(0);
+            $('#selectSemestreProva').val(1);
+            $('#selectProfessorProva').selectpicker('val', null);
+            $('#selectDisciplinaProva').val(0);
+            $('#selectDisciplinaProva').prop('disabled', false);
 
             $("#hdTemasProva").val("");
             $('#temasProva').val("");
@@ -155,7 +151,7 @@
         },
 
         DisciplinaAlterada: function () {
-            var idDisciplina = parseInt($('#selectDisciplina').val());
+            var idDisciplina = parseInt($('#selectDisciplinaProva').val());
 
             $("#hdTemasProva").val('');
             $('#temasProva').val('');
@@ -237,13 +233,13 @@
         },
 
         Salvar: function () {
-            var titulo = $.trim($('#txtTitulo').val());
-            var descricao = $.trim($('#txtDescricao').val());
-            var tipo = parseInt($('#selectTipo').val());
-            var disciplina = parseInt($('#selectDisciplina').val());
-            var ano = parseInt($('#selectAno').val());
-            var semestre = parseInt($('#selectSemestre').val());
-            var professores = $('#selectProfessor').selectpicker('val');
+            var titulo = $.trim($('#txtTituloProva').val());
+            var descricao = $.trim($('#txtDescricaoProva').val());
+            var tipo = parseInt($('#selectTipoProva').val());
+            var disciplina = parseInt($('#selectDisciplinaProva').val());
+            var ano = parseInt($('#selectAnoProva').val());
+            var semestre = parseInt($('#selectSemestreProva').val());
+            var professores = $('#selectProfessorProva').selectpicker('val');
             var arquivos = $('input[type=file]')[0].files;
             var temas = $.trim($("#hdTemasProva").val());
 
@@ -269,9 +265,9 @@
                 var params = {
                     'titulo': titulo,
                     'descricao': descricao,
-                    'tipo': { 'id': tipo, 'nome': $('#selectTipo option:selected').text() },
+                    'tipo': { 'id': tipo, 'nome': $('#selectTipoProva option:selected').text() },
                     'turma': {
-                        'disciplina': { 'id': disciplina, 'nome': $('#selectDisciplina option:selected').text() },
+                        'disciplina': { 'id': disciplina, 'nome': $('#selectDisciplinaProva option:selected').text() },
                         'periodo': { 'ano': ano, 'semestre': semestre },
                         'listaProfessores': []
                     }

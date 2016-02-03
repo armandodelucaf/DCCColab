@@ -889,7 +889,7 @@
     <Content Include="Views\Notificacao\Consulta.cshtml" />
     <Content Include="Views\Shared\AboutModal.cshtml" />
     <Content Include="Views\Prova\Modal.cshtml" />
-    <Content Include="Views\Shared\LinkModal.cshtml" />
+    <Content Include="Views\Link\Modal.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

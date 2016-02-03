@@ -162,7 +162,8 @@ namespace DCC.COLAB.Web.Controllers
             ViewBag.listaTipos = WCFDispatcher<ICOLABServico>.UseService(u => u.SelecionarTiposProva()).ToList();
             ViewBag.listaDisciplinas = WCFDispatcher<ICOLABServico>.UseService(u => u.SelecionarDisciplinasFiltradas(new FiltroDisciplina())).ToList();
             ViewBag.listaProfessores = WCFDispatcher<ICOLABServico>.UseService(u => u.SelecionarUsuariosFiltrados(new FiltroUsuario() { idPerfil = BusinessConfig.IdPerfilProfessor })).ToList();
-            return View("Modal", "Prova");
+            string html = RenderPartialViewToString("Modal");
+            return Json(html);
         }
 
     }

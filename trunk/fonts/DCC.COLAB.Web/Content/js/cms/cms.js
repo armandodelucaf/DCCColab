@@ -4,7 +4,9 @@
     MarcarCamposObrigatorios: function () {
         $('[required]').each(function () {
             var id = $(this).prop('id');
-            $('label[for=' + id + ']').append('<span class="requiredLabel glyphicon glyphicon-asterisk"></span>');
+            if ($('label[for=' + id + ']').find('span.glyphicon-asterisk').length == 0) {
+                $('label[for=' + id + ']').append('<span class="requiredLabel glyphicon glyphicon-asterisk"></span>');
+            }
         });
     },
 

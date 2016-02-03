@@ -1,0 +1,239 @@
+﻿@using DCC.COLAB.Common.AuxiliarEntities;
+@using DCC.COLAB.Common.Entities;
+
+@{
+    List<TipoLink> listaTipos = Convert.ChangeType(ViewBag.listaTipos, typeof(List<TipoLink>));
+    List<Disciplina> listaDisciplinas = Convert.ChangeType(ViewBag.listaDisciplinas, typeof(List<Disciplina>));
+}
+
+<div class="modal fade" id="linkModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Enviar novo Material de Apoio</h4>
+            </div>
+            <div class="modal-body" style="overflow-y: inherit !important;">
+                <form>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="txtTituloLink" class="control-label">Título:</label>
+                                <input id="txtTituloLink" name="txtTituloLink" type="text" placeholder="Título do material de apoio" class="form-control input-md" value="" required/>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="txtUrlLink" class="control-label">URL:</label>
+                                <input id="txtUrlLink" name="txtUrlLink" type="text" placeholder="URL do material de apoio" class="form-control input-md" value="" required />
+                            </div>
+                        </div>
+                    </div>
+                           
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <label for="selectDisciplinaLink" class="control-label">Disciplina:</label>
+                                <select id="selectDisciplinaLink" class="form-control input-md" onchange="DisciplinaAlterada()" required>
+                                    <option value="0">Selecione uma Disciplina</option>
+                                    @foreach (Disciplina disciplina in listaDisciplinas) {
+                                        <option value="@disciplina.id">@disciplina.nome</option>
+                                    }                                    
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="selectTipoLink" class="control-label">Tipo:</label>
+                                <select id="selectTipoLink" class="form-control input-md" required>
+                                    <option value="0">Selecione um tipo</option>
+                                    @foreach (TipoLink tipo in listaTipos)
+                                    {
+                                        <option value="@tipo.id">@tipo.nome</option>
+                                    }                                    
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+
+                            <input id="hdTemasLink" name="hdTemasLink" type="hidden" value="" />
+
+                            <div class="form-group ui-front">
+                                <label for="temasLink" class="control-label">Temas:</label>
+                                <textarea id="temasLink" name="temasLink" placeholder="Digite aqui os temas para associar a este material de apoio" class="form-control input-md"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="txtDescricaoLink" class="control-label">Descrição:</label>
+                                <textarea id="txtDescricaoLink" name="txtDescricaoLink" placeholder="Descrição do material de apoio" class="form-control input-md"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                <button type="button" class="btn btn-success" id="btnSalvarLink" onclick="LinkModal.Salvar()">Enviar material de apoio</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    var LinkModal =
+    {
+        Abrir: function() {
+            $('#txtTituloLink').val("");
+            $('#txtDescricaoLink').val("");
+            $('#selectTipoLink').val(0);
+            $('#txtUrlLink').val("");
+
+            $('#selectDisciplinaLink').val(0);
+            $('#selectDisciplinaLink').prop('disabled', false);
+
+            $("#hdTemasLink").val("");
+            $('#temasLink').val("");
+
+            $('#linkModal').modal();
+        },
+
+        DisciplinaAlterada: function () {
+            var idDisciplina = parseInt($('#selectDisciplinaLink').val());
+
+            $("#hdTemasLink").val('');
+            $('#temasLink').val('');
+
+            if (idDisciplina > 0) {
+                LinkModal.ObterTemas(idDisciplina);
+            }
+        },
+
+        ObterTemas: function (idDisciplina) {
+            SRV.ChamarAjax('@Url.Action("ObterTemas", "Link")', { idDisciplina: idDisciplina }, LinkModal.ObterTemas_cb);
+        },
+
+        split: function (val) {
+            return val.split(/,\s*/);
+        },
+
+        extractLast: function (term) {
+            return LinkModal.split(term).pop();
+        },
+
+        ObterTemas_cb: function (json) {
+            var dataSet = $.map(json, function (value, index) {
+                return { value: value.id, label: value.nome };
+            });
+
+            $('#temasLink').autocomplete({
+                minLength: 0,
+                source: function (request, response) {
+                    // delegate back to autocomplete, but extract the last term
+                    response($.ui.autocomplete.filter(dataSet, LinkModal.extractLast(request.term)));
+                },
+                focus: function () {
+                    // prevent value inserted on focus
+                    return false;
+                },
+                select: function (event, ui) {
+                    var temas = LinkModal.split(this.value);
+                    // remove the current input
+                    temas.pop();
+                    // add the selected item
+                    temas.push(ui.item.label);
+                    // add placeholder to get the comma-and-space at the end
+                    temas.push("");
+                    this.value = temas.join(", ");
+
+                    metrics = jQuery.grep(dataSet, function (element) {
+                        return element.label != ui.item.label;
+                    });
+
+                    return false;
+                },
+                change: function (event, ui) {
+                    var temas = LinkModal.split(this.value);
+                    if (temas[temas.length - 1] === '') {
+                        temas.pop();
+                    }
+
+                    var uniqueTemas = temas.filter(function (item, pos, self) {
+                        return self.indexOf(item) == pos;
+                    })
+                    temas = uniqueTemas;
+
+                    var temasObj = [];
+
+                    $.each(temas, function (index, value) {
+                        temaEncontrado = dataSet.filter(function (tag) { return tag.label.toUpperCase() == value.toUpperCase() })
+                        if (temaEncontrado.length > 0) {
+                            temasObj.push({ nome: temaEncontrado[0].label.toUpperCase(), id: temaEncontrado[0].value });
+                        }
+                    });
+                    $('#hdTemasLink').val(JSON.stringify(temasObj));
+                }
+            }).focus(function () {
+                $(this).data("uiAutocomplete").search($(this).val());
+            }).click(function () {
+                $(this).data("uiAutocomplete").search($(this).val());
+            });
+        },
+
+        Salvar: function () {
+            var titulo = $.trim($('#txtTituloLink').val());
+            var descricao = $.trim($('#txtDescricaoLink').val());
+            var tipo = parseInt($('#selectTipoLink').val());
+            var disciplina = parseInt($('#selectDisciplinaLink').val());
+            var url = $.trim($('#txtUrlLink').val());
+            var temas = $.trim($("#hdTemasLink").val());
+
+            if (!tipo) {
+                Msg.error('O campo "Tipo" é obrigatório. Favor verificar a seleção do mesmo.', 4000);
+            }
+            else if (!disciplina) {
+                Msg.error('O campo "Disciplina" é obrigatório. Favor verificar a seleção do mesmo.', 4000);
+            }
+            else if (!titulo) {
+                Msg.error('O campo "Título" é obrigatório. Favor verificar o preenchimento do mesmo.', 4000);
+            }
+            else if (!url) {
+                Msg.error('O campo "URL" é obrigatório. Favor verificar o preenchimento do mesmo.', 4000);
+            }
+            else {
+                var params = {
+                    'url': url,
+                    'titulo': titulo,
+                    'descricao': descricao,
+                    'tipo': { 'id': tipo, 'nome': $('#selectTipoLink option:selected').text() },
+                    'disciplina': { 'id': disciplina, 'nome': $('#selectDisciplinaLink option:selected').text() }
+                }
+
+                if (temas) {
+                    params.temasAssociados = JSON.parse(temas);
+                }
+
+                SRV.ChamarAjax('@Url.Action("Salvar", "Link")', params, Salvar_cb);
+            }
+        },
+
+        Salvar_cb: function (json) {
+            Msg.success('Material de apoio submetido com sucesso', 4000);
+            $('#linkModal').modal('hide');
+        }
+    }
+
+    $(document).ready(function () {
+        COLAB.InicializarPropriedades();
+    });
+</script>
