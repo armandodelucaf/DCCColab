@@ -22,6 +22,14 @@ namespace DCC.COLAB.Common.Entities
         [DataMember]
         public EnumConteudo tipoConteudo { get; set; }
 
+        public String tipoConteudoString
+        {
+            get
+            {
+                return (tipoConteudo == EnumConteudo.prova ? "Prova" : "Material de Apoio");
+            }
+        }
+
         [DataMember]
         public int idConteudo { get; set; }
 
