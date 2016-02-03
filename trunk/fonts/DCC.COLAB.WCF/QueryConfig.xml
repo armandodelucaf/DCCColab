@@ -109,7 +109,7 @@
       ORDER BY @ORDER_BY
     </selecionarUsuariosFiltrados>
     <inserirUsuario>
-      INSERT INTO dcccolab.Usuario (nm_Usuario, email, id_Perfil_Acesso, senha) VALUES (@NOME, @EMAIL, @ID_PERFIL, DES_ENCRYPT(@SENHA))
+      INSERT INTO dcccolab.Usuario (id_Facebook, nm_Usuario, email, id_Perfil_Acesso, senha) VALUES (@ID_FACEBOOK, @NOME, @EMAIL, @ID_PERFIL, DES_ENCRYPT(@SENHA))
     </inserirUsuario>
     <atualizarUsuario>
       UPDATE dcccolab.Usuario

@@ -32,7 +32,7 @@ CREATE TABLE `Usuario`(
 	`nm_Usuario` varchar(128) NOT NULL,
 	`email` varchar(64) NOT NULL,
 	`id_Perfil_Acesso` int NOT NULL,
-	`senha` LONGBLOB NOT NULL,
+	`senha` LONGBLOB NULL,
 	
 	CONSTRAINT `PK_Usuario` PRIMARY KEY 
 	(`id_Usuario`) ,

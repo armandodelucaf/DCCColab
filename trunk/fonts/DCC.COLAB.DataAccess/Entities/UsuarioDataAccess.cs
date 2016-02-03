@@ -130,6 +130,7 @@ namespace DCC.COLAB.DataAccess.SQLServer.Entities
         {
             Hashtable parametros = new Hashtable();
             parametros.Add("ID", usuario.id);
+            parametros.Add("ID_FACEBOOK", usuario.idFacebook);
             parametros.Add("NOME", usuario.nome);
             parametros.Add("EMAIL", usuario.email);
             parametros.Add("ID_PERFIL", usuario.perfilAcesso.id);
