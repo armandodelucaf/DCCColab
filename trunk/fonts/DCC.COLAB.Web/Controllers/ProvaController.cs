@@ -133,6 +133,20 @@ namespace DCC.COLAB.Web.Controllers
             }
         }
 
+        public ActionResult SalvarAvaliacao(AvaliacaoUsuario registro)
+        {
+            try
+            {
+                registro.idUsuario = SessaoUtil.Usuario.id;
+                WCFDispatcher<ICOLABServico>.UseService(u => u.SalvarAvaliacaoProva(registro));
+                return Json(registro, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return ThrowJsonError("Não foi possível salvar a avaliação. Verifique se o usuário está conectado.", ex);
+            }
+        }
+
         public JsonResult ObterProvaExibicao(int codigo)
         {
             try

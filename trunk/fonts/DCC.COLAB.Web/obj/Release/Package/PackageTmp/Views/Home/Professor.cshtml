@@ -223,6 +223,10 @@
                         <center>
                             <input type="hidden" id="hdIdLink" value="" />
 
+                            <div id="usuario-upload" class="col-xs-12 text-left" style="top: -15px;">
+                                Inserido por <span></span>
+                            </div>
+
                             <a id="linkRef" href="#" target="_blank"></a>
                             <br /><br />
 
@@ -256,11 +260,11 @@
                                 <br />
                                 
                                 <div class="text-left" style="margin:0 5% 0 5%">
-                                    <input type="radio" name="notificacao" value="inadequado"> O conteúdo é inadequado. Ex: Arquivo ou abordagem indevida.<br>
-                                    <input type="radio" name="notificacao" value="qualidade"> Má qualidade do arquivo. Ex: Difícil leitura.<br>
-                                    <input type="radio" name="notificacao" value="cadastro"> Conteúdo cadastrado incorretamente. Ex: Professor/Matéria errada.<br>
+                                    <input type="radio" name="notificacao" value="Conteúdo inadequado" > O conteúdo é inadequado. Ex: Arquivo ou abordagem indevida.<br>
+                                    <input type="radio" name="notificacao" value="Má qualidade"> Má qualidade do arquivo. Ex: Difícil leitura.<br>
+                                    <input type="radio" name="notificacao" value="Cadastro incorreto"> Conteúdo cadastrado incorretamente. Ex: Professor/Matéria errada.<br>
                                     <input type="radio" name="notificacao" id="rad_outro" value="outro"> Outro
-                                    <textarea name="outro" id="outro" style="width:100%" placeholder="Digite o motivo da sua notificação aqui..." ></textarea>
+                                    <textarea name="txtOutro" id="txtOutro" style="width:100%" placeholder="Digite o motivo da sua notificação aqui..." ></textarea>
                                 </div>
 
                                 <button id="btnNotificacao" name="btnNotificacao" class="btn btn-primary">Enviar</button>
@@ -293,6 +297,25 @@
             }
         });
     });
+
+    $('#btnNotificacao').click(function () {
+        if ($('input[name=notificacao]:checked') && $('#txtOutro').val() != '') {
+            var params = {
+                'descricao': $('#txtOutro').val(),
+                'tipoConteudo': @((int)EnumConteudo.link),
+                'idConteudo': $('#hdIdLink').val()
+            }
+
+            SRV.ChamarAjax('@Url.Action("Salvar", "Notificacao")', params, SalvarNotificacao_cb);
+        }
+        else {
+            Msg.error("Você precisa especificar um motivo para enviar a notificação.", 3000);
+        }
+    });
+
+    var SalvarNotificacao_cb = function (json) {
+        Msg.success("Notificação enviada com sucesso.", 3000);
+    };
 
     $('#divDisciplinas .list-group-item').click(function () {
         $('#divDisciplinas .list-group-item.active').removeClass('active');
@@ -512,6 +535,7 @@
         
         $('#linkRef').text(json.url);
         $('#linkRef').prop('href', json.url);
+        $('#usuario-upload span').text(json.usuario.nome);
 
         $('input[name=rating]').prop('checked', false);
         
@@ -528,7 +552,7 @@
 
         $('#divNotificacao').hide();
         $('.ratingText').hide();
-        $("#outro").hide();
+        $("#txtOutro").hide();
 
         $('#linkModal').modal();
     };
@@ -569,20 +593,32 @@
             id: parseInt($('#hdIdLink').val()),
             valor: $(this).attr('ref')
         };
-        SRV.ChamarAjax('@Url.Action("SalvarAvaliacao", "Link")', { registro: aval }, null);
+        SRV.ChamarAjax('@Url.Action("SalvarAvaliacao", "Link")', { registro: aval }, SalvarRating_cb);
     });
 
+    var SalvarRating_cb = function() {
+        Msg.success("Avaliação enviada com sucesso.", 3000);
+    };
+
     $('#rad_outro').click(function(){
-        $("#outro").slideDown()
+        $("#txtOutro").val('');
+        $("#txtOutro").slideDown();
     });
 
     $('input[name=notificacao]').click(function(){
+        var valueInput = $('input[name=notificacao]').val();
+
         if (!$('#rad_outro').prop("checked")) {
-            $("#outro").slideUp()
+            $("#txtOutro").slideUp();
+            setTimeout(function(){
+                if (!$('#rad_outro').prop("checked")) {
+                    $("#txtOutro").val(valueInput);
+                }
+            }, 1000);            
         }
     });
 
-    $("#outro").focusin(function() {
+    $("#txtOutro").focusin(function() {
         $('#rad_outro').prop("checked", true);
     });
 

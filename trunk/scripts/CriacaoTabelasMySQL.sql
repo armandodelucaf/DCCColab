@@ -215,7 +215,7 @@ CREATE TABLE `Avaliacao_Link`(
 );
 
 CREATE TABLE `Notificacao`(
-	`id_Notificacao` int NOT NULL,
+	`id_Notificacao` int AUTO_INCREMENT NOT NULL,
 	`id_Referencia` int NOT NULL,
 	`tipo_Referencia` int NOT NULL,
 	`txt_Notificacao` varchar(255) NOT NULL,
