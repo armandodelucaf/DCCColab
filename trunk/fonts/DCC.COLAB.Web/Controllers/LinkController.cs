@@ -113,7 +113,7 @@ namespace DCC.COLAB.Web.Controllers
             }
         }
 
-        public JsonResult ObterLinkExibicao(int codigo)
+        public JsonResult ObterModalLinkRating(int codigo)
         {
             try
             {
@@ -123,12 +123,8 @@ namespace DCC.COLAB.Web.Controllers
 
                 Link link = WCFDispatcher<ICOLABServico>.UseService(u => u.SelecionarLinkPorCodigo(codigo, SessaoUtil.Usuario.id));
 
-                return new JsonResult()
-                {
-                    Data = link,
-                    JsonRequestBehavior = JsonRequestBehavior.AllowGet,
-                    MaxJsonLength = Int32.MaxValue
-                };
+                string html = RenderPartialViewToString("RatingModal", link);
+                return Json(html);
             }
             catch (Exception ex)
             {

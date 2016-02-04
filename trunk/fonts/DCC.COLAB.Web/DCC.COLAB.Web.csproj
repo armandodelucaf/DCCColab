@@ -890,6 +890,7 @@
     <Content Include="Views\Shared\AboutModal.cshtml" />
     <Content Include="Views\Prova\Modal.cshtml" />
     <Content Include="Views\Link\Modal.cshtml" />
+    <Content Include="Views\Link\RatingModal.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -140,6 +140,9 @@
     $(document).ready(function () {
     });
 
+    var avaliacaoLogado = @prova.avaliacaoLogado;
+    var avaliacaoLogadoTemp = 0;
+
     window.onload = function (){
         var caminho = {
             url: '@Url.Action("VisualizarPDF", "Prova")' + '/' + @prova.id,
@@ -153,7 +156,7 @@
         @if(SessaoUtil.UsuarioEstaAutenticado)
         {
             <text>
-                ExibirModalRating(@prova.avaliacaoLogado);
+                ExibirModalRating();
             </text>
         }
     });
@@ -177,7 +180,7 @@
         Msg.success("Notificação enviada com sucesso.", 3000);
     };
 
-    var ExibirModalRating = function (avaliacaoLogado) {
+    var ExibirModalRating = function () {
         $('input[name=rating]').prop('checked', false);
         
         if (avaliacaoLogado > 0) {
@@ -234,11 +237,13 @@
             id: parseInt($('#hdIdProva').val()),
             valor: $(this).attr('ref')
         };
+        avaliacaoLogadoTemp = $(this).attr('ref');
         SRV.ChamarAjax('@Url.Action("SalvarAvaliacao", "Prova")', { registro: aval }, SalvarRating_cb);
     });
 
     var SalvarRating_cb = function() {
         Msg.success("Avaliação enviada com sucesso.", 3000);
+        avaliacaoLogado = avaliacaoLogadoTemp;
     };
 
     $('#rad_outro').click(function(){

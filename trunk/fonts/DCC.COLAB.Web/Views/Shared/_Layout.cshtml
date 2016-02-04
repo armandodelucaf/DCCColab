@@ -139,8 +139,8 @@
 
         window.fbAsyncInit = function () {
             FB.init({
-                //appId: '251309015074551', //produção
-                appId: '424317664440351', //desenvolvimento
+                //appId: '424317664440351', //desenvolvimento
+                appId: '251309015074551', //produção
                 cookie: true,  // enable cookies to allow the server to access 
                 // the session
                 xfbml: true,  // parse social plugins on this page
@@ -192,6 +192,10 @@
     </div>
 
     <div id="linkModalDivContainer">
+    </div>
+
+    <div id="aboutModalDivContainer">
+        @Html.Partial("AboutModal")
     </div>
 
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
