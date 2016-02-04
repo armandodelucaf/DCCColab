@@ -16,19 +16,34 @@
             <div class="modal-body" style="overflow-y: inherit !important;">
                 <form>
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-8">
                             <div class="form-group">
                                 <label for="txtTituloLink" class="control-label">Título:</label>
                                 <input id="txtTituloLink" name="txtTituloLink" type="text" placeholder="Título do material de apoio" class="form-control input-md" value="" required/>
                             </div>
                         </div>
+                        <div class="col-md-4">
+                            <div class="form-group" id="divUploadLink" style="padding-top: 30px;">
+                                <input type="radio" name="ehUpload" value="0" > Link &nbsp;&nbsp;&nbsp;
+                                <input type="radio" name="ehUpload" value="1"> Upload
+                            </div>
+                        </div>
                     </div>
                     
-                    <div class="row">
+                    <div class="row" id="divUrlLink">
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label for="txtUrlLink" class="control-label">URL:</label>
-                                <input id="txtUrlLink" name="txtUrlLink" type="text" placeholder="URL do material de apoio" class="form-control input-md" value="" required />
+                                <label for="txtUrl" class="control-label">URL:</label>
+                                <input id="txtUrl" name="txtUrl" type="text" placeholder="URL do material de apoio" class="form-control input-md" value="" required />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row" id="divInputLink">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="inputLinks" class="control-label">Arquivo:</label>
+                                <input id="inputLinks" type="file" class="file" data-show-preview="false" data-show-upload="false" required />
                             </div>
                         </div>
                     </div>
@@ -98,12 +113,18 @@
             $('#txtDescricaoLink').val("");
             $('#selectTipoLink').val(0);
             $('#txtUrlLink').val("");
+            $('#inputLinks').fileinput('reset');
 
             $('#selectDisciplinaLink').val(0);
             $('#selectDisciplinaLink').prop('disabled', false);
 
             $("#hdTemasLink").val("");
             $('#temasLink').val("");
+
+            $('input[name=ehUpload][value=0]').prop('checked', true);
+            $('#divUploadLink').removeClass('hide');
+            $('#divUrlLink').removeClass('hide');
+            $('#divInputLink').addClass('hide');
 
             $('#linkModal').modal();
         },
@@ -197,33 +218,42 @@
             var disciplina = parseInt($('#selectDisciplinaLink').val());
             var url = $.trim($('#txtUrlLink').val());
             var temas = $.trim($("#hdTemasLink").val());
+            var arquivos = $('input[type=file][id=inputLinks]')[0].files;
+            var ehUpload = parseInt($('input[name=ehUpload]:checked').val());
 
-            if (!tipo) {
+            if (ehUpload && arquivos.length == 0) {
+                Msg.error('O campo "Upload" é obrigatório. Favor verificar a seleção do arquivo.', 4000);
+            }
+            else if (!ehUpload && !url) {
+                Msg.error('O campo "URL" é obrigatório. Favor verificar o preenchimento.', 4000);
+            }
+            else if (!tipo) {
                 Msg.error('O campo "Tipo" é obrigatório. Favor verificar a seleção do mesmo.', 4000);
             }
             else if (!disciplina) {
                 Msg.error('O campo "Disciplina" é obrigatório. Favor verificar a seleção do mesmo.', 4000);
             }
             else if (!titulo) {
-                Msg.error('O campo "Título" é obrigatório. Favor verificar o preenchimento do mesmo.', 4000);
-            }
-            else if (!url) {
-                Msg.error('O campo "URL" é obrigatório. Favor verificar o preenchimento do mesmo.', 4000);
+                Msg.error('O campo "Título" é obrigatório. Favor verificar a seleção do mesmo.', 4000);
             }
             else {
                 var params = {
-                    'url': url,
                     'titulo': titulo,
                     'descricao': descricao,
-                    'tipo': { 'id': tipo, 'nome': $('#selectTipoLink option:selected').text() },
-                    'disciplina': { 'id': disciplina, 'nome': $('#selectDisciplinaLink option:selected').text() }
+                    'upload': ehUpload,
+                    'url': url,
+                    'tipo': { 'id': tipo, 'nome': $('#selectTipo option:selected').text() },
+                    'disciplina': { 'id': disciplina, 'nome': $('#selectDisciplina option:selected').text() }
                 }
 
                 if (temas) {
                     params.temasAssociados = JSON.parse(temas);
                 }
 
-                SRV.ChamarAjax('@Url.Action("Salvar", "Link")', params, LinkModal.Salvar_cb);
+                var formData = new FormData();
+                formData.append("link", JSON.stringify(params));
+                formData.append("file", arquivos[0]);
+                SRV.ChamarHttpRequest('@Url.Action("Salvar", "Link")', formData, LinkModal.Salvar_cb);
             }
         },
 
@@ -232,6 +262,18 @@
             $('#linkModal').modal('hide');
         }
     }
+
+    $('input[name=ehUpload]').click(function () {
+        var ehUpload = parseInt($('input[name=ehUpload]:checked').val());
+        if (ehUpload) {
+            $('#divInputLink').removeClass('hide');
+            $('#divUrlLink').addClass('hide');
+        }
+        else {
+            $('#divUrlLink').removeClass('hide');
+            $('#divInputLink').addClass('hide');
+        }
+    });
 
     $(document).ready(function () {
         COLAB.InicializarPropriedades();

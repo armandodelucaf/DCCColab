@@ -21,6 +21,12 @@ namespace DCC.COLAB.Common.Entities
         public string url { get; set; }
 
         [DataMember]
+        public Byte[] src { get; set; }
+
+        [DataMember]
+        public bool upload { get; set; }
+
+        [DataMember]
         public string titulo { get; set; }
 
         [DataMember]

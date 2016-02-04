@@ -146,7 +146,7 @@
                                     {
                                         if (listaLinks[i].tipo.id == tipo.id)
                                         {
-                                            <a href="@listaLinks[i].url" target="_blank" class="list-group-item clearfix">
+                                            <a href="@(listaLinks[i].upload ? "http://dcccolab.gear.host/Link/VisualizarArquivo/" + listaLinks[i].id : listaLinks[i].url)" target="_blank" class="list-group-item clearfix">
 
                                             @if (tipo.id == BusinessConfig.IdTipoLinkApostilaLivro)
                                             {
@@ -374,7 +374,7 @@
 
                 for (var j = 0; j < listaLinks.length; j++) {
                     if (listaLinks[j].tipo.id == listaTiposLink[i].id) {
-                        var a = $('<a>').prop('href', listaLinks[j].url).prop('target', '_blank').addClass('list-group-item clearfix').text(listaLinks[j].titulo);
+                        var a = $('<a>').prop('href', (listaLinks[j].upload ? "http://dcccolab.gear.host/Link/VisualizarArquivo/" + listaLinks[j].id : listaLinks[j].url)).prop('target', '_blank').addClass('list-group-item clearfix').text(listaLinks[j].titulo);
                         var spanGlyphicon;
 
                         if (listaLinks[j].tipo.id == @BusinessConfig.IdTipoLinkApostilaLivro)

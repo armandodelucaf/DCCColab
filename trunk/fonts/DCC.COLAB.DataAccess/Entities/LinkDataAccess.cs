@@ -135,6 +135,8 @@ namespace DCC.COLAB.DataAccess.SQLServer.Entities
             link.id = CastDB<int>(dr, "id_Link");
             link.titulo = CastDB<string>(dr, "titulo");
             link.url = CastDB<string>(dr, "url");
+            link.src = CastDB<byte[]>(dr, "src");
+            link.upload = CastDB<bool>(dr, "flag_upload");
             link.descricao = CastDB<string>(dr, "descricao");
             link.tipo = new TipoLink() {
                 id = CastDB<int>(dr, "id_Tipo_Link"),
@@ -199,6 +201,8 @@ namespace DCC.COLAB.DataAccess.SQLServer.Entities
             parametros.Add("TITULO", link.titulo);            
             parametros.Add("DESCRICAO", link.descricao);
             parametros.Add("URL", link.url);
+            parametros.Add("SRC", link.src);
+            parametros.Add("FLAG_UPLOAD", link.upload);
             parametros.Add("ID_USUARIO", link.usuario.id);
             parametros.Add("ID_DISCIPLINA", link.disciplina.id);
             parametros.Add("ID_TIPO_LINK", link.tipo.id);

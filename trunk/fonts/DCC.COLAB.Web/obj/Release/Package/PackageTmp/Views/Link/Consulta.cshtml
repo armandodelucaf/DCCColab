@@ -41,19 +41,34 @@
                     <input type="hidden" id="hdIdLink" value="" />
 
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-8">
                             <div class="form-group">
                                 <label for="txtTitulo" class="control-label">Título:</label>
                                 <input id="txtTitulo" name="txtTitulo" type="text" placeholder="Título do link" class="form-control input-md" value="" required/>
                             </div>
                         </div>
+                        <div class="col-md-4">
+                            <div class="form-group" id="divUploadLink" style="padding-top: 30px;">
+                                <input type="radio" name="ehUpload" value="0" > Link &nbsp;&nbsp;&nbsp;
+                                <input type="radio" name="ehUpload" value="1"> Upload
+                            </div>
+                        </div>
                     </div>
                     
-                    <div class="row">
+                    <div class="row" id="divUrlLink">
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label for="txtUrl" class="control-label">URL:</label>
                                 <input id="txtUrl" name="txtUrl" type="text" placeholder="URL do link" class="form-control input-md" value="" required />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row" id="divInputLink">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="inputLinks" class="control-label">Arquivo:</label>
+                                <input id="inputLinks" type="file" class="file" data-show-preview="false" data-show-upload="false" required />
                             </div>
                         </div>
                     </div>
@@ -130,6 +145,7 @@
             $('#txtTitulo').val(json.titulo);
             $('#txtDescricao').val(json.descricao);
             $('#selectTipo').val(json.tipo.id);
+            $('#inputLinks').fileinput('reset');
             
             $('#selectDisciplina').val(json.disciplina.id);
             $('#selectDisciplina').prop('disabled', true);
@@ -148,6 +164,9 @@
             }
             ObterTemas(json.disciplina.id);
 
+            $('#divUploadLink').addClass('hide');
+            $('#divUrlLink').addClass('hide');
+            $('#divInputLink').addClass('hide');
             $('#cadastroDeLink').modal();
         };
 
@@ -308,6 +327,7 @@
             $('#txtDescricao').val("");
             $('#selectTipo').val(0);
             $('#txtUrl').val("");
+            $('#inputLinks').fileinput('reset');
 
             $('#selectDisciplina').val(0);
             $('#selectDisciplina').prop('disabled', false);
@@ -315,18 +335,41 @@
             $("#hdTemas").val("");
             $('#temasLink').val("");
 
+            $('input[name=ehUpload][value=0]').prop('checked', true);
+            $('#divUploadLink').removeClass('hide');
+            $('#divUrlLink').removeClass('hide');
+            $('#divInputLink').addClass('hide');
+
             $('#cadastroDeLink').modal();
         });
 
-
+        $('input[name=ehUpload]').click(function () {
+            var ehUpload = parseInt($('input[name=ehUpload]:checked').val());
+            if (ehUpload) {
+                $('#divInputLink').removeClass('hide');
+                $('#divUrlLink').addClass('hide');
+            }
+            else {
+                $('#divUrlLink').removeClass('hide');
+                $('#divInputLink').addClass('hide');
+            }
+        });
 
         $('#btnSalvar').click(function () {
             var id = parseInt($("#hdIdLink").val());
+            if (id == 0) {
+                SalvarInsercao();
+            }
+            else {
+                SalvarEdicao(id);
+            }
+        });
+
+        var SalvarEdicao = function (id) {
             var titulo = $.trim($('#txtTitulo').val());
             var descricao = $.trim($('#txtDescricao').val());
             var tipo = parseInt($('#selectTipo').val());
             var disciplina = parseInt($('#selectDisciplina').val());
-            var url = $.trim($('#txtUrl').val());
             var temas = $.trim($("#hdTemas").val());
 
             if (!tipo) {
@@ -338,15 +381,53 @@
             else if (!titulo) {
                 Msg.error('O campo "Título" é obrigatório. Favor verificar o preenchimento do mesmo.', 4000);
             }
-            else if (!url) {
-                Msg.error('O campo "URL" é obrigatório. Favor verificar o preenchimento do mesmo.', 4000);
+            else {
+                var params = {
+                    'id': id,
+                    'titulo': titulo,
+                    'descricao': descricao,
+                    'tipo': { 'id': tipo, 'nome': $('#selectTipo option:selected').text() },
+                    'disciplina': { 'id': disciplina, 'nome': $('#selectDisciplina option:selected').text() }
+                }
+
+                var formData = new FormData();
+                formData.append("link", JSON.stringify(params));
+                SRV.ChamarHttpRequest('@Url.Action("Salvar", "Link")', formData, Salvar_cb);
+            }
+        };
+
+        var SalvarInsercao = function () {
+            var titulo = $.trim($('#txtTitulo').val());
+            var descricao = $.trim($('#txtDescricao').val());
+            var tipo = parseInt($('#selectTipo').val());
+            var disciplina = parseInt($('#selectDisciplina').val());
+            var arquivos = $('input[type=file][id=inputLinks]')[0].files;
+            var url = $.trim($('#txtUrl').val());
+            var temas = $.trim($("#hdTemas").val());
+            var ehUpload = parseInt($('input[name=ehUpload]:checked').val());
+
+            if (ehUpload && arquivos.length == 0) {
+                Msg.error('O campo "Upload" é obrigatório. Favor verificar a seleção do arquivo.', 4000);
+            }
+            else if (!ehUpload && !url) {
+                Msg.error('O campo "URL" é obrigatório. Favor verificar o preenchimento.', 4000);
+            }
+            else if (!tipo) {
+                Msg.error('O campo "Tipo" é obrigatório. Favor verificar a seleção do mesmo.', 4000);
+            }
+            else if (!disciplina) {
+                Msg.error('O campo "Disciplina" é obrigatório. Favor verificar a seleção do mesmo.', 4000);
+            }
+            else if (!titulo) {
+                Msg.error('O campo "Título" é obrigatório. Favor verificar a seleção do mesmo.', 4000);
             }
             else {
                 var params = {
                     'id': id,
-                    'url': url,
                     'titulo': titulo,
                     'descricao': descricao,
+                    'upload': ehUpload,
+                    'url': url,
                     'tipo': { 'id': tipo, 'nome': $('#selectTipo option:selected').text() },
                     'disciplina': { 'id': disciplina, 'nome': $('#selectDisciplina option:selected').text() }
                 }
@@ -355,9 +436,12 @@
                     params.temasAssociados = JSON.parse(temas);
                 }
 
-                SRV.ChamarAjax('@Url.Action("Salvar", "Link")', params, Salvar_cb);
+                var formData = new FormData();
+                formData.append("link", JSON.stringify(params));
+                formData.append("file", arquivos[0]);
+                SRV.ChamarHttpRequest('@Url.Action("Salvar", "Link")', formData, Salvar_cb);
             }
-        });
+        };
 
         var Salvar_cb = function (json) {
             Msg.success('Cadastro efetuado com sucesso', 4000);

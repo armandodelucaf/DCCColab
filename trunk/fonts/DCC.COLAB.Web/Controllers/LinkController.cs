@@ -3,9 +3,13 @@ using DCC.COLAB.Common.Entities;
 using DCC.COLAB.Common.Filtros;
 using DCC.COLAB.WCF.Interface;
 using DCC.COLAB.Web.Util;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
+using System.IO;
 using System.Linq;
+using System.Web;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
 
@@ -53,13 +57,28 @@ namespace DCC.COLAB.Web.Controllers
             }
         }
 
-        public ActionResult Salvar(Link link)
+        public ActionResult Salvar()
         {
             try
             {
+                Link link = JsonConvert.DeserializeObject<Link>(Request.Form["link"], new JsonSerializerSettings() { Culture = new CultureInfo("pt-BR") });
                 link.usuario = SessaoUtil.Usuario;
+
                 if (link.id == 0)
                 {
+                    HttpPostedFileBase file = Request.Files[0];
+
+                    if (String.IsNullOrEmpty(link.titulo))
+                    {
+                        link.titulo = file.FileName;
+                    }
+
+                    Stream fileContent = file.InputStream;
+                    fileContent.Seek(0, SeekOrigin.Begin);
+                    MemoryStream target = new MemoryStream();
+                    fileContent.CopyTo(target);
+                    link.src = target.ToArray();
+
                     WCFDispatcher<ICOLABServico>.UseService(u => u.InserirLink(link));
                 }
                 else {
@@ -96,6 +115,18 @@ namespace DCC.COLAB.Web.Controllers
             catch (Exception ex)
             {
                 return ThrowJsonError("Não foi possível obter as informações do registro desejado.", ex);
+            }
+        }
+
+        public void VisualizarArquivo(int id)
+        {
+            Link link = WCFDispatcher<ICOLABServico>.UseService(u => u.SelecionarLinkPorCodigo(id));
+
+            Response.Cache.SetCacheability(HttpCacheability.NoCache);
+
+            if (link.src != null)
+            {
+                Response.OutputStream.Write(link.src, 0, link.src.Length);
             }
         }
 

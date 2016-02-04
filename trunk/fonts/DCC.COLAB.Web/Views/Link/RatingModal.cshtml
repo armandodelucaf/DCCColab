@@ -17,7 +17,14 @@
                     </div>
 
                     <div class="row">
-                        <a id="linkRef" href="@ViewData.Model.url" target="_blank">@ViewData.Model.url</a>
+                        @if (ViewData.Model.upload)
+                        {
+                            <a href="http://dcccolab.gear.host/Link/VisualizarArquivo/@ViewData.Model.id" target="_blank">Clique aqui para download do arquivo</a>
+                        }
+                        else
+                        { 
+                            <a id="linkRef" href="@ViewData.Model.url" target="_blank">@ViewData.Model.url</a>
+                        }
                         <br /><br />
 
                         <label>Classifique esse Material de Apoio:</label>

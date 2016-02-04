@@ -426,6 +426,8 @@
       SELECT
         L.id_Link,
         L.url,
+        L.src,
+        L.flag_upload,
         L.titulo,
         L.descricao,
         L.id_Usuario,
@@ -452,6 +454,8 @@
       SELECT DISTINCT
         L.id_Link,
         L.url,
+        L.src,
+        L.flag_upload,
         L.titulo,
         L.descricao,
         L.id_Usuario,
@@ -482,7 +486,7 @@
       ORDER BY @ORDER_BY
     </selecionarLinksFiltrados>
     <inserirLink>
-      INSERT INTO dcccolab.Link (url, titulo, descricao, id_Usuario, id_Disciplina, id_Tipo_Link, aval_Professor, aval_Monitor) VALUES (@URL, @TITULO, @DESCRICAO, @ID_USUARIO, @id_Disciplina, @ID_TIPO_LINK, 0, 0)
+      INSERT INTO dcccolab.Link (url, src, flag_upload, titulo, descricao, id_Usuario, id_Disciplina, id_Tipo_Link, aval_Professor, aval_Monitor) VALUES (@URL, @SRC, @FLAG_UPLOAD, @TITULO, @DESCRICAO, @ID_USUARIO, @id_Disciplina, @ID_TIPO_LINK, 0, 0)
     </inserirLink>
     <atualizarLink>
       UPDATE dcccolab.Link
