@@ -15,6 +15,9 @@ INSERT INTO `Tipo_Prova` (nm_Tipo_Prova) VALUES ('Prova Final');
 INSERT INTO `Tipo_Prova` (nm_Tipo_Prova) VALUES ('Segunda Chamada');
 INSERT INTO `Tipo_Prova` (nm_Tipo_Prova) VALUES ('Lista de Exercícios');
 INSERT INTO `Tipo_Prova` (nm_Tipo_Prova) VALUES ('Outro');
+INSERT INTO `Tipo_Prova` (nm_Tipo_Prova) VALUES ('Trabalho 1');
+INSERT INTO `Tipo_Prova` (nm_Tipo_Prova) VALUES ('Trabalho 2');
+INSERT INTO `Tipo_Prova` (nm_Tipo_Prova) VALUES ('Trabalho 3');
 
 INSERT INTO `Tipo_Link` (nm_Tipo_Link) VALUES ('Artigo/Texto');
 INSERT INTO `Tipo_Link` (nm_Tipo_Link) VALUES ('Apostila/Livro');

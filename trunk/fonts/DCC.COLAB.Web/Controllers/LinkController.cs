@@ -66,18 +66,21 @@ namespace DCC.COLAB.Web.Controllers
 
                 if (link.id == 0)
                 {
-                    HttpPostedFileBase file = Request.Files[0];
-
-                    if (String.IsNullOrEmpty(link.titulo))
+                    if (link.upload)
                     {
-                        link.titulo = file.FileName;
-                    }
+                        HttpPostedFileBase file = Request.Files[0];
 
-                    Stream fileContent = file.InputStream;
-                    fileContent.Seek(0, SeekOrigin.Begin);
-                    MemoryStream target = new MemoryStream();
-                    fileContent.CopyTo(target);
-                    link.src = target.ToArray();
+                        if (String.IsNullOrEmpty(link.titulo))
+                        {
+                            link.titulo = file.FileName;
+                        }
+
+                        Stream fileContent = file.InputStream;
+                        fileContent.Seek(0, SeekOrigin.Begin);
+                        MemoryStream target = new MemoryStream();
+                        fileContent.CopyTo(target);
+                        link.src = target.ToArray();
+                    }
 
                     WCFDispatcher<ICOLABServico>.UseService(u => u.InserirLink(link));
                 }
