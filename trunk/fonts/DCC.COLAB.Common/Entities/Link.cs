@@ -24,6 +24,12 @@ namespace DCC.COLAB.Common.Entities
         public Byte[] src { get; set; }
 
         [DataMember]
+        public string mimeType { get; set; }
+
+        [DataMember]
+        public string extension { get; set; }
+
+        [DataMember]
         public bool upload { get; set; }
 
         [DataMember]

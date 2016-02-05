@@ -171,6 +171,8 @@ CREATE TABLE `Link`(
 	`url` varchar(255) NULL,
 	`src` longblob NULL,
 	`flag_upload` tinyint NOT NULL,
+	`mimeType` varchar(100) NULL,
+	`extension` varchar(5) NULL,
 	`titulo` varchar(100) NULL,
 	`descricao` varchar(255) NULL,
 	`id_Usuario` int NOT NULL,

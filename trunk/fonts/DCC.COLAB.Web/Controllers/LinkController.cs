@@ -75,6 +75,9 @@ namespace DCC.COLAB.Web.Controllers
                             link.titulo = file.FileName;
                         }
 
+                        link.mimeType = MimeMapping.GetMimeMapping(file.FileName);
+                        link.extension = Path.GetExtension(file.FileName);
+
                         Stream fileContent = file.InputStream;
                         fileContent.Seek(0, SeekOrigin.Begin);
                         MemoryStream target = new MemoryStream();
@@ -129,6 +132,8 @@ namespace DCC.COLAB.Web.Controllers
 
             if (link.src != null)
             {
+                Response.ContentType = link.mimeType;
+                Response.AddHeader("Content-Disposition", "attachment; filename=" + link.titulo + link.extension);
                 Response.OutputStream.Write(link.src, 0, link.src.Length);
             }
         }
