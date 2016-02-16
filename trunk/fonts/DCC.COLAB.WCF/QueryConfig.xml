@@ -455,8 +455,7 @@
     <selecionarLinksFiltrados>
       SELECT DISTINCT
         L.id_Link,
-        L.url,
-        L.src,
+        L.url, 
         L.flag_upload,
         L.mimeType,
         L.extensao,
